@@ -12,14 +12,17 @@
 #import "MoreViewController.h"
 #import "PSCollectionView.h"
 #import "RecommendAnimaViewController.h"
-@interface ShinBanViewController ()<UITableViewDelegate,UITableViewDataSource,PSCollectionViewDelegate,PSCollectionViewDataSource>
+#import "RecommendCollectionViewController.h"
+
+@interface ShinBanViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) ShinBanViewModel* vm;
-//@property (nonatomic, assign) CGSize allSize;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *headView;
 @property (weak, nonatomic) IBOutlet UIButton *everyDayPlay;
 @property (weak, nonatomic) IBOutlet UIButton *ShinBanIndex;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightC;
+
+@property (nonatomic, strong) RecommendCollectionViewController* collectionViewController;
 
 @property (nonatomic, strong) PSCollectionView* psCollectionView;
 
@@ -32,28 +35,6 @@
         _vm = [ShinBanViewModel new];
     }
     return _vm;
-}
-
-//- (CGSize)allSize{
-//    if (_allSize.width == 0) {
-//        _allSize = CGSizeMake(self.view.frame.size.width, [self.vm commendAllCoverHeight]);
-//    }
-//    return _allSize;
-//}
-
-- (PSCollectionView *)psCollectionView{
-    if (_psCollectionView == nil) {
-        _psCollectionView = [[PSCollectionView alloc] init];
-        _psCollectionView.delegate = self;
-        _psCollectionView.collectionViewDelegate = self;
-        _psCollectionView.collectionViewDataSource = self;
-        _psCollectionView.numColsPortrait = 2;
-        [_psCollectionView setScrollEnabled: NO];
-       // _psCollectionView.contentSize = CGSizeMake(self.view.frame.size.width, [self.vm commendAllCoverHeight]);
-        _psCollectionView.frame = CGRectMake(0, 0, kWindowW, kWindowH);
-      //  NSLog(@"%@",NSStringFromCGRect(_psCollectionView.frame));
-    }
-    return _psCollectionView;
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -72,6 +53,7 @@
         [self.vm refreshDataCompleteHandle:^(NSError *error) {
             [self.tableView.header endRefreshing];
             [self.tableView reloadData];
+            [self.collectionViewController.collectionView reloadData];
             if (error) {
                 [self showErrorMsg:error.localizedDescription];
             }
@@ -97,7 +79,7 @@
     [self.tableView.header beginRefreshing];
 }
 
-
+#pragma mark - UITableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 1;
 }
@@ -137,7 +119,13 @@
                 }
             }
         }else{
-            //[cell.contentView addSubview:self.psCollectionView];
+            cell = [tableView dequeueReusableCellWithIdentifier:@"scell2"];
+            [self addChildViewController: self.collectionViewController];
+            [cell.contentView addSubview: self.collectionViewController.collectionView];
+            [self.collectionViewController.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.bottom.left.right.equalTo(cell);
+                make.top.equalTo(cell).offset(35);
+            }];
         }
     }
     
@@ -179,15 +167,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     //大家都在看单元格
-    if (indexPath.section == 0) {
+   // if (indexPath.section == 0) {
         return kWindowW / 640 * 735;
-    }
-    //推荐单元格
-    if (indexPath.section == 1) {
-        return [self collectionView:self.psCollectionView heightForRowAtIndex:0] * self.vm.RecommentList.count;
-       // return (c) * self.vm.RecommentList.count;
-    }
-    return 0;
+//    }
+//    //推荐单元格
+//    if (indexPath.section == 1) {
+//        return [self collectionView:self.psCollectionView heightForRowAtIndex:1] * self.vm.recommentList.count / self.psCollectionView.numColsPortrait;
+//    }
+//    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -198,41 +185,62 @@
     return 10;
 }
 
-#pragma mark - PSCollectionViewDataSource
-- (CGFloat)collectionView:(PSCollectionView *)collectionView heightForRowAtIndex:(NSInteger)index{
-    //CGSize size = [self.vm commendCoverSize:index];
-    return (kWindowW - 15) / 0.7 + 10;
-  //  return (kWindowW / 2 - 12) * size.height / size.width + 10;
-}
+#pragma mark - CollectionView
 
-- (NSInteger)numberOfRowsInCollectionView:(PSCollectionView *)collectionView{
-//    return [self.vm getRecommentDataModel].count;
-    return 10;
-}
-
-
-- (PSCollectionViewCell *)collectionView:(PSCollectionView *)collectionView cellForRowAtIndex:(NSInteger)index{
-    PSCollectionViewCell* cell = [collectionView dequeueReusableViewForClass:[PSCollectionViewCell class]];
-    
-    if (!cell) {
-        cell = [[PSCollectionViewCell alloc] initWithFrame:CGRectZero];
-        
-        UIImageView *imageView=[UIImageView new];
-        [cell addSubview:imageView];
-        imageView.tag = 110;
+- (RecommendCollectionViewController *)collectionViewController{
+    if (_collectionViewController == nil) {
+        _collectionViewController = kStoryboardWithInd(@"RecommendCollectionViewController");
+        [_collectionViewController setItems:self.vm.recommentList colNum: 3];
     }
-    UIImageView* imgView = (UIImageView*)[cell viewWithTag:110];
-    
-    [imgView setImageWithURL:[self.vm commendCoverForRow:index]];
-    
-    [imgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.equalTo(cell).mas_equalTo(0);
-    }];
-    return cell;
+    return _collectionViewController;
 }
 
-- (void)collectionView:(PSCollectionView *)collectionView didSelectCell:(PSCollectionViewCell *)cell atIndex:(NSInteger)index{
-    NSLog(@"%ld",(long)index);
-}
 
+//#pragma mark - PSCollectionViewDataSource
+//
+//- (PSCollectionView *)psCollectionView{
+//    if (_psCollectionView == nil) {
+//        _psCollectionView = [[PSCollectionView alloc] init];
+//        _psCollectionView.delegate = self;
+//        _psCollectionView.collectionViewDelegate = self;
+//        _psCollectionView.collectionViewDataSource = self;
+//        _psCollectionView.numColsPortrait = 3;
+//         //[_psCollectionView setScrollEnabled: NO];
+//    }
+//    return _psCollectionView;
+//}
+//
+//- (CGFloat)collectionView:(PSCollectionView *)collectionView heightForRowAtIndex:(NSInteger)index{
+//    return kWindowW / self.psCollectionView.numColsPortrait / 0.7;
+//}
+//
+//- (NSInteger)numberOfRowsInCollectionView:(PSCollectionView *)collectionView{
+//    return self.vm.recommentList.count;
+//}
+//
+//
+//- (PSCollectionViewCell *)collectionView:(PSCollectionView *)collectionView cellForRowAtIndex:(NSInteger)index{
+//    PSCollectionViewCell* cell = [collectionView dequeueReusableViewForClass:[PSCollectionViewCell class]];
+//    //PSCollectionViewCell* cell = [[PSCollectionViewCell alloc] init];
+//    if (!cell) {
+//        cell = [[PSCollectionViewCell alloc] init];
+//        
+//        UIImageView *imageView=[UIImageView new];
+//        [cell addSubview:imageView];
+//        imageView.tag = 110;
+//    }
+//    UIImageView* imgView = (UIImageView*)[cell viewWithTag:110];
+//    
+//    [imgView setImageWithURL:[self.vm commendCoverForRow:index]];
+//    
+//    [imgView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.equalTo(cell);
+//    }];
+//    return cell;
+//}
+//
+//- (void)collectionView:(PSCollectionView *)collectionView didSelectCell:(PSCollectionViewCell *)cell atIndex:(NSInteger)index{
+//    DDLogVerbose(@"%@ %@",NSStringFromCGSize(collectionView.contentSize),NSStringFromCGRect(collectionView.frame));
+//   // NSLog(@"%ld",(long)index);
+//}
 @end

@@ -23,6 +23,8 @@
 		A103A8681BE08907001C5C15 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A103A8671BE08907001C5C15 /* WebViewController.m */; };
 		A13102491BE5CD9800F2903C /* AVInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A13102481BE5CD9800F2903C /* AVInfoViewController.m */; };
 		A171FE5C1BD8F801005CF7E6 /* CellView.m in Sources */ = {isa = PBXBuildFile; fileRef = A171FE5B1BD8F801005CF7E6 /* CellView.m */; };
+		A17466B01BE8C14F005AF449 /* RecommendCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17466AF1BE8C14F005AF449 /* RecommendCollectionViewController.m */; };
+		A17466B31BE8C8AD005AF449 /* RecommendCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A17466B21BE8C8AD005AF449 /* RecommendCollectionViewCell.m */; };
 		A176A50C1BD7B3C4004AD9FB /* RecommendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A176A50B1BD7B3C4004AD9FB /* RecommendModel.m */; };
 		A176A50F1BD7B6D0004AD9FB /* RecommendNetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A176A50E1BD7B6D0004AD9FB /* RecommendNetManager.m */; };
 		A176A5121BD7BC53004AD9FB /* RecommendViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A176A5111BD7BC53004AD9FB /* RecommendViewModel.m */; };
@@ -76,6 +78,10 @@
 		A13102481BE5CD9800F2903C /* AVInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVInfoViewController.m; sourceTree = "<group>"; };
 		A171FE5A1BD8F801005CF7E6 /* CellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellView.h; sourceTree = "<group>"; };
 		A171FE5B1BD8F801005CF7E6 /* CellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellView.m; sourceTree = "<group>"; };
+		A17466AE1BE8C14F005AF449 /* RecommendCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendCollectionViewController.h; sourceTree = "<group>"; };
+		A17466AF1BE8C14F005AF449 /* RecommendCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendCollectionViewController.m; sourceTree = "<group>"; };
+		A17466B11BE8C8AD005AF449 /* RecommendCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendCollectionViewCell.h; sourceTree = "<group>"; };
+		A17466B21BE8C8AD005AF449 /* RecommendCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendCollectionViewCell.m; sourceTree = "<group>"; };
 		A176A50A1BD7B3C4004AD9FB /* RecommendModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendModel.h; sourceTree = "<group>"; };
 		A176A50B1BD7B3C4004AD9FB /* RecommendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendModel.m; sourceTree = "<group>"; };
 		A176A50D1BD7B6D0004AD9FB /* RecommendNetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendNetManager.h; sourceTree = "<group>"; };
@@ -199,9 +205,9 @@
 		3886C0B01BD74A4A0014E661 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A19569B41BE0EE6E00CFB80E /* 推荐 */,
 				3886C0BF1BD74B090014E661 /* BaseModel.h */,
 				3886C0C01BD74B090014E661 /* BaseModel.m */,
+				A19569B41BE0EE6E00CFB80E /* 推荐 */,
 				A19569B51BE0EE7A00CFB80E /* 番剧 */,
 			);
 			path = Model;
@@ -327,6 +333,8 @@
 			children = (
 				A19569A91BE0D6E400CFB80E /* ShinBanViewController.h */,
 				A19569AA1BE0D6E400CFB80E /* ShinBanViewController.m */,
+				A17466AE1BE8C14F005AF449 /* RecommendCollectionViewController.h */,
+				A17466AF1BE8C14F005AF449 /* RecommendCollectionViewController.m */,
 				A19569BD1BE0F4C800CFB80E /* MoreViewController.h */,
 				A19569BE1BE0F4C800CFB80E /* MoreViewController.m */,
 				A19569C01BE0F70C00CFB80E /* RecommendAnimaViewController.h */,
@@ -403,6 +411,8 @@
 		A19569C41BE0FA2100CFB80E /* 番剧 */ = {
 			isa = PBXGroup;
 			children = (
+				A17466B11BE8C8AD005AF449 /* RecommendCollectionViewCell.h */,
+				A17466B21BE8C8AD005AF449 /* RecommendCollectionViewCell.m */,
 				A19569C51BE0FA6900CFB80E /* MoreViewCell.h */,
 				A19569C61BE0FA6900CFB80E /* MoreViewCell.m */,
 			);
@@ -551,8 +561,10 @@
 				A1FE5D6C1BE1CBDD00D65132 /* PSCollectionViewCell.m in Sources */,
 				3886C0BE1BD74AFE0014E661 /* BaseNetManager.m in Sources */,
 				A195697F1BE0B3B800CFB80E /* ShinBanModel.m in Sources */,
+				A17466B31BE8C8AD005AF449 /* RecommendCollectionViewCell.m in Sources */,
 				A1776F011BE46AD60095A10E /* HomePageViewController.m in Sources */,
 				A19569BF1BE0F4C800CFB80E /* MoreViewController.m in Sources */,
+				A17466B01BE8C14F005AF449 /* RecommendCollectionViewController.m in Sources */,
 				A19569AB1BE0D6E400CFB80E /* ShinBanViewController.m in Sources */,
 				A13102491BE5CD9800F2903C /* AVInfoViewController.m in Sources */,
 				A103A8681BE08907001C5C15 /* WebViewController.m in Sources */,
