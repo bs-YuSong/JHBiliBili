@@ -11,7 +11,6 @@
 #import "MoreViewCell.h"
 #import "MoreViewController.h"
 #import "PSCollectionView.h"
-#import "RecommendAnimaViewController.h"
 #import "RecommendCollectionViewController.h"
 
 @interface ShinBanViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -81,17 +80,23 @@
 
 #pragma mark - UITableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
+    if ([self.vm moreViewListCount]) {
+        return 1;
+    }
+    return 0;
+}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    //第一行显示大家都在看 第二行显示推荐番剧
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    MoreViewCell* cell = [MoreViewCell new];
+    MoreViewCell* cell = nil;
     
-    if (self.vm.moreViewList.count != 0) {
         if (indexPath.section == 0) {
             cell = [tableView dequeueReusableCellWithIdentifier:@"scell"];
-            if (![cell.contentView viewWithTag:101]) {
+           // if (![cell.contentView viewWithTag:101]) {
                 NSMutableArray* itemArr = [NSMutableArray new];
                 for (int i = 0; i < 4; ++i) {
                     MoreViewController* cvc = [kStoryboard(@"Main") instantiateViewControllerWithIdentifier:@"MoreViewController"];
@@ -105,19 +110,19 @@
                 }
                 [self makeConstraintsWithViews:itemArr cell:cell];
                 
-            }else{
-                NSArray* conArr = self.childViewControllers;
-                for (int i = 0; i < 4; ++i) {
-                    UIView* iv = [cell viewWithTag:100 + i];
-                    for (MoreViewController* con in conArr) {
-                        if (iv == con.view) {
-                            [con.pic setImageWithURL: [self.vm moreViewPicForRow: i]];
-                            con.animaTitle.text = [self.vm moreViewTitleForRow: i];
-                            con.playNum.text = [self.vm moreViewPlayForRow:i];
-                        }
-                    }
-                }
-            }
+//            }else{
+//                NSArray* conArr = self.childViewControllers;
+//                for (int i = 0; i < 4; ++i) {
+//                    UIView* iv = [cell viewWithTag:100 + i];
+//                    for (MoreViewController* con in conArr) {
+//                        if (iv == con.view) {
+//                            [con.pic setImageWithURL: [self.vm moreViewPicForRow: i]];
+//                            con.animaTitle.text = [self.vm moreViewTitleForRow: i];
+//                            con.playNum.text = [self.vm moreViewPlayForRow:i];
+//                        }
+//                    }
+//                }
+//            }
         }else{
             cell = [tableView dequeueReusableCellWithIdentifier:@"scell2"];
             [self addChildViewController: self.collectionViewController];
@@ -127,14 +132,8 @@
                 make.top.equalTo(cell).offset(35);
             }];
         }
-    }
     
     return cell;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    //第一行显示大家都在看 第二行显示推荐番剧
-    return 2;
 }
 
 - (void)makeConstraintsWithViews:(NSMutableArray *)views cell:(MoreViewCell*)cell{
@@ -190,57 +189,8 @@
 - (RecommendCollectionViewController *)collectionViewController{
     if (_collectionViewController == nil) {
         _collectionViewController = kStoryboardWithInd(@"RecommendCollectionViewController");
-        [_collectionViewController setItems:self.vm.recommentList colNum: 3];
+        [_collectionViewController setItems:[self.vm getRecommentList] colNum: 3];
     }
     return _collectionViewController;
 }
-
-
-//#pragma mark - PSCollectionViewDataSource
-//
-//- (PSCollectionView *)psCollectionView{
-//    if (_psCollectionView == nil) {
-//        _psCollectionView = [[PSCollectionView alloc] init];
-//        _psCollectionView.delegate = self;
-//        _psCollectionView.collectionViewDelegate = self;
-//        _psCollectionView.collectionViewDataSource = self;
-//        _psCollectionView.numColsPortrait = 3;
-//         //[_psCollectionView setScrollEnabled: NO];
-//    }
-//    return _psCollectionView;
-//}
-//
-//- (CGFloat)collectionView:(PSCollectionView *)collectionView heightForRowAtIndex:(NSInteger)index{
-//    return kWindowW / self.psCollectionView.numColsPortrait / 0.7;
-//}
-//
-//- (NSInteger)numberOfRowsInCollectionView:(PSCollectionView *)collectionView{
-//    return self.vm.recommentList.count;
-//}
-//
-//
-//- (PSCollectionViewCell *)collectionView:(PSCollectionView *)collectionView cellForRowAtIndex:(NSInteger)index{
-//    PSCollectionViewCell* cell = [collectionView dequeueReusableViewForClass:[PSCollectionViewCell class]];
-//    //PSCollectionViewCell* cell = [[PSCollectionViewCell alloc] init];
-//    if (!cell) {
-//        cell = [[PSCollectionViewCell alloc] init];
-//        
-//        UIImageView *imageView=[UIImageView new];
-//        [cell addSubview:imageView];
-//        imageView.tag = 110;
-//    }
-//    UIImageView* imgView = (UIImageView*)[cell viewWithTag:110];
-//    
-//    [imgView setImageWithURL:[self.vm commendCoverForRow:index]];
-//    
-//    [imgView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.edges.equalTo(cell);
-//    }];
-//    return cell;
-//}
-//
-//- (void)collectionView:(PSCollectionView *)collectionView didSelectCell:(PSCollectionViewCell *)cell atIndex:(NSInteger)index{
-//    DDLogVerbose(@"%@ %@",NSStringFromCGSize(collectionView.contentSize),NSStringFromCGRect(collectionView.frame));
-//   // NSLog(@"%ld",(long)index);
-//}
 @end

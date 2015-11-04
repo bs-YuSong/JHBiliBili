@@ -9,7 +9,23 @@
 #import "ShinBanViewModel.h"
 #import "ShinBanNetManager.h"
 #import "ShinBanModel.h"
+@interface ShinBanViewModel ()
+@property (nonatomic, strong) NSMutableArray* moreViewList;
+@property (nonatomic, strong) NSMutableArray* recommentList;
+@end
+
 @implementation ShinBanViewModel
+
+- (NSMutableArray*)getRecommentList{
+    return self.recommentList;
+}
+
+- (NSInteger)moreViewListCount{
+    return self.moreViewList.count;
+}
+- (NSInteger)recommentListCount{
+    return self.recommentList.count;
+}
 
 - (NSMutableArray *)recommentList{
     if (_recommentList == nil) {

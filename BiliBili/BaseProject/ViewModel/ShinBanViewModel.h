@@ -9,8 +9,11 @@
 #import "BaseViewModel.h"
 
 @interface ShinBanViewModel : BaseViewModel
-@property (nonatomic, strong) NSMutableArray* moreViewList;
-@property (nonatomic, strong) NSMutableArray* recommentList;
+
+- (NSInteger)moreViewListCount;
+- (NSInteger)recommentListCount;
+- (NSMutableArray*)getRecommentList;
+
 - (NSURL*)moreViewPicForRow:(NSInteger)row;
 - (NSString*)moreViewPlayForRow:(NSInteger)row;
 - (NSString*)moreViewTitleForRow:(NSInteger)row;

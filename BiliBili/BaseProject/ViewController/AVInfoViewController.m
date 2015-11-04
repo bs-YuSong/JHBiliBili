@@ -61,7 +61,6 @@
     for (int i = 0; i < titleArr.count; ++i) {
         UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setTitle: titleArr[i] forState:UIControlStateNormal];
-       // [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [button setTitleColor:kRGBColor(221, 107, 140) forState:UIControlStateSelected];
         button.titleLabel.font = [UIFont systemFontOfSize:13];
         [view addSubview: button];

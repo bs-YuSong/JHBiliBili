@@ -38,9 +38,7 @@ kRemoveCellSeparator
     }
     return _vm;
 }
-- (void)viewWillAppear:(BOOL)animated{
-    self.navigationController.navigationBarHidden = YES;
-}
+
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -137,14 +135,6 @@ kRemoveCellSeparator
             }
         }
     }
-   /*     //http://www.bilibili.com/video/av3002959/
-    cell.v1.videoID = [NSString stringWithFormat:@"http://www.bilibili.com/video/av%@/",[self.vm aidForRow:0 section:dic[key]]];
-    cell.v2.videoID = [NSString stringWithFormat:@"http://www.bilibili.com/video/av%@/",[self.vm aidForRow:1 section:dic[key]]];
-    cell.v3.videoID = [NSString stringWithFormat:@"http://www.bilibili.com/video/av%@/",[self.vm aidForRow:2 section:dic[key]]];
-    cell.v4.videoID = [NSString stringWithFormat:@"http://www.bilibili.com/video/av%@/",[self.vm aidForRow:3 section:dic[key]]];
-    
-    cell.title.text = key;
-    cell.titleImg.image = [UIImage imageNamed:[NSString stringWithFormat:@"home_region_icon_%@",[dic[key] componentsSeparatedByString:@"-"].firstObject]];*/
     return cell;
 }
 

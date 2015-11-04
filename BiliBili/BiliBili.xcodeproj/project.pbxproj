@@ -25,6 +25,7 @@
 		A171FE5C1BD8F801005CF7E6 /* CellView.m in Sources */ = {isa = PBXBuildFile; fileRef = A171FE5B1BD8F801005CF7E6 /* CellView.m */; };
 		A17466B01BE8C14F005AF449 /* RecommendCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17466AF1BE8C14F005AF449 /* RecommendCollectionViewController.m */; };
 		A17466B31BE8C8AD005AF449 /* RecommendCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A17466B21BE8C8AD005AF449 /* RecommendCollectionViewCell.m */; };
+		A17466B81BE8E45A005AF449 /* FindModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A17466B71BE8E45A005AF449 /* FindModel.m */; };
 		A176A50C1BD7B3C4004AD9FB /* RecommendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A176A50B1BD7B3C4004AD9FB /* RecommendModel.m */; };
 		A176A50F1BD7B6D0004AD9FB /* RecommendNetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A176A50E1BD7B6D0004AD9FB /* RecommendNetManager.m */; };
 		A176A5121BD7BC53004AD9FB /* RecommendViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A176A5111BD7BC53004AD9FB /* RecommendViewModel.m */; };
@@ -36,10 +37,12 @@
 		A19569AB1BE0D6E400CFB80E /* ShinBanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A19569AA1BE0D6E400CFB80E /* ShinBanViewController.m */; };
 		A19569B11BE0E1A400CFB80E /* ShinBanViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A19569B01BE0E1A400CFB80E /* ShinBanViewModel.m */; };
 		A19569BF1BE0F4C800CFB80E /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A19569BE1BE0F4C800CFB80E /* MoreViewController.m */; };
-		A19569C21BE0F70C00CFB80E /* RecommendAnimaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A19569C11BE0F70C00CFB80E /* RecommendAnimaViewController.m */; };
 		A19569C71BE0FA6900CFB80E /* MoreViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A19569C61BE0FA6900CFB80E /* MoreViewCell.m */; };
 		A1C0ACB31BD9D18E000E1848 /* IndexModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C0ACB21BD9D18E000E1848 /* IndexModel.m */; };
 		A1C0ACC21BDA0CD9000E1848 /* CellItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C0ACC11BDA0CD9000E1848 /* CellItemViewController.m */; };
+		A1D42DD51BE9897D002EEAC0 /* FindNetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D42DD41BE9897D002EEAC0 /* FindNetManager.m */; };
+		A1D42DD91BE98E04002EEAC0 /* FindViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D42DD81BE98E04002EEAC0 /* FindViewModel.m */; };
+		A1D42E021BE9A73E002EEAC0 /* UIImage+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D42E011BE9A73E002EEAC0 /* UIImage+Tools.m */; };
 		A1E296FB1BD86D9B00AFBA29 /* RecommendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E296F91BD86D9B00AFBA29 /* RecommendViewController.m */; };
 		A1FE5D6B1BE1CBDD00D65132 /* PSCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FE5D681BE1CBDD00D65132 /* PSCollectionView.m */; };
 		A1FE5D6C1BE1CBDD00D65132 /* PSCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FE5D6A1BE1CBDD00D65132 /* PSCollectionViewCell.m */; };
@@ -82,6 +85,8 @@
 		A17466AF1BE8C14F005AF449 /* RecommendCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendCollectionViewController.m; sourceTree = "<group>"; };
 		A17466B11BE8C8AD005AF449 /* RecommendCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendCollectionViewCell.h; sourceTree = "<group>"; };
 		A17466B21BE8C8AD005AF449 /* RecommendCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendCollectionViewCell.m; sourceTree = "<group>"; };
+		A17466B61BE8E45A005AF449 /* FindModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindModel.h; sourceTree = "<group>"; };
+		A17466B71BE8E45A005AF449 /* FindModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindModel.m; sourceTree = "<group>"; };
 		A176A50A1BD7B3C4004AD9FB /* RecommendModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendModel.h; sourceTree = "<group>"; };
 		A176A50B1BD7B3C4004AD9FB /* RecommendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendModel.m; sourceTree = "<group>"; };
 		A176A50D1BD7B6D0004AD9FB /* RecommendNetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendNetManager.h; sourceTree = "<group>"; };
@@ -104,14 +109,18 @@
 		A19569B01BE0E1A400CFB80E /* ShinBanViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinBanViewModel.m; sourceTree = "<group>"; };
 		A19569BD1BE0F4C800CFB80E /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
 		A19569BE1BE0F4C800CFB80E /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
-		A19569C01BE0F70C00CFB80E /* RecommendAnimaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendAnimaViewController.h; sourceTree = "<group>"; };
-		A19569C11BE0F70C00CFB80E /* RecommendAnimaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendAnimaViewController.m; sourceTree = "<group>"; };
 		A19569C51BE0FA6900CFB80E /* MoreViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewCell.h; sourceTree = "<group>"; };
 		A19569C61BE0FA6900CFB80E /* MoreViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewCell.m; sourceTree = "<group>"; };
 		A1C0ACB11BD9D18E000E1848 /* IndexModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexModel.h; sourceTree = "<group>"; };
 		A1C0ACB21BD9D18E000E1848 /* IndexModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexModel.m; sourceTree = "<group>"; };
 		A1C0ACC01BDA0CD9000E1848 /* CellItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellItemViewController.h; sourceTree = "<group>"; };
 		A1C0ACC11BDA0CD9000E1848 /* CellItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellItemViewController.m; sourceTree = "<group>"; };
+		A1D42DD31BE9897D002EEAC0 /* FindNetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindNetManager.h; sourceTree = "<group>"; };
+		A1D42DD41BE9897D002EEAC0 /* FindNetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindNetManager.m; sourceTree = "<group>"; };
+		A1D42DD71BE98E04002EEAC0 /* FindViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindViewModel.h; sourceTree = "<group>"; };
+		A1D42DD81BE98E04002EEAC0 /* FindViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindViewModel.m; sourceTree = "<group>"; };
+		A1D42E001BE9A73E002EEAC0 /* UIImage+Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Tools.h"; sourceTree = "<group>"; };
+		A1D42E011BE9A73E002EEAC0 /* UIImage+Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Tools.m"; sourceTree = "<group>"; };
 		A1E296F81BD86D9B00AFBA29 /* RecommendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendViewController.h; sourceTree = "<group>"; };
 		A1E296F91BD86D9B00AFBA29 /* RecommendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendViewController.m; sourceTree = "<group>"; };
 		A1FE5D671BE1CBDD00D65132 /* PSCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSCollectionView.h; path = ../ViewController/PSCollectionView.h; sourceTree = "<group>"; };
@@ -144,6 +153,8 @@
 				3804CE4E1BD758F10046C8C8 /* NSString+PJR.m */,
 				3804CE4F1BD758F10046C8C8 /* NSString+QRCode.h */,
 				3804CE501BD758F10046C8C8 /* NSString+QRCode.m */,
+				A1D42E001BE9A73E002EEAC0 /* UIImage+Tools.h */,
+				A1D42E011BE9A73E002EEAC0 /* UIImage+Tools.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -207,8 +218,8 @@
 			children = (
 				3886C0BF1BD74B090014E661 /* BaseModel.h */,
 				3886C0C01BD74B090014E661 /* BaseModel.m */,
-				A19569B41BE0EE6E00CFB80E /* 推荐 */,
-				A19569B51BE0EE7A00CFB80E /* 番剧 */,
+				A17466B51BE8E43E005AF449 /* 发现 */,
+				A17466B41BE8E42A005AF449 /* 首页 */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -216,8 +227,8 @@
 		3886C0B11BD74A4A0014E661 /* NetManager */ = {
 			isa = PBXGroup;
 			children = (
-				A19569B61BE0EE9000CFB80E /* 推荐 */,
-				A19569B71BE0EEA400CFB80E /* 番剧 */,
+				A1D42DD21BE9895C002EEAC0 /* 发现 */,
+				A1D42DD11BE9894D002EEAC0 /* 首页 */,
 				3886C0BC1BD74AFE0014E661 /* BaseNetManager.h */,
 				3886C0BD1BD74AFE0014E661 /* BaseNetManager.m */,
 			);
@@ -238,12 +249,6 @@
 		3886C0B31BD74A4A0014E661 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				A1FE5D691BE1CBDD00D65132 /* PSCollectionViewCell.h */,
-				A1FE5D6A1BE1CBDD00D65132 /* PSCollectionViewCell.m */,
-				A1FE5D671BE1CBDD00D65132 /* PSCollectionView.h */,
-				A1FE5D681BE1CBDD00D65132 /* PSCollectionView.m */,
-				A185427A1BDE565500DB45E7 /* ScrollDisplayViewController.m */,
-				A18542791BDE565500DB45E7 /* ScrollDisplayViewController.h */,
 				3804CE481BD758F10046C8C8 /* Category */,
 			);
 			path = Util;
@@ -252,6 +257,12 @@
 		3886C0B41BD74A4A0014E661 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				A1FE5D691BE1CBDD00D65132 /* PSCollectionViewCell.h */,
+				A1FE5D6A1BE1CBDD00D65132 /* PSCollectionViewCell.m */,
+				A1FE5D671BE1CBDD00D65132 /* PSCollectionView.h */,
+				A1FE5D681BE1CBDD00D65132 /* PSCollectionView.m */,
+				A185427A1BDE565500DB45E7 /* ScrollDisplayViewController.m */,
+				A18542791BDE565500DB45E7 /* ScrollDisplayViewController.h */,
 			);
 			path = Vendor;
 			sourceTree = "<group>";
@@ -259,8 +270,7 @@
 		3886C0B51BD74A4A0014E661 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A19569C41BE0FA2100CFB80E /* 番剧 */,
-				A19569C31BE0FA1700CFB80E /* 推荐 */,
+				A17466B91BE8E512005AF449 /* 首页 */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -280,10 +290,46 @@
 			children = (
 				3886C0B91BD74AE90014E661 /* BaseViewModel.h */,
 				3886C0BA1BD74AE90014E661 /* BaseViewModel.m */,
+				A1D42DD61BE98DE9002EEAC0 /* 发现 */,
+				A17466BA1BE8E520005AF449 /* 首页 */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A17466B41BE8E42A005AF449 /* 首页 */ = {
+			isa = PBXGroup;
+			children = (
+				A19569B41BE0EE6E00CFB80E /* 推荐 */,
+				A19569B51BE0EE7A00CFB80E /* 番剧 */,
+			);
+			name = "首页";
+			sourceTree = "<group>";
+		};
+		A17466B51BE8E43E005AF449 /* 发现 */ = {
+			isa = PBXGroup;
+			children = (
+				A17466B61BE8E45A005AF449 /* FindModel.h */,
+				A17466B71BE8E45A005AF449 /* FindModel.m */,
+			);
+			name = "发现";
+			sourceTree = "<group>";
+		};
+		A17466B91BE8E512005AF449 /* 首页 */ = {
+			isa = PBXGroup;
+			children = (
+				A19569C41BE0FA2100CFB80E /* 番剧 */,
+				A19569C31BE0FA1700CFB80E /* 推荐 */,
+			);
+			name = "首页";
+			sourceTree = "<group>";
+		};
+		A17466BA1BE8E520005AF449 /* 首页 */ = {
+			isa = PBXGroup;
+			children = (
 				A19569B81BE0EEBB00CFB80E /* 推荐 */,
 				A19569B91BE0EEC200CFB80E /* 番剧 */,
 			);
-			path = ViewModel;
+			name = "首页";
 			sourceTree = "<group>";
 		};
 		A1776EF71BE456ED0095A10E /* 发现 */ = {
@@ -337,8 +383,6 @@
 				A17466AF1BE8C14F005AF449 /* RecommendCollectionViewController.m */,
 				A19569BD1BE0F4C800CFB80E /* MoreViewController.h */,
 				A19569BE1BE0F4C800CFB80E /* MoreViewController.m */,
-				A19569C01BE0F70C00CFB80E /* RecommendAnimaViewController.h */,
-				A19569C11BE0F70C00CFB80E /* RecommendAnimaViewController.m */,
 			);
 			name = "番剧";
 			sourceTree = "<group>";
@@ -417,6 +461,33 @@
 				A19569C61BE0FA6900CFB80E /* MoreViewCell.m */,
 			);
 			name = "番剧";
+			sourceTree = "<group>";
+		};
+		A1D42DD11BE9894D002EEAC0 /* 首页 */ = {
+			isa = PBXGroup;
+			children = (
+				A19569B61BE0EE9000CFB80E /* 推荐 */,
+				A19569B71BE0EEA400CFB80E /* 番剧 */,
+			);
+			name = "首页";
+			sourceTree = "<group>";
+		};
+		A1D42DD21BE9895C002EEAC0 /* 发现 */ = {
+			isa = PBXGroup;
+			children = (
+				A1D42DD31BE9897D002EEAC0 /* FindNetManager.h */,
+				A1D42DD41BE9897D002EEAC0 /* FindNetManager.m */,
+			);
+			name = "发现";
+			sourceTree = "<group>";
+		};
+		A1D42DD61BE98DE9002EEAC0 /* 发现 */ = {
+			isa = PBXGroup;
+			children = (
+				A1D42DD71BE98E04002EEAC0 /* FindViewModel.h */,
+				A1D42DD81BE98E04002EEAC0 /* FindViewModel.m */,
+			);
+			name = "发现";
 			sourceTree = "<group>";
 		};
 		DEB62B47C560AA65E07ECFA4 /* Pods */ = {
@@ -557,7 +628,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A19569C21BE0F70C00CFB80E /* RecommendAnimaViewController.m in Sources */,
 				A1FE5D6C1BE1CBDD00D65132 /* PSCollectionViewCell.m in Sources */,
 				3886C0BE1BD74AFE0014E661 /* BaseNetManager.m in Sources */,
 				A195697F1BE0B3B800CFB80E /* ShinBanModel.m in Sources */,
@@ -575,9 +645,12 @@
 				A176A50F1BD7B6D0004AD9FB /* RecommendNetManager.m in Sources */,
 				A176A50C1BD7B3C4004AD9FB /* RecommendModel.m in Sources */,
 				A1E296FB1BD86D9B00AFBA29 /* RecommendViewController.m in Sources */,
+				A1D42DD51BE9897D002EEAC0 /* FindNetManager.m in Sources */,
 				A171FE5C1BD8F801005CF7E6 /* CellView.m in Sources */,
+				A17466B81BE8E45A005AF449 /* FindModel.m in Sources */,
 				A19569C71BE0FA6900CFB80E /* MoreViewCell.m in Sources */,
 				A1FE5D6B1BE1CBDD00D65132 /* PSCollectionView.m in Sources */,
+				A1D42DD91BE98E04002EEAC0 /* FindViewModel.m in Sources */,
 				A19569821BE0B59F00CFB80E /* ShinBanNetManager.m in Sources */,
 				3804CE531BD758F10046C8C8 /* NSString+PJR.m in Sources */,
 				A1C0ACB31BD9D18E000E1848 /* IndexModel.m in Sources */,
@@ -585,6 +658,7 @@
 				A19569B11BE0E1A400CFB80E /* ShinBanViewModel.m in Sources */,
 				3804CE511BD758F10046C8C8 /* AppDelegate+Category.m in Sources */,
 				3886C0BB1BD74AE90014E661 /* BaseViewModel.m in Sources */,
+				A1D42E021BE9A73E002EEAC0 /* UIImage+Tools.m in Sources */,
 				3886C0C11BD74B090014E661 /* BaseModel.m in Sources */,
 				3886C0981BD748830014E661 /* main.m in Sources */,
 				3804CE521BD758F10046C8C8 /* NSObject+Common.m in Sources */,
