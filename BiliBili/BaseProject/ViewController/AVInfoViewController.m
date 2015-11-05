@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray* buttons;
 @property (weak, nonatomic) IBOutlet UILabel *UP;
+@property (weak, nonatomic) IBOutlet UIImageView *imgView;
 
 
 
@@ -24,6 +25,9 @@
     [super viewDidLoad];
     
     self.headView.frame = CGRectMake(0, 0, kWindowW, kWindowH / 2.25);
+    [self.imgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(self.imgView.mas_width).multipliedBy(0.62);
+    }];
 
     NSMutableAttributedString* str = [[NSMutableAttributedString alloc] initWithString:@"UP主："];
     [str appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@"查看所有中奖记录" attributes:@{NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle),NSForegroundColorAttributeName:kRGBColor(248, 116, 153)}]];

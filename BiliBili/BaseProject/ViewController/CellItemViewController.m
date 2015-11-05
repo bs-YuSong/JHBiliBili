@@ -26,6 +26,9 @@
 
 - (void)setViewContentWithModel:(RecommendDataModel*)model{
     [self.imgv setImageWithURL:[NSURL URLWithString:model.pic]];
+    [self.imgv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(self.imgv.mas_width).multipliedBy(0.63);
+    }];
     self.imgv.layer.cornerRadius = 8;
     self.imgv.layer.masksToBounds = YES;
     self.label.text = model.title;

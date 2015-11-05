@@ -9,12 +9,18 @@
 #import "FindViewController.h"
 #import "FindViewModel.h"
 #import "UIImage+Tools.h"
+#import "UIView+Tools.h"
 @interface FindViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *allSectionSortButtonCon;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftImgCon;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *headView;
 @property (nonatomic, strong) FindViewModel* vm;
+@property (weak, nonatomic) IBOutlet UIButton *allSectionRangeButton;
+@property (weak, nonatomic) IBOutlet UIImageView *hotSearchLeftImgView;
+@property (weak, nonatomic) IBOutlet UIImageView *hotSearchRightImgView;
+@property (weak, nonatomic) IBOutlet UIView *hotSearchBottomBlackView;
+@property (weak, nonatomic) IBOutlet UILabel *hotSearchLeftLabel;
+@property (weak, nonatomic) IBOutlet UILabel *hotSearchRightLabel;
+
 
 @property (nonatomic, strong) UIImage* upImg;
 @property (nonatomic, strong) UIImage* downImg;
@@ -30,19 +36,33 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //顶部视图高
+    [self.headView changeHeight: kWindowW * 0.7];
+    
     //全区排行按钮
-    self.allSectionSortButtonCon.constant = (kWindowW - 30) / 2 / 2.12;
+    [self.allSectionRangeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(self.allSectionRangeButton.mas_width).multipliedBy(0.47);
+    }];
     //左边图片按钮
-    self.leftImgCon.constant = (kWindowW - 30) / 2 / 1.68;
+    [self.hotSearchLeftImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(self.hotSearchLeftImgView.mas_width).multipliedBy(0.63);
+    }];
+    [self.hotSearchBottomBlackView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(self.hotSearchLeftImgView.mas_height).multipliedBy(1.0/4);
+    }];
     
     MJRefreshNormalHeader* header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-       [self.vm refreshDataCompleteHandle:^(NSError *error) {
-           [self.tableView.header endRefreshing];
-           [self.tableView reloadData];
-           if (error) {
-               [self showErrorMsg: error.localizedDescription];
-           }
-       }];
+        [self.vm refreshDataCompleteHandle:^(NSError *error) {
+            [self.tableView.header endRefreshing];
+            [self.hotSearchLeftImgView setImageWithURL: [self.vm rankCoverForNum:0]];
+            [self.hotSearchRightImgView setImageWithURL: [self.vm rankCoverForNum:1]];
+            self.hotSearchLeftLabel.text = [self.vm coverKeyWordForNum:0];
+            self.hotSearchRightLabel.text = [self.vm coverKeyWordForNum:1];
+            [self.tableView reloadData];
+            if (error) {
+                [self showErrorMsg: error.localizedDescription];
+            }
+        }];
     }];
     header.lastUpdatedTimeLabel.hidden = YES;
     [header setTitle:@"再拉，再拉就刷新给你看" forState:MJRefreshStateIdle];
@@ -109,4 +129,5 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
 @end

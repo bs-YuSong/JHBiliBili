@@ -18,7 +18,9 @@
 - (NSNumber *)replyForRow:(NSInteger)row section:(NSString*)section;
 - (NSString*)aidForRow:(NSInteger)row section:(NSString*)section;
 - (void)refreshDataCompleteHandle:(void(^)(NSError *error))complete;
-- (NSArray*)headImgArr;
+
 - (NSInteger)sectionCount;
 - (NSURL*)headImgURL:(NSInteger)index;
+- (NSURL*)headImgLink:(NSInteger)index;
+- (NSInteger)numberOfHeadImg;
 @end

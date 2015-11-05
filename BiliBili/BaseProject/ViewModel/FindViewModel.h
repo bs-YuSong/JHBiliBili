@@ -11,8 +11,10 @@
 @interface FindViewModel : BaseViewModel
 - (NSString*)keyWordForRow:(NSInteger)row;
 - (NSString*)statusWordForRow:(NSInteger)row;
+
 - (NSURL*)rankCoverForNum:(NSInteger)num;
 - (NSString*)coverKeyWordForNum:(NSInteger)num;
+
 - (void)refreshDataCompleteHandle:(void(^)(NSError *error))complete;
 - (NSInteger)rankArrConut;
 @end

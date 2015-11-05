@@ -66,7 +66,7 @@
 }
 #pragma mark  <UICollectionViewDelegate>
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    DDLogVerbose(@"%ld",indexPath.row);
+    DDLogVerbose(@"%ld",(long)indexPath.row);
 }
 
 @end

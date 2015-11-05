@@ -18,7 +18,6 @@ static AFHTTPRequestOperationManager *manager = nil;
         manager = [AFHTTPRequestOperationManager manager];
         manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"application/json", nil];
     });
-    UIImage* i;
     return manager;
 }
 

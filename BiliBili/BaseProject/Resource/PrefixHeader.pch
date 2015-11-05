@@ -38,6 +38,8 @@
 
 #import <CocoaLumberjack.h>
 
+#import "iCarousel.h"
+
 #ifdef DEBUG
 static const int ddLogLevel = DDLogLevelVerbose;
 #else

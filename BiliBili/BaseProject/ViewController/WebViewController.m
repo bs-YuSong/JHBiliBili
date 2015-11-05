@@ -9,7 +9,7 @@
 #import "WebViewController.h"
 
 @interface WebViewController ()<UIWebViewDelegate>
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (strong, nonatomic) UIWebView *webView;
 
 @end
 
@@ -18,8 +18,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.URL]];
-    self.webView.delegate = self;
-    // Do any additional setup after loading the view.
+}
+
+- (UIWebView *)webView{
+    if (_webView == nil) {
+        _webView = [[UIWebView alloc] initWithFrame:self.view.frame];
+        _webView.scalesPageToFit = YES;
+        [self.view addSubview:_webView];
+        self.webView.delegate = self;
+    }
+    return _webView;
 }
 
 - (void)viewWillAppear:(BOOL)animated{

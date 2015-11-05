@@ -19,8 +19,6 @@
 @property (weak, nonatomic) IBOutlet UIView *headView;
 @property (weak, nonatomic) IBOutlet UIButton *everyDayPlay;
 @property (weak, nonatomic) IBOutlet UIButton *ShinBanIndex;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightC;
-
 @property (nonatomic, strong) RecommendCollectionViewController* collectionViewController;
 
 @property (nonatomic, strong) PSCollectionView* psCollectionView;
@@ -43,10 +41,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //填补表尾空白
-    self.tableView.tableFooterView = [UIView new];
+
     //头部高度
-    self.heightC.constant = (kWindowW - 30) / 4.56 / 2;
+    [self.everyDayPlay mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(self.everyDayPlay.mas_width).multipliedBy(0.22);
+    }];
     
     MJRefreshNormalHeader* head = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self.vm refreshDataCompleteHandle:^(NSError *error) {
@@ -96,7 +95,6 @@
     
         if (indexPath.section == 0) {
             cell = [tableView dequeueReusableCellWithIdentifier:@"scell"];
-           // if (![cell.contentView viewWithTag:101]) {
                 NSMutableArray* itemArr = [NSMutableArray new];
                 for (int i = 0; i < 4; ++i) {
                     MoreViewController* cvc = [kStoryboard(@"Main") instantiateViewControllerWithIdentifier:@"MoreViewController"];
@@ -109,20 +107,7 @@
                     [cell.contentView addSubview: cvc.view];
                 }
                 [self makeConstraintsWithViews:itemArr cell:cell];
-                
-//            }else{
-//                NSArray* conArr = self.childViewControllers;
-//                for (int i = 0; i < 4; ++i) {
-//                    UIView* iv = [cell viewWithTag:100 + i];
-//                    for (MoreViewController* con in conArr) {
-//                        if (iv == con.view) {
-//                            [con.pic setImageWithURL: [self.vm moreViewPicForRow: i]];
-//                            con.animaTitle.text = [self.vm moreViewTitleForRow: i];
-//                            con.playNum.text = [self.vm moreViewPlayForRow:i];
-//                        }
-//                    }
-//                }
-//            }
+            
         }else{
             cell = [tableView dequeueReusableCellWithIdentifier:@"scell2"];
             [self addChildViewController: self.collectionViewController];
@@ -165,15 +150,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    //大家都在看单元格
-   // if (indexPath.section == 0) {
         return kWindowW / 640 * 735;
-//    }
-//    //推荐单元格
-//    if (indexPath.section == 1) {
-//        return [self collectionView:self.psCollectionView heightForRowAtIndex:1] * self.vm.recommentList.count / self.psCollectionView.numColsPortrait;
-//    }
-//    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{

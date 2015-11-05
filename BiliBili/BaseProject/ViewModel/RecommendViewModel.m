@@ -59,15 +59,18 @@
     return m.aid;
 }
 
-- (NSArray*)headImgArr{
-    NSMutableArray* arr =[NSMutableArray new];
-    for (IndexDataModel* mo in self.list[@"slideshow.json"]) {
-        [arr addObject:mo.img];
-    }
-    return [arr copy];
+- (NSInteger)numberOfHeadImg{
+    NSArray* arr = self.list[@"slideshow.json"];
+    return arr.count;
 }
 
+
 - (NSURL*)headImgURL:(NSInteger)index{
+    IndexDataModel* mo = self.list[@"slideshow.json"][index];
+    return [NSURL URLWithString:mo.img];
+}
+
+- (NSURL*)headImgLink:(NSInteger)index{
     IndexDataModel* mo = self.list[@"slideshow.json"][index];
     return [NSURL URLWithString:mo.link];
 }

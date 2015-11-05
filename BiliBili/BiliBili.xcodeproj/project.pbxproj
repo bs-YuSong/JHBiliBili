@@ -31,7 +31,8 @@
 		A176A5121BD7BC53004AD9FB /* RecommendViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A176A5111BD7BC53004AD9FB /* RecommendViewModel.m */; };
 		A1776EFB1BE457460095A10E /* FindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1776EFA1BE457460095A10E /* FindViewController.m */; };
 		A1776F011BE46AD60095A10E /* HomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1776F001BE46AD60095A10E /* HomePageViewController.m */; };
-		A185427B1BDE565500DB45E7 /* ScrollDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A185427A1BDE565500DB45E7 /* ScrollDisplayViewController.m */; };
+		A18F92271BEAF38700607FCD /* UIView+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = A18F92261BEAF38700607FCD /* UIView+Tools.m */; };
+		A18F92371BEB3AE200607FCD /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = A18F92361BEB3AE200607FCD /* iCarousel.m */; };
 		A195697F1BE0B3B800CFB80E /* ShinBanModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A195697E1BE0B3B800CFB80E /* ShinBanModel.m */; };
 		A19569821BE0B59F00CFB80E /* ShinBanNetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A19569811BE0B59F00CFB80E /* ShinBanNetManager.m */; };
 		A19569AB1BE0D6E400CFB80E /* ShinBanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A19569AA1BE0D6E400CFB80E /* ShinBanViewController.m */; };
@@ -44,8 +45,6 @@
 		A1D42DD91BE98E04002EEAC0 /* FindViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D42DD81BE98E04002EEAC0 /* FindViewModel.m */; };
 		A1D42E021BE9A73E002EEAC0 /* UIImage+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D42E011BE9A73E002EEAC0 /* UIImage+Tools.m */; };
 		A1E296FB1BD86D9B00AFBA29 /* RecommendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E296F91BD86D9B00AFBA29 /* RecommendViewController.m */; };
-		A1FE5D6B1BE1CBDD00D65132 /* PSCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FE5D681BE1CBDD00D65132 /* PSCollectionView.m */; };
-		A1FE5D6C1BE1CBDD00D65132 /* PSCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FE5D6A1BE1CBDD00D65132 /* PSCollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,8 +96,10 @@
 		A1776EFA1BE457460095A10E /* FindViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindViewController.m; sourceTree = "<group>"; };
 		A1776EFF1BE46AD60095A10E /* HomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageViewController.h; sourceTree = "<group>"; };
 		A1776F001BE46AD60095A10E /* HomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageViewController.m; sourceTree = "<group>"; };
-		A18542791BDE565500DB45E7 /* ScrollDisplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScrollDisplayViewController.h; path = ../ViewController/ScrollDisplayViewController.h; sourceTree = "<group>"; };
-		A185427A1BDE565500DB45E7 /* ScrollDisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScrollDisplayViewController.m; path = ../ViewController/ScrollDisplayViewController.m; sourceTree = "<group>"; };
+		A18F92251BEAF38700607FCD /* UIView+Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Tools.h"; sourceTree = "<group>"; };
+		A18F92261BEAF38700607FCD /* UIView+Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Tools.m"; sourceTree = "<group>"; };
+		A18F92351BEB3AE200607FCD /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
+		A18F92361BEB3AE200607FCD /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		A195697D1BE0B3B800CFB80E /* ShinBanModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinBanModel.h; sourceTree = "<group>"; };
 		A195697E1BE0B3B800CFB80E /* ShinBanModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinBanModel.m; sourceTree = "<group>"; };
 		A19569801BE0B59F00CFB80E /* ShinBanNetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinBanNetManager.h; sourceTree = "<group>"; };
@@ -123,10 +124,6 @@
 		A1D42E011BE9A73E002EEAC0 /* UIImage+Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Tools.m"; sourceTree = "<group>"; };
 		A1E296F81BD86D9B00AFBA29 /* RecommendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendViewController.h; sourceTree = "<group>"; };
 		A1E296F91BD86D9B00AFBA29 /* RecommendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendViewController.m; sourceTree = "<group>"; };
-		A1FE5D671BE1CBDD00D65132 /* PSCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSCollectionView.h; path = ../ViewController/PSCollectionView.h; sourceTree = "<group>"; };
-		A1FE5D681BE1CBDD00D65132 /* PSCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSCollectionView.m; path = ../ViewController/PSCollectionView.m; sourceTree = "<group>"; };
-		A1FE5D691BE1CBDD00D65132 /* PSCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSCollectionViewCell.h; path = ../ViewController/PSCollectionViewCell.h; sourceTree = "<group>"; };
-		A1FE5D6A1BE1CBDD00D65132 /* PSCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSCollectionViewCell.m; path = ../ViewController/PSCollectionViewCell.m; sourceTree = "<group>"; };
 		DD4F0750B5DAAA87BA236B31 /* Pods-BaseProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-BaseProject/Pods-BaseProject.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -155,6 +152,8 @@
 				3804CE501BD758F10046C8C8 /* NSString+QRCode.m */,
 				A1D42E001BE9A73E002EEAC0 /* UIImage+Tools.h */,
 				A1D42E011BE9A73E002EEAC0 /* UIImage+Tools.m */,
+				A18F92251BEAF38700607FCD /* UIView+Tools.h */,
+				A18F92261BEAF38700607FCD /* UIView+Tools.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -180,12 +179,12 @@
 		3886C0951BD748830014E661 /* BaseProject */ = {
 			isa = PBXGroup;
 			children = (
+				A18F92331BEB3ABE00607FCD /* Vendor */,
 				3886C0AF1BD74A4A0014E661 /* Define */,
 				3886C0B01BD74A4A0014E661 /* Model */,
 				3886C0B11BD74A4A0014E661 /* NetManager */,
 				3886C0B21BD74A4A0014E661 /* Resource */,
 				3886C0B31BD74A4A0014E661 /* Util */,
-				3886C0B41BD74A4A0014E661 /* Vendor */,
 				3886C0B51BD74A4A0014E661 /* View */,
 				3886C0B61BD74A4A0014E661 /* ViewController */,
 				3886C0B71BD74A4A0014E661 /* ViewModel */,
@@ -254,22 +253,10 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
-		3886C0B41BD74A4A0014E661 /* Vendor */ = {
-			isa = PBXGroup;
-			children = (
-				A1FE5D691BE1CBDD00D65132 /* PSCollectionViewCell.h */,
-				A1FE5D6A1BE1CBDD00D65132 /* PSCollectionViewCell.m */,
-				A1FE5D671BE1CBDD00D65132 /* PSCollectionView.h */,
-				A1FE5D681BE1CBDD00D65132 /* PSCollectionView.m */,
-				A185427A1BDE565500DB45E7 /* ScrollDisplayViewController.m */,
-				A18542791BDE565500DB45E7 /* ScrollDisplayViewController.h */,
-			);
-			path = Vendor;
-			sourceTree = "<group>";
-		};
 		3886C0B51BD74A4A0014E661 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A18F92281BEAF6C900607FCD /* 发现 */,
 				A17466B91BE8E512005AF449 /* 首页 */,
 			);
 			path = View;
@@ -359,6 +346,31 @@
 				A13102481BE5CD9800F2903C /* AVInfoViewController.m */,
 			);
 			name = "其它";
+			sourceTree = "<group>";
+		};
+		A18F92281BEAF6C900607FCD /* 发现 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "发现";
+			sourceTree = "<group>";
+		};
+		A18F92331BEB3ABE00607FCD /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				A18F92341BEB3AE200607FCD /* iCarousel */,
+			);
+			name = Vendor;
+			path = View/Vendor;
+			sourceTree = "<group>";
+		};
+		A18F92341BEB3AE200607FCD /* iCarousel */ = {
+			isa = PBXGroup;
+			children = (
+				A18F92351BEB3AE200607FCD /* iCarousel.h */,
+				A18F92361BEB3AE200607FCD /* iCarousel.m */,
+			);
+			path = iCarousel;
 			sourceTree = "<group>";
 		};
 		A19569B21BE0EDF900CFB80E /* 推荐 */ = {
@@ -628,7 +640,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1FE5D6C1BE1CBDD00D65132 /* PSCollectionViewCell.m in Sources */,
 				3886C0BE1BD74AFE0014E661 /* BaseNetManager.m in Sources */,
 				A195697F1BE0B3B800CFB80E /* ShinBanModel.m in Sources */,
 				A17466B31BE8C8AD005AF449 /* RecommendCollectionViewCell.m in Sources */,
@@ -636,12 +647,13 @@
 				A19569BF1BE0F4C800CFB80E /* MoreViewController.m in Sources */,
 				A17466B01BE8C14F005AF449 /* RecommendCollectionViewController.m in Sources */,
 				A19569AB1BE0D6E400CFB80E /* ShinBanViewController.m in Sources */,
+				A18F92371BEB3AE200607FCD /* iCarousel.m in Sources */,
 				A13102491BE5CD9800F2903C /* AVInfoViewController.m in Sources */,
 				A103A8681BE08907001C5C15 /* WebViewController.m in Sources */,
+				A18F92271BEAF38700607FCD /* UIView+Tools.m in Sources */,
 				A1C0ACC21BDA0CD9000E1848 /* CellItemViewController.m in Sources */,
 				A176A5121BD7BC53004AD9FB /* RecommendViewModel.m in Sources */,
 				3804CE541BD758F10046C8C8 /* NSString+QRCode.m in Sources */,
-				A185427B1BDE565500DB45E7 /* ScrollDisplayViewController.m in Sources */,
 				A176A50F1BD7B6D0004AD9FB /* RecommendNetManager.m in Sources */,
 				A176A50C1BD7B3C4004AD9FB /* RecommendModel.m in Sources */,
 				A1E296FB1BD86D9B00AFBA29 /* RecommendViewController.m in Sources */,
@@ -649,7 +661,6 @@
 				A171FE5C1BD8F801005CF7E6 /* CellView.m in Sources */,
 				A17466B81BE8E45A005AF449 /* FindModel.m in Sources */,
 				A19569C71BE0FA6900CFB80E /* MoreViewCell.m in Sources */,
-				A1FE5D6B1BE1CBDD00D65132 /* PSCollectionView.m in Sources */,
 				A1D42DD91BE98E04002EEAC0 /* FindViewModel.m in Sources */,
 				A19569821BE0B59F00CFB80E /* ShinBanNetManager.m in Sources */,
 				3804CE531BD758F10046C8C8 /* NSString+PJR.m in Sources */,
