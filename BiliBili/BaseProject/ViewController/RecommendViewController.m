@@ -13,6 +13,7 @@
 #import "ScrollDisplayViewController.h"
 #import "WebViewController.h"
 #import "UIView+Tools.h"
+#import "AVInfoViewController.h"
 @interface RecommendViewController ()<UITableViewDataSource, UITableViewDelegate,iCarouselDelegate, iCarouselDataSource>
 @property (nonatomic, strong) RecommendViewModel* vm;
 @property (weak, nonatomic) IBOutlet UIView *headView;
@@ -50,7 +51,7 @@ kRemoveCellSeparator
     MJRefreshNormalHeader* head = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self.vm refreshDataCompleteHandle:^(NSError *error) {
             [self.tableView.header endRefreshing];
-
+            
             [self.headScrollView reloadData];
             
             [self.tableView reloadData];
@@ -129,23 +130,43 @@ kRemoveCellSeparator
             NSMutableArray* itemArr = [NSMutableArray new];
             for (int i = 0; i < 4; ++i) {
                 CellItemViewController* cvc = [kStoryboard(@"Main") instantiateViewControllerWithIdentifier:@"CellItemViewController"];
-                RecommendDataModel* m = self.vm.list[dic[key]][i];
+                
+                RecommendDataModel* dataModel = self.vm.list[dic[key]][i];
+                
                 cvc.view.tag = 100 + i;
-                [cvc setViewContentWithModel:m];
+                
+                [cvc setViewContentWithImgURL:[self.vm picForRow:i section:dic[key]] playNum:[self.vm playForRow:i section:dic[key]] replyNum:[self.vm replyForRow:i section:dic[key]] title:[self.vm titleForRow:i section:dic[key]] section:dic[key] ind:i];
+                //传值
+                [cvc pushAVInfoViewController:^() {
+                    AVInfoViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"AVInfoViewController"];
+                [vc setWithModel: dataModel];
+                    
+                    [self.navigationController pushViewController:vc animated:YES];
+                }];
+                
                 [itemArr addObject: cvc];
+                
                 [self addChildViewController: cvc];
                 [cell.contentView addSubview: cvc.view];
             }
             [self makeConstraintsWithViews:itemArr cell:cell];
-    
+            
         }else{
             NSArray* conArr = self.childViewControllers;
             for (int i = 0; i < 4; ++i) {
                 UIView* iv = [cell viewWithTag:100 + i];
-                for (CellItemViewController* con in conArr) {
-                    if (iv == con.view) {
-                        RecommendDataModel* m = self.vm.list[dic[key]][i];
-                        [con setViewContentWithModel:m];
+                for (CellItemViewController* cvc in conArr) {
+                    if (iv == cvc.view) {
+                        RecommendDataModel* dataModel = self.vm.list[dic[key]][i];
+                        
+                        [cvc setViewContentWithImgURL:[self.vm picForRow:i section:dic[key]] playNum:[self.vm playForRow:i section:dic[key]] replyNum:[self.vm replyForRow:i section:dic[key]] title:[self.vm titleForRow:i section:dic[key]] section:dic[key] ind:i];
+                        
+                        [cvc pushAVInfoViewController:^() {
+                            AVInfoViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"AVInfoViewController"];
+                        [vc setWithModel: dataModel];
+
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }];
                     }
                 }
             }
@@ -156,7 +177,7 @@ kRemoveCellSeparator
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    640*735
+    //    640*735
     return kWindowW / 640 * 735;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -174,11 +195,12 @@ kRemoveCellSeparator
         _headScrollView.delegate = self;
         _headScrollView.dataSource = self;
         _headScrollView.type = iCarouselTypeInvertedCylinder;
-        //自动滚动速度
-        _headScrollView.autoscroll = 0.2;
         _headScrollView.pagingEnabled = YES;
         //手动滚动速度
         _headScrollView.scrollSpeed = 2;
+        [NSTimer bk_scheduledTimerWithTimeInterval:2.5 block:^(NSTimer *timer) {
+            [_headScrollView scrollToItemAtIndex:_headScrollView.currentItemIndex + 1 animated:YES];
+        } repeats:YES];
     }
     return _headScrollView;
 }
@@ -202,9 +224,6 @@ kRemoveCellSeparator
 }
 
 - (CGFloat)carousel:(iCarousel *)carousel valueForOption:(iCarouselOption)option withDefault:(CGFloat)value{
-    if (option == iCarouselOptionWrap) {
-        return YES; //type0的默认循环滚动模式是否
-    }
     return value;
 }
 

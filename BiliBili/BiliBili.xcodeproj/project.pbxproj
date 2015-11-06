@@ -33,6 +33,7 @@
 		A1776F011BE46AD60095A10E /* HomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1776F001BE46AD60095A10E /* HomePageViewController.m */; };
 		A18F92271BEAF38700607FCD /* UIView+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = A18F92261BEAF38700607FCD /* UIView+Tools.m */; };
 		A18F92371BEB3AE200607FCD /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = A18F92361BEB3AE200607FCD /* iCarousel.m */; };
+		A18F923A1BEB676300607FCD /* NSString+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = A18F92391BEB676300607FCD /* NSString+Tools.m */; };
 		A195697F1BE0B3B800CFB80E /* ShinBanModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A195697E1BE0B3B800CFB80E /* ShinBanModel.m */; };
 		A19569821BE0B59F00CFB80E /* ShinBanNetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A19569811BE0B59F00CFB80E /* ShinBanNetManager.m */; };
 		A19569AB1BE0D6E400CFB80E /* ShinBanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A19569AA1BE0D6E400CFB80E /* ShinBanViewController.m */; };
@@ -100,6 +101,8 @@
 		A18F92261BEAF38700607FCD /* UIView+Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Tools.m"; sourceTree = "<group>"; };
 		A18F92351BEB3AE200607FCD /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		A18F92361BEB3AE200607FCD /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
+		A18F92381BEB676300607FCD /* NSString+Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Tools.h"; sourceTree = "<group>"; };
+		A18F92391BEB676300607FCD /* NSString+Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Tools.m"; sourceTree = "<group>"; };
 		A195697D1BE0B3B800CFB80E /* ShinBanModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinBanModel.h; sourceTree = "<group>"; };
 		A195697E1BE0B3B800CFB80E /* ShinBanModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinBanModel.m; sourceTree = "<group>"; };
 		A19569801BE0B59F00CFB80E /* ShinBanNetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinBanNetManager.h; sourceTree = "<group>"; };
@@ -150,6 +153,8 @@
 				3804CE4E1BD758F10046C8C8 /* NSString+PJR.m */,
 				3804CE4F1BD758F10046C8C8 /* NSString+QRCode.h */,
 				3804CE501BD758F10046C8C8 /* NSString+QRCode.m */,
+				A18F92381BEB676300607FCD /* NSString+Tools.h */,
+				A18F92391BEB676300607FCD /* NSString+Tools.m */,
 				A1D42E001BE9A73E002EEAC0 /* UIImage+Tools.h */,
 				A1D42E011BE9A73E002EEAC0 /* UIImage+Tools.m */,
 				A18F92251BEAF38700607FCD /* UIView+Tools.h */,
@@ -672,6 +677,7 @@
 				A1D42E021BE9A73E002EEAC0 /* UIImage+Tools.m in Sources */,
 				3886C0C11BD74B090014E661 /* BaseModel.m in Sources */,
 				3886C0981BD748830014E661 /* main.m in Sources */,
+				A18F923A1BEB676300607FCD /* NSString+Tools.m in Sources */,
 				3804CE521BD758F10046C8C8 /* NSObject+Common.m in Sources */,
 				A1776EFB1BE457460095A10E /* FindViewController.m in Sources */,
 			);

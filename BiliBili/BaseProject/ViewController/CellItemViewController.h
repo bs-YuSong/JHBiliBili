@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "RecommendModel.h"
+typedef void(^block)();
+
 @interface CellItemViewController : UIViewController
-- (void)setViewContentWithModel:(RecommendDataModel*)model;
+- (void)setViewContentWithImgURL:(NSURL*)URL playNum:(NSString*)playNum replyNum:(NSString*)replyNum title:(NSString*)title section:(NSString*)section ind:(NSInteger)ind;
+//回传下标
+- (void)pushAVInfoViewController:(block) b;
+@property (nonatomic, copy) block returnBlock;
 @end

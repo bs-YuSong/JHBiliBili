@@ -10,6 +10,7 @@
 #import "RecommendModel.h"
 #import "RecommendNetManager.h"
 #import "IndexModel.h"
+#import "NSString+Tools.h"
 @implementation RecommendViewModel
 
 - (NSMutableDictionary *)list{
@@ -45,20 +46,34 @@
     RecommendDataModel* m = self.list[section][row];
     return m.title;
 }
-- (NSNumber *)playForRow:(NSInteger)row section:(NSString*)section{
+- (NSString *)playForRow:(NSInteger)row section:(NSString*)section{
     RecommendDataModel* m = self.list[section][row];
-    return m.play;
+    return [NSString stringWithFormatNum:m.play];
 }
-- (NSNumber *)replyForRow:(NSInteger)row section:(NSString*)section{
+- (NSString *)replyForRow:(NSInteger)row section:(NSString*)section{
     RecommendDataModel* m = self.list[section][row];
-    return m.review;
-}
-
-- (NSString*)aidForRow:(NSInteger)row section:(NSString*)section{
-    RecommendDataModel* m = self.list[section][row];
-    return m.aid;
+    return [NSString stringWithFormatNum:m.review];
 }
 
+//- (NSString*)aidForRow:(NSInteger)row section:(NSString*)section{
+//    RecommendDataModel* m = self.list[section][row];
+//    return m.aid;
+//}
+
+- (NSString*)authorForRow:(NSInteger)row section:(NSString*)section{
+    RecommendDataModel* m = self.list[section][row];
+    return m.author;
+}
+
+- (NSString*)publicTimeForRow:(NSInteger)row section:(NSString*)section{
+    RecommendDataModel* m = self.list[section][row];
+    return m.create;
+}
+
+//- (NSString*)coinForRow:(NSInteger)row section:(NSString*)section{
+//    RecommendDataModel* m = self.list[section][row];
+//    return [NSString stringWithFormatNum:m.coins];
+//}
 - (NSInteger)numberOfHeadImg{
     NSArray* arr = self.list[@"slideshow.json"];
     return arr.count;

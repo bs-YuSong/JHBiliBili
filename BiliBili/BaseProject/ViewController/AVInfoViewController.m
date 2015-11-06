@@ -7,32 +7,52 @@
 //
 
 #import "AVInfoViewController.h"
+#import "NSString+Tools.h"
+#import "RecommendModel.h"
 
 @interface AVInfoViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIView *headView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray* buttons;
+//up名
 @property (weak, nonatomic) IBOutlet UILabel *UP;
+//视频缩略图
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
+//播放数
+@property (weak, nonatomic) IBOutlet UILabel *playNumLabel;
+//弹幕数
+@property (weak, nonatomic) IBOutlet UILabel *danMuLabel;
+//发布时间
+@property (weak, nonatomic) IBOutlet UILabel *publicTimeLabel;
+//视频标题
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
-
+@property (nonatomic, strong) RecommendDataModel* model;
 
 @end
 
 @implementation AVInfoViewController
-
+//235 147
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.headView.frame = CGRectMake(0, 0, kWindowW, kWindowH / 2.25);
+    self.headView.frame = CGRectMake(0, 0, kWindowW, kWindowW * 0.4 + 30);
+    
     [self.imgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(self.headView.mas_width).multipliedBy(0.33);
         make.height.mas_equalTo(self.imgView.mas_width).multipliedBy(0.62);
     }];
 
-    NSMutableAttributedString* str = [[NSMutableAttributedString alloc] initWithString:@"UP主："];
-    [str appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@"查看所有中奖记录" attributes:@{NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle),NSForegroundColorAttributeName:kRGBColor(248, 116, 153)}]];
-    [self.UP setAttributedText:str];
 
+    NSMutableAttributedString* str = [[NSMutableAttributedString alloc] initWithString:@"UP主："];
+    [str appendAttributedString:[[NSMutableAttributedString alloc] initWithString: self.model.author attributes:@{NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle),NSForegroundColorAttributeName:kRGBColor(248, 116, 153)}]];
+    [self.UP setAttributedText:str];
+    
+    self.playNumLabel.text = [NSString stringWithFormat:@"播放：%@", [NSString stringWithFormatNum:self.model.play]];
+    self.danMuLabel.text = [NSString stringWithFormat:@"弹幕数：%@", [NSString stringWithFormatNum:self.model.video_review]];
+    self.publicTimeLabel.text = [NSString stringWithFormat:@"发布于：%@", self.model.create];
+    [self.imgView setImageWithURL: [NSURL URLWithString:self.model.pic]];
+    self.titleLabel.text = self.model.title;
     
 }
 
@@ -98,6 +118,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 40;
 }
+
 //把没被选中按钮的选择状态还原
 - (void)setSelectedButton:(UIButton*)button{
     [self.buttons enumerateObjectsUsingBlock:^(UIButton*  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -108,5 +129,10 @@
         }
     }];
 }
+
+- (void)setWithModel:(RecommendDataModel*)model{
+    self.model = model;
+}
+
 
 @end

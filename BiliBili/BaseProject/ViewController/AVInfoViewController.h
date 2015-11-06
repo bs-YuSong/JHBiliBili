@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class RecommendDataModel;
 @interface AVInfoViewController : UIViewController
-
+- (void)setWithModel:(RecommendDataModel*)model;
 @end

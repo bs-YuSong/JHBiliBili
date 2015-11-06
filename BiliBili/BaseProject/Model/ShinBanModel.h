@@ -27,20 +27,6 @@
 @property (nonatomic, strong)NSString* cover;
 @property (nonatomic, strong)NSNumber* total_count;
 @property (nonatomic, strong)NSString* url;
-//@property (nonatomic, assign)CGSize coverSize;
-//@property (nonatomic, assign)CGFloat coverWidth;
-//@property (nonatomic, strong)NSNumber* endepcount;
-//@property (nonatomic, strong)NSString* style;
-//@property (nonatomic, strong)NSString* spname;
-//@property (nonatomic, strong)NSNumber* spid;
-//@property (nonatomic, strong)NSString* remark2;
-//@property (nonatomic, assign)CGFloat width;
-//@property (nonatomic, strong)NSString* type;
-//@property (nonatomic, strong)NSString* title;
-//@property (nonatomic, strong)NSString* imageurl;
-//@property (nonatomic, strong)NSString* remark;
-//@property (nonatomic, assign)CGFloat height;
-//@property (nonatomic, strong)NSString* imagekey;
 @end
 
 @interface MoreViewShinBanDataModel : BaseModel

@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *playLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *replyIcon;
 @property (weak, nonatomic) IBOutlet UILabel *replyLabel;
+@property (nonatomic, strong) NSString* section;
+@property (nonatomic, assign) NSInteger ind;
 
 @end
 
@@ -24,34 +26,42 @@
     [super viewDidLoad];
 }
 
-- (void)setViewContentWithModel:(RecommendDataModel*)model{
-    [self.imgv setImageWithURL:[NSURL URLWithString:model.pic]];
+- (void)setViewContentWithImgURL:(NSURL*)URL playNum:(NSString*)playNum replyNum:(NSString*)replyNum title:(NSString*)title section:(NSString*)section ind:(NSInteger)ind{
+    //视频缩略图
+    [self.imgv setImageWithURL: URL];
     [self.imgv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(self.imgv.mas_width).multipliedBy(0.63);
     }];
     self.imgv.layer.cornerRadius = 8;
     self.imgv.layer.masksToBounds = YES;
-    self.label.text = model.title;
+    //视频标题
+    self.label.text = title;
+    //小图标
     self.playIcon.tintColor = kRGBColor(182, 182, 182);
     self.playIcon.image = [self.playIcon.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.replyIcon.tintColor = kRGBColor(182, 182, 182);
     self.replyIcon.image = [self.replyIcon.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    NSString* str = model.play.stringValue;
-    NSString* str2 = model.review.stringValue;
-    if (str.doubleValue >= 10000) {
-        str = [NSString stringWithFormat:@"%.1f万",model.play.doubleValue/10000];
-    }
-    if (str2.doubleValue >= 10000) {
-        str2 = [NSString stringWithFormat:@"%.1f万",model.review.doubleValue/10000];
-    }
-    self.playLabel.text = str;
-    self.replyLabel.text = str2;
+    
+    self.playLabel.text = playNum;
+    self.replyLabel.text = replyNum;
+    
+    self.section = section;
+    self.ind = ind;
 }
+
+- (void)pushAVInfoViewController:(block) b{
+    self.returnBlock = b;
+}
+
 - (IBAction)touchStart:(UIButton *)sender {
-    sender.backgroundColor = kRGBColor(100, 100, 100);
+    self.returnBlock();
+   // sender.backgroundColor = kRGBColor(100, 100, 100);
+    //[self.parentViewController.navigationController performSegueWithIdentifier:@"item2info" sender:nil];
 }
+
+
 - (IBAction)touchOver:(UIButton *)sender {
-    sender.backgroundColor = [UIColor clearColor];
+  //  sender.backgroundColor = [UIColor clearColor];
 }
 
 @end
