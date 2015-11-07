@@ -77,23 +77,23 @@ kRemoveCellSeparator
     UIView* v2 = views[1].view;
     UIView* v3 = views[2].view;
     UIView* v4 = views[3].view;
-    [v1 mas_makeConstraints:^(MASConstraintMaker *make) {
+    [v1 mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(cell.titleImg.mas_bottom).mas_offset(EDGE);
         make.left.mas_offset(EDGE);
         make.size.equalTo(@[v2,v3,v4]);
         make.bottom.equalTo(v3.mas_top).mas_offset(-EDGE);
     }];
-    [v2 mas_makeConstraints:^(MASConstraintMaker *make) {
+    [v2 mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(v1.mas_top);
         make.left.equalTo(v1.mas_right).mas_offset(EDGE);
         make.bottom.equalTo(v1.mas_bottom);
         make.right.mas_offset(-EDGE);
     }];
-    [v3 mas_makeConstraints:^(MASConstraintMaker *make) {
+    [v3 mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(v1.mas_left);
         make.bottom.mas_offset(-50);
     }];
-    [v4 mas_makeConstraints:^(MASConstraintMaker *make) {
+    [v4 mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(v3.mas_right).mas_offset(EDGE);
         make.right.mas_offset(-EDGE);
         make.bottom.equalTo(v3.mas_bottom);
@@ -116,14 +116,8 @@ kRemoveCellSeparator
     CellView* cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     NSDictionary* dic = self.vm.dicMap[indexPath.section];
     NSString* key = [dic allKeys].firstObject;
-    cell.title.text = key;
-    //图片文件名 home_region_icon_分区名
-    NSString* imgName = [dic[key] componentsSeparatedByString:@"/"].lastObject;
-    cell.titleImg.image = [UIImage imageNamed:[NSString stringWithFormat:@"home_region_icon_%@",[imgName componentsSeparatedByString:@"-"].firstObject]];
-    
-    [cell.moreButton setTitle:[@"更多" stringByAppendingString:key] forState:UIControlStateNormal];
-    cell.enterView.layer.cornerRadius = cell.enterView.frame.size.width / 2;
-    cell.enterView.layer.masksToBounds = YES;
+    //设置分区内容
+    [cell setTitle: key titleImg:[NSString stringWithFormat:@"home_region_icon_%@",[dic[key] componentsSeparatedByString:@"-"].firstObject] buttonTitle:[@"更多" stringByAppendingString:key]];
     
     if (self.vm.list[dic[key]]) {
         if (![cell.contentView viewWithTag:101]) {
@@ -131,15 +125,13 @@ kRemoveCellSeparator
             for (int i = 0; i < 4; ++i) {
                 CellItemViewController* cvc = [kStoryboard(@"Main") instantiateViewControllerWithIdentifier:@"CellItemViewController"];
                 
-                RecommendDataModel* dataModel = self.vm.list[dic[key]][i];
-                
                 cvc.view.tag = 100 + i;
                 
                 [cvc setViewContentWithImgURL:[self.vm picForRow:i section:dic[key]] playNum:[self.vm playForRow:i section:dic[key]] replyNum:[self.vm replyForRow:i section:dic[key]] title:[self.vm titleForRow:i section:dic[key]] section:dic[key] ind:i];
                 //传值
                 [cvc pushAVInfoViewController:^() {
                     AVInfoViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"AVInfoViewController"];
-                [vc setWithModel: dataModel];
+                    [vc setWithModel: self.vm.list[dic[key]][i] withSection:dic[key]];
                     
                     [self.navigationController pushViewController:vc animated:YES];
                 }];
@@ -150,21 +142,20 @@ kRemoveCellSeparator
                 [cell.contentView addSubview: cvc.view];
             }
             [self makeConstraintsWithViews:itemArr cell:cell];
-            
+            //重用判断
         }else{
             NSArray* conArr = self.childViewControllers;
             for (int i = 0; i < 4; ++i) {
                 UIView* iv = [cell viewWithTag:100 + i];
                 for (CellItemViewController* cvc in conArr) {
                     if (iv == cvc.view) {
-                        RecommendDataModel* dataModel = self.vm.list[dic[key]][i];
                         
                         [cvc setViewContentWithImgURL:[self.vm picForRow:i section:dic[key]] playNum:[self.vm playForRow:i section:dic[key]] replyNum:[self.vm replyForRow:i section:dic[key]] title:[self.vm titleForRow:i section:dic[key]] section:dic[key] ind:i];
                         
                         [cvc pushAVInfoViewController:^() {
                             AVInfoViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"AVInfoViewController"];
-                        [vc setWithModel: dataModel];
-
+                            [vc setWithModel: self.vm.list[dic[key]][i] withSection:dic[key]];
+                            
                             [self.navigationController pushViewController:vc animated:YES];
                         }];
                     }
@@ -174,6 +165,8 @@ kRemoveCellSeparator
     }
     return cell;
 }
+
+
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

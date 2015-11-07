@@ -6,15 +6,15 @@
 //  Copyright © 2015年 Tarena. All rights reserved.
 //
 
-#import "RecommendModel.h"
+#import "AVModel.h"
 
-@implementation RecommendModel
+@implementation AVModel
 + (NSDictionary *)objectClassInArray{
-    return @{@"list":[RecommendDataModel class]};
+    return @{@"list":[AVDataModel class]};
 }
 @end
 
-@implementation RecommendDataModel
+@implementation AVDataModel
 
 + (NSDictionary *)replacedKeyFromPropertyName{
     return @{@"desc": @"description"};

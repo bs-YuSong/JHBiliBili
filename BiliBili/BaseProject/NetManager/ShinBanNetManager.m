@@ -8,6 +8,7 @@
 
 #import "ShinBanNetManager.h"
 #import "ShinBanModel.h"
+#import "NSDictionary+Tools.h"
 @implementation ShinBanNetManager
 + (id)getMoreViewParametersCompletionHandler:(void(^)(id responseObj, NSError *error))complete{
     //http://www.bilibili.com/index/ding/13.json
@@ -23,13 +24,8 @@
     
     //http://www.bilibili.com/api_proxy?app=bangumi&page=1&indexType=0&pagesize=30&action=site_season_index
     
-    NSMutableString* basePath = [@"http://www.bilibili.com/api_proxy?app=bangumi" mutableCopy];
-    [params enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-    //page = 1 pagesize = 30
-        NSString* str = [NSString stringWithFormat:@"&%@=%@",key,obj];
-        [basePath appendString: str];
-    }];
-    [basePath appendString:@"&indexType=0&action=site_season_index"];
+    NSString*basePath = [params appendGetParameterWithBasePath:@"http://www.bilibili.com/api_proxy?app=bangumi&indexType=0&action=site_season_index&"];
+    
     
     return [self Get:basePath parameters:nil completionHandler:^(id responseObj, NSError *error) {
         complete([RecommentShinBanModel objectWithKeyValues:responseObj[@"result"]],error);

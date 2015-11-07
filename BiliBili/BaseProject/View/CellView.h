@@ -12,5 +12,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *titleImg;
 @property (weak, nonatomic) IBOutlet UIButton *moreButton;
 @property (weak, nonatomic) IBOutlet UIView *enterView;
-
+- (void)setTitle:(NSString*)title titleImg:(NSString*)titleimg buttonTitle:(NSString*)buttonTitle;
 @end

@@ -9,5 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface NSString (Tools)
+/** 把字符串格式化成xx万的形式*/
 + (NSString*)stringWithFormatNum:(NSInteger)num;
+//根据正则表达式返回对应子字符串
+- (NSArray<NSString *>*)subStringsWithRegularExpression:(NSString*)regularExpression;
 @end

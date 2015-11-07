@@ -68,12 +68,13 @@
     return dataModel.title;
 }
 
-#define pagesize @30
+#define pagesize @21
 - (void)refreshDataCompleteHandle:(void(^)(NSError *error))complete{
+    //刷新大家都在看
     [ShinBanNetManager getMoreViewParametersCompletionHandler:^(MoreViewShinBanModel* responseObj, NSError *error) {
         [self.moreViewList removeAllObjects];
         self.moreViewList = [responseObj.list mutableCopy];
-        
+    //刷新推荐番剧
         [ShinBanNetManager getRecommentParameters:@{@"page":@1,@"pagesize":pagesize} CompletionHandler:^(RecommentShinBanModel* responseObj1, NSError *error) {
             [self.recommentList removeAllObjects];
             self.recommentList = [responseObj1.list mutableCopy];
@@ -83,8 +84,11 @@
 }
 
 - (void)getMoreDataCompleteHandle:(void(^)(NSError *error))complete{
-    [ShinBanNetManager getRecommentParameters:@{@"page":@1,@"pagesize":pagesize} CompletionHandler:^(RecommentShinBanModel* responseObj1, NSError *error) {
-        [self.recommentList addObject: responseObj1.list];
+    [ShinBanNetManager getRecommentParameters:@{@"page":@(self.recommentList.count / pagesize.intValue + 1),@"pagesize":pagesize} CompletionHandler:^(RecommentShinBanModel* responseObj1, NSError *error) {
+        if (responseObj1.list.count > 0 ) {
+            [self.recommentList addObjectsFromArray:responseObj1.list];
+        }
+        complete(error);
     }];
 }
 @end

@@ -1,0 +1,22 @@
+//
+//  ReplyModel.m
+//  BiliBili
+//
+//  Created by apple-jd44 on 15/11/6.
+//  Copyright © 2015年 Tarena. All rights reserved.
+//
+
+#import "ReplyModel.h"
+
+@implementation ReplyModel
++ (NSDictionary*)objectClassInArray{
+    return @{@"ReplyDataModel":[ReplyDataModel class]};
+}
+@end
+
+
+@implementation ReplyDataModel
+
+
+
+@end

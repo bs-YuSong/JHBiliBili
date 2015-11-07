@@ -8,11 +8,11 @@
 
 #import "BaseViewModel.h"
 
-@interface RecommendModel : BaseViewModel
+@interface AVModel : BaseViewModel
 @property (nonatomic, strong) NSArray* list;
 @end
 
-@interface RecommendDataModel : BaseViewModel
+@interface AVDataModel : BaseViewModel
 @property (nonatomic, strong)NSString* desc;
 @property (nonatomic, strong)NSNumber* mid;
 @property (nonatomic, strong)NSString* subtitle;

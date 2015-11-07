@@ -66,14 +66,15 @@
     [head setTitle:@"刷呀刷，好累啊，喵(＾▽＾)" forState:MJRefreshStateRefreshing];
     self.tableView.header = head;
     
-//    self.tableView.footer=[MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-//        
-//        [self.vm refreshDataCompleteHandle:^(NSError *error) {
-//            [self.tableView.footer endRefreshing];
-//            [self.tableView reloadData];
-//        }];
-//        
-//    }];
+    self.tableView.footer=[MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        
+        [self.vm getMoreDataCompleteHandle:^(NSError *error) {
+            [self.tableView.footer endRefreshing];
+            //[self.tableView reloadData];
+            [self.collectionViewController.collectionView reloadData];
+        }];
+        
+    }];
     [self.tableView.header beginRefreshing];
 }
 
@@ -150,7 +151,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-        return kWindowW / 640 * 735;
+        return kWindowW / 640 * 735 - 100;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{

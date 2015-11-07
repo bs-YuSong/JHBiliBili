@@ -22,4 +22,5 @@
 - (NSString*)commendTitileForRow:(NSInteger)row;
 
 - (void)refreshDataCompleteHandle:(void(^)(NSError *error))complete;
+- (void)getMoreDataCompleteHandle:(void(^)(NSError *error))complete;
 @end

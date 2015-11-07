@@ -7,10 +7,15 @@
 //
 
 #import "RecommendViewModel.h"
-#import "RecommendModel.h"
+#import "AVModel.h"
 #import "RecommendNetManager.h"
 #import "IndexModel.h"
 #import "NSString+Tools.h"
+
+@interface RecommendViewModel ()
+
+@end
+
 @implementation RecommendViewModel
 
 - (NSMutableDictionary *)list{
@@ -21,73 +26,56 @@
     return _list;
 }
 
-- (NSMutableArray *)headObject{
+- (NSArray *)headObject{
     if (_headObject == nil) {
-        _headObject = [NSMutableArray new];
+        _headObject = [NSArray new];
     }
     return _headObject;
 }
 
-- (NSArray *)dicMap{
+- (NSArray<NSDictionary *> *)dicMap{
     if (_dicMap == nil) {
-        _dicMap =  @[@{@"动画":@"catalogy/1-3day.json"},@{@"番剧":@"catalogy/13-3day.json"},@{@"音乐":@"catalogy/3-3day.json"},@{@"舞蹈":@"catalogy/129-3day.json"},@{@"游戏":@"catalogy/4-3day.json"},@{@"科技":@"catalogy/36-3day.json"},@{@"娱乐":@"catalogy/5-3day.json"},@{@"鬼畜":@"catalogy/119-3day.json"},@{@"电影":@"catalogy/23-3day.json"},@{@"电视剧":@"catalogy/11-3day.json"},@{@"顶部视图":@"slideshow.json"}];
+        _dicMap =  @[@{@"动画":@"1-3day.json"},@{@"番剧":@"13-3day.json"},@{@"音乐":@"3-3day.json"},@{@"舞蹈":@"129-3day.json"},@{@"游戏":@"4-3day.json"},@{@"科技":@"36-3day.json"},@{@"娱乐":@"5-3day.json"},@{@"鬼畜":@"119-3day.json"},@{@"电影":@"23-3day.json"},@{@"电视剧":@"11-3day.json"}];
     }
     return _dicMap;
 }
 
-
-
 - (NSURL *)picForRow:(NSInteger)row section:(NSString*)section{
-    RecommendDataModel* m = self.list[section][row];
     
-    return [NSURL URLWithString:m.pic];
+    return [NSURL URLWithString:self.list[section][row].pic];
 }
 - (NSString*)titleForRow:(NSInteger)row section:(NSString*)section{
-    RecommendDataModel* m = self.list[section][row];
-    return m.title;
+    return self.list[section][row].title;
 }
 - (NSString *)playForRow:(NSInteger)row section:(NSString*)section{
-    RecommendDataModel* m = self.list[section][row];
-    return [NSString stringWithFormatNum:m.play];
+    return [NSString stringWithFormatNum:self.list[section][row].play];
 }
 - (NSString *)replyForRow:(NSInteger)row section:(NSString*)section{
-    RecommendDataModel* m = self.list[section][row];
-    return [NSString stringWithFormatNum:m.review];
+    return [NSString stringWithFormatNum:self.list[section][row].review];
 }
 
-//- (NSString*)aidForRow:(NSInteger)row section:(NSString*)section{
-//    RecommendDataModel* m = self.list[section][row];
-//    return m.aid;
-//}
 
 - (NSString*)authorForRow:(NSInteger)row section:(NSString*)section{
-    RecommendDataModel* m = self.list[section][row];
-    return m.author;
+    return self.list[section][row].author;
 }
 
 - (NSString*)publicTimeForRow:(NSInteger)row section:(NSString*)section{
-    RecommendDataModel* m = self.list[section][row];
-    return m.create;
+    return self.list[section][row].create;
 }
 
-//- (NSString*)coinForRow:(NSInteger)row section:(NSString*)section{
-//    RecommendDataModel* m = self.list[section][row];
-//    return [NSString stringWithFormatNum:m.coins];
-//}
+
+#pragma mark - 顶部视图
 - (NSInteger)numberOfHeadImg{
-    NSArray* arr = self.list[@"slideshow.json"];
-    return arr.count;
+    return self.headObject.count;
 }
 
 
 - (NSURL*)headImgURL:(NSInteger)index{
-    IndexDataModel* mo = self.list[@"slideshow.json"][index];
-    return [NSURL URLWithString:mo.img];
+    return [NSURL URLWithString:self.headObject[index].img];
 }
 
 - (NSURL*)headImgLink:(NSInteger)index{
-    IndexDataModel* mo = self.list[@"slideshow.json"][index];
-    return [NSURL URLWithString:mo.link];
+    return [NSURL URLWithString:self.headObject[index].link];
 }
 
 - (NSInteger)sectionCount{
@@ -95,14 +83,17 @@
 }
 
 - (void)refreshDataCompleteHandle:(void(^)(NSError *error))complete{
-
-    [self.dicMap enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSString* key = [(NSDictionary*)obj allValues].firstObject;
-        [RecommendNetManager getSection:key completionHandler:^(id responseObj, NSError *error) {
-            self.list[key] = [[responseObj list] mutableCopy];
-            complete(error);
+    [RecommendNetManager getHeadImgCompletionHandler:^(IndexModel* responseObj, NSError *error) {
+         self.headObject = [responseObj.list mutableCopy];
+        [self.dicMap enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSString* key = [obj allValues].firstObject;
+            [RecommendNetManager getSection:key completionHandler:^(AVModel* responseObj1, NSError *error) {
+                self.list[key] = [responseObj1.list mutableCopy];
+                if (idx == self.dicMap.count - 1) {
+                    complete(error);
+                }
+            }];
         }];
     }];
-
 }
 @end

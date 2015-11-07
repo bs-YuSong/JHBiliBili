@@ -10,4 +10,5 @@
 
 @interface RecommendNetManager : BaseNetManager
 + (id)getSection:(NSString *)section completionHandler:(void(^)(id responseObj, NSError *error))complete;
++ (id)getHeadImgCompletionHandler:(void(^)(id responseObj, NSError *error))complete;
 @end
