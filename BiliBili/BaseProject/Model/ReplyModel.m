@@ -10,7 +10,7 @@
 
 @implementation ReplyModel
 + (NSDictionary*)objectClassInArray{
-    return @{@"ReplyDataModel":[ReplyDataModel class]};
+    return @{@"list":[ReplyDataModel class]};
 }
 @end
 

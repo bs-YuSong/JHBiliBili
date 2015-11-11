@@ -10,7 +10,7 @@
 
 @implementation sameVideoModel
 + (NSDictionary *)objectClassInArray{
-    return @{@"sameVideoDataModel":[sameVideoModel class]};
+    return @{@"list":[sameVideoDataModel class]};
 }
 @end
 

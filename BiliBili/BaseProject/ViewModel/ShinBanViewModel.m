@@ -9,9 +9,10 @@
 #import "ShinBanViewModel.h"
 #import "ShinBanNetManager.h"
 #import "ShinBanModel.h"
+#import "NSString+Tools.h"
 @interface ShinBanViewModel ()
-@property (nonatomic, strong) NSMutableArray* moreViewList;
-@property (nonatomic, strong) NSMutableArray* recommentList;
+@property (nonatomic, strong) NSMutableArray<MoreViewShinBanDataModel*>* moreViewList;
+@property (nonatomic, strong) NSMutableArray<RecommentShinBanDataModel*>* recommentList;
 @end
 
 @implementation ShinBanViewModel
@@ -42,30 +43,22 @@
 }
 
 - (NSURL*)moreViewPicForRow:(NSInteger)row{
-    MoreViewShinBanDataModel* model = self.moreViewList[row];
-    return [NSURL URLWithString:model.pic];
+    return [NSURL URLWithString:self.moreViewList[row].pic];
 }
 - (NSString*)moreViewPlayForRow:(NSInteger)row{
-    MoreViewShinBanDataModel* model = self.moreViewList[row];
-    if (model.play.integerValue > 10000) {
-        return [NSString stringWithFormat:@"%.1f万",model.play.integerValue / 10000.0];
-    }
-    return model.play.stringValue;
+    return [NSString stringWithFormatNum:self.moreViewList[row].play];
 }
 
 - (NSString*)moreViewTitleForRow:(NSInteger)row{
-    MoreViewShinBanDataModel* model = self.moreViewList[row];
-    return model.title;
+    return self.moreViewList[row].title;
 }
 
 
 - (NSURL*)commendCoverForRow:(NSInteger)row{
-    RecommentShinBanDataModel* dataModel = self.recommentList[row];
-    return [NSURL URLWithString:dataModel.cover];
+    return [NSURL URLWithString:self.recommentList[row].cover];
 }
 - (NSString*)commendTitileForRow:(NSInteger)row{
-    RecommentShinBanDataModel* dataModel = self.recommentList[row];
-    return dataModel.title;
+    return self.recommentList[row].title;
 }
 
 #define pagesize @21
@@ -75,14 +68,14 @@
         [self.moreViewList removeAllObjects];
         self.moreViewList = [responseObj.list mutableCopy];
     //刷新推荐番剧
-        [ShinBanNetManager getRecommentParameters:@{@"page":@1,@"pagesize":pagesize} CompletionHandler:^(RecommentShinBanModel* responseObj1, NSError *error) {
-            [self.recommentList removeAllObjects];
-            self.recommentList = [responseObj1.list mutableCopy];
+        [self.recommentList removeAllObjects];
+        [self getMoreDataCompleteHandle:^(NSError *error) {
             complete(error);
         }];
+
     }];
 }
-
+//获取更多推荐番剧
 - (void)getMoreDataCompleteHandle:(void(^)(NSError *error))complete{
     [ShinBanNetManager getRecommentParameters:@{@"page":@(self.recommentList.count / pagesize.intValue + 1),@"pagesize":pagesize} CompletionHandler:^(RecommentShinBanModel* responseObj1, NSError *error) {
         if (responseObj1.list.count > 0 ) {

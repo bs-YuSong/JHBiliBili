@@ -40,6 +40,8 @@
 
 #import "iCarousel.h"
 
+#import "MyRefreshHeader.h"
+
 #ifdef DEBUG
 static const int ddLogLevel = DDLogLevelVerbose;
 #else

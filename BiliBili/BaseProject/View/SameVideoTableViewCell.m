@@ -12,22 +12,22 @@
 @property (weak, nonatomic) IBOutlet UILabel *videoLabel;
 @property (weak, nonatomic) IBOutlet UILabel *playNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *replyLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *playIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *DanMuIcon;
 
 @end
 
 
 @implementation SameVideoTableViewCell
 
-- (instancetype)init{
-    self = [super init];
-    [self.videoImgView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(self.videoImgView.mas_height).multipliedBy(0.63);
-    }];
-    return self;
-}
-
-- (void)serTitle:(NSString*)title playNum:(NSString*)playNum replyNum:(NSString*)replyNum videoImg:(NSURL*)imgURL{
+- (void)setTitle:(NSString*)title playNum:(NSString*)playNum replyNum:(NSString*)replyNum videoImg:(NSURL*)imgURL{
     [self.videoImgView setImageWithURL:imgURL];
+    [self.videoImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(self.videoImgView.mas_height).multipliedBy(1.6);
+    }];
+    self.playIcon.image = [self.playIcon.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    self.DanMuIcon.image = [self.DanMuIcon.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    
     self.videoLabel.text = title;
     self.playNumLabel.text = playNum;
     self.replyLabel.text = replyNum;

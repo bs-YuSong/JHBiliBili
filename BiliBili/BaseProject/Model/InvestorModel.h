@@ -19,10 +19,10 @@
 @property (nonatomic, strong)NSString* face;
 // 回复内容
 @property (nonatomic, strong)NSString* message;
-@property (nonatomic, strong)NSString* uid;
 //排行
 @property (nonatomic, assign)NSInteger rank;
 //名称
 @property (nonatomic, strong)NSString* uname;
-@property (nonatomic, strong)NSString* hidden;
+//@property (nonatomic, strong)NSString* uid;
+//@property (nonatomic, strong)NSString* hidden;
 @end

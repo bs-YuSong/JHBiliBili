@@ -41,13 +41,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     //头部高度
     [self.everyDayPlay mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(self.everyDayPlay.mas_width).multipliedBy(0.22);
     }];
-    
-    MJRefreshNormalHeader* head = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.tableView.header = [MyRefreshHeader myRefreshHead:^{
         [self.vm refreshDataCompleteHandle:^(NSError *error) {
             [self.tableView.header endRefreshing];
             [self.tableView reloadData];
@@ -57,14 +56,8 @@
             }
             
         }];
-        
     }];
     
-    head.lastUpdatedTimeLabel.hidden = YES;
-    [head setTitle:@"再拉，再拉就刷新给你看" forState:MJRefreshStateIdle];
-    [head setTitle:@"够了啦，松开人家嘛" forState:MJRefreshStatePulling];
-    [head setTitle:@"刷呀刷，好累啊，喵(＾▽＾)" forState:MJRefreshStateRefreshing];
-    self.tableView.header = head;
     
     self.tableView.footer=[MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         
@@ -94,30 +87,30 @@
     
     MoreViewCell* cell = nil;
     
-        if (indexPath.section == 0) {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"scell"];
-                NSMutableArray* itemArr = [NSMutableArray new];
-                for (int i = 0; i < 4; ++i) {
-                    MoreViewController* cvc = [kStoryboard(@"Main") instantiateViewControllerWithIdentifier:@"MoreViewController"];
-                    cvc.view.tag = 100 + i;
-                    [cvc.pic setImageWithURL: [self.vm moreViewPicForRow: i]];
-                    cvc.animaTitle.text = [self.vm moreViewTitleForRow: i];
-                    cvc.playNum.text = [self.vm moreViewPlayForRow:i];
-                    [itemArr addObject: cvc];
-                    [self addChildViewController: cvc];
-                    [cell.contentView addSubview: cvc.view];
-                }
-                [self makeConstraintsWithViews:itemArr cell:cell];
-            
-        }else{
-            cell = [tableView dequeueReusableCellWithIdentifier:@"scell2"];
-            [self addChildViewController: self.collectionViewController];
-            [cell.contentView addSubview: self.collectionViewController.collectionView];
-            [self.collectionViewController.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.bottom.left.right.equalTo(cell);
-                make.top.equalTo(cell).offset(35);
-            }];
+    if (indexPath.section == 0) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"scell"];
+        NSMutableArray* itemArr = [NSMutableArray new];
+        for (int i = 0; i < 4; ++i) {
+            MoreViewController* cvc = [kStoryboard(@"Main") instantiateViewControllerWithIdentifier:@"MoreViewController"];
+            cvc.view.tag = 100 + i;
+            [cvc.pic setImageWithURL: [self.vm moreViewPicForRow: i]];
+            cvc.animaTitle.text = [self.vm moreViewTitleForRow: i];
+            cvc.playNum.text = [self.vm moreViewPlayForRow:i];
+            [itemArr addObject: cvc];
+            [self addChildViewController: cvc];
+            [cell.contentView addSubview: cvc.view];
         }
+        [self makeConstraintsWithViews:itemArr cell:cell];
+        
+    }else{
+        cell = [tableView dequeueReusableCellWithIdentifier:@"scell2"];
+        [self addChildViewController: self.collectionViewController];
+        [cell.contentView addSubview: self.collectionViewController.collectionView];
+        [self.collectionViewController.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.left.right.equalTo(cell);
+            make.top.equalTo(cell).offset(35);
+        }];
+    }
     
     return cell;
 }
@@ -151,7 +144,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-        return kWindowW / 640 * 735 - 100;
+    return kWindowW / 640 * 735 - 100;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{

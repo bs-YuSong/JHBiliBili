@@ -22,4 +22,6 @@
 
 //获取新番详情信息
 + (id)GetShiBanInfoWithParameter:(NSDictionary*)parame completionHandler:(void(^)(id responseObj, NSError *error))complete;
+
++ (id)GetTagWithParameter:(NSDictionary*)parame completionHandler:(void(^)(id responseObj, NSError *error))complete;
 @end

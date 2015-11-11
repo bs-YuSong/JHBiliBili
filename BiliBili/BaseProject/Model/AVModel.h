@@ -5,27 +5,44 @@
 //  Created by apple-jd44 on 15/10/21.
 //  Copyright © 2015年 Tarena. All rights reserved.
 //
-
+/**
+ * 视频展示类 包含缩略图 标题 播放数 回复数
+ *
+ */
 #import "BaseViewModel.h"
-
 @interface AVModel : BaseViewModel
 @property (nonatomic, strong) NSArray* list;
 @end
 
 @interface AVDataModel : BaseViewModel
-@property (nonatomic, strong)NSString* desc;
-@property (nonatomic, strong)NSNumber* mid;
-@property (nonatomic, strong)NSString* subtitle;
-//弹幕
-@property (nonatomic, assign)NSInteger review;
-@property (nonatomic, assign)NSInteger favorites;
-@property (nonatomic, strong)NSString* author;
-@property (nonatomic, assign)NSInteger coins;
+//@property (nonatomic, strong)NSNumber* mid;
+//@property (nonatomic, strong)NSString* subtitle;
+//@property (nonatomic, assign)NSInteger favorites;
+//@property (nonatomic, strong)NSString* duration;
+//硬币数
+//@property (nonatomic, assign)NSInteger coins;
+//回复数
+//@property (nonatomic, assign)NSInteger review;
+
+
+//缩略图部分
+//图片地址
 @property (nonatomic, strong)NSString* pic;
+//标题
 @property (nonatomic, strong)NSString* title;
-@property (nonatomic, assign)NSInteger video_review;
-@property (nonatomic, strong)NSString* duration;
-@property (nonatomic, strong)NSString* create;
-@property (nonatomic, strong)NSString* aid;
+//播放数
 @property (nonatomic, assign)NSInteger play;
+//弹幕数
+@property (nonatomic, assign)NSInteger video_review;
+
+
+
+//简介
+@property (nonatomic, strong)NSString* desc;
+//作者
+@property (nonatomic, strong)NSString* author;
+//创建时间
+@property (nonatomic, strong)NSString* create;
+//av号
+@property (nonatomic, strong)NSString* aid;
 @end

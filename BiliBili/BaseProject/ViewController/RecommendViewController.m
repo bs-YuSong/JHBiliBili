@@ -48,7 +48,7 @@ kRemoveCellSeparator
         make.edges.mas_equalTo(0);
     }];
     
-    MJRefreshNormalHeader* head = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.tableView.header = [MyRefreshHeader myRefreshHead:^{
         [self.vm refreshDataCompleteHandle:^(NSError *error) {
             [self.tableView.header endRefreshing];
             
@@ -60,13 +60,7 @@ kRemoveCellSeparator
             }
             
         }];
-        
     }];
-    head.lastUpdatedTimeLabel.hidden = YES;
-    [head setTitle:@"再拉，再拉就刷新给你看" forState:MJRefreshStateIdle];
-    [head setTitle:@"够了啦，松开人家嘛" forState:MJRefreshStatePulling];
-    [head setTitle:@"刷呀刷，好累啊，喵(＾▽＾)" forState:MJRefreshStateRefreshing];
-    self.tableView.header = head;
     
     [self.tableView.header beginRefreshing];
 }
@@ -127,11 +121,11 @@ kRemoveCellSeparator
                 
                 cvc.view.tag = 100 + i;
                 
-                [cvc setViewContentWithImgURL:[self.vm picForRow:i section:dic[key]] playNum:[self.vm playForRow:i section:dic[key]] replyNum:[self.vm replyForRow:i section:dic[key]] title:[self.vm titleForRow:i section:dic[key]] section:dic[key] ind:i];
+                [cvc setViewContentWithImgURL:[self.vm picForRow:i section:dic[key]] playNum:[self.vm playForRow:i section:dic[key]] replyNum:[self.vm danMuCountForRow:i section:dic[key]] title:[self.vm titleForRow:i section:dic[key]] section:dic[key] ind:i];
                 //传值
                 [cvc pushAVInfoViewController:^() {
                     AVInfoViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"AVInfoViewController"];
-                    [vc setWithModel: self.vm.list[dic[key]][i] withSection:dic[key]];
+                    [vc setWithModel: self.vm.list[dic[key]][i]];
                     
                     [self.navigationController pushViewController:vc animated:YES];
                 }];
@@ -150,11 +144,12 @@ kRemoveCellSeparator
                 for (CellItemViewController* cvc in conArr) {
                     if (iv == cvc.view) {
                         
-                        [cvc setViewContentWithImgURL:[self.vm picForRow:i section:dic[key]] playNum:[self.vm playForRow:i section:dic[key]] replyNum:[self.vm replyForRow:i section:dic[key]] title:[self.vm titleForRow:i section:dic[key]] section:dic[key] ind:i];
+                        [cvc setViewContentWithImgURL:[self.vm picForRow:i section:dic[key]] playNum:[self.vm playForRow:i section:dic[key]] replyNum:[self.vm danMuCountForRow:i section:dic[key]] title:[self.vm titleForRow:i section:dic[key]] section:dic[key] ind:i];
                         
                         [cvc pushAVInfoViewController:^() {
                             AVInfoViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"AVInfoViewController"];
-                            [vc setWithModel: self.vm.list[dic[key]][i] withSection:dic[key]];
+                            
+                            [vc setWithModel: self.vm.list[dic[key]][i]];
                             
                             [self.navigationController pushViewController:vc animated:YES];
                         }];
@@ -210,7 +205,6 @@ kRemoveCellSeparator
 }
 //滚动视图跳转
 - (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index{
-    NSLog(@"%@", [self.vm headImgLink:index]);
     WebViewController* wbc = [[WebViewController alloc] init];
     wbc.URL = [self.vm headImgLink:index];
     [self.navigationController pushViewController:wbc animated:YES];

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 @class AVDataModel;
 @interface AVInfoViewController : UIViewController
-- (void)setWithModel:(AVDataModel*)model withSection:(NSString*)section;
+- (void)setWithModel:(AVDataModel*)model;
 @end

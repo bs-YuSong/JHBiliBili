@@ -27,8 +27,8 @@
     self.dataSource = self;
     
     //[self.controllers addObject: kStoryboardWithInd(@"FindNav")];
-    [self.controllers addObject: kStoryboardWithInd(@"ShinBanNav")];
-    [self.controllers addObject: kStoryboardWithInd(@"RecommendNav")];
+    [self.controllers addObject: kStoryboardWithInd(@"ShinBanViewController")];
+    [self.controllers addObject: kStoryboardWithInd(@"RecommendViewController")];
     
     [self setViewControllers:@[self.controllers.firstObject] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:^(BOOL finished) {
         

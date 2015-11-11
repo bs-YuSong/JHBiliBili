@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SameVideoTableViewCell : UITableViewCell
-- (void)serTitle:(NSString*)title playNum:(NSString*)playNum replyNum:(NSString*)replyNum videoImg:(NSURL*)imgURL;
+- (void)setTitle:(NSString*)title playNum:(NSString*)playNum replyNum:(NSString*)replyNum videoImg:(NSURL*)imgURL;
 @end

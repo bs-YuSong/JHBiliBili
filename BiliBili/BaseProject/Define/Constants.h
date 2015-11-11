@@ -32,4 +32,6 @@ cell.preservesSuperviewLayoutMargins = NO; \
 //Docment文件夹目录
 #define kDocumentPath NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject
 
+#define kGloableColor kRGBColor(248, 116, 153)
+
 #endif /* Constants_h */

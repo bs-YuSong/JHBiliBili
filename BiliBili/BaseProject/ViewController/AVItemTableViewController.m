@@ -2,97 +2,111 @@
 //  AVItemTableViewController.m
 //  BiliBili
 //
-//  Created by apple-jd44 on 15/11/6.
+//  Created by apple-jd44 on 15/11/8.
 //  Copyright © 2015年 Tarena. All rights reserved.
 //
 
 #import "AVItemTableViewController.h"
-
+#import "AVInfoViewModel.h"
+#import "ReViewTableViewCell.h"
+#import "SameVideoTableViewCell.h"
+#import "UIScrollView+Tools.h"
 @interface AVItemTableViewController ()
-
+//根据cell的标识符判断初始化的cell类型
+@property (nonatomic, strong) NSString* cellIdentity;
+@property (nonatomic, strong) AVInfoViewModel* vm;
+@property (nonatomic, strong) UITableView* parentTableView;
 @end
 
 @implementation AVItemTableViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    UIView* v = [UIView new];
+    v.backgroundColor = kRGBColor(242, 242, 242);
+    //表尾空白
+    self.tableView.tableFooterView = v;
+    //设置默认不可滚动
+    self.tableView.scrollEnabled = NO;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+#pragma mark - TableViewController
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
+    //textCell SameVideoTableViewCell ReViewTableViewCell InvestorTableViewCell
+    
+    return [@{@"textCell":@2, @"SameVideoTableViewCell": @([self.vm sameVideoCount]), @"ReViewTableViewCell":@([self.vm replyCount])}[self.cellIdentity] integerValue];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    id cell = [tableView dequeueReusableCellWithIdentifier:self.cellIdentity];
+    [self setCellContent:cell index:indexPath];
+    return cell;
+}
+
+//视频详情页子项高度
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ([self.cellIdentity isEqualToString:@"SameVideoTableViewCell"]) {
+        return kWindowW * 0.24;
+    }
+    return [self tableView:tableView estimatedHeightForRowAtIndexPath:indexPath];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if([self.cellIdentity isEqualToString:@"ReViewTableViewCell"] || [self.cellIdentity isEqualToString:@"textCell"]){
+        return UITableViewAutomaticDimension;
+    }
     return 0;
 }
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - 方法
+
+- (id)setCellContent:(id)cell index:(NSIndexPath*)index{
     
-    // Configure the cell...
-    
+    //根据标识类型初始化cell内容
+    //相似视频cell
+    if ([self.cellIdentity isEqualToString:@"SameVideoTableViewCell"]) {
+        [cell setTitle:[self.vm sameVideoTitleForRow:index.row] playNum:[self.vm sameVideoPlayNumForRow:index.row] replyNum:[self.vm sameVideoReplyForRow:index.row] videoImg:[self.vm sameVideoPicForRow:index.row]];
+        //评论cell
+    }else if([self.cellIdentity isEqualToString:@"ReViewTableViewCell"]){
+        [cell setName:[self.vm replyNameForRow:index.row] image:[self.vm replyIconForRow:index.row] time:[self.vm replyTimeForRow:index.row] message:[self.vm replyMessageForRow:index.row] goodNum:[self.vm replyGoodForRow:index.row] lv:[self.vm replyLVForRow:index.row] gender:[self.vm replyGenderForRow:index.row]];
+        //视频详情cell
+    }else if ([self.cellIdentity isEqualToString:@"textCell"]){
+        [cell textLabel].font = [UIFont systemFontOfSize: 13];
+        [cell textLabel].numberOfLines = 0;
+        if (index.row == 0) {
+            [cell textLabel].attributedText = [self.vm infoTags];
+            [cell textLabel].textColor = kGloableColor;
+        }else{
+            [cell textLabel].text = [self.vm infoBrief];
+            [cell textLabel].textColor = kRGBColor(164, 164, 164);
+            
+        }
+    }
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (instancetype)initWithVM:(AVInfoViewModel*)vm cellIdentity:(NSString*)cellIdentity storyBoardIndentity:(NSString*)ID parentTableView:(UITableView*)tableView{
+    if ((self = kStoryboardWithInd(ID))) {
+        self.vm = vm;
+        self.cellIdentity = cellIdentity;
+        self.parentTableView = tableView;
+    }
+    return self;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+#pragma mark - UIScrollView
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (scrollView.contentOffset.y <= 5) {
+        self.parentTableView.scrollEnabled = YES;
+        // 用于临界值的判断 并不是字面上的意思
+        scrollView.scrollEnabled = NO;
+    }
 }
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end

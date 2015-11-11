@@ -51,7 +51,7 @@
         make.height.mas_equalTo(self.hotSearchLeftImgView.mas_height).multipliedBy(1.0/4);
     }];
     
-    MJRefreshNormalHeader* header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.tableView.header = [MyRefreshHeader myRefreshHead:^{
         [self.vm refreshDataCompleteHandle:^(NSError *error) {
             [self.tableView.header endRefreshing];
             [self.hotSearchLeftImgView setImageWithURL: [self.vm rankCoverForNum:0]];
@@ -64,11 +64,7 @@
             }
         }];
     }];
-    header.lastUpdatedTimeLabel.hidden = YES;
-    [header setTitle:@"再拉，再拉就刷新给你看" forState:MJRefreshStateIdle];
-    [header setTitle:@"够了啦，松开人家嘛" forState:MJRefreshStatePulling];
-    [header setTitle:@"刷呀刷，好累啊，喵(＾▽＾)" forState:MJRefreshStateRefreshing];
-    self.tableView.header = header;
+
     [self.tableView.header beginRefreshing];
 }
 
@@ -112,7 +108,7 @@
     
     NSMutableAttributedString* str = [[NSMutableAttributedString alloc] initWithString:@(indexPath.row + 1).stringValue];
     if (indexPath.row <= 2) {
-        [str setAttributes:@{NSForegroundColorAttributeName:kRGBColor(248, 116, 153)} range:NSMakeRange(0, str.length)];
+        [str setAttributes:@{NSForegroundColorAttributeName:kGloableColor} range:NSMakeRange(0, str.length)];
     }
     [str appendAttributedString:[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"\t%@",[self.vm keyWordForRow: indexPath.row]]]];
     [cell.textLabel setAttributedText: str];
