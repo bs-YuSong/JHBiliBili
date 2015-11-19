@@ -32,6 +32,11 @@ cell.preservesSuperviewLayoutMargins = NO; \
 //Docment文件夹目录
 #define kDocumentPath NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject
 
+#define kMyCachePath [kDocumentPath stringByAppendingPathComponent:@"src.arch"]
+
 #define kGloableColor kRGBColor(248, 116, 153)
+
+#define kerrorMessage @"网络连接出错_(:3 」∠)_"
+
 
 #endif /* Constants_h */

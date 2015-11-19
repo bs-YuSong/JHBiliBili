@@ -12,13 +12,14 @@
 @interface AVInfoViewModel ()
 ////新番独有属性
 ////承包商数组
-//@property (nonatomic, strong) NSMutableArray <InvestorDataModel*>* investorList;
+@property (nonatomic, strong) NSMutableArray <InvestorDataModel*>* investorList;
 ////新番详情数组
 //@property (nonatomic, strong) NSMutableArray <ShinBanInfoDataModel*>* shiBanInfoList;
 
 //@property (nonatomic, assign) NSString* aid;
 ////视频简介
 //@property (nonatomic, strong) NSString* AVBrief;
+@property (nonatomic, strong) NSString* section;
 
 @property (nonatomic, assign) NSInteger allReplyCount;
 @end
@@ -55,7 +56,7 @@
     return self.replyList[row].create_at;
 }
 - (NSString*)replyLVForRow:(NSInteger)row{
-    return [NSString stringWithFormat:@"#%ld", self.replyList[row].lv];
+    return [NSString stringWithFormat:@"#%ld", (long)self.replyList[row].lv];
 }
 - (NSString*)replyGoodForRow:(NSInteger)row{
     return [NSString stringWithFormatNum:self.replyList[row].good];
@@ -72,15 +73,6 @@
 
 
 - (NSAttributedString*)infoTags{
-//    NSMutableString* str = [[NSMutableString alloc] initWithString:@""];
-//    
-//    [self.tagList enumerateObjectsUsingBlock:^(TagDataModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        if (idx == self.tagList.count - 1) {
-//            [str appendFormat:@"%@",obj.name];
-//        }else{
-//            [str appendFormat:@"%@, ",obj.name];
-//        }
-//    }];
     NSDictionary* textAtt =  @{NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle),NSForegroundColorAttributeName:kGloableColor};
     
     NSMutableAttributedString* mstr = [[NSMutableAttributedString alloc] initWithString:@"" attributes:textAtt];
@@ -123,6 +115,34 @@
     return self.AVData.desc;
 }
 
+
+//承包商排行
+- (NSURL*)investorIconForRow:(NSInteger)row{
+    return [NSURL URLWithString:self.investorList[row].face];
+}
+- (NSString*)investorNameForRow:(NSInteger)row{
+    return self.investorList[row].uname;
+}
+- (NSString*)investorMessageForRow:(NSInteger)row{
+    return self.investorList[row].message;
+}
+
+- (NSInteger)investorCount{
+    return self.investorList.count;
+}
+
+- (NSInteger)investorRankForRow:(NSInteger)row{
+    return self.investorList[row].rank;
+}
+
+- (BOOL)isShiBan{
+    return [self.section isEqualToString:@"13-3day.json"];
+}
+
+
+
+
+
 #define pagesize @20
 #define page @1
 
@@ -132,10 +152,22 @@
         self.allReplyCount = responseObj.results;
         [AVInfoNetManager GetSameVideoWithParameter:[self videoAid] completionHandler:^(sameVideoModel* responseObj1, NSError *error) {
             self.sameVideoList = [responseObj1.list mutableCopy];
-            [AVInfoNetManager GetTagWithParameter:@{@"aid":[self videoAid]} completionHandler:^(TagModel* responseObj2, NSError *error) {
-                self.tagList = [responseObj2.result mutableCopy];
-                complete(error);
-            }];
+            //新番情况下 多增加一个承包商请求
+            if ([self isShiBan]) {
+                [AVInfoNetManager GetInverstorWithParameter:@{@"aid":[self videoAid]} completionHandler:^(InvestorModel* responseObj2, NSError *error) {
+                    self.investorList = [responseObj2.list mutableCopy];
+                    [AVInfoNetManager GetTagWithParameter:@{@"aid":[self videoAid]} completionHandler:^(TagModel* responseObj2, NSError *error) {
+                        self.tagList = [responseObj2.result mutableCopy];
+                        complete(error);
+                    }];
+                }];
+            }else{
+                [AVInfoNetManager GetTagWithParameter:@{@"aid":[self videoAid]} completionHandler:^(TagModel* responseObj2, NSError *error) {
+                    self.tagList = [responseObj2.result mutableCopy];
+                    complete(error);
+                }];
+            }
+            
         }];
     }];
 }
@@ -150,16 +182,6 @@
 
 
 
-//承包商排行
-//- (NSURL*)investorIconForRow:(NSInteger)row{
-//    return [NSURL URLWithString:self.investorList[row].face];
-//}
-//- (NSString*)investorNameForRow:(NSInteger)row{
-//    return self.investorList[row].uname;
-//}
-//- (NSString*)investorMessageForRow:(NSInteger)row{
-//    return self.investorList[row].message;
-//}
 
 
 //视频详情
@@ -217,10 +239,18 @@
 //    return _shiBanInfoList;
 //}
 //
-//- (NSMutableArray<InvestorDataModel *> *)investorList{
-//    if (_investorList == nil) {
-//        _investorList = [NSMutableArray array];
-//    }
-//    return _investorList;
-//}
+- (NSMutableArray<InvestorDataModel *> *)investorList{
+    if (_investorList == nil) {
+        _investorList = [NSMutableArray array];
+    }
+    return _investorList;
+}
+
+#pragma mark - 初始化
+- (void)setAVData:(AVDataModel *)AVData section:(NSString*)section{
+    self.AVData = AVData;
+    self.section = section;
+}
+
+
 @end

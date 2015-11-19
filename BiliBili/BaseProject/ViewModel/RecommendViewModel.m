@@ -66,12 +66,16 @@
 #pragma mark - 刷新
 - (void)refreshDataCompleteHandle:(void(^)(NSError *error))complete{
     [RecommendNetManager getHeadImgCompletionHandler:^(IndexModel* responseObj, NSError *error) {
+        //获取顶部滚动视图
          self.headObject = [responseObj.list mutableCopy];
+        [ArchiverObj archiveWithObj:self.headObject key:@"recommendHeadModel"];
+        //获取各分区内容
         [self.dicMap enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             NSString* key = [obj allValues].firstObject;
             [RecommendNetManager getSection:key completionHandler:^(AVModel* responseObj1, NSError *error) {
                 self.list[key] = [responseObj1.list mutableCopy];
                 if (idx == self.dicMap.count - 1) {
+                    [ArchiverObj archiveWithObj:self.list key:@"recommendViewModel"];
                     complete(error);
                 }
             }];
@@ -83,14 +87,24 @@
 - (NSMutableDictionary *)list{
     if (_list == nil) {
         //1-3 动画 、129-3 舞蹈、13-3番剧 3-3音乐 4-3游戏 36-3科技 5-3娱乐 119-3鬼畜 11-3电视剧 23-3电影
-        _list = [NSMutableDictionary new];
+        NSDictionary* dic = [ArchiverObj UnArchiveWithKey:@"recommendViewModel"];
+        if (dic == nil) {
+            _list = [NSMutableDictionary new];
+        }else{
+            _list = [dic mutableCopy];
+        }
     }
     return _list;
 }
 
 - (NSArray *)headObject{
     if (_headObject == nil) {
-        _headObject = [NSArray new];
+        NSArray* headArr = [ArchiverObj UnArchiveWithKey:@"recommendHeadModel"];
+        if (headArr == nil) {
+            _headObject = [NSArray new];
+        }else{
+            _headObject = [headArr mutableCopy];
+        }
     }
     return _headObject;
 }
@@ -101,4 +115,5 @@
     }
     return _dicMap;
 }
+
 @end

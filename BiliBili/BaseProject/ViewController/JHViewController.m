@@ -7,7 +7,6 @@
 //
 
 #import "JHViewController.h"
-
 @interface JHViewController ()<UIScrollViewDelegate>
 
 @property (nonatomic, strong) NSArray<UIViewController*>* conArr;
@@ -23,11 +22,10 @@
 - (instancetype)initWithControllers:(NSArray*)controllers{
     if (self = [super init]) {
         self.conArr = controllers;
-        [self.view addSubview: self.scrollView];
-        self.scrollView.frame = self.view.frame;
-//        [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.edges.mas_equalTo(0);
-//        }];
+        [self.view addSubview:self.scrollView];
+        [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.view);
+        }];
     }
     return self;
 }
@@ -39,13 +37,14 @@
         _scrollView = [[UIScrollView alloc] init];
         _scrollView.pagingEnabled = YES;
         _scrollView.delegate = self;
+
         __block UIView* preView = nil;
         [self.conArr enumerateObjectsUsingBlock:^(UIViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [self addChildViewController: obj];
             [_scrollView addSubview:obj.view];
             if (preView == nil) {
                 [obj.view mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.top.left.width.height.equalTo(_scrollView);
+                    make.top.left.height.width.equalTo(_scrollView);
                 }];
             }else{
                 [obj.view mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BaseModel : NSObject
-
+@interface BaseModel : NSObject<NSCoding>
+- (void)encodeWithCoder:(NSCoder *)aCoder;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder;
 @end

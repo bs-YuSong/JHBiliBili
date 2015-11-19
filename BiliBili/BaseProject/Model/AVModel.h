@@ -9,12 +9,12 @@
  * 视频展示类 包含缩略图 标题 播放数 回复数
  *
  */
-#import "BaseViewModel.h"
-@interface AVModel : BaseViewModel
+#import "BaseModel.h"
+@interface AVModel : BaseModel
 @property (nonatomic, strong) NSArray* list;
 @end
 
-@interface AVDataModel : BaseViewModel
+@interface AVDataModel : BaseModel
 //@property (nonatomic, strong)NSNumber* mid;
 //@property (nonatomic, strong)NSString* subtitle;
 //@property (nonatomic, assign)NSInteger favorites;

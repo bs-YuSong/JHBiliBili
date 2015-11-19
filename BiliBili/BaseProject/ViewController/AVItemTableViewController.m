@@ -10,6 +10,7 @@
 #import "AVInfoViewModel.h"
 #import "ReViewTableViewCell.h"
 #import "SameVideoTableViewCell.h"
+#import "InvestorTableViewCell.h"
 #import "UIScrollView+Tools.h"
 @interface AVItemTableViewController ()
 //根据cell的标识符判断初始化的cell类型
@@ -29,15 +30,16 @@
     self.tableView.tableFooterView = v;
     //设置默认不可滚动
     self.tableView.scrollEnabled = NO;
+    self.tableView.estimatedRowHeight = 100;
 }
 
 #pragma mark - TableViewController
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     //textCell SameVideoTableViewCell ReViewTableViewCell InvestorTableViewCell
+    NSInteger i = [@{@"textCell":@2, @"SameVideoTableViewCell": @([self.vm sameVideoCount]),@"InvestorTableViewCell":@([self.vm investorCount]), @"ReViewTableViewCell":@([self.vm replyCount])}[self.cellIdentity] integerValue];
     
-    return [@{@"textCell":@2, @"SameVideoTableViewCell": @([self.vm sameVideoCount]), @"ReViewTableViewCell":@([self.vm replyCount])}[self.cellIdentity] integerValue];
+    return i;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -46,20 +48,34 @@
     return cell;
 }
 
-//视频详情页子项高度
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ([self.cellIdentity isEqualToString:@"SameVideoTableViewCell"]) {
-        return kWindowW * 0.24;
-    }
-    return [self tableView:tableView estimatedHeightForRowAtIndexPath:indexPath];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if([self.cellIdentity isEqualToString:@"ReViewTableViewCell"] || [self.cellIdentity isEqualToString:@"textCell"]){
+    if ([self.cellIdentity isEqualToString:@"textCell"]) {
         return UITableViewAutomaticDimension;
     }
-    return 0;
+    return [tableView fd_heightForCellWithIdentifier:self.cellIdentity configuration:^(id cell) {
+       [self setCellContent:cell index:indexPath];
+    }];
 }
+
+
+//视频详情页子项高度
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    if ([self.cellIdentity isEqualToString:@"SameVideoTableViewCell"]) {
+//        return kWindowW * 0.24;
+//    }
+//    if([self.cellIdentity isEqualToString:@"InvestorTableViewCell"]){
+//        return kWindowW * 0.17;
+//    }
+//    return 50;
+//    //return [self tableView:tableView estimatedHeightForRowAtIndexPath:indexPath];
+//}
+
+//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//  //  if([self.cellIdentity isEqualToString:@"ReViewTableViewCell"] || [self.cellIdentity isEqualToString:@"textCell"]){
+//        return UITableViewAutomaticDimension;
+//   // }
+//   // return 0;
+//}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -78,18 +94,24 @@
         [cell setName:[self.vm replyNameForRow:index.row] image:[self.vm replyIconForRow:index.row] time:[self.vm replyTimeForRow:index.row] message:[self.vm replyMessageForRow:index.row] goodNum:[self.vm replyGoodForRow:index.row] lv:[self.vm replyLVForRow:index.row] gender:[self.vm replyGenderForRow:index.row]];
         //视频详情cell
     }else if ([self.cellIdentity isEqualToString:@"textCell"]){
+        
         [cell textLabel].font = [UIFont systemFontOfSize: 13];
         [cell textLabel].numberOfLines = 0;
+        //tag
         if (index.row == 0) {
             [cell textLabel].attributedText = [self.vm infoTags];
             [cell textLabel].textColor = kGloableColor;
+        //简介
         }else{
             [cell textLabel].text = [self.vm infoBrief];
             [cell textLabel].textColor = kRGBColor(164, 164, 164);
             
         }
+    }else if([self.cellIdentity isEqualToString:@"InvestorTableViewCell"]){
+        
+        [cell setRank:[self.vm investorRankForRow:index.row] icon:[self.vm investorIconForRow:index.row] name:[self.vm investorNameForRow:index.row] reply:[self.vm investorMessageForRow:index.row]];
     }
-    return cell;
+        return cell;
 }
 
 - (instancetype)initWithVM:(AVInfoViewModel*)vm cellIdentity:(NSString*)cellIdentity storyBoardIndentity:(NSString*)ID parentTableView:(UITableView*)tableView{

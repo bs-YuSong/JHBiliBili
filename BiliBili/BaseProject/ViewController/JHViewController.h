@@ -15,8 +15,8 @@
 
 @interface JHViewController : UIViewController
 @property (nonatomic, strong) UIScrollView* scrollView;
-- (instancetype)initWithControllers:(NSArray*)controllers;
 
-@property (nonatomic, strong) id<JHViewControllerDelegate> delegate;
+- (instancetype)initWithControllers:(NSArray*)controllers;
+@property (nonatomic, weak) id<JHViewControllerDelegate> delegate;
 @property (nonatomic, assign) NSInteger currentPage;
 @end

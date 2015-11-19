@@ -57,17 +57,19 @@
 //存放视频详情 例如up名 播放数
 @property (nonatomic, strong) AVDataModel* AVData;
 
+- (void)setAVData:(AVDataModel *)AVData section:(NSString*)section;
+//判断是不是新番
+- (BOOL)isShiBan;
+
 - (void)refreshDataCompleteHandle:(void(^)(NSError *error))complete;
 
-//初始化方法
-//- (instancetype)initWithAid:(NSString*)aid brief:(NSString*)brief;
-
-//- (void)setAid:(NSString*)aid brief:(NSString*)brief;
 
 ////承包商排行
-//- (NSURL*)investorIconForRow:(NSInteger)row;
-//- (NSString*)investorNameForRow:(NSInteger)row;
-//- (NSString*)investorMessageForRow:(NSInteger)row;
+- (NSURL*)investorIconForRow:(NSInteger)row;
+- (NSString*)investorNameForRow:(NSInteger)row;
+- (NSString*)investorMessageForRow:(NSInteger)row;
+- (NSInteger)investorRankForRow:(NSInteger)row;
+- (NSInteger)investorCount;
 //
 ////视频详情
 //- (NSString*)avInfoTag;

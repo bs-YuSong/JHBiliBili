@@ -48,15 +48,16 @@ kRemoveCellSeparator
         make.edges.mas_equalTo(0);
     }];
     
+    __block typeof(self) weakObj = self;
     self.tableView.header = [MyRefreshHeader myRefreshHead:^{
         [self.vm refreshDataCompleteHandle:^(NSError *error) {
-            [self.tableView.header endRefreshing];
+            [weakObj.tableView.header endRefreshing];
             
-            [self.headScrollView reloadData];
+            [weakObj.headScrollView reloadData];
             
-            [self.tableView reloadData];
+            [weakObj.tableView reloadData];
             if (error) {
-                [self showErrorMsg:error.localizedDescription];
+                [self showErrorMsg:kerrorMessage];
             }
             
         }];
@@ -114,6 +115,7 @@ kRemoveCellSeparator
     [cell setTitle: key titleImg:[NSString stringWithFormat:@"home_region_icon_%@",[dic[key] componentsSeparatedByString:@"-"].firstObject] buttonTitle:[@"更多" stringByAppendingString:key]];
     
     if (self.vm.list[dic[key]]) {
+        __block typeof(self) weakObj = self;
         if (![cell.contentView viewWithTag:101]) {
             NSMutableArray* itemArr = [NSMutableArray new];
             for (int i = 0; i < 4; ++i) {
@@ -123,11 +125,12 @@ kRemoveCellSeparator
                 
                 [cvc setViewContentWithImgURL:[self.vm picForRow:i section:dic[key]] playNum:[self.vm playForRow:i section:dic[key]] replyNum:[self.vm danMuCountForRow:i section:dic[key]] title:[self.vm titleForRow:i section:dic[key]] section:dic[key] ind:i];
                 //传值
+                
                 [cvc pushAVInfoViewController:^() {
-                    AVInfoViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"AVInfoViewController"];
-                    [vc setWithModel: self.vm.list[dic[key]][i]];
+                    __weak AVInfoViewController* vc = [weakObj.storyboard instantiateViewControllerWithIdentifier:@"AVInfoViewController"];
+                    [vc setWithModel: weakObj.vm.list[dic[key]][i] section:dic[key]];
                     
-                    [self.navigationController pushViewController:vc animated:YES];
+                    [weakObj.navigationController pushViewController:vc animated:YES];
                 }];
                 
                 [itemArr addObject: cvc];
@@ -147,11 +150,11 @@ kRemoveCellSeparator
                         [cvc setViewContentWithImgURL:[self.vm picForRow:i section:dic[key]] playNum:[self.vm playForRow:i section:dic[key]] replyNum:[self.vm danMuCountForRow:i section:dic[key]] title:[self.vm titleForRow:i section:dic[key]] section:dic[key] ind:i];
                         
                         [cvc pushAVInfoViewController:^() {
-                            AVInfoViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"AVInfoViewController"];
+                             __weak AVInfoViewController* vc = [weakObj.storyboard instantiateViewControllerWithIdentifier:@"AVInfoViewController"];
                             
-                            [vc setWithModel: self.vm.list[dic[key]][i]];
+                            [vc setWithModel: weakObj.vm.list[dic[key]][i] section:dic[key]];
                             
-                            [self.navigationController pushViewController:vc animated:YES];
+                            [weakObj.navigationController pushViewController:vc animated:YES];
                         }];
                     }
                 }

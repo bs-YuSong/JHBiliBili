@@ -16,9 +16,11 @@
 @end
 
 @implementation InvestorTableViewCell
-- (void)setRank:(NSString*)rank icon:(NSURL*)icon name:(NSString*)name reply:(NSString*)reply{
-    self.rankLabel.text = rank;
+- (void)setRank:(NSInteger)rank icon:(NSURL*)icon name:(NSString*)name reply:(NSString*)reply{
+    self.rankLabel.text = [NSString stringWithFormat:@"%ld",(long)rank];
     [self.invertorIcon setImageWithURL:icon];
+    self.invertorIcon.layer.cornerRadius = self.invertorIcon.frame.size.width / 2;
+    self.invertorIcon.layer.masksToBounds = YES;
     self.invertorName.text = name;
     self.replyLabel.text = reply;
 }

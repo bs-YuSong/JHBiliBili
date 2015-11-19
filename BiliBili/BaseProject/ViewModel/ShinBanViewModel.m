@@ -28,20 +28,6 @@
     return self.recommentList.count;
 }
 
-- (NSMutableArray *)recommentList{
-    if (_recommentList == nil) {
-        _recommentList = [NSMutableArray array];
-    }
-    return _recommentList;
-}
-
-- (NSMutableArray *)moreViewList{
-    if (_moreViewList == nil) {
-        _moreViewList = [NSMutableArray array];
-    }
-    return _moreViewList;
-}
-
 - (NSURL*)moreViewPicForRow:(NSInteger)row{
     return [NSURL URLWithString:self.moreViewList[row].pic];
 }
@@ -67,6 +53,8 @@
     [ShinBanNetManager getMoreViewParametersCompletionHandler:^(MoreViewShinBanModel* responseObj, NSError *error) {
         [self.moreViewList removeAllObjects];
         self.moreViewList = [responseObj.list mutableCopy];
+        //归档
+        [ArchiverObj archiveWithObj:responseObj];
     //刷新推荐番剧
         [self.recommentList removeAllObjects];
         [self getMoreDataCompleteHandle:^(NSError *error) {
@@ -77,11 +65,38 @@
 }
 //获取更多推荐番剧
 - (void)getMoreDataCompleteHandle:(void(^)(NSError *error))complete{
-    [ShinBanNetManager getRecommentParameters:@{@"page":@(self.recommentList.count / pagesize.intValue + 1),@"pagesize":pagesize} CompletionHandler:^(RecommentShinBanModel* responseObj1, NSError *error) {
-        if (responseObj1.list.count > 0 ) {
-            [self.recommentList addObjectsFromArray:responseObj1.list];
+    [ShinBanNetManager getRecommentParameters:@{@"page":@(self.recommentList.count / pagesize.intValue + 1),@"pagesize":pagesize} CompletionHandler:^(RecommentShinBanModel* responseObj, NSError *error) {
+        if (responseObj.list.count > 0 ) {
+            [self.recommentList addObjectsFromArray:responseObj.list];
+            [ArchiverObj archiveWithObj: responseObj];
         }
         complete(error);
     }];
+}
+
+
+#pragma mark - 懒加载
+- (NSMutableArray *)recommentList{
+    if (_recommentList == nil) {
+        RecommentShinBanModel* model = [ArchiverObj UnArchiveWithClass:[RecommentShinBanModel class]];
+        if (model != nil) {
+            _recommentList = [model.list mutableCopy];
+        }else{
+            _recommentList = [NSMutableArray array];
+        }
+    }
+    return _recommentList;
+}
+
+- (NSMutableArray *)moreViewList{
+    if (_moreViewList == nil) {
+        MoreViewShinBanModel* model = [ArchiverObj UnArchiveWithClass:[MoreViewShinBanModel class]];
+        if (model != nil) {
+            _moreViewList = [model.list mutableCopy];
+        }else{
+            _moreViewList = [NSMutableArray array];
+        }
+    }
+    return _moreViewList;
 }
 @end

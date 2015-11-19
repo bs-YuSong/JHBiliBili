@@ -14,20 +14,6 @@
 
 @implementation FindViewModel
 
-- (NSMutableArray<FindImgDataModel *> *)rankImgArr{
-    if (_rankImgArr == nil) {
-        _rankImgArr = [NSMutableArray array];
-    }
-    return _rankImgArr;
-}
-
-- (NSMutableArray<FindDataModel *> *)rankArr{
-    if (_rankArr == nil) {
-        _rankArr = [NSMutableArray array];
-    }
-    return _rankArr;
-}
-
 - (NSInteger)rankArrConut{
     return self.rankArr.count;
 }
@@ -48,11 +34,38 @@
     [FindNetManager GetRankCompletionHandler:^(FindModel* responseObj, NSError *error) {
         [self.rankArr removeAllObjects];
         self.rankArr = [responseObj.list mutableCopy];
+        [ArchiverObj archiveWithObj:responseObj];
         [FindNetManager GetRankImgCompletionHandler:^(FindImgModel* responseObj1, NSError *error) {
             [self.rankImgArr removeAllObjects];
             self.rankImgArr = [responseObj1.recommend mutableCopy];
+            [ArchiverObj archiveWithObj:responseObj1];
             complete(error);
         }];
     }];
+}
+
+#pragma mark - 懒加载
+- (NSMutableArray<FindImgDataModel *> *)rankImgArr{
+    if (_rankImgArr == nil) {
+        FindImgModel* model = [ArchiverObj UnArchiveWithClass:[FindImgModel class]];
+        if (model != nil) {
+            _rankImgArr = [model.recommend mutableCopy];
+        }else{
+            _rankImgArr = [NSMutableArray array];
+        }
+    }
+    return _rankImgArr;
+}
+
+- (NSMutableArray<FindDataModel *> *)rankArr{
+    if (_rankArr == nil) {
+        FindModel* model = [ArchiverObj UnArchiveWithClass:[FindModel class]];
+        if (model == nil) {
+            _rankArr = [NSMutableArray array];
+        }else{
+            _rankArr = [model.list mutableCopy];
+        }
+    }
+    return _rankArr;
 }
 @end

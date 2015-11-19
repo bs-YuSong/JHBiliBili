@@ -23,13 +23,13 @@
 - (void)setName:(NSString*)name image:(NSURL*)imgURL time:(NSString*)time message:(NSString*)message goodNum:(NSString*)goodNum lv:(NSString*)lv gender:(NSString*)gender{
     self.nameLabel.text = name;
     [self.imgView setImageWithURL:imgURL];
-    [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(kWindowW).multipliedBy(0.1);
-        make.height.mas_equalTo(self.imageView.mas_width);
-    }];
-    [self.messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.imgView.mas_bottom).offset(10);
-    }];
+//    [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.width.mas_equalTo(kWindowW).multipliedBy(0.1);
+//        make.height.mas_equalTo(self.imageView.mas_width);
+//    }];
+//    [self.messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.imgView.mas_bottom).offset(10);
+//    }];
     self.imgView.layer.cornerRadius = self.imgView.frame.size.width /2 ;
     self.imgView.layer.masksToBounds = YES;
     self.timeLabel.text = time;

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import "AVModel.h"
+#import "AVModel.h"
 typedef void(^block)();
 
 @interface CellItemViewController : UIViewController

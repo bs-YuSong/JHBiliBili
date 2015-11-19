@@ -16,11 +16,9 @@
     //http://api.bilibili.com/feedback?type=jsonp&ver=3&callback=jQuery172019889523880556226_1446769749937&mode=arc&aid=3118012&pagesize=20&page=1&_=1446769758188
     //aid pagesize page
     NSString*path = [parame appendGetParameterWithBasePath:@"http://api.bilibili.com/feedback?type=jsonp&ver=3&callback=jQuery172019889523880556226_1446769749937&mode=arc&_=1446769758188&"];
-    return [self downLoad:path parameters:nil completionHandler:^(NSString* responseObj, NSError *error) {
-        NSString* str = [NSString stringWithContentsOfFile:responseObj encoding:NSUTF8StringEncoding error:nil];
-        //拿到下载之后的文件 做处理 返回字典对象
-        NSDictionary* js = [NSJSONSerialization JSONObjectWithData:[[str subStringsWithRegularExpression:@"\\{.*\\}"].firstObject dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves|NSJSONReadingAllowFragments error:nil];
-        [[NSFileManager defaultManager] removeItemAtPath:responseObj error:nil];
+    return [self Get:path parameters:nil completionHandler:^(NSData* responseObj, NSError *error) {
+        NSString* str = [[[NSString alloc] initWithData:responseObj encoding:NSUTF8StringEncoding] subStringsWithRegularExpression:@"\\{.*\\}"].firstObject;
+        NSDictionary* js = [NSJSONSerialization json2DicWithData:[str dataUsingEncoding:NSUTF8StringEncoding]];
         complete([ReplyModel objectWithKeyValues: js], error);
     }];
 }
@@ -31,7 +29,7 @@
     //aid
     NSString* path = [parame appendGetParameterWithBasePath:@"http://www.bilibili.com/widget/ajaxGetBP?"];
     return [self Get:path parameters:nil completionHandler:^(id responseObj, NSError *error) {
-        complete([InvestorModel objectWithKeyValues:responseObj[@"list"]], error);
+        complete([InvestorModel objectWithKeyValues:[NSJSONSerialization json2DicWithData:responseObj][@"list"]], error);
     }];
 }
 //获取推荐视频信息
@@ -39,7 +37,12 @@
    // http://comment.bilibili.com/recommend,3187577
     NSString* path = [NSString stringWithFormat:@"http://comment.bilibili.com/recommend,%@",parame];
     return [self Get:path parameters:nil completionHandler:^(id responseObj, NSError *error) {
-        complete([sameVideoModel objectWithKeyValues:@{@"list":responseObj}], error);
+        id obj = [NSJSONSerialization json2DicWithData:responseObj];
+        if (obj == nil) {
+            complete(nil, error);
+        }else{
+            complete([sameVideoModel objectWithKeyValues:@{@"list":obj}], error);
+        }
     }];
 }
 
@@ -48,7 +51,7 @@
 //    aid
     NSString* path = [parame appendGetParameterWithBasePath:@"http://www.bilibili.com/api_proxy?app=tag&action=/tags/archive_list&nomid=1&"];
     return [self Get:path parameters:nil completionHandler:^(id responseObj, NSError *error) {
-        complete([TagModel objectWithKeyValues:responseObj],error);
+        complete([TagModel objectWithKeyValues:[NSJSONSerialization json2DicWithData:responseObj]],error);
     }];
 }
 
@@ -56,12 +59,9 @@
 + (id)GetShiBanInfoWithParameter:(NSString*)parame completionHandler:(void(^)(id responseObj, NSError *error))complete{
     //http://app.bilibili.com/bangumi/seasoninfo/2725.ver?callback=episodeJsonCallback&_=1446863930820
     NSString* path = [NSString stringWithFormat:@"http://app.bilibili.com/bangumi/seasoninfo/%@.ver?callback=episodeJsonCallback&_=1446863930820",parame];
-    
-    return [self downLoad:path parameters:nil completionHandler:^(NSString* responseObj, NSError *error) {
-        NSString* str = [NSString stringWithContentsOfFile:responseObj encoding:NSUTF8StringEncoding error:nil];
-        //拿到下载之后的文件 做处理 返回字典对象
-        NSDictionary* js = [NSJSONSerialization JSONObjectWithData:[[str subStringsWithRegularExpression:@"\\{.*\\}"].firstObject dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves|NSJSONReadingAllowFragments error:nil];
-        [[NSFileManager defaultManager] removeItemAtPath:responseObj error:nil];
+    return [self Get:path parameters:nil completionHandler:^(NSData* responseObj, NSError *error) {
+        NSString* str = [[[NSString alloc] initWithData:responseObj encoding:NSUTF8StringEncoding] subStringsWithRegularExpression:@"\\{.*\\}"].firstObject;
+        NSDictionary* js = [NSJSONSerialization json2DicWithData:[str dataUsingEncoding:NSUTF8StringEncoding]];
         complete([ShinBanInfoModel objectWithKeyValues: js], error);
     }];
 }

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface InvestorTableViewCell : UITableViewCell
-- (void)setRank:(NSString*)rank icon:(NSURL*)icon name:(NSString*)name reply:(NSString*)reply;
+- (void)setRank:(NSInteger)rank icon:(NSURL*)icon name:(NSString*)name reply:(NSString*)reply;
 @end

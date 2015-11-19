@@ -7,6 +7,7 @@
 //
 
 #import "CellItemViewController.h"
+#import "AVInfoViewController.h"
 
 @interface CellItemViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imgv;
@@ -17,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *replyLabel;
 @property (nonatomic, strong) NSString* section;
 @property (nonatomic, assign) NSInteger ind;
-
+//@property (nonatomic, strong) AVDataModel* model;
 @end
 
 @implementation CellItemViewController
@@ -25,6 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
+
 
 - (void)setViewContentWithImgURL:(NSURL*)URL playNum:(NSString*)playNum replyNum:(NSString*)replyNum title:(NSString*)title section:(NSString*)section ind:(NSInteger)ind{
     //视频缩略图
@@ -47,6 +49,8 @@
     
     self.section = section;
     self.ind = ind;
+    
+//    self.model = model;
 }
 
 - (void)pushAVInfoViewController:(block) b{
@@ -55,8 +59,6 @@
 
 - (IBAction)touchStart:(UIButton *)sender {
     self.returnBlock();
-   // sender.backgroundColor = kRGBColor(100, 100, 100);
-    //[self.parentViewController.navigationController performSegueWithIdentifier:@"item2info" sender:nil];
 }
 
 

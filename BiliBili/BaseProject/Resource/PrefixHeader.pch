@@ -57,4 +57,12 @@ static const int ddLogLevel = DDLogLevelError;
 
 #import <BlocksKit+UIKit.h>
 
+#import "UITableView+FDTemplateLayoutCell.h"
+
+#import "BarrageHeader.h"
+
+#import "NSJSONSerialization+Tools.h"
+
+#import "ArchiverObj.h"
+
 #endif /* PrefixHeader_pch */

@@ -46,13 +46,15 @@
     [self.everyDayPlay mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(self.everyDayPlay.mas_width).multipliedBy(0.22);
     }];
+    
+    __block typeof(self) weakObj = self;
     self.tableView.header = [MyRefreshHeader myRefreshHead:^{
         [self.vm refreshDataCompleteHandle:^(NSError *error) {
-            [self.tableView.header endRefreshing];
-            [self.tableView reloadData];
-            [self.collectionViewController.collectionView reloadData];
+            [weakObj.tableView.header endRefreshing];
+            [weakObj.tableView reloadData];
+            [weakObj.collectionViewController.collectionView reloadData];
             if (error) {
-                [self showErrorMsg:error.localizedDescription];
+                [self showErrorMsg:kerrorMessage];
             }
             
         }];
@@ -62,9 +64,9 @@
     self.tableView.footer=[MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         
         [self.vm getMoreDataCompleteHandle:^(NSError *error) {
-            [self.tableView.footer endRefreshing];
+            [_tableView.footer endRefreshing];
             //[self.tableView reloadData];
-            [self.collectionViewController.collectionView reloadData];
+            [_collectionViewController.collectionView reloadData];
         }];
         
     }];
@@ -144,7 +146,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return kWindowW / 640 * 735 - 100;
+    return kWindowW / 640 * 735;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{

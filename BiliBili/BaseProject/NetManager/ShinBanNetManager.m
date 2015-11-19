@@ -14,7 +14,7 @@
     //http://www.bilibili.com/index/ding/13.json
     NSString* basePath = @"http://www.bilibili.com/index/ding/13.json";
     return [self Get:basePath parameters:nil completionHandler:^(id responseObj, NSError *error) {
-        complete([MoreViewShinBanModel objectWithKeyValues:responseObj],error);
+        complete([MoreViewShinBanModel objectWithKeyValues:[NSJSONSerialization json2DicWithData:responseObj]],error);
     }];
     
 }
@@ -28,7 +28,7 @@
     
     
     return [self Get:basePath parameters:nil completionHandler:^(id responseObj, NSError *error) {
-        complete([RecommentShinBanModel objectWithKeyValues:responseObj[@"result"]],error);
+        complete([RecommentShinBanModel objectWithKeyValues:[NSJSONSerialization json2DicWithData:responseObj][@"result"]],error);
     }];
 }
 @end

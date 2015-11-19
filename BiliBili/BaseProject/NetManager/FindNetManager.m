@@ -11,13 +11,13 @@
 + (id)GetRankCompletionHandler:(void(^)(id responseObj, NSError *error))complete{
     NSString* basePath = @"http://app.bilibili.com/api/search_rank.json?_device=android&_hwid=831fc7511fa9aff5&appkey=c1b107428d337928&build=407000&platform=android&ts=1446554579000&sign=e99f5ed257d7c081e5ac901f8b72f331";
     return [self Get:basePath parameters:nil completionHandler:^(id responseObj, NSError *error) {
-        complete([FindModel objectWithKeyValues:responseObj],error);
+        complete([FindModel objectWithKeyValues:[NSJSONSerialization json2DicWithData:responseObj]],error);
     }];
 }
 + (id)GetRankImgCompletionHandler:(void(^)(id responseObj, NSError *error))complete{
     NSString* basePath = @"http://app.bilibili.com/api/search/1954/search.android.xhdpi.android.json";
     return [self Get:basePath parameters:nil completionHandler:^(id responseObj, NSError *error) {
-        complete([FindImgModel objectWithKeyValues:responseObj[@"result"]],error);
+        complete([FindImgModel objectWithKeyValues:[NSJSONSerialization json2DicWithData:responseObj][@"result"]],error);
     }];
 }
 @end

@@ -16,10 +16,15 @@
 #import "AVItemTableViewController.h"
 #import "UIScrollView+Tools.h"
 #import "JHViewController.h"
+#import "VideoViewController.h"
 
 #define MENEVIEWHEIGHT 40
 
-#define MAXOFFSET self.headView.frame.size.height - [self.topLayoutGuide length]
+#define MAXOFFSET self.headView.frame.size.height
+
+#define MINOFFSET 0
+
+#define TOPVALUE
 
 @interface AVInfoViewController ()<UITableViewDelegate,UITableViewDataSource,WMMenuViewDelegate,JHViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *headView;
@@ -46,7 +51,7 @@
 @property (nonatomic, strong) NSMutableArray<AVItemTableViewController*>* controllers;
 @property (nonatomic, strong) UIPanGestureRecognizer* panGesture;
 @property (nonatomic, strong) WMMenuView* menuView;
-//@property (nonatomic, assign) NSInteger currentPage;
+@property (nonatomic, strong) NSValue* topFrame;
 
 @end
 
@@ -55,15 +60,16 @@
     [super viewDidLoad];
     //初始化属性
     [self setProperty];
+    __block typeof(self) weakObj = self;
     self.tableView.header = [MyRefreshHeader myRefreshHead:^{
         [self.vm refreshDataCompleteHandle:^(NSError *error) {
-            [self.tableView.header endRefreshing];
-            [self.tableView reloadData];
-            for (UITableViewController* c in self.controllers) {
+            [weakObj.tableView.header endRefreshing];
+            [weakObj.tableView reloadData];
+            for (UITableViewController* c in weakObj.controllers) {
                 [c.tableView reloadData];
             }
             if (error) {
-                [self showErrorMsg:error.localizedDescription];
+                [self showErrorMsg: kerrorMessage];
             }
         }];
     }];
@@ -75,6 +81,7 @@
     [super viewWillDisappear:animated];
     [self.tableView.header endRefreshing];
 }
+
 
 #pragma mark - tableViewController
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -89,15 +96,21 @@
     if (v == nil) {
         self.pageViewController.view.tag = 100;
         [cell.contentView addSubview: self.pageViewController.view];
-        [self.pageViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.mas_equalTo(0);
-        }];
     }
+    [self.pageViewController.view mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
     return cell;
 }
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    WMMenuView* menuView = [[WMMenuView alloc] initWithFrame:CGRectMake(0, 0, kWindowW, 30) buttonItems:@[@"视频详情",@"相关视频",[NSString stringWithFormat:@"评论(%ld)",[self.vm allReply]]] backgroundColor:[UIColor whiteColor] norSize:15 selSize:15 norColor:[UIColor blackColor] selColor:kGloableColor];
+    
+    NSMutableArray* arr = [@[@"视频详情",@"相关视频",[NSString stringWithFormat:@"评论(%ld)",(long)[self.vm allReply]]] mutableCopy];
+    if ([self.vm isShiBan]) {
+        [arr insertObject:@"承包商排行" atIndex:0];
+    }
+    
+    WMMenuView* menuView = [[WMMenuView alloc] initWithFrame:CGRectMake(0, 0, kWindowW, 30) buttonItems:arr backgroundColor:[UIColor whiteColor] norSize:15 selSize:15 norColor:[UIColor blackColor] selColor:kGloableColor];
     menuView.delegate = self;
     menuView.style = WMMenuViewStyleLine;
     self.menuView = menuView;
@@ -110,13 +123,14 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return kWindowH - self.headView.frame.size.height + [self.topLayoutGuide length];
+    return kWindowH - MAXOFFSET + self.topFrame.CGRectValue.size.height;
 }
 
 
 #pragma mark - 初始化属性
-- (void)setWithModel:(AVDataModel*)model{
-    self.vm.AVData = model;
+- (void)setWithModel:(AVDataModel*)model section:(NSString*)section{
+    //self.vm.AVData = model;
+    [self.vm setAVData:model section:section];
     self.navigationItem.title = [NSString stringWithFormat:@"av%@", model.aid];
 }
 
@@ -131,10 +145,10 @@
     
     [self addChildViewController:self.pageViewController];
     
-    
+    __block typeof(self) weakObj = self;
     [self.imgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(self.headView.mas_width).multipliedBy(0.33);
-        make.height.mas_equalTo(self.imgView.mas_width).multipliedBy(0.62);
+        make.width.mas_equalTo(weakObj.headView.mas_width).multipliedBy(0.33);
+        make.height.mas_equalTo(weakObj.imgView.mas_width).multipliedBy(0.62);
     }];
     
     //设置up名
@@ -161,30 +175,37 @@
 
 - (void)startMove{
     CGPoint offset = [self.panGesture translationInView:nil];
-   // NSLog(@"%lf,%lf", self.headView.frame.size.height - [self.topLayoutGuide length], self.tableView.contentOffset.y);
-    //视图偏移值在0到顶视图高之间 或者isScrollEnabled为真时(用于偏移值正好是顶视图高时的临界值判断)可以滚动
-    if ((self.tableView.contentOffset.y >=0 && self.tableView.contentOffset.y <= MAXOFFSET) || self.tableView.isScrollEnabled) {
+//    NSLog(@"%lf", self.tableView.contentOffset.y);
+    //视图偏移值在最顶位置到顶视图高之间 或者isScrollEnabled为真时(用于偏移值正好是顶视图高时的临界值判断)可以滚动
+    if ((self.tableView.contentOffset.y >= MINOFFSET && self.tableView.contentOffset.y <= MAXOFFSET) || self.tableView.isScrollEnabled) {
         [self.tableView addContentOffsetY: -offset.y];
         self.tableView.scrollEnabled = NO;
-        //视图偏移值大于顶视图高时 子视图可以滚动
-    }else if(self.tableView.contentOffset.y > MAXOFFSET){
-        CGPoint p = CGPointMake(0, MAXOFFSET);
-        [self.tableView setContentOffset:p animated:YES];
+    }
+    //视图偏移值大于顶视图高时 子视图可以滚动
+    else if(self.tableView.contentOffset.y > MAXOFFSET){
+        [self.tableView setContentOffset:CGPointMake(0, MAXOFFSET) animated:YES];
         [self setChildrenScrollEnabled];
         [self.controllers[self.pageViewController.currentPage].tableView addContentOffsetY:-offset.y];
-        //满足刷新条件
-    }else if (self.tableView.contentOffset.y <= -54 && self.panGesture.state == UIGestureRecognizerStateEnded){
-        [self.tableView.header endRefreshing];
-        [self.tableView.header beginRefreshing];
-        //不满足刷新条件
-    }else if(self.tableView.contentOffset.y > -54 && self.panGesture.state == UIGestureRecognizerStateEnded){
-        [self.tableView setContentOffset:CGPointZero animated:YES];
-    }else{
+        //刷新条件
+    }else if(self.panGesture.state == UIGestureRecognizerStateEnded){
+        if (self.tableView.contentOffset.y <= MINOFFSET - 65) {
+            [self.tableView.header endRefreshing];
+            [self.tableView.header beginRefreshing];
+        }else{
+            [self.tableView setContentOffset:CGPointMake(0, MINOFFSET) animated:YES];
+        }
+    }
+    else{
         [self.tableView addContentOffsetY: -offset.y];
     }
-    
     [self.panGesture setTranslation:CGPointZero inView: nil];
 }
+- (IBAction)pushVideoViewController:(UIButton *)sender {
+    VideoViewController* vc = [[VideoViewController alloc] initWithAid:[self.vm videoAid]];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
 
 #pragma mark - 懒加载
 - (AVInfoViewModel *)vm{
@@ -192,6 +213,16 @@
         _vm = [AVInfoViewModel new];
     }
     return _vm;
+}
+
+- (NSValue *)topFrame{
+    if (_topFrame == nil) {
+        CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
+        CGRect rectNav = self.navigationController.navigationBar.frame;
+        rectStatus.size.height += rectNav.size.height;
+        _topFrame = [NSValue valueWithCGRect: rectStatus];
+    }
+    return _topFrame;
 }
 
 - (JHViewController *)pageViewController{
@@ -205,15 +236,22 @@
 - (NSMutableArray *)controllers{
     if (_controllers == nil) {
         _controllers = [NSMutableArray array];
+        
+        if ([self.vm isShiBan]) {
+            AVItemTableViewController* inverstorVC = [[AVItemTableViewController alloc] initWithVM:self.vm cellIdentity:@"InvestorTableViewCell" storyBoardIndentity:@"AVItemTableViewController" parentTableView:self.tableView];
+            [_controllers addObject:inverstorVC];
+        }
+        
         AVItemTableViewController* avInfoVC = [[AVItemTableViewController alloc] initWithVM:self.vm cellIdentity:@"textCell" storyBoardIndentity:@"AVItemTableViewController" parentTableView:self.tableView];
+        [_controllers addObject:avInfoVC];
         
         AVItemTableViewController* sameVideoVC = [[AVItemTableViewController alloc] initWithVM:self.vm cellIdentity:@"SameVideoTableViewCell" storyBoardIndentity:@"AVItemTableViewController"  parentTableView:self.tableView];
+        [_controllers addObject:sameVideoVC];
         
         AVItemTableViewController* replyVC = [[AVItemTableViewController alloc] initWithVM:self.vm cellIdentity:@"ReViewTableViewCell" storyBoardIndentity:@"AVItemTableViewController"  parentTableView:self.tableView];
-        
-        [_controllers addObject:avInfoVC];
-        [_controllers addObject:sameVideoVC];
         [_controllers addObject:replyVC];
+        
+        
     }
     return _controllers;
 }
@@ -234,6 +272,6 @@
 
 #pragma mark - WMMenuView
 - (CGFloat)menuView:(WMMenuView *)menu widthForItemAtIndex:(NSInteger)index{
-    return 100;
+    return self.view.frame.size.width / ([self.vm isShiBan]?4:3);
 }
 @end

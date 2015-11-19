@@ -60,7 +60,7 @@
             self.hotSearchRightLabel.text = [self.vm coverKeyWordForNum:1];
             [self.tableView reloadData];
             if (error) {
-                [self showErrorMsg: error.localizedDescription];
+                [self showErrorMsg: kerrorMessage];
             }
         }];
     }];

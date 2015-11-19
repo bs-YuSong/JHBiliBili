@@ -10,7 +10,7 @@
 
 @implementation InvestorModel
 + (NSDictionary *)objectClassInArray{
-    return @{@"InvestorDataModel":[InvestorModel class]};
+    return @{@"list":[InvestorDataModel class]};
 }
 @end
 
