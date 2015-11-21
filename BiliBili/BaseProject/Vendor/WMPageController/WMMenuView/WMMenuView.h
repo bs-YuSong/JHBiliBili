@@ -28,6 +28,7 @@ typedef enum {
 @property (nonatomic, strong) NSArray *items;
 @property (nonatomic, assign) WMMenuViewStyle style;
 @property (nonatomic, strong) UIColor *lineColor;
+@property (nonatomic, strong) UIColor *norColor;
 @property (nonatomic, weak) id<WMMenuViewDelegate> delegate;
 @property (nonatomic, copy) NSString *fontName;
 

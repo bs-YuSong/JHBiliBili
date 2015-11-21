@@ -22,19 +22,26 @@ static NSMutableDictionary* dic = nil;
             dic = [NSMutableDictionary dictionary];
         }
     });
-    dic[key] = obj;
-    [NSKeyedArchiver archiveRootObject:dic toFile:kMyCachePath];
+//    dic[key] = obj;
+    if ([key isEqualToString:@""] || key == nil || obj == nil) {
+        return;
+    }
+    [dic setValue:obj forKey:key];
+    [NSKeyedArchiver archiveRootObject:dic toFile:kArchiverCachePath];
 }
 
 + (id)UnArchiveWithKey:(NSString*)key{
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        dic = [NSKeyedUnarchiver unarchiveObjectWithFile:kMyCachePath];
+        dic = [NSKeyedUnarchiver unarchiveObjectWithFile:kArchiverCachePath];
         if (dic == nil) {
             dic = [NSMutableDictionary dictionary];
         }
     });
-    return dic[key];
+    if ([key isEqualToString:@""] || key == nil) {
+        return nil;
+    }
+    return [dic valueForKey:key];
 }
 
 + (id)UnArchiveWithClass:(Class)class{

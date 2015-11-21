@@ -22,9 +22,7 @@
 
 - (void)setTitle:(NSString*)title playNum:(NSString*)playNum replyNum:(NSString*)replyNum videoImg:(NSURL*)imgURL{
     [self.videoImgView setImageWithURL:imgURL];
-//    [self.videoImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.width.mas_equalTo(self.videoImgView.mas_height).multipliedBy(1.6);
-//    }];
+
     self.playIcon.image = [self.playIcon.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.DanMuIcon.image = [self.DanMuIcon.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     

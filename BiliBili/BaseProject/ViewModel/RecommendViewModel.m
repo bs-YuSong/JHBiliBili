@@ -19,7 +19,6 @@
 @implementation RecommendViewModel
 #pragma mark - 缩略图
 - (NSURL *)picForRow:(NSInteger)row section:(NSString*)section{
-    
     return [NSURL URLWithString:self.list[section][row].pic];
 }
 - (NSString*)titleForRow:(NSInteger)row section:(NSString*)section{

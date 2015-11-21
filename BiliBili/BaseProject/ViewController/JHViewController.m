@@ -7,7 +7,7 @@
 //
 
 #import "JHViewController.h"
-@interface JHViewController ()<UIScrollViewDelegate>
+@interface JHViewController ()
 
 @property (nonatomic, strong) NSArray<UIViewController*>* conArr;
 @end
@@ -37,6 +37,8 @@
         _scrollView = [[UIScrollView alloc] init];
         _scrollView.pagingEnabled = YES;
         _scrollView.delegate = self;
+        _scrollView.showsVerticalScrollIndicator = NO;
+        _scrollView.showsHorizontalScrollIndicator = NO;
 
         __block UIView* preView = nil;
         [self.conArr enumerateObjectsUsingBlock:^(UIViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -68,11 +70,22 @@
     return _conArr;
 }
 
+- (NSInteger)currentPage{
+    return self.scrollView.contentOffset.x / self.scrollView.frame.size.width;
+}
+
+- (void)setScrollViewPage:(NSInteger)page{
+    CGPoint offset = self.scrollView.contentOffset;
+    offset.x = self.scrollView.frame.size.width * page;
+    [self.scrollView setContentOffset:offset animated:YES];
+}
+
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    self.currentPage = scrollView.contentOffset.x / self.scrollView.frame.size.width;
     [self.delegate JHViewGetOffset:scrollView.contentOffset];
 }
+
+
 
 @end

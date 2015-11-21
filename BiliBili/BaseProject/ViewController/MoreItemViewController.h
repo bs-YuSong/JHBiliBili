@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ShinBanModel.h"
-@interface MoreViewController : UIViewController
+@interface MoreItemViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIImageView *pic;
 @property (weak, nonatomic) IBOutlet UILabel *animaTitle;
 @property (weak, nonatomic) IBOutlet UILabel *playNum;

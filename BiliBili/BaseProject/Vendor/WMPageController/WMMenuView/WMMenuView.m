@@ -14,11 +14,12 @@
 #define kItemWidth   60
 #define kTagGap      6250
 #define kBGColor     [UIColor colorWithRed:172.0/255.0 green:165.0/255.0 blue:162.0/255.0 alpha:1.0]
-@interface WMMenuView () <WMMenuItemDelegate> {
+@interface WMMenuView () <WMMenuItemDelegate>
+{
     CGFloat _norSize;
     CGFloat _selSize;
-    UIColor *_norColor;
-    UIColor *_selColor;
+//    UIColor *_norColor;
+//    UIColor *_selColor;
 }
 @property (nonatomic, weak) UIScrollView *scrollView;
 @property (nonatomic, weak) WMProgressView *progressView;
@@ -39,12 +40,12 @@ static CGFloat const WMProgressHeight = 2.0;
     return _progressHeight;
 }
 
-- (UIColor *)lineColor {
-    if (!_lineColor) {
-        _lineColor = _selColor;
-    }
-    return _lineColor;
-}
+//- (UIColor *)lineColor {
+//    if (!_lineColor) {
+//        _lineColor = _selColor;
+//    }
+//    return _lineColor;
+//}
 
 - (NSMutableArray *)frames {
     if (_frames == nil) {
@@ -64,8 +65,10 @@ static CGFloat const WMProgressHeight = 2.0;
         }
         _norSize  = norSize;
         _selSize  = selSize;
-        _norColor = norColor;
-        _selColor = selColor;
+        self.lineColor = selColor;
+        self.norColor = norColor;
+//        _norColor = norColor;
+//        _selColor = selColor;
     }
     return self;
 }
@@ -160,7 +163,6 @@ static CGFloat const WMProgressHeight = 2.0;
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:frame];
     scrollView.showsHorizontalScrollIndicator = NO;
     scrollView.showsVerticalScrollIndicator   = NO;
-    scrollView.backgroundColor = self.bgColor;
     [self addSubview:scrollView];
     self.scrollView = scrollView;
 }
@@ -185,8 +187,8 @@ static CGFloat const WMProgressHeight = 2.0;
         item.backgroundColor = [UIColor clearColor];
         item.normalSize    = _norSize;
         item.selectedSize  = _selSize;
-        item.normalColor   = _norColor;
-        item.selectedColor = _selColor;
+        item.normalColor   = self.norColor;
+        item.selectedColor = self.lineColor;
         if (i == 0) {
             [item selectedItemWithoutAnimation];
             self.selItem = item;

@@ -49,7 +49,6 @@
 @property (nonatomic, strong) JHViewController* pageViewController;
 
 @property (nonatomic, strong) NSMutableArray<AVItemTableViewController*>* controllers;
-@property (nonatomic, strong) UIPanGestureRecognizer* panGesture;
 @property (nonatomic, strong) WMMenuView* menuView;
 @property (nonatomic, strong) NSValue* topFrame;
 
@@ -61,7 +60,7 @@
     //初始化属性
     [self setProperty];
     __block typeof(self) weakObj = self;
-    self.tableView.header = [MyRefreshHeader myRefreshHead:^{
+    self.tableView.header = [MyRefreshComplete myRefreshHead:^{
         [self.vm refreshDataCompleteHandle:^(NSError *error) {
             [weakObj.tableView.header endRefreshing];
             [weakObj.tableView reloadData];
@@ -135,7 +134,7 @@
 }
 
 - (void)setProperty{
-    [self.tableView addGestureRecognizer:self.panGesture];
+    self.tableView.showsVerticalScrollIndicator = NO;
     
     self.playButton.layer.cornerRadius = 5;
     
@@ -173,33 +172,7 @@
     }
 }
 
-- (void)startMove{
-    CGPoint offset = [self.panGesture translationInView:nil];
-//    NSLog(@"%lf", self.tableView.contentOffset.y);
-    //视图偏移值在最顶位置到顶视图高之间 或者isScrollEnabled为真时(用于偏移值正好是顶视图高时的临界值判断)可以滚动
-    if ((self.tableView.contentOffset.y >= MINOFFSET && self.tableView.contentOffset.y <= MAXOFFSET) || self.tableView.isScrollEnabled) {
-        [self.tableView addContentOffsetY: -offset.y];
-        self.tableView.scrollEnabled = NO;
-    }
-    //视图偏移值大于顶视图高时 子视图可以滚动
-    else if(self.tableView.contentOffset.y > MAXOFFSET){
-        [self.tableView setContentOffset:CGPointMake(0, MAXOFFSET) animated:YES];
-        [self setChildrenScrollEnabled];
-        [self.controllers[self.pageViewController.currentPage].tableView addContentOffsetY:-offset.y];
-        //刷新条件
-    }else if(self.panGesture.state == UIGestureRecognizerStateEnded){
-        if (self.tableView.contentOffset.y <= MINOFFSET - 65) {
-            [self.tableView.header endRefreshing];
-            [self.tableView.header beginRefreshing];
-        }else{
-            [self.tableView setContentOffset:CGPointMake(0, MINOFFSET) animated:YES];
-        }
-    }
-    else{
-        [self.tableView addContentOffsetY: -offset.y];
-    }
-    [self.panGesture setTranslation:CGPointZero inView: nil];
-}
+
 - (IBAction)pushVideoViewController:(UIButton *)sender {
     VideoViewController* vc = [[VideoViewController alloc] initWithAid:[self.vm videoAid]];
     [self.navigationController pushViewController:vc animated:YES];
@@ -249,18 +222,22 @@
         [_controllers addObject:sameVideoVC];
         
         AVItemTableViewController* replyVC = [[AVItemTableViewController alloc] initWithVM:self.vm cellIdentity:@"ReViewTableViewCell" storyBoardIndentity:@"AVItemTableViewController"  parentTableView:self.tableView];
+        //添加脚部刷新
+        replyVC.tableView.footer = [MyRefreshComplete myRefreshFoot:^{
+           [self.vm getMoveReplyCompleteHandle:^(NSError *error) {
+               [replyVC.tableView.footer endRefreshing];
+               [replyVC.tableView reloadData];
+               if (error) {
+                   [self showErrorMsg: kerrorMessage];
+               }
+           }];
+        }];
+
         [_controllers addObject:replyVC];
         
         
     }
     return _controllers;
-}
-//手势
-- (UIPanGestureRecognizer *)panGesture{
-    if (_panGesture == nil) {
-        _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(startMove)];
-    }
-    return _panGesture;
 }
 
 
@@ -273,5 +250,16 @@
 #pragma mark - WMMenuView
 - (CGFloat)menuView:(WMMenuView *)menu widthForItemAtIndex:(NSInteger)index{
     return self.view.frame.size.width / ([self.vm isShiBan]?4:3);
+}
+- (void)menuView:(WMMenuView *)menu didSelesctedIndex:(NSInteger)index currentIndex:(NSInteger)currentIndex{
+    [self.pageViewController setScrollViewPage:index];
+}
+
+#pragma mark - UIScrollerView
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+        if(scrollView.contentOffset.y >= MAXOFFSET){
+        scrollView.scrollEnabled = NO;
+        [self setChildrenScrollEnabled];
+    }
 }
 @end

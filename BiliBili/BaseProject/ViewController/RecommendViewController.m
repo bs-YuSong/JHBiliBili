@@ -7,8 +7,9 @@
 //
 
 #import "RecommendViewController.h"
-#import "CellItemViewController.h"
+//#import "CellItemViewController.h"
 #import "CellView.h"
+#import "RecommendTableView.h"
 #import "RecommendViewModel.h"
 #import "ScrollDisplayViewController.h"
 #import "WebViewController.h"
@@ -16,8 +17,9 @@
 #import "AVInfoViewController.h"
 @interface RecommendViewController ()<UITableViewDataSource, UITableViewDelegate,iCarouselDelegate, iCarouselDataSource>
 @property (nonatomic, strong) RecommendViewModel* vm;
-@property (weak, nonatomic) IBOutlet UIView *headView;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+//@property (weak, nonatomic) IBOutlet UIView *headView;
+//@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) RecommendTableView *tableView;
 @property (nonatomic, strong) iCarousel* headScrollView;
 
 @end
@@ -33,27 +35,44 @@ kRemoveCellSeparator
     return _vm;
 }
 
+- (RecommendTableView *)tableView{
+    if (_tableView == nil) {
+        _tableView = [[RecommendTableView alloc] init];
+        _tableView.delegate =self;
+        _tableView.dataSource = self;
+        _tableView.backgroundColor = [UIColor clearColor];
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    return _tableView;
+}
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.tableView.header endRefreshing];
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //滚动视图大小
-    [self.headView changeHeight:kWindowW / 2];
-    [self.headView addSubview: self.headScrollView];
-    [self.headScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(0);
+    __weak typeof(self) weakObj = self;
+
+    [self.view addSubview: self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(weakObj.view);
     }];
     
-    __block typeof(self) weakObj = self;
-    self.tableView.header = [MyRefreshHeader myRefreshHead:^{
+    self.headScrollView.frame = self.tableView.tableHeaderView.frame;
+    self.tableView.tableHeaderView = self.headScrollView;
+//    [self.tableView.tableHeaderView addSubview: self.headScrollView];
+//    [self.headScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.mas_equalTo(0);
+//    }];
+    
+    self.tableView.header = [MyRefreshComplete myRefreshHead:^{
         [self.vm refreshDataCompleteHandle:^(NSError *error) {
             [weakObj.tableView.header endRefreshing];
             
-            [weakObj.headScrollView reloadData];
+           // [weakObj.headScrollView reloadData];
             
             [weakObj.tableView reloadData];
             if (error) {
@@ -66,37 +85,10 @@ kRemoveCellSeparator
     [self.tableView.header beginRefreshing];
 }
 
-#define EDGE 10 //单元格间距
-- (void)makeConstraintsWithViews:(NSMutableArray <UIViewController*>*)views cell:(CellView*)cell{
-    UIView* v1 = views[0].view;
-    UIView* v2 = views[1].view;
-    UIView* v3 = views[2].view;
-    UIView* v4 = views[3].view;
-    [v1 mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(cell.titleImg.mas_bottom).mas_offset(EDGE);
-        make.left.mas_offset(EDGE);
-        make.size.equalTo(@[v2,v3,v4]);
-        make.bottom.equalTo(v3.mas_top).mas_offset(-EDGE);
-    }];
-    [v2 mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(v1.mas_top);
-        make.left.equalTo(v1.mas_right).mas_offset(EDGE);
-        make.bottom.equalTo(v1.mas_bottom);
-        make.right.mas_offset(-EDGE);
-    }];
-    [v3 mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(v1.mas_left);
-        make.bottom.mas_offset(-50);
-    }];
-    [v4 mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(v3.mas_right).mas_offset(EDGE);
-        make.right.mas_offset(-EDGE);
-        make.bottom.equalTo(v3.mas_bottom);
-    }];
-}
-
 
 # pragma mark - tableViewController
+
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 1;
@@ -109,58 +101,100 @@ kRemoveCellSeparator
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     CellView* cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if (cell == nil) {
+        cell = [[CellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    cell.contentView.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"CellView.contentView.backgroundColor"];
+    
     NSDictionary* dic = self.vm.dicMap[indexPath.section];
     NSString* key = [dic allKeys].firstObject;
     //设置分区内容
-    [cell setTitle: key titleImg:[NSString stringWithFormat:@"home_region_icon_%@",[dic[key] componentsSeparatedByString:@"-"].firstObject] buttonTitle:[@"更多" stringByAppendingString:key]];
     
-    if (self.vm.list[dic[key]]) {
-        __block typeof(self) weakObj = self;
-        if (![cell.contentView viewWithTag:101]) {
-            NSMutableArray* itemArr = [NSMutableArray new];
-            for (int i = 0; i < 4; ++i) {
-                CellItemViewController* cvc = [kStoryboard(@"Main") instantiateViewControllerWithIdentifier:@"CellItemViewController"];
-                
-                cvc.view.tag = 100 + i;
-                
-                [cvc setViewContentWithImgURL:[self.vm picForRow:i section:dic[key]] playNum:[self.vm playForRow:i section:dic[key]] replyNum:[self.vm danMuCountForRow:i section:dic[key]] title:[self.vm titleForRow:i section:dic[key]] section:dic[key] ind:i];
-                //传值
-                
-                [cvc pushAVInfoViewController:^() {
-                    __weak AVInfoViewController* vc = [weakObj.storyboard instantiateViewControllerWithIdentifier:@"AVInfoViewController"];
-                    [vc setWithModel: weakObj.vm.list[dic[key]][i] section:dic[key]];
-                    
-                    [weakObj.navigationController pushViewController:vc animated:YES];
-                }];
-                
-                [itemArr addObject: cvc];
-                
-                [self addChildViewController: cvc];
-                [cell.contentView addSubview: cvc.view];
-            }
-            [self makeConstraintsWithViews:itemArr cell:cell];
-            //重用判断
-        }else{
-            NSArray* conArr = self.childViewControllers;
-            for (int i = 0; i < 4; ++i) {
-                UIView* iv = [cell viewWithTag:100 + i];
-                for (CellItemViewController* cvc in conArr) {
-                    if (iv == cvc.view) {
-                        
-                        [cvc setViewContentWithImgURL:[self.vm picForRow:i section:dic[key]] playNum:[self.vm playForRow:i section:dic[key]] replyNum:[self.vm danMuCountForRow:i section:dic[key]] title:[self.vm titleForRow:i section:dic[key]] section:dic[key] ind:i];
-                        
-                        [cvc pushAVInfoViewController:^() {
-                             __weak AVInfoViewController* vc = [weakObj.storyboard instantiateViewControllerWithIdentifier:@"AVInfoViewController"];
-                            
-                            [vc setWithModel: weakObj.vm.list[dic[key]][i] section:dic[key]];
-                            
-                            [weakObj.navigationController pushViewController:vc animated:YES];
-                        }];
-                    }
-                }
-            }
-        }
+    NSDictionary* tempDic = @{@"titleLabel.text":[NSMutableArray array],@"playLabel.text":[NSMutableArray array],@"danMuLabel.text":[NSMutableArray array],@"imgv":[NSMutableArray array]};
+    for (int i = 0; i < 4; ++i) {
+        [tempDic[@"imgv"] addObject:[self.vm picForRow:i section:dic[key]]];
+        [tempDic[@"titleLabel.text"] addObject:[self.vm titleForRow:i section:dic[key]]];
+        [tempDic[@"playLabel.text"] addObject:[self.vm playForRow:i section:dic[key]]];
+        [tempDic[@"danMuLabel.text"] addObject:[self.vm danMuCountForRow:i section:dic[key]]];
     }
+    
+    [cell setTitle:key titleImg:[NSString stringWithFormat:@"home_region_icon_%@",[dic[key] componentsSeparatedByString:@"-"].firstObject] buttonTitle:[@"更多" stringByAppendingString:key] dic:tempDic];
+    
+   /* //视频缩略图
+    [self.imgv setImageWithURL: URL];
+    [self.imgv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(self.imgv.mas_width).multipliedBy(0.63);
+    }];
+    self.imgv.layer.cornerRadius = 8;
+    self.imgv.layer.masksToBounds = YES;
+    //视频标题
+    self.label.text = title;
+    //小图标
+    self.playIcon.tintColor = kRGBColor(182, 182, 182);
+    self.playIcon.image = [self.playIcon.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    self.replyIcon.tintColor = kRGBColor(182, 182, 182);
+    self.replyIcon.image = [self.replyIcon.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    
+    self.playLabel.text = playNum;
+    self.replyLabel.text = replyNum;
+    
+    self.section = section;
+    self.ind = ind;
+    */
+//    self.title.text = title;
+//    //图片文件名 home_region_icon_分区名
+//    [self.titleImg setImage:[UIImage imageNamed: titleimg]];
+//    [self.moreButton setTitle:[@"更多" stringByAppendingString: title] forState:UIControlStateNormal];
+//    self.enterView.layer.cornerRadius = self.enterView.frame.size.width / 2;
+//    self.enterView.layer.masksToBounds = YES;
+//    if (self.vm.list[dic[key]]) {
+//        __block typeof(self) weakObj = self;
+//        if (![cell.contentView viewWithTag:101]) {
+//            NSMutableArray* itemArr = [NSMutableArray new];
+//            for (int i = 0; i < 4; ++i) {
+//                CellItemViewController* cvc = [kStoryboard(@"Main") instantiateViewControllerWithIdentifier:@"CellItemViewController"];
+//                
+//                cvc.view.tag = 100 + i;
+//                
+//                [cvc setViewContentWithImgURL:[self.vm picForRow:i section:dic[key]] playNum:[self.vm playForRow:i section:dic[key]] replyNum:[self.vm danMuCountForRow:i section:dic[key]] title:[self.vm titleForRow:i section:dic[key]] section:dic[key] ind:i];
+//                //传值
+//                
+//                [cvc pushAVInfoViewController:^() {
+//                    __weak AVInfoViewController* vc = [weakObj.storyboard instantiateViewControllerWithIdentifier:@"AVInfoViewController"];
+//                    [vc setWithModel: weakObj.vm.list[dic[key]][i] section:dic[key]];
+//                    
+//                    [weakObj.navigationController pushViewController:vc animated:YES];
+//                }];
+//                
+//                [itemArr addObject: cvc];
+//                
+//                [self addChildViewController: cvc];
+//                [cell.contentView addSubview: cvc.view];
+//            }
+//            [self makeConstraintsWithViews:itemArr cell:cell];
+//            //重用判断
+//        }else{
+//            NSArray* conArr = self.childViewControllers;
+//            for (int i = 0; i < 4; ++i) {
+//                UIView* iv = [cell viewWithTag:100 + i];
+//                for (CellItemViewController* cvc in conArr) {
+//                    if (iv == cvc.view) {
+//                        
+//                        [cvc setViewContentWithImgURL:[self.vm picForRow:i section:dic[key]] playNum:[self.vm playForRow:i section:dic[key]] replyNum:[self.vm danMuCountForRow:i section:dic[key]] title:[self.vm titleForRow:i section:dic[key]] section:dic[key] ind:i];
+//                        
+//                        [cvc pushAVInfoViewController:^() {
+//                             __weak AVInfoViewController* vc = [weakObj.storyboard instantiateViewControllerWithIdentifier:@"AVInfoViewController"];
+//                            
+//                            [vc setWithModel: weakObj.vm.list[dic[key]][i] section:dic[key]];
+//                            
+//                            [weakObj.navigationController pushViewController:vc animated:YES];
+//                        }];
+//                    }
+//                }
+//            }
+//        }
+//    }
     return cell;
 }
 
@@ -168,8 +202,8 @@ kRemoveCellSeparator
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    //    640*735
-    return kWindowW / 640 * 735;
+    //    850/1280
+    return kWindowH * 850 / 1280;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 1;
@@ -215,6 +249,10 @@ kRemoveCellSeparator
 
 - (CGFloat)carousel:(iCarousel *)carousel valueForOption:(iCarouselOption)option withDefault:(CGFloat)value{
     return value;
+}
+
+- (void)colorSetting{
+    [self.tableView reloadData];
 }
 
 @end

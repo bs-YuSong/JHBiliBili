@@ -11,7 +11,6 @@
 @implementation UIViewController (Tools)
 - (UINavigationController*)setupNavigationController{
     UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:self];
-//    nav.navigationBarHidden = YES;
     return nav;
 }
 @end

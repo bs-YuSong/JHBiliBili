@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+/**
+ *   大家都在看单元格
+ */
 @interface MoreViewCell : UITableViewCell;
-@property (weak, nonatomic) IBOutlet UIImageView *icon;
-
+- (void)setWithDic:(NSDictionary<NSString*, NSMutableArray*>*)dic;
 @end

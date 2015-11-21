@@ -13,10 +13,13 @@
 - (void)JHViewGetOffset:(CGPoint)offset;
 @end
 
-@interface JHViewController : UIViewController
+
+@interface JHViewController : BaseViewController <UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView* scrollView;
+@property (nonatomic, weak) id<JHViewControllerDelegate> delegate;
 
 - (instancetype)initWithControllers:(NSArray*)controllers;
-@property (nonatomic, weak) id<JHViewControllerDelegate> delegate;
-@property (nonatomic, assign) NSInteger currentPage;
+- (NSInteger)currentPage;
+- (void)setScrollViewPage:(NSInteger)page;
+//@property (nonatomic, assign) NSInteger currentPage;
 @end

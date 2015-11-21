@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JHViewController.h"
 
-@interface HomePageViewController : UIPageViewController
-
+@interface HomePageViewController : JHViewController
+- (void)profileViewMoveToOriginal;
+- (void)profileViewMoveToDestination;
 @end

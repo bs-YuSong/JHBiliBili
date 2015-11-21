@@ -9,16 +9,25 @@
 #import "RecommendCollectionViewController.h"
 #import "RecommendCollectionViewCell.h"
 #import "ShinBanModel.h"
+#import "ShinBanViewModel.h"
 #define EDGE 10
 @interface RecommendCollectionViewController ()<UICollectionViewDelegateFlowLayout,UICollectionViewDelegate>
 @property (nonatomic, strong) NSArray<RecommentShinBanDataModel*>* items;
 @property (nonatomic, assign) NSInteger colNum;
+@property (nonatomic, strong) ShinBanViewModel* vm;
 @end
 
 @implementation RecommendCollectionViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    __weak typeof(self) weakObj = self;
+    self.collectionView.footer = [MyRefreshComplete myRefreshFoot:^{
+        [self.vm getMoreDataCompleteHandle:^(NSError *error) {
+            [weakObj.collectionView.footer endRefreshing];
+            [weakObj.collectionView reloadData];
+        }];
+    }];
 }
 
 - (NSArray<RecommentShinBanDataModel *> *)items{
@@ -28,9 +37,10 @@
     return _items;
 }
 
-- (void)setItems:(NSArray*)items colNum:(NSInteger)num{
-    self.items = items;
+- (void)setVM:(ShinBanViewModel*)vm colNum:(NSInteger)num{
+    self.items = [vm getRecommentList];
     self.colNum = num;
+    self.vm = vm;
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     //cell的宽度等于(屏宽-2*边距-(列数-1)*item间的间距)/列数
@@ -60,6 +70,9 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     RecommendCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"RecommendCollectionViewCell" forIndexPath:indexPath];
     [cell.imgView setImageWithURL:[NSURL URLWithString:self.items[indexPath.row].cover]];
+    cell.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"RecommendCollectionViewCell.backgroundColor"];
+    cell.Label.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"RecommendCollectionViewCell.Label.backgroundColor"];
+    cell.Label.textColor = [[ColorManager shareColorManager] colorWithString:@"textColor"];
     cell.Label.text = self.items[indexPath.row].title;
     
     return cell;
@@ -69,4 +82,7 @@
     DDLogVerbose(@"%ld",(long)indexPath.row);
 }
 
+- (void)colorSetting{
+    [self.collectionView reloadData];
+}
 @end

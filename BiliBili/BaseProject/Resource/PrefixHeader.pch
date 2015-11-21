@@ -40,7 +40,7 @@
 
 #import "iCarousel.h"
 
-#import "MyRefreshHeader.h"
+#import "MyRefreshComplete.h"
 
 #ifdef DEBUG
 static const int ddLogLevel = DDLogLevelVerbose;
@@ -64,5 +64,10 @@ static const int ddLogLevel = DDLogLevelError;
 #import "NSJSONSerialization+Tools.h"
 
 #import "ArchiverObj.h"
+
+#import "ColorManager.h"
+
+#import "BaseViewController.h"
+
 
 #endif /* PrefixHeader_pch */

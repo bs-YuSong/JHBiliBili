@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface RecommendCollectionViewController : UICollectionViewController
-- (void)setItems:(NSArray*)items colNum:(NSInteger)num;
+#import "BaseCollectionViewController.h"
+@class ShinBanViewModel;
+@interface RecommendCollectionViewController : BaseCollectionViewController
+- (void)setVM:(ShinBanViewModel*)vm colNum:(NSInteger)num;
 @end

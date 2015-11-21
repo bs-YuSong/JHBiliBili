@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ShinBanViewController : UIViewController
+@interface ShinBanViewController : BaseViewController
 
 @end

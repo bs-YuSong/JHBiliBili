@@ -5,13 +5,13 @@
         "mode" : "9-part",
         "center" : {
           "mode" : "tile",
-          "width" : 8,
-          "height" : 18
+          "width" : 7,
+          "height" : 19
         },
         "cap-insets" : {
           "bottom" : 5,
-          "top" : 6,
-          "right" : 4,
+          "top" : 5,
+          "right" : 5,
           "left" : 5
         }
       },
@@ -24,14 +24,14 @@
         "mode" : "9-part",
         "center" : {
           "mode" : "tile",
-          "width" : 17,
+          "width" : 12,
           "height" : 38
         },
         "cap-insets" : {
           "bottom" : 10,
           "top" : 10,
-          "right" : 8,
-          "left" : 9
+          "right" : 11,
+          "left" : 11
         }
       },
       "idiom" : "universal",

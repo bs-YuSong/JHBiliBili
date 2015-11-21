@@ -62,7 +62,7 @@
 - (BOOL)isShiBan;
 
 - (void)refreshDataCompleteHandle:(void(^)(NSError *error))complete;
-
+- (void)getMoveReplyCompleteHandle:(void(^)(NSError *error))complete;
 
 ////承包商排行
 - (NSURL*)investorIconForRow:(NSInteger)row;

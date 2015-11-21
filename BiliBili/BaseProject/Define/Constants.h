@@ -32,7 +32,9 @@ cell.preservesSuperviewLayoutMargins = NO; \
 //Docment文件夹目录
 #define kDocumentPath NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject
 
-#define kMyCachePath [kDocumentPath stringByAppendingPathComponent:@"src.arch"]
+#define kCachePath NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject
+
+#define kArchiverCachePath [kCachePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@/src.arch",[[NSBundle mainBundle] bundleIdentifier]]]
 
 #define kGloableColor kRGBColor(248, 116, 153)
 

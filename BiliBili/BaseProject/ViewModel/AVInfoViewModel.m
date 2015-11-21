@@ -172,6 +172,14 @@
     }];
 }
 
+- (void)getMoveReplyCompleteHandle:(void(^)(NSError *error))complete{
+    [AVInfoNetManager GetReplyWithParameter:@{@"pagesize":pagesize.stringValue, @"page":@([self replyCount] / pagesize.intValue + 1), @"aid":[self videoAid]} completionHandler:^(ReplyModel* responseObj, NSError *error) {
+        [self.replyList addObjectsFromArray:responseObj.list];
+        self.allReplyCount = responseObj.results;
+        complete(error);
+    }];
+}
+
 //- (instancetype)initWithAid:(NSString*)aid brief:(NSString*)brief{
 //    if (self = [super init]) {
 //        self.aid = aid;

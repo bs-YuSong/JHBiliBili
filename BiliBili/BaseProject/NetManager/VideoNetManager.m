@@ -39,17 +39,8 @@
 + (id)DownDanMuWithParameter:(NSString*)parame completionHandler:(void(^)(NSDictionary* responseObj, NSError *error))complete{
     //http://comment.bilibili.com/4937954.xml
     NSString* path = [[@"http://comment.bilibili.com/" stringByAppendingString:parame] stringByAppendingString:@".xml"];
-//    return [self downLoad:path parameters:nil completionHandler:^(NSURL* responseObj, NSError *error) {
-//        if (responseObj == nil || responseObj.path.length == 0) {
-//            complete(nil, error);
-//        }else{
-//            complete([XML2Dic dicWithPath: responseObj.path], error);
-//            [[NSFileManager defaultManager] removeItemAtURL:responseObj error:nil];
-//        }
-//    }];
     return [self Get:path parameters:nil completionHandler:^(id responseObj, NSError *error) {
             complete([XML2Dic dicWithData:responseObj], error);
-            //[[NSFileManager defaultManager] removeItemAtURL:responseObj error:nil];
     }];
 }
 @end

@@ -27,14 +27,16 @@
 - (NSInteger)recommentListCount{
     return self.recommentList.count;
 }
-
+// 大家都在看
+//封面
 - (NSURL*)moreViewPicForRow:(NSInteger)row{
     return [NSURL URLWithString:self.moreViewList[row].pic];
 }
+//播放数
 - (NSString*)moreViewPlayForRow:(NSInteger)row{
     return [NSString stringWithFormatNum:self.moreViewList[row].play];
 }
-
+//标题
 - (NSString*)moreViewTitleForRow:(NSInteger)row{
     return self.moreViewList[row].title;
 }

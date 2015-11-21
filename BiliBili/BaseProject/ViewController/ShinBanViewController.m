@@ -9,9 +9,8 @@
 #import "ShinBanViewController.h"
 #import "ShinBanViewModel.h"
 #import "MoreViewCell.h"
-#import "MoreViewController.h"
-#import "PSCollectionView.h"
-#import "RecommendCollectionViewController.h"
+#import "RecommendViewCell.h"
+//#import "RecommendCollectionViewController.h"
 
 @interface ShinBanViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) ShinBanViewModel* vm;
@@ -19,10 +18,6 @@
 @property (weak, nonatomic) IBOutlet UIView *headView;
 @property (weak, nonatomic) IBOutlet UIButton *everyDayPlay;
 @property (weak, nonatomic) IBOutlet UIButton *ShinBanIndex;
-@property (nonatomic, strong) RecommendCollectionViewController* collectionViewController;
-
-@property (nonatomic, strong) PSCollectionView* psCollectionView;
-
 @end
 
 @implementation ShinBanViewController
@@ -41,18 +36,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     //头部高度
     [self.everyDayPlay mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(self.everyDayPlay.mas_width).multipliedBy(0.22);
     }];
     
     __block typeof(self) weakObj = self;
-    self.tableView.header = [MyRefreshHeader myRefreshHead:^{
+    self.tableView.header = [MyRefreshComplete myRefreshHead:^{
         [self.vm refreshDataCompleteHandle:^(NSError *error) {
             [weakObj.tableView.header endRefreshing];
             [weakObj.tableView reloadData];
-            [weakObj.collectionViewController.collectionView reloadData];
             if (error) {
                 [self showErrorMsg:kerrorMessage];
             }
@@ -60,16 +53,6 @@
         }];
     }];
     
-    
-    self.tableView.footer=[MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        
-        [self.vm getMoreDataCompleteHandle:^(NSError *error) {
-            [_tableView.footer endRefreshing];
-            //[self.tableView reloadData];
-            [_collectionViewController.collectionView reloadData];
-        }];
-        
-    }];
     [self.tableView.header beginRefreshing];
 }
 
@@ -87,63 +70,24 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    MoreViewCell* cell = nil;
-    
     if (indexPath.section == 0) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"scell"];
-        NSMutableArray* itemArr = [NSMutableArray new];
+        MoreViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"scell"];
+        NSDictionary* dic = @{@"pic":[NSMutableArray array],@"animaTitle.text":[NSMutableArray array],@"playNum.text":[NSMutableArray array]};
         for (int i = 0; i < 4; ++i) {
-            MoreViewController* cvc = [kStoryboard(@"Main") instantiateViewControllerWithIdentifier:@"MoreViewController"];
-            cvc.view.tag = 100 + i;
-            [cvc.pic setImageWithURL: [self.vm moreViewPicForRow: i]];
-            cvc.animaTitle.text = [self.vm moreViewTitleForRow: i];
-            cvc.playNum.text = [self.vm moreViewPlayForRow:i];
-            [itemArr addObject: cvc];
-            [self addChildViewController: cvc];
-            [cell.contentView addSubview: cvc.view];
+            [dic[@"pic"] addObject:[self.vm moreViewPicForRow: i]];
+            [dic[@"animaTitle.text"] addObject:[self.vm moreViewTitleForRow: i]];
+            [dic[@"playNum.text"] addObject:[self.vm moreViewPlayForRow: i]];
         }
-        [self makeConstraintsWithViews:itemArr cell:cell];
-        
+        [cell setWithDic:dic];
+        return cell;
     }else{
-        cell = [tableView dequeueReusableCellWithIdentifier:@"scell2"];
-        [self addChildViewController: self.collectionViewController];
-        [cell.contentView addSubview: self.collectionViewController.collectionView];
-        [self.collectionViewController.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.left.right.equalTo(cell);
-            make.top.equalTo(cell).offset(35);
-        }];
+        RecommendViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"scell2"];
+        [cell setWithVM:self.vm];
+
+        return cell;
     }
-    
-    return cell;
 }
 
-- (void)makeConstraintsWithViews:(NSMutableArray *)views cell:(MoreViewCell*)cell{
-    UIView* v1 = [views[0] view];
-    UIView* v2 = [views[1] view];
-    UIView* v3 = [views[2] view];
-    UIView* v4 = [views[3] view];
-    [v1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(cell.icon.mas_bottom).mas_equalTo(10);
-        make.left.mas_equalTo(10);
-        make.size.equalTo(@[v2,v3,v4]);
-        make.bottom.equalTo(v3.mas_top).mas_equalTo(-10);
-    }];
-    [v2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(v1.mas_top);
-        make.left.equalTo(v1.mas_right).mas_equalTo(10);
-        make.bottom.equalTo(v1.mas_bottom);
-        make.right.mas_equalTo(-10);
-    }];
-    [v3 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(v1.mas_left);
-        make.bottom.mas_equalTo(-10);
-    }];
-    [v4 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(v3.mas_right).mas_equalTo(10);
-        make.right.mas_equalTo(-10);
-        make.bottom.equalTo(v3.mas_bottom);
-    }];
-}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return kWindowW / 640 * 735;
@@ -157,13 +101,8 @@
     return 10;
 }
 
-#pragma mark - CollectionView
-
-- (RecommendCollectionViewController *)collectionViewController{
-    if (_collectionViewController == nil) {
-        _collectionViewController = kStoryboardWithInd(@"RecommendCollectionViewController");
-        [_collectionViewController setItems:[self.vm getRecommentList] colNum: 3];
-    }
-    return _collectionViewController;
+- (void)colorSetting{
+    [self.tableView reloadData];
 }
+
 @end

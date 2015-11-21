@@ -51,7 +51,7 @@
         make.height.mas_equalTo(self.hotSearchLeftImgView.mas_height).multipliedBy(1.0/4);
     }];
     
-    self.tableView.header = [MyRefreshHeader myRefreshHead:^{
+    self.tableView.header = [MyRefreshComplete myRefreshHead:^{
         [self.vm refreshDataCompleteHandle:^(NSError *error) {
             [self.tableView.header endRefreshing];
             [self.hotSearchLeftImgView setImageWithURL: [self.vm rankCoverForNum:0]];
@@ -107,10 +107,10 @@
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"fvcell"];
     
     NSMutableAttributedString* str = [[NSMutableAttributedString alloc] initWithString:@(indexPath.row + 1).stringValue];
-    if (indexPath.row <= 2) {
-        [str setAttributes:@{NSForegroundColorAttributeName:kGloableColor} range:NSMakeRange(0, str.length)];
-    }
-    [str appendAttributedString:[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"\t%@",[self.vm keyWordForRow: indexPath.row]]]];
+    //排行前三添加其它标识颜色
+    [str setAttributes:@{NSForegroundColorAttributeName:[[ColorManager shareColorManager] colorWithString: indexPath.row <= 2?@"FindViewController.hotTextColor":@"FindViewController.TextColor"]} range:NSMakeRange(0, str.length)];
+    //之后的关键词
+    [str appendAttributedString: [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"\t%@",[self.vm keyWordForRow: indexPath.row]] attributes:@{NSForegroundColorAttributeName:[[ColorManager shareColorManager] colorWithString:@"textColor"]}]];
     [cell.textLabel setAttributedText: str];
     
     UIImageView* imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 7, 10)];
@@ -126,4 +126,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+# pragma mark - 颜色设置
+- (void)colorSetting{
+    [self.tableView reloadData];
+}
 @end
