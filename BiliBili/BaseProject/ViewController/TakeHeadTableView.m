@@ -6,13 +6,14 @@
 //  Copyright © 2015年 Tarena. All rights reserved.
 //
 
-#import "RecommendTableView.h"
+#import "TakeHeadTableView.h"
 
-@interface RecommendTableView ()
+@interface TakeHeadTableView ()
 
 @end
 
-@implementation RecommendTableView
+@implementation TakeHeadTableView
+
 
 - (instancetype)init{
     if (self = [super initWithFrame:CGRectMake(0, 0, kWindowW, kWindowH) style:UITableViewStyleGrouped]) {

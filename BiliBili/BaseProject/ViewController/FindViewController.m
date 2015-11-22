@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIView *hotSearchBottomBlackView;
 @property (weak, nonatomic) IBOutlet UILabel *hotSearchLeftLabel;
 @property (weak, nonatomic) IBOutlet UILabel *hotSearchRightLabel;
+@property (weak, nonatomic) IBOutlet UILabel *allViewLabel;
 
 
 @property (nonatomic, strong) UIImage* upImg;
@@ -128,6 +129,7 @@
 
 # pragma mark - 颜色设置
 - (void)colorSetting{
+    self.allViewLabel.textColor = [[ColorManager shareColorManager] colorWithString:@"textColor"];
     [self.tableView reloadData];
 }
 @end

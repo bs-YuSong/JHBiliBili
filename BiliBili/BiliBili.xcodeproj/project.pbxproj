@@ -101,7 +101,7 @@
 		A1E82F1D1BFD5B75004DAE7B /* MyRefreshComplete.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E82F1C1BFD5B75004DAE7B /* MyRefreshComplete.m */; };
 		A1E82F201BFDA8F5004DAE7B /* ProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E82F1F1BFDA8F5004DAE7B /* ProfileTableViewController.m */; };
 		A1E82F241BFDACA2004DAE7B /* ProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E82F231BFDACA2004DAE7B /* ProfileTableViewCell.m */; };
-		A1F017CA1C00217500822989 /* RecommendTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F017C91C00217500822989 /* RecommendTableView.m */; };
+		A1F017CA1C00217500822989 /* TakeHeadTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F017C91C00217500822989 /* TakeHeadTableView.m */; };
 		A1F953E41BEC991F00714399 /* SameVideoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F953E31BEC991F00714399 /* SameVideoTableViewCell.m */; };
 		A1F953E71BECB83900714399 /* ReViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F953E61BECB83900714399 /* ReViewTableViewCell.m */; };
 		A1F953EA1BECC77C00714399 /* InvestorTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F953E91BECC77C00714399 /* InvestorTableViewCell.m */; };
@@ -300,8 +300,8 @@
 		A1E82F1F1BFDA8F5004DAE7B /* ProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileTableViewController.m; sourceTree = "<group>"; };
 		A1E82F221BFDACA2004DAE7B /* ProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileTableViewCell.h; sourceTree = "<group>"; };
 		A1E82F231BFDACA2004DAE7B /* ProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileTableViewCell.m; sourceTree = "<group>"; };
-		A1F017C81C00217500822989 /* RecommendTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendTableView.h; sourceTree = "<group>"; };
-		A1F017C91C00217500822989 /* RecommendTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendTableView.m; sourceTree = "<group>"; };
+		A1F017C81C00217500822989 /* TakeHeadTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TakeHeadTableView.h; path = BaseProject/ViewController/TakeHeadTableView.h; sourceTree = SOURCE_ROOT; };
+		A1F017C91C00217500822989 /* TakeHeadTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TakeHeadTableView.m; path = BaseProject/ViewController/TakeHeadTableView.m; sourceTree = SOURCE_ROOT; };
 		A1F953E21BEC991F00714399 /* SameVideoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SameVideoTableViewCell.h; sourceTree = "<group>"; };
 		A1F953E31BEC991F00714399 /* SameVideoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SameVideoTableViewCell.m; sourceTree = "<group>"; };
 		A1F953E51BECB83900714399 /* ReViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReViewTableViewCell.h; sourceTree = "<group>"; };
@@ -517,6 +517,8 @@
 		A17466B91BE8E512005AF449 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				A1F017C81C00217500822989 /* TakeHeadTableView.h */,
+				A1F017C91C00217500822989 /* TakeHeadTableView.m */,
 				A1D52CB71BFF3BE500C18404 /* 侧边栏 */,
 				A18F92281BEAF6C900607FCD /* 发现 */,
 				A19569C41BE0FA2100CFB80E /* 番剧 */,
@@ -589,8 +591,6 @@
 				A1C0ACC11BDA0CD9000E1848 /* CellItemViewController.m */,
 				A1E296F81BD86D9B00AFBA29 /* RecommendViewController.h */,
 				A1E296F91BD86D9B00AFBA29 /* RecommendViewController.m */,
-				A1F017C81C00217500822989 /* RecommendTableView.h */,
-				A1F017C91C00217500822989 /* RecommendTableView.m */,
 			);
 			name = "推荐";
 			sourceTree = "<group>";
@@ -1084,7 +1084,7 @@
 				A1C3BCF21BF5661B00673A77 /* UITableView+FDTemplateLayoutCellDebug.m in Sources */,
 				A1C3BD3F1BF5863F00673A77 /* BarrageFloatImageSpirit.m in Sources */,
 				A1D52CB01BFEF8BF00C18404 /* RecommendViewCell.m in Sources */,
-				A1F017CA1C00217500822989 /* RecommendTableView.m in Sources */,
+				A1F017CA1C00217500822989 /* TakeHeadTableView.m in Sources */,
 				3886C0BE1BD74AFE0014E661 /* BaseNetManager.m in Sources */,
 				A1F953E41BEC991F00714399 /* SameVideoTableViewCell.m in Sources */,
 				A1C3BCF81BF5661B00673A77 /* WMPageController.m in Sources */,

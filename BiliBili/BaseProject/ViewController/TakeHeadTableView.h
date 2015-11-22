@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface RecommendTableView : UITableView
+/**
+ *  创建一个自带顶视图的TableView
+ */
+@interface TakeHeadTableView : UITableView
 
 @end

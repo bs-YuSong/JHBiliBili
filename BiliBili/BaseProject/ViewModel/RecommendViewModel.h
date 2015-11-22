@@ -28,6 +28,8 @@
 - (NSURL*)headImgURL:(NSInteger)index;
 - (NSURL*)headImgLink:(NSInteger)index;
 - (NSInteger)numberOfHeadImg;
+//视频详情子项
+- (AVDataModel*)AVDataModelForRow:(NSInteger)row section:(NSString*)section;
 
 - (void)refreshDataCompleteHandle:(void(^)(NSError *error))complete;
 @end

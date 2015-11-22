@@ -9,7 +9,7 @@
 #import "RecommendViewController.h"
 //#import "CellItemViewController.h"
 #import "CellView.h"
-#import "RecommendTableView.h"
+#import "TakeHeadTableView.h"
 #import "RecommendViewModel.h"
 #import "ScrollDisplayViewController.h"
 #import "WebViewController.h"
@@ -19,7 +19,7 @@
 @property (nonatomic, strong) RecommendViewModel* vm;
 //@property (weak, nonatomic) IBOutlet UIView *headView;
 //@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) RecommendTableView *tableView;
+@property (strong, nonatomic) TakeHeadTableView *tableView;
 @property (nonatomic, strong) iCarousel* headScrollView;
 
 @end
@@ -35,9 +35,9 @@ kRemoveCellSeparator
     return _vm;
 }
 
-- (RecommendTableView *)tableView{
+- (TakeHeadTableView *)tableView{
     if (_tableView == nil) {
-        _tableView = [[RecommendTableView alloc] init];
+        _tableView = [[TakeHeadTableView alloc] init];
         _tableView.delegate =self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor clearColor];
@@ -54,6 +54,7 @@ kRemoveCellSeparator
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     __weak typeof(self) weakObj = self;
 
     [self.view addSubview: self.tableView];
@@ -61,18 +62,18 @@ kRemoveCellSeparator
         make.edges.equalTo(weakObj.view);
     }];
     
-    self.headScrollView.frame = self.tableView.tableHeaderView.frame;
-    self.tableView.tableHeaderView = self.headScrollView;
-//    [self.tableView.tableHeaderView addSubview: self.headScrollView];
-//    [self.headScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.edges.mas_equalTo(0);
-//    }];
+   // self.headScrollView.frame = self.tableView.tableHeaderView.frame;
+    //self.tableView.tableHeaderView = self.headScrollView;
+    [self.tableView.tableHeaderView addSubview: self.headScrollView];
+    [self.headScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
     
     self.tableView.header = [MyRefreshComplete myRefreshHead:^{
         [self.vm refreshDataCompleteHandle:^(NSError *error) {
             [weakObj.tableView.header endRefreshing];
             
-           // [weakObj.headScrollView reloadData];
+            [weakObj.headScrollView reloadData];
             
             [weakObj.tableView reloadData];
             if (error) {
@@ -99,11 +100,9 @@ kRemoveCellSeparator
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     CellView* cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell == nil) {
         cell = [[CellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     cell.contentView.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"CellView.contentView.backgroundColor"];
     
@@ -111,90 +110,18 @@ kRemoveCellSeparator
     NSString* key = [dic allKeys].firstObject;
     //设置分区内容
     
-    NSDictionary* tempDic = @{@"titleLabel.text":[NSMutableArray array],@"playLabel.text":[NSMutableArray array],@"danMuLabel.text":[NSMutableArray array],@"imgv":[NSMutableArray array]};
+    NSDictionary* tempDic = @{@"titleLabel.text":[NSMutableArray array],@"playLabel.text":[NSMutableArray array],@"danMuLabel.text":[NSMutableArray array],@"imgv":[NSMutableArray array],@"dataModel":[NSMutableArray array],@"navController":self.parentViewController.navigationController,@"section":dic[key]};
+    
     for (int i = 0; i < 4; ++i) {
         [tempDic[@"imgv"] addObject:[self.vm picForRow:i section:dic[key]]];
         [tempDic[@"titleLabel.text"] addObject:[self.vm titleForRow:i section:dic[key]]];
         [tempDic[@"playLabel.text"] addObject:[self.vm playForRow:i section:dic[key]]];
         [tempDic[@"danMuLabel.text"] addObject:[self.vm danMuCountForRow:i section:dic[key]]];
+        [tempDic[@"dataModel"] addObject:[self.vm AVDataModelForRow:i section:dic[key]]];
     }
     
     [cell setTitle:key titleImg:[NSString stringWithFormat:@"home_region_icon_%@",[dic[key] componentsSeparatedByString:@"-"].firstObject] buttonTitle:[@"更多" stringByAppendingString:key] dic:tempDic];
     
-   /* //视频缩略图
-    [self.imgv setImageWithURL: URL];
-    [self.imgv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(self.imgv.mas_width).multipliedBy(0.63);
-    }];
-    self.imgv.layer.cornerRadius = 8;
-    self.imgv.layer.masksToBounds = YES;
-    //视频标题
-    self.label.text = title;
-    //小图标
-    self.playIcon.tintColor = kRGBColor(182, 182, 182);
-    self.playIcon.image = [self.playIcon.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    self.replyIcon.tintColor = kRGBColor(182, 182, 182);
-    self.replyIcon.image = [self.replyIcon.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    
-    self.playLabel.text = playNum;
-    self.replyLabel.text = replyNum;
-    
-    self.section = section;
-    self.ind = ind;
-    */
-//    self.title.text = title;
-//    //图片文件名 home_region_icon_分区名
-//    [self.titleImg setImage:[UIImage imageNamed: titleimg]];
-//    [self.moreButton setTitle:[@"更多" stringByAppendingString: title] forState:UIControlStateNormal];
-//    self.enterView.layer.cornerRadius = self.enterView.frame.size.width / 2;
-//    self.enterView.layer.masksToBounds = YES;
-//    if (self.vm.list[dic[key]]) {
-//        __block typeof(self) weakObj = self;
-//        if (![cell.contentView viewWithTag:101]) {
-//            NSMutableArray* itemArr = [NSMutableArray new];
-//            for (int i = 0; i < 4; ++i) {
-//                CellItemViewController* cvc = [kStoryboard(@"Main") instantiateViewControllerWithIdentifier:@"CellItemViewController"];
-//                
-//                cvc.view.tag = 100 + i;
-//                
-//                [cvc setViewContentWithImgURL:[self.vm picForRow:i section:dic[key]] playNum:[self.vm playForRow:i section:dic[key]] replyNum:[self.vm danMuCountForRow:i section:dic[key]] title:[self.vm titleForRow:i section:dic[key]] section:dic[key] ind:i];
-//                //传值
-//                
-//                [cvc pushAVInfoViewController:^() {
-//                    __weak AVInfoViewController* vc = [weakObj.storyboard instantiateViewControllerWithIdentifier:@"AVInfoViewController"];
-//                    [vc setWithModel: weakObj.vm.list[dic[key]][i] section:dic[key]];
-//                    
-//                    [weakObj.navigationController pushViewController:vc animated:YES];
-//                }];
-//                
-//                [itemArr addObject: cvc];
-//                
-//                [self addChildViewController: cvc];
-//                [cell.contentView addSubview: cvc.view];
-//            }
-//            [self makeConstraintsWithViews:itemArr cell:cell];
-//            //重用判断
-//        }else{
-//            NSArray* conArr = self.childViewControllers;
-//            for (int i = 0; i < 4; ++i) {
-//                UIView* iv = [cell viewWithTag:100 + i];
-//                for (CellItemViewController* cvc in conArr) {
-//                    if (iv == cvc.view) {
-//                        
-//                        [cvc setViewContentWithImgURL:[self.vm picForRow:i section:dic[key]] playNum:[self.vm playForRow:i section:dic[key]] replyNum:[self.vm danMuCountForRow:i section:dic[key]] title:[self.vm titleForRow:i section:dic[key]] section:dic[key] ind:i];
-//                        
-//                        [cvc pushAVInfoViewController:^() {
-//                             __weak AVInfoViewController* vc = [weakObj.storyboard instantiateViewControllerWithIdentifier:@"AVInfoViewController"];
-//                            
-//                            [vc setWithModel: weakObj.vm.list[dic[key]][i] section:dic[key]];
-//                            
-//                            [weakObj.navigationController pushViewController:vc animated:YES];
-//                        }];
-//                    }
-//                }
-//            }
-//        }
-//    }
     return cell;
 }
 

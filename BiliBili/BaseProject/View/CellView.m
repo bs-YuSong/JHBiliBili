@@ -14,7 +14,7 @@
 
 @implementation CellView
 
-- (void)setTitle:(NSString*)title titleImg:(NSString*)titleimg buttonTitle:(NSString*)buttonTitle dic:(NSDictionary<NSString*,NSArray*>*)dic{
+- (void)setTitle:(NSString*)title titleImg:(NSString*)titleimg buttonTitle:(NSString*)buttonTitle dic:(NSDictionary<NSString*,id>*)dic{
     self.title.text = title;
     self.title.textColor = [[ColorManager shareColorManager] colorWithString:@"textColor"];
     //图片文件名 home_region_icon_分区名
@@ -29,9 +29,11 @@
     
     NSArray<CellItemViewController*>* arr = [self.vc childViewControllers];
     [arr enumerateObjectsUsingBlock:^(CellItemViewController * _Nonnull vc, NSUInteger idx, BOOL * _Nonnull stop) {
-        [dic enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSArray * _Nonnull obj, BOOL * _Nonnull stop) {
+        [dic enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, id _Nonnull obj, BOOL * _Nonnull stop) {
             if ([key isEqualToString: @"imgv"]) {
                 [vc.imgv setImageWithURL: obj[idx]];
+            }else if ([key isEqualToString: @"section"] || [key isEqualToString: @"navController"]){
+                [vc setValue:obj forKeyPath:key];
             }else{
                 [vc setValue:obj[idx] forKeyPath:key];
             }
@@ -89,6 +91,7 @@
 }
 
 
+#pragma mark - 懒加载
 - (UILabel *)title{
     if (_title == nil) {
         _title = [[UILabel alloc] init];

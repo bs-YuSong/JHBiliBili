@@ -62,6 +62,11 @@
     return self.dicMap.count - 1;
 }
 
+#pragma mark - 获取视频子项详情
+- (AVDataModel*)AVDataModelForRow:(NSInteger)row section:(NSString*)section{
+    return self.list[section][row];
+}
+
 #pragma mark - 刷新
 - (void)refreshDataCompleteHandle:(void(^)(NSError *error))complete{
     [RecommendNetManager getHeadImgCompletionHandler:^(IndexModel* responseObj, NSError *error) {

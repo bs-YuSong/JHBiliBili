@@ -128,7 +128,6 @@
 
 #pragma mark - 初始化属性
 - (void)setWithModel:(AVDataModel*)model section:(NSString*)section{
-    //self.vm.AVData = model;
     [self.vm setAVData:model section:section];
     self.navigationItem.title = [NSString stringWithFormat:@"av%@", model.aid];
 }
