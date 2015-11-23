@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>BaseProject.xcscheme</key>
+		<key>BiliBili.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -12,7 +12,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>3886C0921BD748830014E661</key>
+		<key>A17EC1441C0292980030886E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
