@@ -3,7 +3,7 @@
 //  BiliBili
 //
 //  Created by apple-jd44 on 15/10/21.
-//  Copyright © 2015年 Tarena. All rights reserved.
+//  Copyright © 2015年 JimHuang. All rights reserved.
 //
 
 #import "RecommendViewModel.h"
@@ -59,7 +59,7 @@
 }
 
 - (NSInteger)sectionCount{
-    return self.dicMap.count - 1;
+    return self.list.count;
 }
 
 #pragma mark - 获取视频子项详情
@@ -69,22 +69,24 @@
 
 #pragma mark - 刷新
 - (void)refreshDataCompleteHandle:(void(^)(NSError *error))complete{
-    [RecommendNetManager getHeadImgCompletionHandler:^(IndexModel* responseObj, NSError *error) {
-        //获取顶部滚动视图
-         self.headObject = [responseObj.list mutableCopy];
-        [ArchiverObj archiveWithObj:self.headObject key:@"recommendHeadModel"];
-        //获取各分区内容
-        [self.dicMap enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            NSString* key = [obj allValues].firstObject;
-            [RecommendNetManager getSection:key completionHandler:^(AVModel* responseObj1, NSError *error) {
-                self.list[key] = [responseObj1.list mutableCopy];
-                if (idx == self.dicMap.count - 1) {
-                    [ArchiverObj archiveWithObj:self.list key:@"recommendViewModel"];
-                    complete(error);
-                }
-            }];
-        }];
+    NSMutableArray<AFHTTPRequestOperation*>* arr = [NSMutableArray array];
+    [arr addObject: [RecommendNetManager getHeadImgCompletionHandler:^(IndexModel* responseObj, NSError *error) {
+        self.headObject = [responseObj.list mutableCopy];
+    }]];
+    [self.dicMap enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSString* key = [obj allValues].firstObject;
+        [arr addObject: [RecommendNetManager getSection:key completionHandler:^(AVModel* responseObj1, NSError *error) {
+            self.list[key] = [responseObj1.list mutableCopy];
+        }]];
     }];
+    
+    NSArray* operations = [AFURLConnectionOperation batchOfRequestOperations:arr progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations) {
+    } completionBlock:^(NSArray *operations) {
+        [ArchiverObj archiveWithObj:self.list key:@"recommendViewModel"];
+        complete(nil);
+    }];
+    [[NSOperationQueue mainQueue] addOperations:@[operations.lastObject] waitUntilFinished:NO];
+    
 }
 
 #pragma mark - 懒加载
@@ -94,7 +96,8 @@
         NSDictionary* dic = [ArchiverObj UnArchiveWithKey:@"recommendViewModel"];
         if (dic == nil) {
             _list = [NSMutableDictionary new];
-        }else{
+        }
+        else{
             _list = [dic mutableCopy];
         }
     }

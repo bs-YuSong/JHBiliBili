@@ -12,7 +12,6 @@
 		A17EC1551C0292980030886E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A17EC1541C0292980030886E /* Assets.xcassets */; };
 		A17EC1581C0292980030886E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A17EC1561C0292980030886E /* LaunchScreen.storyboard */; };
 		A17EC1611C0292C70030886E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC1601C0292C70030886E /* AppDelegate.m */; };
-		A17EC1631C0292F50030886E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A17EC1621C0292F50030886E /* Info.plist */; };
 		A17EC1B21C0293130030886E /* ArchiverObj.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC1681C0293130030886E /* ArchiverObj.m */; };
 		A17EC1B31C0293130030886E /* AVModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC16A1C0293130030886E /* AVModel.m */; };
 		A17EC1B41C0293130030886E /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC16C1C0293130030886E /* BaseModel.m */; };
@@ -33,7 +32,6 @@
 		A17EC1C31C0293130030886E /* RecommendNetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC18B1C0293130030886E /* RecommendNetManager.m */; };
 		A17EC1C41C0293130030886E /* ShinBanNetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC18D1C0293130030886E /* ShinBanNetManager.m */; };
 		A17EC1C51C0293130030886E /* VideoNetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC18F1C0293130030886E /* VideoNetManager.m */; };
-		A17EC1C61C0293130030886E /* logo.ai in Resources */ = {isa = PBXBuildFile; fileRef = A17EC1911C0293130030886E /* logo.ai */; };
 		A17EC1C71C0293130030886E /* theme.plist in Resources */ = {isa = PBXBuildFile; fileRef = A17EC1931C0293130030886E /* theme.plist */; };
 		A17EC1C81C0293130030886E /* AppDelegate+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC1971C0293130030886E /* AppDelegate+Category.m */; };
 		A17EC1C91C0293130030886E /* BarrageDescriptor+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC1991C0293130030886E /* BarrageDescriptor+Tools.m */; };
@@ -98,14 +96,10 @@
 		A17EC2961C0293270030886E /* JHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC2401C0293270030886E /* JHViewController.m */; };
 		A17EC2971C0293270030886E /* MoreItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC2421C0293270030886E /* MoreItemViewController.m */; };
 		A17EC2981C0293270030886E /* ProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC2441C0293270030886E /* ProfileTableViewController.m */; };
-		A17EC2991C0293270030886E /* PSCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC2461C0293270030886E /* PSCollectionView.m */; };
-		A17EC29A1C0293270030886E /* PSCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC2481C0293270030886E /* PSCollectionViewCell.m */; };
 		A17EC29B1C0293270030886E /* RecommendCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC24A1C0293270030886E /* RecommendCollectionViewController.m */; };
 		A17EC29C1C0293270030886E /* RecommendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC24C1C0293270030886E /* RecommendViewController.m */; };
-		A17EC29D1C0293270030886E /* ScrollDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC24E1C0293270030886E /* ScrollDisplayViewController.m */; };
 		A17EC29E1C0293270030886E /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC2501C0293270030886E /* SettingTableViewController.m */; };
 		A17EC29F1C0293270030886E /* ShinBanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC2521C0293270030886E /* ShinBanViewController.m */; };
-		A17EC2A01C0293270030886E /* TakeHeadTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC2541C0293270030886E /* TakeHeadTableView.m */; };
 		A17EC2A11C0293270030886E /* ThemeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC2561C0293270030886E /* ThemeTableViewController.m */; };
 		A17EC2A21C0293270030886E /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC2581C0293270030886E /* VideoViewController.m */; };
 		A17EC2A31C0293270030886E /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC25A1C0293270030886E /* WebViewController.m */; };
@@ -116,17 +110,20 @@
 		A17EC2A81C0293270030886E /* ShinBanViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC2651C0293270030886E /* ShinBanViewModel.m */; };
 		A17EC2A91C0293270030886E /* VideoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC2671C0293270030886E /* VideoViewModel.m */; };
 		A17EC2AB1C0293710030886E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A17EC2AA1C0293710030886E /* Main.storyboard */; };
+		A17EC2C81C02A59A0030886E /* TakeHeadTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC2C61C02A59A0030886E /* TakeHeadTableView.m */; };
+		A1B6D6361C03229400DA3F27 /* HotSearchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B6D6351C03229400DA3F27 /* HotSearchButton.m */; };
+		A1B6D6391C03262000DA3F27 /* HotSearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B6D6381C03262000DA3F27 /* HotSearchTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2E9147FFD8FD76D398161AD2 /* Pods-BiliBili.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BiliBili.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BiliBili/Pods-BiliBili.debug.xcconfig"; sourceTree = "<group>"; };
 		A17EC1451C0292980030886E /* BiliBili.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BiliBili.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A17EC1491C0292980030886E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		A17EC1541C0292980030886E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A17EC1541C0292980030886E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
 		A17EC1571C0292980030886E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A17EC15F1C0292C70030886E /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A17EC1601C0292C70030886E /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		A17EC1621C0292F50030886E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A17EC1621C0292F50030886E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		A17EC1651C0292FE0030886E /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		A17EC1671C0293130030886E /* ArchiverObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchiverObj.h; sourceTree = "<group>"; };
 		A17EC1681C0293130030886E /* ArchiverObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArchiverObj.m; sourceTree = "<group>"; };
@@ -168,7 +165,6 @@
 		A17EC18D1C0293130030886E /* ShinBanNetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinBanNetManager.m; sourceTree = "<group>"; };
 		A17EC18E1C0293130030886E /* VideoNetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoNetManager.h; sourceTree = "<group>"; };
 		A17EC18F1C0293130030886E /* VideoNetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoNetManager.m; sourceTree = "<group>"; };
-		A17EC1911C0293130030886E /* logo.ai */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = logo.ai; sourceTree = "<group>"; };
 		A17EC1921C0293130030886E /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		A17EC1931C0293130030886E /* theme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = theme.plist; sourceTree = "<group>"; };
 		A17EC1961C0293130030886E /* AppDelegate+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+Category.h"; sourceTree = "<group>"; };
@@ -299,22 +295,14 @@
 		A17EC2421C0293270030886E /* MoreItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreItemViewController.m; sourceTree = "<group>"; };
 		A17EC2431C0293270030886E /* ProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileTableViewController.h; sourceTree = "<group>"; };
 		A17EC2441C0293270030886E /* ProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileTableViewController.m; sourceTree = "<group>"; };
-		A17EC2451C0293270030886E /* PSCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSCollectionView.h; sourceTree = "<group>"; };
-		A17EC2461C0293270030886E /* PSCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSCollectionView.m; sourceTree = "<group>"; };
-		A17EC2471C0293270030886E /* PSCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSCollectionViewCell.h; sourceTree = "<group>"; };
-		A17EC2481C0293270030886E /* PSCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSCollectionViewCell.m; sourceTree = "<group>"; };
 		A17EC2491C0293270030886E /* RecommendCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendCollectionViewController.h; sourceTree = "<group>"; };
 		A17EC24A1C0293270030886E /* RecommendCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendCollectionViewController.m; sourceTree = "<group>"; };
 		A17EC24B1C0293270030886E /* RecommendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendViewController.h; sourceTree = "<group>"; };
 		A17EC24C1C0293270030886E /* RecommendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendViewController.m; sourceTree = "<group>"; };
-		A17EC24D1C0293270030886E /* ScrollDisplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollDisplayViewController.h; sourceTree = "<group>"; };
-		A17EC24E1C0293270030886E /* ScrollDisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollDisplayViewController.m; sourceTree = "<group>"; };
 		A17EC24F1C0293270030886E /* SettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableViewController.h; sourceTree = "<group>"; };
 		A17EC2501C0293270030886E /* SettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewController.m; sourceTree = "<group>"; };
 		A17EC2511C0293270030886E /* ShinBanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinBanViewController.h; sourceTree = "<group>"; };
 		A17EC2521C0293270030886E /* ShinBanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinBanViewController.m; sourceTree = "<group>"; };
-		A17EC2531C0293270030886E /* TakeHeadTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakeHeadTableView.h; sourceTree = "<group>"; };
-		A17EC2541C0293270030886E /* TakeHeadTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakeHeadTableView.m; sourceTree = "<group>"; };
 		A17EC2551C0293270030886E /* ThemeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeTableViewController.h; sourceTree = "<group>"; };
 		A17EC2561C0293270030886E /* ThemeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeTableViewController.m; sourceTree = "<group>"; };
 		A17EC2571C0293270030886E /* VideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoViewController.h; sourceTree = "<group>"; };
@@ -333,7 +321,13 @@
 		A17EC2651C0293270030886E /* ShinBanViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinBanViewModel.m; sourceTree = "<group>"; };
 		A17EC2661C0293270030886E /* VideoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoViewModel.h; sourceTree = "<group>"; };
 		A17EC2671C0293270030886E /* VideoViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoViewModel.m; sourceTree = "<group>"; };
-		A17EC2AA1C0293710030886E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		A17EC2AA1C0293710030886E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../Main.storyboard; sourceTree = "<group>"; };
+		A17EC2C61C02A59A0030886E /* TakeHeadTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakeHeadTableView.m; sourceTree = "<group>"; };
+		A17EC2C71C02A59A0030886E /* TakeHeadTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakeHeadTableView.h; sourceTree = "<group>"; };
+		A1B6D6341C03229400DA3F27 /* HotSearchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotSearchButton.h; sourceTree = "<group>"; };
+		A1B6D6351C03229400DA3F27 /* HotSearchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotSearchButton.m; sourceTree = "<group>"; };
+		A1B6D6371C03262000DA3F27 /* HotSearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotSearchTableViewCell.h; sourceTree = "<group>"; };
+		A1B6D6381C03262000DA3F27 /* HotSearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotSearchTableViewCell.m; sourceTree = "<group>"; };
 		AA45D052281870CB68A872A1 /* libPods-BiliBili.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BiliBili.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29B8EFF4C9AFC44BA8CB642 /* Pods-BiliBili.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BiliBili.release.xcconfig"; path = "Pods/Target Support Files/Pods-BiliBili/Pods-BiliBili.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -382,7 +376,6 @@
 			children = (
 				A17EC15F1C0292C70030886E /* AppDelegate.h */,
 				A17EC1601C0292C70030886E /* AppDelegate.m */,
-				A17EC2AA1C0293710030886E /* Main.storyboard */,
 				A17EC1661C0293130030886E /* Model */,
 				A17EC1831C0293130030886E /* NetManager */,
 				A17EC1901C0293130030886E /* Resource */,
@@ -392,9 +385,6 @@
 				A17EC2151C0293270030886E /* View */,
 				A17EC22E1C0293270030886E /* ViewController */,
 				A17EC25B1C0293270030886E /* ViewModel */,
-				A17EC1541C0292980030886E /* Assets.xcassets */,
-				A17EC1621C0292F50030886E /* Info.plist */,
-				A17EC1561C0292980030886E /* LaunchScreen.storyboard */,
 				A17EC1481C0292980030886E /* Supporting Files */,
 			);
 			path = BiliBili;
@@ -419,34 +409,11 @@
 		A17EC1661C0293130030886E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A17EC1671C0293130030886E /* ArchiverObj.h */,
-				A17EC1681C0293130030886E /* ArchiverObj.m */,
-				A17EC1691C0293130030886E /* AVModel.h */,
-				A17EC16A1C0293130030886E /* AVModel.m */,
+				A17EC2B11C02A25D0030886E /* 其它 */,
+				A17EC2AD1C02A1EC0030886E /* 首页 */,
+				A17EC2AC1C02A1AD0030886E /* 视频详情 */,
 				A17EC16B1C0293130030886E /* BaseModel.h */,
 				A17EC16C1C0293130030886E /* BaseModel.m */,
-				A17EC16D1C0293130030886E /* ColorManager.h */,
-				A17EC16E1C0293130030886E /* ColorManager.m */,
-				A17EC16F1C0293130030886E /* DanMuModel.h */,
-				A17EC1701C0293130030886E /* DanMuModel.m */,
-				A17EC1711C0293130030886E /* FindModel.h */,
-				A17EC1721C0293130030886E /* FindModel.m */,
-				A17EC1731C0293130030886E /* IndexModel.h */,
-				A17EC1741C0293130030886E /* IndexModel.m */,
-				A17EC1751C0293130030886E /* InvestorModel.h */,
-				A17EC1761C0293130030886E /* InvestorModel.m */,
-				A17EC1771C0293130030886E /* ReplyModel.h */,
-				A17EC1781C0293130030886E /* ReplyModel.m */,
-				A17EC1791C0293130030886E /* sameVideoModel.h */,
-				A17EC17A1C0293130030886E /* sameVideoModel.m */,
-				A17EC17B1C0293130030886E /* ShinBanInfoModel.h */,
-				A17EC17C1C0293130030886E /* ShinBanInfoModel.m */,
-				A17EC17D1C0293130030886E /* ShinBanModel.h */,
-				A17EC17E1C0293130030886E /* ShinBanModel.m */,
-				A17EC17F1C0293130030886E /* TagModel.h */,
-				A17EC1801C0293130030886E /* TagModel.m */,
-				A17EC1811C0293130030886E /* VideoModel.h */,
-				A17EC1821C0293130030886E /* VideoModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -454,18 +421,10 @@
 		A17EC1831C0293130030886E /* NetManager */ = {
 			isa = PBXGroup;
 			children = (
-				A17EC1841C0293130030886E /* AVInfoNetManager.h */,
-				A17EC1851C0293130030886E /* AVInfoNetManager.m */,
-				A17EC1861C0293130030886E /* BaseNetManager.h */,
+				A17EC2B31C02A2A40030886E /* 首页 */,
+				A17EC2B21C02A27E0030886E /* 视频详情 */,
 				A17EC1871C0293130030886E /* BaseNetManager.m */,
-				A17EC1881C0293130030886E /* FindNetManager.h */,
-				A17EC1891C0293130030886E /* FindNetManager.m */,
-				A17EC18A1C0293130030886E /* RecommendNetManager.h */,
-				A17EC18B1C0293130030886E /* RecommendNetManager.m */,
-				A17EC18C1C0293130030886E /* ShinBanNetManager.h */,
-				A17EC18D1C0293130030886E /* ShinBanNetManager.m */,
-				A17EC18E1C0293130030886E /* VideoNetManager.h */,
-				A17EC18F1C0293130030886E /* VideoNetManager.m */,
+				A17EC1861C0293130030886E /* BaseNetManager.h */,
 			);
 			path = NetManager;
 			sourceTree = "<group>";
@@ -473,8 +432,11 @@
 		A17EC1901C0293130030886E /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				A17EC1911C0293130030886E /* logo.ai */,
+				A17EC1541C0292980030886E /* Assets.xcassets */,
+				A17EC2AA1C0293710030886E /* Main.storyboard */,
+				A17EC1561C0292980030886E /* LaunchScreen.storyboard */,
 				A17EC1921C0293130030886E /* PrefixHeader.pch */,
+				A17EC1621C0292F50030886E /* Info.plist */,
 				A17EC1931C0293130030886E /* theme.plist */,
 			);
 			path = Resource;
@@ -652,30 +614,10 @@
 		A17EC2151C0293270030886E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A17EC2161C0293270030886E /* CellView.h */,
-				A17EC2171C0293270030886E /* CellView.m */,
-				A17EC2181C0293270030886E /* InvestorTableViewCell.h */,
-				A17EC2191C0293270030886E /* InvestorTableViewCell.m */,
-				A17EC21A1C0293270030886E /* MoreViewCell.h */,
-				A17EC21B1C0293270030886E /* MoreViewCell.m */,
-				A17EC21C1C0293270030886E /* MyRefreshComplete.h */,
-				A17EC21D1C0293270030886E /* MyRefreshComplete.m */,
-				A17EC21E1C0293270030886E /* ProfileHeadView.h */,
-				A17EC21F1C0293270030886E /* ProfileHeadView.m */,
-				A17EC2201C0293270030886E /* ProfileTableViewCell.h */,
-				A17EC2211C0293270030886E /* ProfileTableViewCell.m */,
-				A17EC2221C0293270030886E /* RecommendCollectionViewCell.h */,
-				A17EC2231C0293270030886E /* RecommendCollectionViewCell.m */,
-				A17EC2241C0293270030886E /* RecommendViewCell.h */,
-				A17EC2251C0293270030886E /* RecommendViewCell.m */,
-				A17EC2261C0293270030886E /* ReViewTableViewCell.h */,
-				A17EC2271C0293270030886E /* ReViewTableViewCell.m */,
-				A17EC2281C0293270030886E /* SameVideoTableViewCell.h */,
-				A17EC2291C0293270030886E /* SameVideoTableViewCell.m */,
-				A17EC22A1C0293270030886E /* StrokeUILabel.h */,
-				A17EC22B1C0293270030886E /* StrokeUILabel.m */,
-				A17EC22C1C0293270030886E /* ThemeTableViewCell.h */,
-				A17EC22D1C0293270030886E /* ThemeTableViewCell.m */,
+				A17EC2BC1C02A3BF0030886E /* 视频详情 */,
+				A17EC2B91C02A37A0030886E /* 首页 */,
+				A17EC2B81C02A34D0030886E /* 侧边栏 */,
+				A17EC2B71C02A2FC0030886E /* 自定义 */,
 			);
 			name = View;
 			path = Define/View;
@@ -684,73 +626,338 @@
 		A17EC22E1C0293270030886E /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				A17EC22F1C0293270030886E /* AVInfoViewController.h */,
-				A17EC2301C0293270030886E /* AVInfoViewController.m */,
-				A17EC2311C0293270030886E /* AVItemTableViewController.h */,
-				A17EC2321C0293270030886E /* AVItemTableViewController.m */,
+				A17EC2C21C02A4D60030886E /* 侧边栏 */,
+				A17EC2C11C02A4610030886E /* 自定义 */,
+				A17EC2BD1C02A3DA0030886E /* 首页 */,
+			);
+			name = ViewController;
+			path = BiliBili/Define/ViewController;
+			sourceTree = SOURCE_ROOT;
+		};
+		A17EC25B1C0293270030886E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A17EC2C51C02A5180030886E /* 首页 */,
+				A17EC2C41C02A4FF0030886E /* 视频详情 */,
+				A17EC25E1C0293270030886E /* BaseViewModel.h */,
+				A17EC25F1C0293270030886E /* BaseViewModel.m */,
+			);
+			name = ViewModel;
+			path = Define/ViewModel;
+			sourceTree = "<group>";
+		};
+		A17EC2AC1C02A1AD0030886E /* 视频详情 */ = {
+			isa = PBXGroup;
+			children = (
+				A17EC1751C0293130030886E /* InvestorModel.h */,
+				A17EC1761C0293130030886E /* InvestorModel.m */,
+				A17EC1771C0293130030886E /* ReplyModel.h */,
+				A17EC1781C0293130030886E /* ReplyModel.m */,
+				A17EC17F1C0293130030886E /* TagModel.h */,
+				A17EC1801C0293130030886E /* TagModel.m */,
+				A17EC1811C0293130030886E /* VideoModel.h */,
+				A17EC1821C0293130030886E /* VideoModel.m */,
+				A17EC1791C0293130030886E /* sameVideoModel.h */,
+				A17EC17A1C0293130030886E /* sameVideoModel.m */,
+				A17EC1691C0293130030886E /* AVModel.h */,
+				A17EC16A1C0293130030886E /* AVModel.m */,
+			);
+			name = "视频详情";
+			sourceTree = "<group>";
+		};
+		A17EC2AD1C02A1EC0030886E /* 首页 */ = {
+			isa = PBXGroup;
+			children = (
+				A17EC2B01C02A2150030886E /* 番剧 */,
+				A17EC2AF1C02A2050030886E /* 推荐 */,
+				A17EC2AE1C02A1F90030886E /* 发现 */,
+			);
+			name = "首页";
+			sourceTree = "<group>";
+		};
+		A17EC2AE1C02A1F90030886E /* 发现 */ = {
+			isa = PBXGroup;
+			children = (
+				A17EC1711C0293130030886E /* FindModel.h */,
+				A17EC1721C0293130030886E /* FindModel.m */,
+			);
+			name = "发现";
+			sourceTree = "<group>";
+		};
+		A17EC2AF1C02A2050030886E /* 推荐 */ = {
+			isa = PBXGroup;
+			children = (
+				A17EC1731C0293130030886E /* IndexModel.h */,
+				A17EC1741C0293130030886E /* IndexModel.m */,
+			);
+			name = "推荐";
+			sourceTree = "<group>";
+		};
+		A17EC2B01C02A2150030886E /* 番剧 */ = {
+			isa = PBXGroup;
+			children = (
+				A17EC17D1C0293130030886E /* ShinBanModel.h */,
+				A17EC17E1C0293130030886E /* ShinBanModel.m */,
+				A17EC17B1C0293130030886E /* ShinBanInfoModel.h */,
+				A17EC17C1C0293130030886E /* ShinBanInfoModel.m */,
+			);
+			name = "番剧";
+			sourceTree = "<group>";
+		};
+		A17EC2B11C02A25D0030886E /* 其它 */ = {
+			isa = PBXGroup;
+			children = (
+				A17EC1671C0293130030886E /* ArchiverObj.h */,
+				A17EC1681C0293130030886E /* ArchiverObj.m */,
+				A17EC16D1C0293130030886E /* ColorManager.h */,
+				A17EC16E1C0293130030886E /* ColorManager.m */,
+				A17EC16F1C0293130030886E /* DanMuModel.h */,
+				A17EC1701C0293130030886E /* DanMuModel.m */,
+			);
+			name = "其它";
+			sourceTree = "<group>";
+		};
+		A17EC2B21C02A27E0030886E /* 视频详情 */ = {
+			isa = PBXGroup;
+			children = (
+				A17EC1841C0293130030886E /* AVInfoNetManager.h */,
+				A17EC1851C0293130030886E /* AVInfoNetManager.m */,
+				A17EC18E1C0293130030886E /* VideoNetManager.h */,
+				A17EC18F1C0293130030886E /* VideoNetManager.m */,
+			);
+			name = "视频详情";
+			sourceTree = "<group>";
+		};
+		A17EC2B31C02A2A40030886E /* 首页 */ = {
+			isa = PBXGroup;
+			children = (
+				A17EC2B61C02A2CF0030886E /* 番剧 */,
+				A17EC2B51C02A2C30030886E /* 推荐 */,
+				A17EC2B41C02A2AE0030886E /* 发现 */,
+			);
+			name = "首页";
+			sourceTree = "<group>";
+		};
+		A17EC2B41C02A2AE0030886E /* 发现 */ = {
+			isa = PBXGroup;
+			children = (
+				A17EC1881C0293130030886E /* FindNetManager.h */,
+				A17EC1891C0293130030886E /* FindNetManager.m */,
+			);
+			name = "发现";
+			sourceTree = "<group>";
+		};
+		A17EC2B51C02A2C30030886E /* 推荐 */ = {
+			isa = PBXGroup;
+			children = (
+				A17EC18A1C0293130030886E /* RecommendNetManager.h */,
+				A17EC18B1C0293130030886E /* RecommendNetManager.m */,
+			);
+			name = "推荐";
+			sourceTree = "<group>";
+		};
+		A17EC2B61C02A2CF0030886E /* 番剧 */ = {
+			isa = PBXGroup;
+			children = (
+				A17EC18C1C0293130030886E /* ShinBanNetManager.h */,
+				A17EC18D1C0293130030886E /* ShinBanNetManager.m */,
+			);
+			name = "番剧";
+			sourceTree = "<group>";
+		};
+		A17EC2B71C02A2FC0030886E /* 自定义 */ = {
+			isa = PBXGroup;
+			children = (
+				A17EC2C61C02A59A0030886E /* TakeHeadTableView.m */,
+				A17EC2C71C02A59A0030886E /* TakeHeadTableView.h */,
+				A17EC21C1C0293270030886E /* MyRefreshComplete.h */,
+				A17EC21D1C0293270030886E /* MyRefreshComplete.m */,
+				A17EC22A1C0293270030886E /* StrokeUILabel.h */,
+				A17EC22B1C0293270030886E /* StrokeUILabel.m */,
+			);
+			name = "自定义";
+			sourceTree = "<group>";
+		};
+		A17EC2B81C02A34D0030886E /* 侧边栏 */ = {
+			isa = PBXGroup;
+			children = (
+				A17EC22C1C0293270030886E /* ThemeTableViewCell.h */,
+				A17EC22D1C0293270030886E /* ThemeTableViewCell.m */,
+				A17EC21E1C0293270030886E /* ProfileHeadView.h */,
+				A17EC21F1C0293270030886E /* ProfileHeadView.m */,
+				A17EC2201C0293270030886E /* ProfileTableViewCell.h */,
+				A17EC2211C0293270030886E /* ProfileTableViewCell.m */,
+			);
+			name = "侧边栏";
+			sourceTree = "<group>";
+		};
+		A17EC2B91C02A37A0030886E /* 首页 */ = {
+			isa = PBXGroup;
+			children = (
+				A1B6D6331C03227800DA3F27 /* 发现 */,
+				A17EC2BB1C02A3A40030886E /* 推荐 */,
+				A17EC2BA1C02A38D0030886E /* 番剧 */,
+			);
+			name = "首页";
+			sourceTree = "<group>";
+		};
+		A17EC2BA1C02A38D0030886E /* 番剧 */ = {
+			isa = PBXGroup;
+			children = (
+				A17EC21A1C0293270030886E /* MoreViewCell.h */,
+				A17EC21B1C0293270030886E /* MoreViewCell.m */,
+				A17EC2221C0293270030886E /* RecommendCollectionViewCell.h */,
+				A17EC2231C0293270030886E /* RecommendCollectionViewCell.m */,
+				A17EC2241C0293270030886E /* RecommendViewCell.h */,
+				A17EC2251C0293270030886E /* RecommendViewCell.m */,
+			);
+			name = "番剧";
+			sourceTree = "<group>";
+		};
+		A17EC2BB1C02A3A40030886E /* 推荐 */ = {
+			isa = PBXGroup;
+			children = (
+				A17EC2161C0293270030886E /* CellView.h */,
+				A17EC2171C0293270030886E /* CellView.m */,
+			);
+			name = "推荐";
+			sourceTree = "<group>";
+		};
+		A17EC2BC1C02A3BF0030886E /* 视频详情 */ = {
+			isa = PBXGroup;
+			children = (
+				A17EC2181C0293270030886E /* InvestorTableViewCell.h */,
+				A17EC2191C0293270030886E /* InvestorTableViewCell.m */,
+				A17EC2261C0293270030886E /* ReViewTableViewCell.h */,
+				A17EC2271C0293270030886E /* ReViewTableViewCell.m */,
+				A17EC2281C0293270030886E /* SameVideoTableViewCell.h */,
+				A17EC2291C0293270030886E /* SameVideoTableViewCell.m */,
+			);
+			name = "视频详情";
+			sourceTree = "<group>";
+		};
+		A17EC2BD1C02A3DA0030886E /* 首页 */ = {
+			isa = PBXGroup;
+			children = (
+				A17EC2C31C02A4E80030886E /* 视频详情 */,
+				A17EC2C01C02A4320030886E /* 番剧 */,
+				A17EC2BF1C02A4010030886E /* 推荐 */,
+				A17EC2BE1C02A3F40030886E /* 发现 */,
+				A17EC23D1C0293270030886E /* HomePageViewController.h */,
+				A17EC23E1C0293270030886E /* HomePageViewController.m */,
+			);
+			name = "首页";
+			sourceTree = "<group>";
+		};
+		A17EC2BE1C02A3F40030886E /* 发现 */ = {
+			isa = PBXGroup;
+			children = (
+				A17EC23B1C0293270030886E /* FindViewController.h */,
+				A17EC23C1C0293270030886E /* FindViewController.m */,
+			);
+			name = "发现";
+			sourceTree = "<group>";
+		};
+		A17EC2BF1C02A4010030886E /* 推荐 */ = {
+			isa = PBXGroup;
+			children = (
+				A17EC24B1C0293270030886E /* RecommendViewController.h */,
+				A17EC24C1C0293270030886E /* RecommendViewController.m */,
+				A17EC2391C0293270030886E /* CellItemViewController.h */,
+				A17EC23A1C0293270030886E /* CellItemViewController.m */,
+				A17EC2591C0293270030886E /* WebViewController.h */,
+				A17EC25A1C0293270030886E /* WebViewController.m */,
+			);
+			name = "推荐";
+			sourceTree = "<group>";
+		};
+		A17EC2C01C02A4320030886E /* 番剧 */ = {
+			isa = PBXGroup;
+			children = (
+				A17EC2411C0293270030886E /* MoreItemViewController.h */,
+				A17EC2421C0293270030886E /* MoreItemViewController.m */,
+				A17EC2491C0293270030886E /* RecommendCollectionViewController.h */,
+				A17EC24A1C0293270030886E /* RecommendCollectionViewController.m */,
+				A17EC2511C0293270030886E /* ShinBanViewController.h */,
+				A17EC2521C0293270030886E /* ShinBanViewController.m */,
+			);
+			name = "番剧";
+			sourceTree = "<group>";
+		};
+		A17EC2C11C02A4610030886E /* 自定义 */ = {
+			isa = PBXGroup;
+			children = (
 				A17EC2331C0293270030886E /* BaseCollectionViewController.h */,
 				A17EC2341C0293270030886E /* BaseCollectionViewController.m */,
 				A17EC2351C0293270030886E /* BaseTableViewController.h */,
 				A17EC2361C0293270030886E /* BaseTableViewController.m */,
 				A17EC2371C0293270030886E /* BaseViewController.h */,
 				A17EC2381C0293270030886E /* BaseViewController.m */,
-				A17EC2391C0293270030886E /* CellItemViewController.h */,
-				A17EC23A1C0293270030886E /* CellItemViewController.m */,
-				A17EC23B1C0293270030886E /* FindViewController.h */,
-				A17EC23C1C0293270030886E /* FindViewController.m */,
-				A17EC23D1C0293270030886E /* HomePageViewController.h */,
-				A17EC23E1C0293270030886E /* HomePageViewController.m */,
 				A17EC23F1C0293270030886E /* JHViewController.h */,
 				A17EC2401C0293270030886E /* JHViewController.m */,
-				A17EC2411C0293270030886E /* MoreItemViewController.h */,
-				A17EC2421C0293270030886E /* MoreItemViewController.m */,
-				A17EC2431C0293270030886E /* ProfileTableViewController.h */,
-				A17EC2441C0293270030886E /* ProfileTableViewController.m */,
-				A17EC2451C0293270030886E /* PSCollectionView.h */,
-				A17EC2461C0293270030886E /* PSCollectionView.m */,
-				A17EC2471C0293270030886E /* PSCollectionViewCell.h */,
-				A17EC2481C0293270030886E /* PSCollectionViewCell.m */,
-				A17EC2491C0293270030886E /* RecommendCollectionViewController.h */,
-				A17EC24A1C0293270030886E /* RecommendCollectionViewController.m */,
-				A17EC24B1C0293270030886E /* RecommendViewController.h */,
-				A17EC24C1C0293270030886E /* RecommendViewController.m */,
-				A17EC24D1C0293270030886E /* ScrollDisplayViewController.h */,
-				A17EC24E1C0293270030886E /* ScrollDisplayViewController.m */,
-				A17EC24F1C0293270030886E /* SettingTableViewController.h */,
-				A17EC2501C0293270030886E /* SettingTableViewController.m */,
-				A17EC2511C0293270030886E /* ShinBanViewController.h */,
-				A17EC2521C0293270030886E /* ShinBanViewController.m */,
-				A17EC2531C0293270030886E /* TakeHeadTableView.h */,
-				A17EC2541C0293270030886E /* TakeHeadTableView.m */,
-				A17EC2551C0293270030886E /* ThemeTableViewController.h */,
-				A17EC2561C0293270030886E /* ThemeTableViewController.m */,
-				A17EC2571C0293270030886E /* VideoViewController.h */,
-				A17EC2581C0293270030886E /* VideoViewController.m */,
-				A17EC2591C0293270030886E /* WebViewController.h */,
-				A17EC25A1C0293270030886E /* WebViewController.m */,
 			);
-			name = ViewController;
-			path = Define/ViewController;
+			name = "自定义";
 			sourceTree = "<group>";
 		};
-		A17EC25B1C0293270030886E /* ViewModel */ = {
+		A17EC2C21C02A4D60030886E /* 侧边栏 */ = {
+			isa = PBXGroup;
+			children = (
+				A17EC2431C0293270030886E /* ProfileTableViewController.h */,
+				A17EC2441C0293270030886E /* ProfileTableViewController.m */,
+				A17EC24F1C0293270030886E /* SettingTableViewController.h */,
+				A17EC2501C0293270030886E /* SettingTableViewController.m */,
+				A17EC2551C0293270030886E /* ThemeTableViewController.h */,
+				A17EC2561C0293270030886E /* ThemeTableViewController.m */,
+			);
+			name = "侧边栏";
+			sourceTree = "<group>";
+		};
+		A17EC2C31C02A4E80030886E /* 视频详情 */ = {
+			isa = PBXGroup;
+			children = (
+				A17EC22F1C0293270030886E /* AVInfoViewController.h */,
+				A17EC2301C0293270030886E /* AVInfoViewController.m */,
+				A17EC2311C0293270030886E /* AVItemTableViewController.h */,
+				A17EC2321C0293270030886E /* AVItemTableViewController.m */,
+				A17EC2571C0293270030886E /* VideoViewController.h */,
+				A17EC2581C0293270030886E /* VideoViewController.m */,
+			);
+			name = "视频详情";
+			sourceTree = "<group>";
+		};
+		A17EC2C41C02A4FF0030886E /* 视频详情 */ = {
 			isa = PBXGroup;
 			children = (
 				A17EC25C1C0293270030886E /* AVInfoViewModel.h */,
 				A17EC25D1C0293270030886E /* AVInfoViewModel.m */,
-				A17EC25E1C0293270030886E /* BaseViewModel.h */,
-				A17EC25F1C0293270030886E /* BaseViewModel.m */,
+				A17EC2661C0293270030886E /* VideoViewModel.h */,
+				A17EC2671C0293270030886E /* VideoViewModel.m */,
+			);
+			name = "视频详情";
+			sourceTree = "<group>";
+		};
+		A17EC2C51C02A5180030886E /* 首页 */ = {
+			isa = PBXGroup;
+			children = (
 				A17EC2601C0293270030886E /* FindViewModel.h */,
 				A17EC2611C0293270030886E /* FindViewModel.m */,
 				A17EC2621C0293270030886E /* RecommendViewModel.h */,
 				A17EC2631C0293270030886E /* RecommendViewModel.m */,
 				A17EC2641C0293270030886E /* ShinBanViewModel.h */,
 				A17EC2651C0293270030886E /* ShinBanViewModel.m */,
-				A17EC2661C0293270030886E /* VideoViewModel.h */,
-				A17EC2671C0293270030886E /* VideoViewModel.m */,
 			);
-			name = ViewModel;
-			path = Define/ViewModel;
+			name = "首页";
+			sourceTree = "<group>";
+		};
+		A1B6D6331C03227800DA3F27 /* 发现 */ = {
+			isa = PBXGroup;
+			children = (
+				A1B6D6341C03229400DA3F27 /* HotSearchButton.h */,
+				A1B6D6351C03229400DA3F27 /* HotSearchButton.m */,
+				A1B6D6371C03262000DA3F27 /* HotSearchTableViewCell.h */,
+				A1B6D6381C03262000DA3F27 /* HotSearchTableViewCell.m */,
+			);
+			name = "发现";
 			sourceTree = "<group>";
 		};
 		B2C01D08A40CA668B4063096 /* Frameworks */ = {
@@ -822,9 +1029,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A17EC1631C0292F50030886E /* Info.plist in Resources */,
 				A17EC1581C0292980030886E /* LaunchScreen.storyboard in Resources */,
-				A17EC1C61C0293130030886E /* logo.ai in Resources */,
 				A17EC2AB1C0293710030886E /* Main.storyboard in Resources */,
 				A17EC1551C0292980030886E /* Assets.xcassets in Resources */,
 				A17EC1C71C0293130030886E /* theme.plist in Resources */,
@@ -899,7 +1104,6 @@
 				A17EC2A81C0293270030886E /* ShinBanViewModel.m in Sources */,
 				A17EC1C01C0293130030886E /* AVInfoNetManager.m in Sources */,
 				A17EC29B1C0293270030886E /* RecommendCollectionViewController.m in Sources */,
-				A17EC2991C0293270030886E /* PSCollectionView.m in Sources */,
 				A17EC1C91C0293130030886E /* BarrageDescriptor+Tools.m in Sources */,
 				A17EC2921C0293270030886E /* BaseViewController.m in Sources */,
 				A17EC28F1C0293270030886E /* AVItemTableViewController.m in Sources */,
@@ -914,12 +1118,11 @@
 				A17EC1CF1C0293130030886E /* NSString+Tools.m in Sources */,
 				A17EC2721C0293270030886E /* BarrageSpirit.m in Sources */,
 				A17EC28B1C0293270030886E /* SameVideoTableViewCell.m in Sources */,
-				A17EC2A01C0293270030886E /* TakeHeadTableView.m in Sources */,
 				A17EC2971C0293270030886E /* MoreItemViewController.m in Sources */,
 				A17EC2A61C0293270030886E /* FindViewModel.m in Sources */,
 				A17EC1B51C0293130030886E /* ColorManager.m in Sources */,
 				A17EC1C31C0293130030886E /* RecommendNetManager.m in Sources */,
-				A17EC29A1C0293270030886E /* PSCollectionViewCell.m in Sources */,
+				A1B6D6391C03262000DA3F27 /* HotSearchTableViewCell.m in Sources */,
 				A17EC28E1C0293270030886E /* AVInfoViewController.m in Sources */,
 				A17EC2981C0293270030886E /* ProfileTableViewController.m in Sources */,
 				A17EC2901C0293270030886E /* BaseCollectionViewController.m in Sources */,
@@ -934,6 +1137,7 @@
 				A17EC2A31C0293270030886E /* WebViewController.m in Sources */,
 				A17EC2871C0293270030886E /* ProfileTableViewCell.m in Sources */,
 				A17EC2961C0293270030886E /* JHViewController.m in Sources */,
+				A1B6D6361C03229400DA3F27 /* HotSearchButton.m in Sources */,
 				A17EC2911C0293270030886E /* BaseTableViewController.m in Sources */,
 				A17EC27F1C0293270030886E /* WMProgressView.m in Sources */,
 				A17EC2851C0293270030886E /* MyRefreshComplete.m in Sources */,
@@ -961,7 +1165,6 @@
 				A17EC2761C0293270030886E /* BarrageWalkTextSpirit.m in Sources */,
 				A17EC1B41C0293130030886E /* BaseModel.m in Sources */,
 				A17EC2A41C0293270030886E /* AVInfoViewModel.m in Sources */,
-				A17EC29D1C0293270030886E /* ScrollDisplayViewController.m in Sources */,
 				A17EC1CC1C0293130030886E /* NSObject+Common.m in Sources */,
 				A17EC1D11C0293130030886E /* UIColor+Art.m in Sources */,
 				A17EC2781C0293270030886E /* UITableView+FDKeyedHeightCache.m in Sources */,
@@ -977,6 +1180,7 @@
 				A17EC1BD1C0293130030886E /* ShinBanModel.m in Sources */,
 				A17EC1B91C0293130030886E /* InvestorModel.m in Sources */,
 				A17EC2821C0293270030886E /* CellView.m in Sources */,
+				A17EC2C81C02A59A0030886E /* TakeHeadTableView.m in Sources */,
 				A17EC2891C0293270030886E /* RecommendViewCell.m in Sources */,
 				A17EC1BA1C0293130030886E /* ReplyModel.m in Sources */,
 				A17EC28D1C0293270030886E /* ThemeTableViewCell.m in Sources */,
@@ -1000,6 +1204,7 @@
 				A17EC1571C0292980030886E /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1041,7 +1246,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1078,7 +1283,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

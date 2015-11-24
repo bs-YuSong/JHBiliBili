@@ -3,7 +3,7 @@
 //  BiliBili
 //
 //  Created by apple-jd44 on 15/10/28.
-//  Copyright © 2015年 Tarena. All rights reserved.
+//  Copyright © 2015年 JimHuang. All rights reserved.
 //
 
 #import "ShinBanNetManager.h"
@@ -14,7 +14,7 @@
     //http://www.bilibili.com/index/ding/13.json
     NSString* basePath = @"http://www.bilibili.com/index/ding/13.json";
     return [self Get:basePath parameters:nil completionHandler:^(id responseObj, NSError *error) {
-        complete([MoreViewShinBanModel objectWithKeyValues:[NSJSONSerialization json2DicWithData:responseObj]],error);
+        complete([MoreViewShinBanModel mj_objectWithKeyValues:[NSJSONSerialization json2DicWithData:responseObj]],error);
     }];
     
 }
@@ -28,7 +28,11 @@
     
     
     return [self Get:basePath parameters:nil completionHandler:^(id responseObj, NSError *error) {
-        complete([RecommentShinBanModel objectWithKeyValues:[NSJSONSerialization json2DicWithData:responseObj][@"result"]],error);
+        if (responseObj != nil) {
+            complete([RecommentShinBanModel mj_objectWithKeyValues:[NSJSONSerialization json2DicWithData:responseObj][@"result"]],error);
+        }else{
+            complete(nil,error);
+        }
     }];
 }
 @end

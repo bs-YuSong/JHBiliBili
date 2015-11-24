@@ -3,7 +3,7 @@
 //  BiliBili
 //
 //  Created by apple-jd44 on 15/10/31.
-//  Copyright © 2015年 Tarena. All rights reserved.
+//  Copyright © 2015年 JimHuang. All rights reserved.
 //
 
 #import "HomePageViewController.h"
@@ -63,7 +63,6 @@
         
         //侧边栏手势
         UIView* panView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, self.view.frame.size.height)];
-//        panView.backgroundColor = [UIColor redColor];
         [panView addGestureRecognizer:self.panG];
         [self.view addSubview: panView];
         

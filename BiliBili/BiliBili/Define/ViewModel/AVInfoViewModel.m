@@ -3,7 +3,7 @@
 //  BiliBili
 //
 //  Created by apple-jd44 on 15/11/7.
-//  Copyright © 2015年 Tarena. All rights reserved.
+//  Copyright © 2015年 JimHuang. All rights reserved.
 //
 
 #import "AVInfoViewModel.h"
@@ -13,12 +13,9 @@
 ////新番独有属性
 ////承包商数组
 @property (nonatomic, strong) NSMutableArray <InvestorDataModel*>* investorList;
-////新番详情数组
-//@property (nonatomic, strong) NSMutableArray <ShinBanInfoDataModel*>* shiBanInfoList;
+//新番详情数组
+@property (nonatomic, strong) NSMutableArray <ShinBanInfoDataModel*>* shiBanInfoList;
 
-//@property (nonatomic, assign) NSString* aid;
-////视频简介
-//@property (nonatomic, strong) NSString* AVBrief;
 @property (nonatomic, strong) NSString* section;
 
 @property (nonatomic, assign) NSInteger allReplyCount;
@@ -180,28 +177,8 @@
     }];
 }
 
-//- (instancetype)initWithAid:(NSString*)aid brief:(NSString*)brief{
-//    if (self = [super init]) {
-//        self.aid = aid;
-//        self.AVBrief = brief;
-//    }
-//    return self;
-//}
 
 
-
-
-
-//视频详情
-//- (NSString*)avInfoTag{
-//    return self.
-//}
-//- (NSString*)avInfoMessage;
-
-//- (void)setAid:(NSString*)aid brief:(NSString*)brief{
-//    self.aid = aid;
-//    self.AVBrief = brief;
-//}
 #pragma mark - 懒加载
 - (NSMutableArray<sameVideoDataModel *> *)sameVideoList{
     if (_sameVideoList == nil) {
@@ -231,22 +208,14 @@
     return _AVData;
 }
 
-////tag
-//- (NSArray*)tags{
-//    return self.tagList;
-//}
-////视频详情
-//- (NSString*)AVBrief{
-//    return self.AVBrief;
-//}
 
-//- (NSMutableArray<ShinBanInfoDataModel *> *)shiBanInfoList{
-//    if (_shiBanInfoList == nil) {
-//        _shiBanInfoList = [NSMutableArray array];
-//    }
-//    return _shiBanInfoList;
-//}
-//
+- (NSMutableArray<ShinBanInfoDataModel *> *)shiBanInfoList{
+    if (_shiBanInfoList == nil) {
+        _shiBanInfoList = [NSMutableArray array];
+    }
+    return _shiBanInfoList;
+}
+
 - (NSMutableArray<InvestorDataModel *> *)investorList{
     if (_investorList == nil) {
         _investorList = [NSMutableArray array];

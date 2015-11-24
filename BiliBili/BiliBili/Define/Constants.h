@@ -2,8 +2,8 @@
 //  Constants.h
 //  BaseProject
 //
-//  Created by jiyingxin on 15/10/21.
-//  Copyright © 2015年 Tarena. All rights reserved.
+//  Created by JimHuang on 15/10/21.
+//  Copyright © 2015年 JimHuang. All rights reserved.
 //
 
 #ifndef Constants_h

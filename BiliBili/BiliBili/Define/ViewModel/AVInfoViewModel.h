@@ -3,7 +3,7 @@
 //  BiliBili
 //
 //  Created by apple-jd44 on 15/11/7.
-//  Copyright © 2015年 Tarena. All rights reserved.
+//  Copyright © 2015年 JimHuang. All rights reserved.
 //
 
 #import "BaseViewModel.h"
@@ -64,18 +64,15 @@
 - (void)refreshDataCompleteHandle:(void(^)(NSError *error))complete;
 - (void)getMoveReplyCompleteHandle:(void(^)(NSError *error))complete;
 
-////承包商排行
+//承包商排行
 - (NSURL*)investorIconForRow:(NSInteger)row;
 - (NSString*)investorNameForRow:(NSInteger)row;
 - (NSString*)investorMessageForRow:(NSInteger)row;
 - (NSInteger)investorRankForRow:(NSInteger)row;
 - (NSInteger)investorCount;
+
 //
-////视频详情
-//- (NSString*)avInfoTag;
-//
-////番剧详情
-//- (NSInteger)shinBanInfoCount;
-//- (NSString*)shinBanInfoIntroduce;
-//- (NSArray*)shinBanInfoTag;
+//番剧详情
+- (NSInteger)shinBanInfoCount;
+- (NSString*)shinBanInfoIntroduce;
 @end

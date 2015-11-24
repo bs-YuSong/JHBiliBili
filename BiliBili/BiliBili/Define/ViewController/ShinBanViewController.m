@@ -3,21 +3,24 @@
 //  BiliBili
 //
 //  Created by apple-jd44 on 15/10/28.
-//  Copyright © 2015年 Tarena. All rights reserved.
+//  Copyright © 2015年 JimHuang. All rights reserved.
 //
 
 #import "ShinBanViewController.h"
 #import "ShinBanViewModel.h"
 #import "MoreViewCell.h"
 #import "RecommendViewCell.h"
-//#import "RecommendCollectionViewController.h"
+#import "TakeHeadTableView.h"
 
 @interface ShinBanViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) ShinBanViewModel* vm;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIView *headView;
-@property (weak, nonatomic) IBOutlet UIButton *everyDayPlay;
-@property (weak, nonatomic) IBOutlet UIButton *ShinBanIndex;
+//@property (weak, nonatomic) IBOutlet UITableView *tableView;
+//@property (weak, nonatomic) IBOutlet UIView *headView;
+//@property (weak, nonatomic) IBOutlet UIButton *everyDayPlay;
+//@property (weak, nonatomic) IBOutlet UIButton *ShinBanIndex;
+@property (strong, nonatomic) TakeHeadTableView *tableView;
+@property (strong, nonatomic) UIButton *everyDayPlay;
+@property (strong, nonatomic) UIButton *shinBanIndex;
 @end
 
 @implementation ShinBanViewController
@@ -31,20 +34,19 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.tableView.header endRefreshing];
+    [self.tableView.mj_header endRefreshing];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //头部高度
-    [self.everyDayPlay mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(self.everyDayPlay.mas_width).multipliedBy(0.22);
-    }];
+    [self.view addSubview: self.tableView];
+    //调用懒加载
+    self.shinBanIndex.hidden = NO;
     
     __block typeof(self) weakObj = self;
-    self.tableView.header = [MyRefreshComplete myRefreshHead:^{
+    self.tableView.mj_header = [MyRefreshComplete myRefreshHead:^{
         [self.vm refreshDataCompleteHandle:^(NSError *error) {
-            [weakObj.tableView.header endRefreshing];
+            [weakObj.tableView.mj_header endRefreshing];
             [weakObj.tableView reloadData];
             if (error) {
                 [self showErrorMsg:kerrorMessage];
@@ -53,7 +55,7 @@
         }];
     }];
     
-    [self.tableView.header beginRefreshing];
+    [self.tableView.mj_header beginRefreshing];
 }
 
 #pragma mark - UITableView
@@ -72,7 +74,10 @@
     
     if (indexPath.section == 0) {
         MoreViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"scell"];
-        NSDictionary* dic = @{@"pic":[NSMutableArray array],@"animaTitle.text":[NSMutableArray array],@"playNum.text":[NSMutableArray array]};
+        if (cell == nil) {
+            cell = [[MoreViewCell alloc] initWithStyle:0 reuseIdentifier:@"scell"];
+        }
+        NSDictionary* dic = @{@"pic":[NSMutableArray array],@"playNum.text":[NSMutableArray array],@"animaTitle.text":[NSMutableArray array]};
         for (int i = 0; i < 4; ++i) {
             [dic[@"pic"] addObject:[self.vm moreViewPicForRow: i]];
             [dic[@"animaTitle.text"] addObject:[self.vm moreViewTitleForRow: i]];
@@ -82,6 +87,9 @@
         return cell;
     }else{
         RecommendViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"scell2"];
+        if (cell == nil) {
+            cell = [[RecommendViewCell alloc] initWithStyle:0 reuseIdentifier:@"scell2"];
+        }
         [cell setWithVM:self.vm];
 
         return cell;
@@ -89,8 +97,8 @@
 }
 
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return kWindowW / 640 * 735;
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewAutomaticDimension;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -103,6 +111,52 @@
 
 - (void)colorSetting{
     [self.tableView reloadData];
+}
+
+
+#pragma mark - 懒加载
+- (UIButton *)everyDayPlay {
+	if(_everyDayPlay == nil) {
+		_everyDayPlay = [[UIButton alloc] init];
+        [_everyDayPlay setBackgroundImage:[UIImage imageNamed:@"home_bangumi_timeline"] forState:UIControlStateNormal];
+        [self.tableView.tableHeaderView addSubview: _everyDayPlay];
+        __weak typeof(self)weakObj = self;
+        [_everyDayPlay mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_offset(10);
+            make.centerY.equalTo(weakObj.tableView.tableHeaderView);
+            make.height.mas_equalTo(_everyDayPlay.mas_width).multipliedBy(0.29);
+        }];
+	}
+	return _everyDayPlay;
+}
+
+- (UIButton *)shinBanIndex {
+	if(_shinBanIndex == nil) {
+		_shinBanIndex = [[UIButton alloc] init];
+        [_shinBanIndex setBackgroundImage:[UIImage imageNamed:@"home_bangumi_category"] forState:UIControlStateNormal];
+        [self.tableView.tableHeaderView addSubview: _shinBanIndex];
+        __weak typeof(self)weakObj = self;
+        [_shinBanIndex mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(weakObj.everyDayPlay.mas_right).mas_offset(10);
+            make.right.mas_offset(-10);
+            make.centerY.equalTo(weakObj.everyDayPlay);
+            make.size.equalTo(weakObj.everyDayPlay);
+        }];
+	}
+	return _shinBanIndex;
+}
+
+- (TakeHeadTableView *)tableView {
+	if(_tableView == nil) {
+		_tableView = [[TakeHeadTableView alloc] initWithHeadHeight: kWindowW *0.18];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+//        _tableView.rowHeight = self.view.frame.size.height * 0.8;
+        _tableView.backgroundColor = [UIColor clearColor];
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.allowsSelection = NO;
+	}
+	return _tableView;
 }
 
 @end

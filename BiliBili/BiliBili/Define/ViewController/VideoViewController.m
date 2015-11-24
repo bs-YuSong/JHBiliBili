@@ -3,7 +3,7 @@
 //  BiliBili
 //
 //  Created by apple-jd44 on 15/11/13.
-//  Copyright © 2015年 Tarena. All rights reserved.
+//  Copyright © 2015年 JimHuang. All rights reserved.
 //
 
 #import "VideoViewController.h"
@@ -19,6 +19,7 @@
 @property(nonatomic,strong) AVPlayerLayer *layer;
 @property (nonatomic, strong) UISlider* slide;
 @property (nonatomic, strong) UIActivityIndicatorView* iv;
+@property (nonatomic, strong) MBProgressHUD* hub;
 @property (nonatomic, assign) NSInteger num;
 @property (nonatomic, assign) NSInteger touchDelayTime;
 @property (nonatomic, assign, getter=isPause) BOOL pause;
@@ -34,7 +35,7 @@
     
     self.slide = slider;
     [self.view addSubview:self.iv];
-    [self.iv startAnimating];
+    [self.hub show:YES];
     
     [slider bk_addEventHandler:^(UISlider* sender) {
         CMTime time = [self.player currentTime];
@@ -106,15 +107,16 @@
             CMTimeRange r = self.player.currentItem.loadedTimeRanges.firstObject.CMTimeRangeValue;
             NSLog(@"%f",CMTimeGetSeconds(r.duration));
             
-            self.pause = YES;
-            
-            if ([self.iv isAnimating] == NO && self.pause) {
-                [self.iv startAnimating];
+            //判断菊花是否应该出现
+            if (self.isPause == YES) {
+                self.hub = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                self.hub.mode = MBProgressHUDModeIndeterminate;
+                [self.hub show: YES];
+                self.pause = NO;
             }
             
             if (CMTimeGetSeconds(r.duration) > 2) {
-                [self.player play];
-                [self.iv stopAnimating];
+                [self playerPlay];
             }
         }
     } repeats:YES];
@@ -146,6 +148,13 @@
     return _rander;
 }
 
+- (MBProgressHUD *)hub{
+    if (_hub == nil) {
+        _hub = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        _hub.mode = MBProgressHUDModeIndeterminate;
+    }
+    return _hub;
+}
 
 - (AVPlayerLayer *)layer{
     if (_layer == nil) {
@@ -155,5 +164,10 @@
     return _layer;
 }
 
+- (void)playerPlay{
+    [self.player play];
+    self.pause = YES;
+    [self.hub hide: YES];
+}
 
 @end

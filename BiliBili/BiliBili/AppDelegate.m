@@ -2,14 +2,16 @@
 //  AppDelegate.m
 //  BaseProject
 //
-//  Created by jiyingxin on 15/10/21.
-//  Copyright © 2015年 Tarena. All rights reserved.
+//  Created by JimHuang on 15/10/21.
+//  Copyright © 2015年 JimHuang. All rights reserved.
 //
 
 #import "AppDelegate.h"
 #import "AppDelegate+Category.h"
 #import "HomePageViewController.h"
 #import "RecommendViewController.h"
+#import "ShinBanViewController.h"
+#import "FindViewController.h"
 #import "UIViewController+Tools.h"
 #import "UIBezierPath+Tools.h"
 @interface AppDelegate ()
@@ -50,7 +52,7 @@
 
 - (HomePageViewController *)vc{
     if (_vc == nil) {
-        _vc = [[HomePageViewController alloc] initWithControllers:@[kStoryboardWithInd(@"ShinBanViewController"), [[RecommendViewController alloc] init], kStoryboardWithInd(@"FindViewController")]];
+        _vc = [[HomePageViewController alloc] initWithControllers:@[[[ShinBanViewController alloc] init], [[RecommendViewController alloc] init], [[FindViewController alloc] init]]];
     }
     return _vc;
 }

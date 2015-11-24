@@ -2,8 +2,8 @@
 //  BaseNetManager.m
 //  BaseProject
 //
-//  Created by jiyingxin on 15/10/21.
-//  Copyright © 2015年 Tarena. All rights reserved.
+//  Created by JimHuang on 15/10/21.
+//  Copyright © 2015年 JimHuang. All rights reserved.
 //
 
 #import "BaseNetManager.h"
@@ -32,6 +32,7 @@ static AFURLSessionManager *URLManager = nil;
 }
 
 + (id)Get:(NSString *)path parameters:(NSDictionary *)params completionHandler:(void(^)(id responseObj, NSError *error))complete{
+    
     return [[self sharedAFManager] GET:path parameters:params success:^void(AFHTTPRequestOperation * operation, id responseObject) {
         complete(responseObject, nil);
     } failure:^void(AFHTTPRequestOperation * operation, NSError * error) {

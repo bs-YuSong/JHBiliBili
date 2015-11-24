@@ -3,7 +3,7 @@
 //  BiliBili
 //
 //  Created by JimHuang on 15/11/23.
-//  Copyright © 2015年 Tarena. All rights reserved.
+//  Copyright © 2015年 JimHuang. All rights reserved.
 //
 
 #import "ThemeTableViewController.h"
@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc] init];
-   // [self colorSetting];
+    self.tableView.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"backgroundColor"];
 }
 
 

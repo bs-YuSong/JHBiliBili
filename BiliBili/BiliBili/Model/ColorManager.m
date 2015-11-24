@@ -3,7 +3,7 @@
 //  BiliBili
 //
 //  Created by apple-jd44 on 15/11/20.
-//  Copyright © 2015年 Tarena. All rights reserved.
+//  Copyright © 2015年 JimHuang. All rights reserved.
 //
 
 #import "ColorManager.h"
@@ -32,11 +32,19 @@ static ColorManager* colorManager = nil;
  *  str的格式为xx.xx.xx
  */
 - (UIColor*)colorWithString:(NSString*)str{
-    return [self theme:self.themeStyle colorWithString:str];
+    return [self theme:self.themeStyle colorWithString:str alpha:1];
 }
 
 - (UIColor*)theme:(NSString*)theme colorWithString:(NSString*)str{
-    return [UIColor colorWithHex:[[self.colorDic[theme] valueForKeyPath:str] integerValue]];
+    return [self theme:theme colorWithString:self.colorDic[theme] alpha: 1];
+}
+
+- (UIColor*)colorWithString:(NSString*)str alpha:(CGFloat)alpha{
+    return [self theme:self.themeStyle colorWithString:str alpha: alpha];
+}
+
+- (UIColor*)theme:(NSString*)theme colorWithString:(NSString*)str alpha:(CGFloat)alpha{
+    return [UIColor colorWithHex:[[self.colorDic[theme] valueForKeyPath:str] integerValue] andAlpha: alpha];
 }
 
 + (instancetype)shareColorManager{

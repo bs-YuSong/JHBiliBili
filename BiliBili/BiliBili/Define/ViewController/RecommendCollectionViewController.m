@@ -3,7 +3,7 @@
 //  BiliBili
 //
 //  Created by apple-jd44 on 15/11/3.
-//  Copyright © 2015年 Tarena. All rights reserved.
+//  Copyright © 2015年 JimHuang. All rights reserved.
 //
 
 #import "RecommendCollectionViewController.h"
@@ -22,9 +22,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     __weak typeof(self) weakObj = self;
-    self.collectionView.footer = [MyRefreshComplete myRefreshFoot:^{
+    self.collectionView.mj_footer = [MyRefreshComplete myRefreshFoot:^{
         [self.vm getMoreDataCompleteHandle:^(NSError *error) {
-            [weakObj.collectionView.footer endRefreshing];
+            [weakObj.collectionView.mj_footer endRefreshing];
             [weakObj.collectionView reloadData];
         }];
     }];

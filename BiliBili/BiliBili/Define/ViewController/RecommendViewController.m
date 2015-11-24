@@ -3,7 +3,7 @@
 //  BiliBili
 //
 //  Created by apple-jd44 on 15/10/22.
-//  Copyright © 2015年 Tarena. All rights reserved.
+//  Copyright © 2015年 JimHuang. All rights reserved.
 //
 
 #import "RecommendViewController.h"
@@ -11,7 +11,6 @@
 #import "CellView.h"
 #import "TakeHeadTableView.h"
 #import "RecommendViewModel.h"
-#import "ScrollDisplayViewController.h"
 #import "WebViewController.h"
 #import "UIView+Tools.h"
 #import "AVInfoViewController.h"
@@ -47,7 +46,7 @@ kRemoveCellSeparator
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.tableView.header endRefreshing];
+    [self.tableView.mj_header endRefreshing];
 }
 
 
@@ -55,6 +54,7 @@ kRemoveCellSeparator
     [super viewDidLoad];
     
     __weak typeof(self) weakObj = self;
+    
 
     [self.view addSubview: self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -66,9 +66,9 @@ kRemoveCellSeparator
         make.edges.mas_equalTo(0);
     }];
     
-    self.tableView.header = [MyRefreshComplete myRefreshHead:^{
+    self.tableView.mj_header = [MyRefreshComplete myRefreshHead:^{
         [self.vm refreshDataCompleteHandle:^(NSError *error) {
-            [weakObj.tableView.header endRefreshing];
+            [weakObj.tableView.mj_header endRefreshing];
             
             [weakObj.headScrollView reloadData];
             
@@ -80,7 +80,7 @@ kRemoveCellSeparator
         }];
     }];
     
-    [self.tableView.header beginRefreshing];
+    [self.tableView.mj_header beginRefreshing];
 }
 
 
@@ -89,13 +89,12 @@ kRemoveCellSeparator
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if ([self.vm list].count) {
-        return 1;
-    }
-    return 0;
+    return 1;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    //return 0;
+  //  NSLog(@"%ld", [self.vm sectionCount]);
     return [self.vm sectionCount];
 }
 
@@ -111,28 +110,27 @@ kRemoveCellSeparator
     //设置分区内容
     
     NSDictionary* tempDic = @{@"titleLabel.text":[NSMutableArray array],@"playLabel.text":[NSMutableArray array],@"danMuLabel.text":[NSMutableArray array],@"imgv":[NSMutableArray array],@"dataModel":[NSMutableArray array],@"navController":self.parentViewController.navigationController,@"section":dic[key]};
-    
-    for (int i = 0; i < 4; ++i) {
+    if (self.vm.list[dic[key]]) {
+        for (int i = 0; i < 4; ++i) {
+            
+            [tempDic[@"imgv"] addObject:[self.vm picForRow:i section:dic[key]]];
+            [tempDic[@"titleLabel.text"] addObject:[self.vm titleForRow:i section:dic[key]]];
+            [tempDic[@"playLabel.text"] addObject:[self.vm playForRow:i section:dic[key]]];
+            [tempDic[@"danMuLabel.text"] addObject:[self.vm danMuCountForRow:i section:dic[key]]];
+            [tempDic[@"dataModel"] addObject:[self.vm AVDataModelForRow:i section:dic[key]]];
+        }
         
-        [tempDic[@"imgv"] addObject:[self.vm picForRow:i section:dic[key]]];
-        [tempDic[@"titleLabel.text"] addObject:[self.vm titleForRow:i section:dic[key]]];
-        [tempDic[@"playLabel.text"] addObject:[self.vm playForRow:i section:dic[key]]];
-        [tempDic[@"danMuLabel.text"] addObject:[self.vm danMuCountForRow:i section:dic[key]]];
-        [tempDic[@"dataModel"] addObject:[self.vm AVDataModelForRow:i section:dic[key]]];
+        [cell setTitle:key titleImg:[NSString stringWithFormat:@"home_region_icon_%@",[dic[key] componentsSeparatedByString:@"-"].firstObject] buttonTitle:[@"更多" stringByAppendingString:key] dic:tempDic];
     }
-    
-    [cell setTitle:key titleImg:[NSString stringWithFormat:@"home_region_icon_%@",[dic[key] componentsSeparatedByString:@"-"].firstObject] buttonTitle:[@"更多" stringByAppendingString:key] dic:tempDic];
     
     return cell;
 }
 
 
-
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    //    850/1280
-    return kWindowH * 850 / 1280;
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewAutomaticDimension;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 1;
 }
@@ -165,7 +163,7 @@ kRemoveCellSeparator
     if (view == nil) {
         view = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kWindowW, kWindowW / 2)];
     }
-    [view sd_setImageWithURL: [self.vm headImgURL:index]];
+    [view setImageWithURL:[self.vm headImgURL:index]];
     return view;
 }
 //滚动视图跳转

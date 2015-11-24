@@ -3,7 +3,7 @@
 //  BiliBili
 //
 //  Created by apple-jd44 on 15/11/7.
-//  Copyright © 2015年 Tarena. All rights reserved.
+//  Copyright © 2015年 JimHuang. All rights reserved.
 //
 
 #import "AVInfoNetManager.h"
@@ -19,7 +19,7 @@
     return [self Get:path parameters:nil completionHandler:^(NSData* responseObj, NSError *error) {
         NSString* str = [[[NSString alloc] initWithData:responseObj encoding:NSUTF8StringEncoding] subStringsWithRegularExpression:@"\\{.*\\}"].firstObject;
         NSDictionary* js = [NSJSONSerialization json2DicWithData:[str dataUsingEncoding:NSUTF8StringEncoding]];
-        complete([ReplyModel objectWithKeyValues: js], error);
+        complete([ReplyModel mj_objectWithKeyValues: js], error);
     }];
 }
 
@@ -29,7 +29,7 @@
     //aid
     NSString* path = [parame appendGetParameterWithBasePath:@"http://www.bilibili.com/widget/ajaxGetBP?"];
     return [self Get:path parameters:nil completionHandler:^(id responseObj, NSError *error) {
-        complete([InvestorModel objectWithKeyValues:[NSJSONSerialization json2DicWithData:responseObj][@"list"]], error);
+        complete([InvestorModel mj_objectWithKeyValues:[NSJSONSerialization json2DicWithData:responseObj][@"list"]], error);
     }];
 }
 //获取推荐视频信息
@@ -41,7 +41,7 @@
         if (obj == nil) {
             complete(nil, error);
         }else{
-            complete([sameVideoModel objectWithKeyValues:@{@"list":obj}], error);
+            complete([sameVideoModel mj_objectWithKeyValues:@{@"list":obj}], error);
         }
     }];
 }
@@ -51,7 +51,7 @@
 //    aid
     NSString* path = [parame appendGetParameterWithBasePath:@"http://www.bilibili.com/api_proxy?app=tag&action=/tags/archive_list&nomid=1&"];
     return [self Get:path parameters:nil completionHandler:^(id responseObj, NSError *error) {
-        complete([TagModel objectWithKeyValues:[NSJSONSerialization json2DicWithData:responseObj]],error);
+        complete([TagModel mj_objectWithKeyValues:[NSJSONSerialization json2DicWithData:responseObj]],error);
     }];
 }
 
@@ -62,7 +62,7 @@
     return [self Get:path parameters:nil completionHandler:^(NSData* responseObj, NSError *error) {
         NSString* str = [[[NSString alloc] initWithData:responseObj encoding:NSUTF8StringEncoding] subStringsWithRegularExpression:@"\\{.*\\}"].firstObject;
         NSDictionary* js = [NSJSONSerialization json2DicWithData:[str dataUsingEncoding:NSUTF8StringEncoding]];
-        complete([ShinBanInfoModel objectWithKeyValues: js], error);
+        complete([ShinBanInfoModel mj_objectWithKeyValues: js], error);
     }];
 }
 

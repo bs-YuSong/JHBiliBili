@@ -3,7 +3,7 @@
 //  BiliBili
 //
 //  Created by apple-jd44 on 15/10/22.
-//  Copyright © 2015年 Tarena. All rights reserved.
+//  Copyright © 2015年 JimHuang. All rights reserved.
 //
 
 #import "CellView.h"
@@ -46,7 +46,7 @@
     if (_vc == nil) {
         _vc = [[UIViewController alloc] init];
         for(int i = 0;i < 4; ++i){
-            CellItemViewController* v = [kStoryboard(@"Main") instantiateViewControllerWithIdentifier:@"CellItemViewController"];
+            CellItemViewController* v = [[CellItemViewController alloc] init];
             [_vc addChildViewController: v];
             [_vc.view addSubview: v.view];
         }
@@ -68,10 +68,10 @@
     UIView* v4 = views[3].view;
     __weak typeof(self)weakObj = self;
     [v1 mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_offset(3* EDGE);
+        make.top.mas_equalTo(weakObj.titleImg.mas_bottom).mas_offset(10);
         make.left.mas_offset(EDGE);
+       // make.height.mas_equalTo(v1.mas_width).multipliedBy(1.03);
         make.size.equalTo(@[v2,v3,v4]);
-        make.bottom.equalTo(v3.mas_top).mas_offset(-EDGE);
     }];
     [v2 mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(v1.mas_top);
@@ -81,12 +81,13 @@
     }];
     [v3 mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(v1.mas_left);
-        make.bottom.equalTo(v4);
+        make.top.mas_equalTo(v1.mas_bottom).mas_offset(EDGE);
     }];
     [v4 mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(v3.mas_right).mas_offset(EDGE);
+        make.top.mas_equalTo(v2.mas_bottom).mas_offset(EDGE);
         make.right.mas_offset(-EDGE);
-        make.bottom.equalTo(weakObj.moreButton.mas_top).mas_offset(-10);
+        make.bottom.equalTo(weakObj.moreButton.mas_top).mas_offset(-EDGE);
     }];
 }
 
@@ -122,8 +123,6 @@
 - (UIButton *)moreButton{
     if (_moreButton == nil) {
         _moreButton = [[UIButton alloc] init];
-       // [_moreButton setBackgroundImage:[UIImage imageNamed:@"bg_text_field_mono_light_gray_boarder"] forState:UIControlStateNormal];
-
         _moreButton.titleLabel.font = [UIFont systemFontOfSize: 13];
         [self addSubview: _moreButton];
         [_moreButton mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -3,7 +3,7 @@
 //  BiliBili
 //
 //  Created by apple-jd44 on 15/11/19.
-//  Copyright © 2015年 Tarena. All rights reserved.
+//  Copyright © 2015年 JimHuang. All rights reserved.
 //
 
 #import "ProfileTableViewController.h"
@@ -102,6 +102,8 @@
             }else{
                 [ColorManager shareColorManager].themeStyle = @"夜间模式";
             }
+            HomePageViewController*vc =(HomePageViewController*) self.parentViewController;
+            [vc profileViewMoveToOriginal];
             //将模式写入userdefault
             [[NSUserDefaults standardUserDefaults] setValue:[ColorManager shareColorManager].themeStyle forKey:@"themeStyle"];
         } forControlEvents:UIControlEventTouchUpInside];

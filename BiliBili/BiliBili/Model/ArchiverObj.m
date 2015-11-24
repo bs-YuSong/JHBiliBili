@@ -3,7 +3,7 @@
 //  BiliBili
 //
 //  Created by apple-jd44 on 15/11/18.
-//  Copyright © 2015年 Tarena. All rights reserved.
+//  Copyright © 2015年 JimHuang. All rights reserved.
 //
 
 #import "ArchiverObj.h"
@@ -44,6 +44,7 @@ static NSMutableDictionary* dic = nil;
 }
 
 + (id)UnArchiveWithClass:(Class)class{
+  //  NSLog(@"%@", kCachePath);
     return [self UnArchiveWithKey:[NSString stringWithCString:object_getClassName(class) encoding:NSUTF8StringEncoding]];
 }
 @end
