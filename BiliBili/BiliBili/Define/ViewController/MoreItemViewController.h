@@ -8,13 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "ShinBanModel.h"
+@class MoreViewShinBanDataModel;
 @interface MoreItemViewController : UIViewController
-//@property (weak, nonatomic) IBOutlet UIImageView *pic;
-//@property (weak, nonatomic) IBOutlet UILabel *animaTitle;
-//@property (weak, nonatomic) IBOutlet UILabel *playNum;
 @property (strong, nonatomic) UIImageView *pic;
 @property (strong, nonatomic) UILabel *animaTitle;
 @property (strong, nonatomic) UILabel *playNum;
-
+@property (nonatomic, strong) MoreViewShinBanDataModel* model;
+- (void)setUpProperty;
 
 @end

@@ -19,6 +19,9 @@
     if (self = [super initWithFrame:CGRectMake(0, 0, kWindowW, kWindowH) style:UITableViewStyleGrouped]) {
         UIView* v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowW, kWindowW / 2)];
         self.tableHeaderView = v;
+        self.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"backgroundColor"];
+        self.separatorStyle = UITableViewCellSeparatorStyleNone;
+        self.allowsSelection = NO;
     }
     return self;
 }
@@ -27,6 +30,9 @@
     if (self = [super initWithFrame:CGRectMake(0, 0, kWindowW, kWindowH) style:UITableViewStyleGrouped]) {
         UIView* v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowW, height)];
         self.tableHeaderView = v;
+        self.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"backgroundColor"];
+        self.separatorStyle = UITableViewCellSeparatorStyleNone;
+        self.allowsSelection = NO;
     }
     return self;
 }

@@ -7,14 +7,20 @@
 //
 
 #import "MoreItemViewController.h"
-
+#import "AVInfoViewController.h"
 
 @implementation MoreItemViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.pic.hidden = NO;
+    [self setUpProperty];
+}
+
+- (void)setUpProperty{
+    self.view.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"MoreItemViewController.view.backgroundColor"];
+    self.animaTitle.textColor = [[ColorManager shareColorManager] colorWithString:@"textColor"];
     self.playNum.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"themeColor" alpha: 0.5];
+    self.pic.hidden = NO;
 }
 
 - (UIImageView *)pic {
@@ -22,7 +28,7 @@
         _pic = [[UIImageView alloc] init];
         _pic.layer.cornerRadius = 10;
         _pic.layer.masksToBounds = YES;
-        [self.view addSubview: _pic];
+        [self.view insertSubview:_pic atIndex:0];
         __weak typeof(self)weakObj = self;
         [_pic mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.width.equalTo(weakObj.view);
@@ -58,7 +64,7 @@
         _playNum.layer.masksToBounds = YES;
         _playNum.textColor = [UIColor whiteColor];
         _playNum.font = [UIFont systemFontOfSize: 12];
-        [self.view addSubview: _playNum];
+        [self.view insertSubview:_playNum atIndex:1];
         __weak typeof(self)weakObj = self;
         [_playNum mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_greaterThanOrEqualTo(41);
@@ -68,6 +74,28 @@
         }];
     }
     return _playNum;
+}
+
+- (MoreViewShinBanDataModel *)model{
+    if(_model == nil) {
+        _model = [[MoreViewShinBanDataModel alloc] init];
+    }
+    return _model;
+}
+
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    AVInfoViewController* vc = [[AVInfoViewController alloc] init];
+    AVDataModel* model = [[AVDataModel alloc] init];
+    model.aid = self.model.aid;
+    model.pic = self.model.pic;
+    model.title = self.model.title;
+    model.author = self.model.author;
+    model.play = self.model.play;
+    model.video_review = self.model.video_review;
+    model.create = self.model.create;
+    [vc setWithModel:model section: @"13-3day.json"];
+    [self.navigationController pushViewController: vc animated:YES];
 }
 
 @end

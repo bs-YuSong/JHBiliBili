@@ -11,15 +11,10 @@
 #import "ShinBanModel.h"
 #import "NSString+Tools.h"
 @interface ShinBanViewModel ()
-@property (nonatomic, strong) NSMutableArray<MoreViewShinBanDataModel*>* moreViewList;
-@property (nonatomic, strong) NSMutableArray<RecommentShinBanDataModel*>* recommentList;
+
 @end
 
 @implementation ShinBanViewModel
-
-- (NSMutableArray*)getRecommentList{
-    return self.recommentList;
-}
 
 - (NSInteger)moreViewListCount{
     return self.moreViewList.count;
@@ -27,6 +22,7 @@
 - (NSInteger)recommentListCount{
     return self.recommentList.count;
 }
+
 // 大家都在看
 //封面
 - (NSURL*)moreViewPicForRow:(NSInteger)row{
@@ -41,7 +37,11 @@
     return self.moreViewList[row].title;
 }
 
+- (MoreViewShinBanDataModel*)moreViewModelForRow:(NSInteger)row{
+    return self.moreViewList[row];
+}
 
+//推荐番剧
 - (NSURL*)commendCoverForRow:(NSInteger)row{
     return [NSURL URLWithString:self.recommentList[row].cover];
 }
@@ -83,7 +83,8 @@
         RecommentShinBanModel* model = [ArchiverObj UnArchiveWithClass:[RecommentShinBanModel class]];
         if (model != nil) {
             _recommentList = [model.list mutableCopy];
-        }else{
+        }
+        else{
             _recommentList = [NSMutableArray array];
         }
     }

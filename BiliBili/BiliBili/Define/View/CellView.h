@@ -14,5 +14,6 @@
 @property (strong, nonatomic) UIButton *moreButton;
 @property (strong, nonatomic) UIView *enterView;
 @property (nonatomic, strong) UILabel* enterLabel;
+@property (nonatomic, strong) UIViewController* vc;
 - (void)setTitle:(NSString*)title titleImg:(NSString*)titleimg buttonTitle:(NSString*)buttonTitle dic:(NSDictionary<NSString*,NSArray*>*)dic;
 @end

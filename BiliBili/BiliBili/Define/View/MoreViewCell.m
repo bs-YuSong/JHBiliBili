@@ -11,24 +11,18 @@
 #define EDGE 10
 
 @interface MoreViewCell ()
-//@property (weak, nonatomic) IBOutlet UILabel *allViewLabel;
 @property (strong, nonatomic) UILabel *allViewLabel;
 @property (nonatomic, strong) UIImageView* allViewIcon;
 @property (nonatomic, strong) UILabel* enterLabel;
-@property (nonatomic, strong) UIViewController* vc;
 @end
 
 @implementation MoreViewCell
 - (void)setWithDic:(NSDictionary<NSString*, NSMutableArray*>*)dic{
     self.allViewLabel.textColor = [[ColorManager shareColorManager] colorWithString:@"textColor"];
     self.enterLabel.textColor = [[ColorManager shareColorManager] colorWithString:@"textColor"];
-    
     NSArray<MoreItemViewController*>* cons = [self.vc childViewControllers];
     [cons enumerateObjectsUsingBlock:^(MoreItemViewController * _Nonnull vc, NSUInteger idx, BOOL * _Nonnull stop) {
-        vc.view.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"MoreItemViewController.view.backgroundColor"];
-        
-        vc.animaTitle.textColor = [[ColorManager shareColorManager] colorWithString:@"textColor"];
-        
+        [vc setUpProperty];
         
         [dic enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSMutableArray * _Nonnull obj, BOOL * _Nonnull stop) {
             if ([key isEqualToString:@"pic"]) {
@@ -94,13 +88,14 @@
         make.right.mas_offset(-EDGE);
         make.bottom.equalTo(v3.mas_bottom);
     }];
-
+    
 }
 
 - (UILabel *)allViewLabel {
-	if(_allViewLabel == nil) {
-		_allViewLabel = [[UILabel alloc] init];
+    if(_allViewLabel == nil) {
+        _allViewLabel = [[UILabel alloc] init];
         _allViewLabel.text = @"大家都在看";
+        _allViewLabel.lineBreakMode = NSLineBreakByClipping;
         _allViewLabel.font = [UIFont systemFontOfSize: 13];
         [self addSubview: _allViewLabel];
         __weak typeof(self)weakObj = self;
@@ -108,26 +103,26 @@
             make.centerY.equalTo(weakObj.allViewIcon);
             make.left.mas_equalTo(weakObj.allViewIcon.mas_right).mas_offset(10);
         }];
-	}
-	return _allViewLabel;
+    }
+    return _allViewLabel;
 }
 
 - (UIImageView *)allViewIcon {
-	if(_allViewIcon == nil) {
-		_allViewIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home_region_icon_4"]];
+    if(_allViewIcon == nil) {
+        _allViewIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home_region_icon_4"]];
         [self addSubview: _allViewIcon];
         [_allViewIcon mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.height.mas_equalTo(15);
             make.left.mas_equalTo(20);
             make.top.mas_equalTo(10);
         }];
-	}
-	return _allViewIcon;
+    }
+    return _allViewIcon;
 }
 
 - (UILabel *)enterLabel {
-	if(_enterLabel == nil) {
-		_enterLabel = [[UILabel alloc] init];
+    if(_enterLabel == nil) {
+        _enterLabel = [[UILabel alloc] init];
         _enterLabel.text = @"进去看看";
         _enterLabel.font = [UIFont systemFontOfSize: 13];
         [self addSubview: _enterLabel];
@@ -136,8 +131,8 @@
             make.right.mas_offset(-10);
             make.centerY.equalTo(weakObj.allViewIcon);
         }];
-	}
-	return _enterLabel;
+    }
+    return _enterLabel;
 }
 
 @end

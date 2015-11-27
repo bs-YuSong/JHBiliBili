@@ -37,9 +37,6 @@ kRemoveCellSeparator
         _tableView = [[TakeHeadTableView alloc] init];
         _tableView.delegate =self;
         _tableView.dataSource = self;
-        _tableView.backgroundColor = [UIColor clearColor];
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.allowsSelection = NO;
     }
     return _tableView;
 }
@@ -102,6 +99,7 @@ kRemoveCellSeparator
     CellView* cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell == nil) {
         cell = [[CellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        [self addChildViewController: cell.vc];
     }
     cell.contentView.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"CellView.contentView.backgroundColor"];
     
@@ -109,7 +107,7 @@ kRemoveCellSeparator
     NSString* key = [dic allKeys].firstObject;
     //设置分区内容
     
-    NSDictionary* tempDic = @{@"titleLabel.text":[NSMutableArray array],@"playLabel.text":[NSMutableArray array],@"danMuLabel.text":[NSMutableArray array],@"imgv":[NSMutableArray array],@"dataModel":[NSMutableArray array],@"navController":self.parentViewController.navigationController,@"section":dic[key]};
+    NSDictionary* tempDic = @{@"titleLabel.text":[NSMutableArray array],@"playLabel.text":[NSMutableArray array],@"danMuLabel.text":[NSMutableArray array],@"imgv":[NSMutableArray array],@"dataModel":[NSMutableArray array]};
     if (self.vm.list[dic[key]]) {
         for (int i = 0; i < 4; ++i) {
             

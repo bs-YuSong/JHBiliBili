@@ -8,9 +8,6 @@
 
 #import "CellView.h"
 #import "CellItemViewController.h"
-@interface CellView ()
-@property (nonatomic, strong) UIViewController* vc;
-@end
 
 @implementation CellView
 
@@ -32,7 +29,7 @@
         [dic enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, id _Nonnull obj, BOOL * _Nonnull stop) {
             if ([key isEqualToString: @"imgv"]) {
                 [vc.imgv setImageWithURL: obj[idx]];
-            }else if ([key isEqualToString: @"section"] || [key isEqualToString: @"navController"]){
+            }else if ([key isEqualToString: @"section"]){
                 [vc setValue:obj forKeyPath:key];
             }else{
                 [vc setValue:obj[idx] forKeyPath:key];

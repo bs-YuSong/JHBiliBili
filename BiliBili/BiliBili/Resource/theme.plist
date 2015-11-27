@@ -4,12 +4,32 @@
 <dict>
 	<key>少女粉</key>
 	<dict>
+		<key>AVItemTableViewController</key>
+		<dict>
+			<key>tagColor</key>
+			<real>16210055</real>
+		</dict>
+		<key>separatorColor</key>
+		<integer>10066329</integer>
 		<key>backgroundColor</key>
 		<integer>15921906</integer>
 		<key>themeColor</key>
 		<real>16210055</real>
 		<key>textColor</key>
-		<integer>3355443</integer>
+		<real>3355443</real>
+		<key>ShiBanPlayTableViewController</key>
+		<dict>
+			<key>numLabel</key>
+			<dict>
+				<key>textColor</key>
+				<real>16210055</real>
+			</dict>
+			<key>UIImageView</key>
+			<dict>
+				<key>tintColor</key>
+				<real>16210055</real>
+			</dict>
+		</dict>
 		<key>FindViewController</key>
 		<dict>
 			<key>hotTextColor</key>
@@ -94,12 +114,32 @@
 	</dict>
 	<key>夜间模式</key>
 	<dict>
+		<key>AVItemTableViewController</key>
+		<dict>
+			<key>tagColor</key>
+			<real>4934475</real>
+		</dict>
+		<key>separatorColor</key>
+		<real>4934475</real>
 		<key>backgroundColor</key>
 		<integer>3355443</integer>
 		<key>themeColor</key>
 		<integer>3881787</integer>
 		<key>textColor</key>
-		<integer>9737364</integer>
+		<real>9737364</real>
+		<key>ShiBanPlayTableViewController</key>
+		<dict>
+			<key>numLabel</key>
+			<dict>
+				<key>textColor</key>
+				<real>9737364</real>
+			</dict>
+			<key>UIImageView</key>
+			<dict>
+				<key>tintColor</key>
+				<real>9737364</real>
+			</dict>
+		</dict>
 		<key>FindViewController</key>
 		<dict>
 			<key>hotTextColor</key>
@@ -189,12 +229,32 @@
 	</dict>
 	<key>姨妈红</key>
 	<dict>
+		<key>AVItemTableViewController</key>
+		<dict>
+			<key>tagColor</key>
+			<real>15808567</real>
+		</dict>
 		<key>backgroundColor</key>
 		<integer>15921906</integer>
+		<key>separatorColor</key>
+		<integer>10066329</integer>
 		<key>themeColor</key>
 		<real>15808567</real>
 		<key>textColor</key>
 		<integer>3355443</integer>
+		<key>ShiBanPlayTableViewController</key>
+		<dict>
+			<key>numLabel</key>
+			<dict>
+				<key>textColor</key>
+				<real>15808567</real>
+			</dict>
+			<key>UIImageView</key>
+			<dict>
+				<key>tintColor</key>
+				<real>15808567</real>
+			</dict>
+		</dict>
 		<key>FindViewController</key>
 		<dict>
 			<key>hotTextColor</key>
@@ -279,12 +339,32 @@
 	</dict>
 	<key>咸蛋黄</key>
 	<dict>
+		<key>AVItemTableViewController</key>
+		<dict>
+			<key>tagColor</key>
+			<real>16630286</real>
+		</dict>
 		<key>backgroundColor</key>
 		<integer>15921906</integer>
 		<key>themeColor</key>
 		<real>16630286</real>
+		<key>separatorColor</key>
+		<integer>10066329</integer>
 		<key>textColor</key>
 		<integer>3355443</integer>
+		<key>ShiBanPlayTableViewController</key>
+		<dict>
+			<key>numLabel</key>
+			<dict>
+				<key>textColor</key>
+				<real>16630286</real>
+			</dict>
+			<key>UIImageView</key>
+			<dict>
+				<key>tintColor</key>
+				<real>16630286</real>
+			</dict>
+		</dict>
 		<key>FindViewController</key>
 		<dict>
 			<key>hotTextColor</key>
@@ -369,12 +449,32 @@
 	</dict>
 	<key>早苗绿</key>
 	<dict>
+		<key>AVItemTableViewController</key>
+		<dict>
+			<key>tagColor</key>
+			<real>9291338</real>
+		</dict>
 		<key>backgroundColor</key>
 		<integer>15921906</integer>
 		<key>themeColor</key>
 		<real>9291338</real>
+		<key>separatorColor</key>
+		<integer>10066329</integer>
 		<key>textColor</key>
 		<integer>3355443</integer>
+		<key>ShiBanPlayTableViewController</key>
+		<dict>
+			<key>numLabel</key>
+			<dict>
+				<key>textColor</key>
+				<real>9291338</real>
+			</dict>
+			<key>UIImageView</key>
+			<dict>
+				<key>tintColor</key>
+				<real>9291338</real>
+			</dict>
+		</dict>
 		<key>FindViewController</key>
 		<dict>
 			<key>hotTextColor</key>
@@ -459,12 +559,32 @@
 	</dict>
 	<key>胖次蓝</key>
 	<dict>
+		<key>AVItemTableViewController</key>
+		<dict>
+			<key>tagColor</key>
+			<real>2790387</real>
+		</dict>
 		<key>backgroundColor</key>
 		<integer>15921906</integer>
+		<key>separatorColor</key>
+		<integer>10066329</integer>
 		<key>themeColor</key>
 		<real>2790387</real>
 		<key>textColor</key>
 		<integer>3355443</integer>
+		<key>ShiBanPlayTableViewController</key>
+		<dict>
+			<key>numLabel</key>
+			<dict>
+				<key>textColor</key>
+				<real>2790387</real>
+			</dict>
+			<key>UIImageView</key>
+			<dict>
+				<key>tintColor</key>
+				<real>2790387</real>
+			</dict>
+		</dict>
 		<key>FindViewController</key>
 		<dict>
 			<key>hotTextColor</key>
@@ -549,12 +669,32 @@
 	</dict>
 	<key>基佬紫</key>
 	<dict>
+		<key>AVItemTableViewController</key>
+		<dict>
+			<key>tagColor</key>
+			<real>10092720</real>
+		</dict>
 		<key>backgroundColor</key>
 		<integer>15921906</integer>
 		<key>themeColor</key>
 		<real>10092720</real>
+		<key>separatorColor</key>
+		<integer>10066329</integer>
 		<key>textColor</key>
 		<integer>3355443</integer>
+		<key>ShiBanPlayTableViewController</key>
+		<dict>
+			<key>numLabel</key>
+			<dict>
+				<key>textColor</key>
+				<real>10092720</real>
+			</dict>
+			<key>UIImageView</key>
+			<dict>
+				<key>tintColor</key>
+				<real>10092720</real>
+			</dict>
+		</dict>
 		<key>FindViewController</key>
 		<dict>
 			<key>hotTextColor</key>

@@ -14,10 +14,14 @@
 #import "FindViewController.h"
 #import "UIViewController+Tools.h"
 #import "UIBezierPath+Tools.h"
+#import "WMPageController.h"
 @interface AppDelegate ()
 @property (nonatomic, strong) HomePageViewController* vc;
+@property (nonatomic, strong) WMPageController* pvc;
 @property (nonatomic, strong) UINavigationController* nav;
+@property (strong, nonatomic) UIImageView* imgView;
 @property (strong, nonatomic) UIView* view;
+@property (strong, nonatomic) NSMutableArray* arr;
 @end
 
 @implementation AppDelegate
@@ -26,7 +30,7 @@
     [self initializeWithApplication:application];
     [self defaultsSetting];
     [self.window makeKeyAndVisible];
-    
+    [self.window addSubview: self.view];
     return YES;
 }
 //默认设置
@@ -50,6 +54,7 @@
     }
 }
 
+//懒加载
 - (HomePageViewController *)vc{
     if (_vc == nil) {
         _vc = [[HomePageViewController alloc] initWithControllers:@[[[ShinBanViewController alloc] init], [[RecommendViewController alloc] init], [[FindViewController alloc] init]]];
@@ -72,14 +77,49 @@
     return _nav;
 }
 
+- (UIImageView *)imgView{
+    if (_imgView == nil) {
+        _imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ic_splash_icon_00067"]];
+        CGPoint p = self.window.center;
+        p.y = self.window.frame.size.height - 50;
+        _imgView.center = p;
+        _imgView.animationImages = self.arr;
+        // 设置动画的时长
+        _imgView.animationDuration = 68*0.029;
+        // 重复次数
+        _imgView.animationRepeatCount = 1;
+        // 开始动画
+        [_imgView startAnimating];
+        [self performSelector:@selector(animationEnd) withObject:nil afterDelay:_imgView.animationDuration];
+    }
+    return _imgView;
+}
+
 - (UIView *)view{
     if (_view == nil) {
         _view = [[UIView alloc] initWithFrame:self.window.frame];
         _view.backgroundColor = kRGBColor(246, 246, 246);
-        [self.window addSubview: _view];
-
+        [_view addSubview: self.imgView];
     }
     return _view;
+}
+
+- (NSMutableArray *)arr{
+    if (_arr == nil) {
+        _arr = [NSMutableArray array];
+        for (int i = 0; i < 68; i++) {
+            // 生成图片路径
+            NSString *imageName = [NSString stringWithFormat:@"ic_splash_icon_000%02d.png",i];
+            NSString *path = [[NSBundle mainBundle] pathForResource:imageName ofType:nil];
+            // 创建图片对象
+            UIImage *image = [UIImage imageWithContentsOfFile:path];
+            
+            // 图片对象添加到数组中
+            [_arr addObject:image];
+        }
+        
+    }
+    return _arr;
 }
 
 - (UIWindow *)window{
@@ -89,6 +129,22 @@
         _window.backgroundColor = [UIColor whiteColor];
     }
     return _window;
+}
+
+- (void)animationEnd{
+    self.arr = nil;
+    [UIView animateWithDuration:0.8 animations:^{
+        self.view.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.view removeFromSuperview];
+    }];
+}
+
+- (WMPageController *)pvc {
+	if(_pvc == nil) {
+		_pvc = [[WMPageController alloc] initWithViewControllerClasses:@[[ShinBanViewController class], [RecommendViewController class], [FindViewController class]] andTheirTitles:@[@"1",@"2",@"3"]];
+	}
+	return _pvc;
 }
 
 @end

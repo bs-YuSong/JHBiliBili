@@ -37,6 +37,7 @@
 
 @property (nonatomic, strong) WMMenuView* menuView;
 
+#pragma mark - 一般视频属性
 //up名
 @property (strong, nonatomic) UILabel *UPLabel;
 //视频缩略图
@@ -53,6 +54,7 @@
 @property (strong, nonatomic) UIButton *playButton;
 
 
+
 @property (nonatomic, strong) NSMutableArray<AVItemTableViewController*>* controllers;
 //顶部状态栏空间
 @property (nonatomic, strong) NSValue* topFrame;
@@ -65,6 +67,7 @@
     [self colorSetting];
     //初始化属性
     [self setProperty];
+    
     __block typeof(self) weakObj = self;
     self.tableView.mj_header = [MyRefreshComplete myRefreshHead:^{
         [self.vm refreshDataCompleteHandle:^(NSError *error) {
@@ -138,17 +141,20 @@
 
 #pragma mark - 初始化属性
 - (void)setWithModel:(AVDataModel*)model section:(NSString*)section{
-    [self.vm setAVData:model section:section];
-    self.navigationItem.title = [NSString stringWithFormat:@"av%@", model.aid];
+        [self.vm setAVData:model section:section];
+        self.navigationItem.title = [NSString stringWithFormat:@"av%@", model.aid];
 }
 
+/**
+ *  初始化一般视频信息
+ */
 - (void)setProperty{
     
     [self addChildViewController:self.pageViewController];
     
     //设置up名
     NSMutableAttributedString* str = [[NSMutableAttributedString alloc] initWithString:@"UP主："];
-    [str appendAttributedString:[[NSMutableAttributedString alloc] initWithString: [self.vm infoUpName] attributes:@{NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle),NSForegroundColorAttributeName:kGloableColor}]];
+    [str appendAttributedString:[[NSMutableAttributedString alloc] initWithString: [self.vm infoUpName] attributes:@{NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle),NSForegroundColorAttributeName:[[ColorManager shareColorManager] colorWithString:@"themeColor"]}]];
     [self.UPLabel setAttributedText:str];
     //播放数
     self.playNumLabel.text = [NSString stringWithFormat:@"播放：%@", [self.vm infoPlayNum]];
@@ -363,6 +369,10 @@
     return _playButton;
 }
 
+
+
+
+
 #pragma mark - JHViewController
 
 - (void)JHViewGetOffset:(CGPoint)offset{
@@ -391,4 +401,6 @@
     self.titleLabel.textColor = [[ColorManager shareColorManager] colorWithString:@"textColor"];
     self.tableView.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"backgroundColor"];
 }
+
+
 @end

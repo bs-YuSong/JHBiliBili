@@ -8,7 +8,9 @@
 
 #import "ShinBanNetManager.h"
 #import "ShinBanModel.h"
+#import "ShiBanPlayTableModel.h"
 #import "NSDictionary+Tools.h"
+#import "NSString+Tools.h"
 @implementation ShinBanNetManager
 + (id)getMoreViewParametersCompletionHandler:(void(^)(id responseObj, NSError *error))complete{
     //http://www.bilibili.com/index/ding/13.json
@@ -33,6 +35,15 @@
         }else{
             complete(nil,error);
         }
+    }];
+}
+
++ (id)getShiBanPlayTableCompletionHandler:(void(^)(id responseObj, NSError *error))complete{
+    //http://app.bilibili.com/bangumi/timeline_v2
+    return [self Get:@"http://app.bilibili.com/bangumi/timeline_v2" parameters:nil completionHandler:^(id responseObj, NSError *error) {
+        NSString* str = [[[NSString alloc] initWithData:responseObj encoding:NSUTF8StringEncoding] subStringsWithRegularExpression:@"\\{.*\\}"].firstObject;
+        NSDictionary* js = [NSJSONSerialization json2DicWithData:[str dataUsingEncoding:NSUTF8StringEncoding]];
+        complete([ShiBanPlayTableModel mj_objectWithKeyValues: js], error);
     }];
 }
 @end

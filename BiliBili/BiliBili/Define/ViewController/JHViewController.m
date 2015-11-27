@@ -24,7 +24,7 @@
         self.conArr = controllers;
         [self.view addSubview:self.scrollView];
         [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self.view);
+            make.edges.mas_equalTo(0);
         }];
     }
     return self;
@@ -58,6 +58,7 @@
         }];
         [preView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(_scrollView.mas_right);
+            make.bottom.mas_equalTo(_scrollView.mas_bottom);
         }];
     }
     return _scrollView;

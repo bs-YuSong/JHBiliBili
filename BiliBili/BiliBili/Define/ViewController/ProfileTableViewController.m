@@ -72,12 +72,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    //选取首页隐藏侧边栏
-    if (indexPath.row == 0 && indexPath.section == 0) {
-        HomePageViewController*vc =(HomePageViewController*) self.parentViewController;
-        [vc profileViewMoveToOriginal];
         //点击设置
-    }else if(indexPath.section == 1 ){
+    if(indexPath.section == 1 ){
         if (indexPath.row == 1) {
             SettingTableViewController* svc = [[SettingTableViewController alloc] init];
             [self.navigationController pushViewController: svc animated:YES];
@@ -86,6 +82,8 @@
             [self.navigationController pushViewController: tvc animated:YES];
         }
     }
+    HomePageViewController*vc =(HomePageViewController*) self.parentViewController;
+    [vc profileViewMoveToOriginal];
     
 }
 

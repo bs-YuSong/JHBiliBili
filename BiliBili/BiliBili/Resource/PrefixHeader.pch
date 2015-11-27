@@ -57,8 +57,6 @@ static const int ddLogLevel = DDLogLevelError;
 
 #import <BlocksKit+UIKit.h>
 
-#import "UITableView+FDTemplateLayoutCell.h"
-
 #import "BarrageHeader.h"
 
 #import "NSJSONSerialization+Tools.h"

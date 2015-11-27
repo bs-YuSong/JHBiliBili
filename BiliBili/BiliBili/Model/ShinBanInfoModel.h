@@ -8,11 +8,14 @@
 
 #import "BaseModel.h"
 #import "TagModel.h"
+
 /**
  *  番剧详情
  */
+@class episodesModel, ShinBanInfoDataModel;
+
 @interface ShinBanInfoModel : BaseModel
-@property (nonatomic, strong) NSArray* result;
+@property (nonatomic, strong) ShinBanInfoDataModel* result;
 @end
 
 @interface ShinBanInfoDataModel : BaseModel
@@ -29,7 +32,7 @@
 //封面
 @property (nonatomic, strong)NSString* cover;
 //分集
-@property (nonatomic, strong)NSArray* episodes;
+@property (nonatomic, strong)NSArray<episodesModel*>* episodes;
 
 //是否完结 0 1
 @property (nonatomic, assign)NSInteger is_finish;
@@ -42,10 +45,11 @@
 //当前季名称
 @property (nonatomic, strong)NSString* title;
 //番剧简介
-@property (nonatomic, strong)NSString* brief;
+@property (nonatomic, strong)NSString* evaluate;
 
 //@property (nonatomic, strong)NSArray* related_seasons;
 //别名
+//@property (nonatomic, strong)NSString* brief;
 //@property (nonatomic, strong)NSString* alias;
 //@property (nonatomic, strong)NSString* watchingCount;
 //@property (nonatomic, strong)NSNumber* viewRank;
@@ -57,7 +61,6 @@
 //@property (nonatomic, strong)NSString* favorites;
 //@property (nonatomic, strong)NSString* allow_download;
 //@property (nonatomic, strong)NSString* area;
-//@property (nonatomic, strong)NSString* evaluate;
 //@property (nonatomic, strong)NSString* squareCover;
 //@property (nonatomic, strong)NSString* total_count;
 //@property (nonatomic, strong)NSString* newest_ep_id;

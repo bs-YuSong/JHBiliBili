@@ -34,9 +34,6 @@
 @property (nonatomic, assign)NSInteger play;
 //弹幕数
 @property (nonatomic, assign)NSInteger video_review;
-
-
-
 //简介
 @property (nonatomic, strong)NSString* desc;
 //作者

@@ -11,13 +11,10 @@
 #import "MoreViewCell.h"
 #import "RecommendViewCell.h"
 #import "TakeHeadTableView.h"
+#import "ShiBanPlayTableViewController.h"
 
 @interface ShinBanViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) ShinBanViewModel* vm;
-//@property (weak, nonatomic) IBOutlet UITableView *tableView;
-//@property (weak, nonatomic) IBOutlet UIView *headView;
-//@property (weak, nonatomic) IBOutlet UIButton *everyDayPlay;
-//@property (weak, nonatomic) IBOutlet UIButton *ShinBanIndex;
 @property (strong, nonatomic) TakeHeadTableView *tableView;
 @property (strong, nonatomic) UIButton *everyDayPlay;
 @property (strong, nonatomic) UIButton *shinBanIndex;
@@ -76,12 +73,14 @@
         MoreViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"scell"];
         if (cell == nil) {
             cell = [[MoreViewCell alloc] initWithStyle:0 reuseIdentifier:@"scell"];
+            [self addChildViewController: cell.vc];
         }
-        NSDictionary* dic = @{@"pic":[NSMutableArray array],@"playNum.text":[NSMutableArray array],@"animaTitle.text":[NSMutableArray array]};
+        NSDictionary* dic = @{@"pic":[NSMutableArray array],@"playNum.text":[NSMutableArray array],@"animaTitle.text":[NSMutableArray array],@"model":[NSMutableArray array]};
         for (int i = 0; i < 4; ++i) {
             [dic[@"pic"] addObject:[self.vm moreViewPicForRow: i]];
             [dic[@"animaTitle.text"] addObject:[self.vm moreViewTitleForRow: i]];
             [dic[@"playNum.text"] addObject:[self.vm moreViewPlayForRow: i]];
+            [dic[@"model"] addObject:[self.vm moreViewModelForRow: i]];
         }
         [cell setWithDic:dic];
         return cell;
@@ -89,6 +88,7 @@
         RecommendViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"scell2"];
         if (cell == nil) {
             cell = [[RecommendViewCell alloc] initWithStyle:0 reuseIdentifier:@"scell2"];
+            [self addChildViewController: (UITableViewController*)cell.vc];
         }
         [cell setWithVM:self.vm];
 
@@ -110,6 +110,7 @@
 }
 
 - (void)colorSetting{
+    self.tableView.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"backgroundColor"];
     [self.tableView reloadData];
 }
 
@@ -126,6 +127,12 @@
             make.centerY.equalTo(weakObj.tableView.tableHeaderView);
             make.height.mas_equalTo(_everyDayPlay.mas_width).multipliedBy(0.29);
         }];
+        
+        [_everyDayPlay bk_addEventHandler:^(id sender) {
+            //推出每日放送表
+            ShiBanPlayTableViewController* vc = [[ShiBanPlayTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            [self.navigationController pushViewController: vc animated:YES];
+        } forControlEvents:UIControlEventTouchUpInside];
 	}
 	return _everyDayPlay;
 }
@@ -151,10 +158,6 @@
 		_tableView = [[TakeHeadTableView alloc] initWithHeadHeight: kWindowW *0.18];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-//        _tableView.rowHeight = self.view.frame.size.height * 0.8;
-        _tableView.backgroundColor = [UIColor clearColor];
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.allowsSelection = NO;
 	}
 	return _tableView;
 }

@@ -36,7 +36,7 @@ static ColorManager* colorManager = nil;
 }
 
 - (UIColor*)theme:(NSString*)theme colorWithString:(NSString*)str{
-    return [self theme:theme colorWithString:self.colorDic[theme] alpha: 1];
+    return [self theme:theme colorWithString:str alpha: 1];
 }
 
 - (UIColor*)colorWithString:(NSString*)str alpha:(CGFloat)alpha{

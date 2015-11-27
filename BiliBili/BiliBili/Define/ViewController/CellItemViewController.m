@@ -17,6 +17,8 @@
 
 - (void)setUpProperty{
     self.titleLabel.textColor = [[ColorManager shareColorManager] colorWithString:@"textColor"];
+    self.danMuLabel.textColor = [[ColorManager shareColorManager] colorWithString:@"textColor"];
+    self.playLabel.textColor = [[ColorManager shareColorManager] colorWithString:@"textColor"];
 
     self.danMuIcon.tintColor = [[ColorManager shareColorManager] colorWithString:@"themeColor"];
     self.danMuIcon.image = [self.danMuIcon.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -24,10 +26,12 @@
     self.playIcon.image = [self.playIcon.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
     AVInfoViewController* vc = [[AVInfoViewController alloc] init];
     [vc setWithModel:self.dataModel section:self.section];
-    [self.navController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (UIImageView *)imgv {

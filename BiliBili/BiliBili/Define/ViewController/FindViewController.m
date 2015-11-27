@@ -145,6 +145,7 @@
 # pragma mark - 颜色设置
 - (void)colorSetting{
     self.allViewLabel.textColor = [[ColorManager shareColorManager] colorWithString:@"textColor"];
+    self.tableView.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"backgroundColor"];
     [self.tableView reloadData];
 }
 
@@ -155,10 +156,6 @@
 		_tableView = [[TakeHeadTableView alloc] initWithHeadHeight:kWindowW * 0.7];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.backgroundColor = [UIColor clearColor];
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.allowsSelection = NO;
-        
 	}
 	return _tableView;
 }

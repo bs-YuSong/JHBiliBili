@@ -19,7 +19,7 @@
 
 @property (nonatomic, strong) NSString* section;
 @property (nonatomic, strong) AVDataModel* dataModel;
-@property (nonatomic, strong) UINavigationController* navController;
+//@property (nonatomic, strong) UINavigationController* navController;
 /**
  *  初始化一些属性
  */

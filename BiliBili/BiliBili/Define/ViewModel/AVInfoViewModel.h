@@ -19,6 +19,7 @@
 - (NSString*)sameVideoPlayNumForRow:(NSInteger)row;
 - (NSString*)sameVideoReplyForRow:(NSInteger)row;
 - (NSInteger)sameVideoCount;
+- (sameVideoDataModel*)sameVideoModelForRow:(NSInteger)row;
 
 //评论
 - (NSString*)replyNameForRow:(NSInteger)row;
@@ -71,8 +72,4 @@
 - (NSInteger)investorRankForRow:(NSInteger)row;
 - (NSInteger)investorCount;
 
-//
-//番剧详情
-- (NSInteger)shinBanInfoCount;
-- (NSString*)shinBanInfoIntroduce;
 @end

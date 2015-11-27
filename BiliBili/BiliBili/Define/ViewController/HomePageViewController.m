@@ -62,7 +62,7 @@
         [self.view addSubview: self.blackView];
         
         //侧边栏手势
-        UIView* panView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, self.view.frame.size.height)];
+        UIView* panView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, self.view.frame.size.height)];
         [panView addGestureRecognizer:self.panG];
         [self.view addSubview: panView];
         

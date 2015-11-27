@@ -34,4 +34,5 @@
     self.replyLabel.textColor = [[ColorManager shareColorManager] colorWithString:@"textColor"];
 }
 
+
 @end

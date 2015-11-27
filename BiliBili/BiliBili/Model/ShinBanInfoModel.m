@@ -9,10 +9,18 @@
 #import "ShinBanInfoModel.h"
 
 @implementation ShinBanInfoModel
-
++ (NSDictionary*)mj_objectClassInArray{
+    return @{@"result":[ShinBanInfoDataModel class]};
+}
 @end
 
 @implementation ShinBanInfoDataModel
++ (NSDictionary *)mj_objectClassInArray{
+    return @{@"episodes":[episodesModel class],@"tag2s":[TagModel class]};
+}
 
+@end
+
+@implementation episodesModel
 
 @end

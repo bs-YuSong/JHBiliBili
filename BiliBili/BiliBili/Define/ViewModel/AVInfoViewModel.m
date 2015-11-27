@@ -13,8 +13,6 @@
 ////新番独有属性
 ////承包商数组
 @property (nonatomic, strong) NSMutableArray <InvestorDataModel*>* investorList;
-//新番详情数组
-@property (nonatomic, strong) NSMutableArray <ShinBanInfoDataModel*>* shiBanInfoList;
 
 @property (nonatomic, strong) NSString* section;
 
@@ -35,6 +33,11 @@
 - (NSString*)sameVideoReplyForRow:(NSInteger)row{
     return [NSString stringWithFormatNum:self.sameVideoList[row].dm_count];
 }
+
+- (sameVideoDataModel*)sameVideoModelForRow:(NSInteger)row{
+    return self.sameVideoList[row];
+}
+
 - (NSInteger)sameVideoCount{
     return self.sameVideoList.count;
 }
@@ -144,29 +147,31 @@
 #define page @1
 
 - (void)refreshDataCompleteHandle:(void(^)(NSError *error))complete{
-    [AVInfoNetManager GetReplyWithParameter:@{@"pagesize":pagesize.stringValue, @"page":page.stringValue, @"aid":[self videoAid]} completionHandler:^(ReplyModel* responseObj, NSError *error) {
+    NSMutableArray<AFHTTPRequestOperation*>* arr = [NSMutableArray array];
+    
+    [arr addObject:[AVInfoNetManager GetReplyWithParameter:@{@"pagesize":pagesize.stringValue, @"page":page.stringValue, @"aid":[self videoAid]} completionHandler:^(ReplyModel* responseObj, NSError *error) {
         self.replyList = [responseObj.list mutableCopy];
         self.allReplyCount = responseObj.results;
-        [AVInfoNetManager GetSameVideoWithParameter:[self videoAid] completionHandler:^(sameVideoModel* responseObj1, NSError *error) {
-            self.sameVideoList = [responseObj1.list mutableCopy];
-            //新番情况下 多增加一个承包商请求
-            if ([self isShiBan]) {
-                [AVInfoNetManager GetInverstorWithParameter:@{@"aid":[self videoAid]} completionHandler:^(InvestorModel* responseObj2, NSError *error) {
-                    self.investorList = [responseObj2.list mutableCopy];
-                    [AVInfoNetManager GetTagWithParameter:@{@"aid":[self videoAid]} completionHandler:^(TagModel* responseObj2, NSError *error) {
-                        self.tagList = [responseObj2.result mutableCopy];
-                        complete(error);
-                    }];
-                }];
-            }else{
-                [AVInfoNetManager GetTagWithParameter:@{@"aid":[self videoAid]} completionHandler:^(TagModel* responseObj2, NSError *error) {
-                    self.tagList = [responseObj2.result mutableCopy];
-                    complete(error);
-                }];
-            }
-            
-        }];
+    }]];
+    [arr addObject:[AVInfoNetManager GetSameVideoWithParameter:[self videoAid] completionHandler:^(sameVideoModel* responseObj, NSError *error) {
+        self.sameVideoList = [responseObj.list mutableCopy];
+    }]];
+    if ([self isShiBan]) {
+        [arr addObject: [AVInfoNetManager GetInverstorWithParameter:@{@"aid":[self videoAid]} completionHandler:^(InvestorModel* responseObj, NSError *error) {
+            self.investorList = [responseObj.list mutableCopy];
+        }]];
+    }
+    [arr addObject: [AVInfoNetManager GetTagWithParameter:@{@"aid":[self videoAid]} completionHandler:^(TagModel* responseObj, NSError *error) {
+        self.tagList = [responseObj.result mutableCopy];
+    }]];
+    
+    
+    NSArray* operations = [AFURLConnectionOperation batchOfRequestOperations:arr progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations) {
+    } completionBlock:^(NSArray *operations) {
+        complete(nil);
     }];
+    [[NSOperationQueue mainQueue] addOperations:@[operations.lastObject] waitUntilFinished:NO];
+
 }
 
 - (void)getMoveReplyCompleteHandle:(void(^)(NSError *error))complete{
@@ -206,14 +211,6 @@
         _AVData = [AVDataModel new];
     }
     return _AVData;
-}
-
-
-- (NSMutableArray<ShinBanInfoDataModel *> *)shiBanInfoList{
-    if (_shiBanInfoList == nil) {
-        _shiBanInfoList = [NSMutableArray array];
-    }
-    return _shiBanInfoList;
 }
 
 - (NSMutableArray<InvestorDataModel *> *)investorList{

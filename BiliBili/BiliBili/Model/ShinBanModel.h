@@ -7,6 +7,7 @@
 //
 
 #import "BaseModel.h"
+#import "AVModel.h"
 /**
  *  番剧页模型
  *
@@ -40,6 +41,7 @@
 //@property (nonatomic, strong)NSNumber* credit;
 //@property (nonatomic, strong)NSString* pubdate;
 //@property (nonatomic, strong)NSNumber* typeID;
+
 //简介
 @property (nonatomic, strong)NSString* desc;
 //播放数
@@ -57,11 +59,11 @@
 //标题
 @property (nonatomic, strong)NSString* title;
 //弹幕
-@property (nonatomic, strong)NSNumber* video_review;
+@property (nonatomic, assign)NSInteger video_review;
 //时长
 @property (nonatomic, strong)NSString* duration;
 //创建时间
 @property (nonatomic, strong)NSString* create;
 //av号
-@property (nonatomic, strong)NSNumber* aid;
+@property (nonatomic, strong)NSString* aid;
 @end

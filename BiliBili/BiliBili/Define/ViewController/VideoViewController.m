@@ -67,9 +67,11 @@
     self.layer.frame = self.view.bounds;
 }
 
-- (void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
     [self.timer invalidate];
+    [self.rander stop];
+    self.player = nil;
 }
 
 - (instancetype)initWithAid:(NSString*)aid{
@@ -122,7 +124,7 @@
     } repeats:YES];
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.navigationController setNavigationBarHidden:![self.navigationController isNavigationBarHidden] animated:YES];
     [self.slide setHidden:[self.navigationController isNavigationBarHidden]];
     self.touchDelayTime = 3;

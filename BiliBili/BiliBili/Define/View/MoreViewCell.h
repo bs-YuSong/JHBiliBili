@@ -11,5 +11,6 @@
  *   大家都在看单元格
  */
 @interface MoreViewCell : UITableViewCell;
+@property (nonatomic, strong) UIViewController* vc;
 - (void)setWithDic:(NSDictionary<NSString*, NSMutableArray*>*)dic;
 @end

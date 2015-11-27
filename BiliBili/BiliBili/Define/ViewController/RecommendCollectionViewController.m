@@ -10,9 +10,10 @@
 #import "RecommendCollectionViewCell.h"
 #import "ShinBanModel.h"
 #import "ShinBanViewModel.h"
+#import "ShiBanInfoViewController.h"
 #define EDGE 10
 @interface RecommendCollectionViewController ()<UICollectionViewDelegateFlowLayout,UICollectionViewDelegate>
-@property (nonatomic, strong) NSArray<RecommentShinBanDataModel*>* items;
+//@property (nonatomic, strong) NSArray<RecommentShinBanDataModel*>* items;
 @property (nonatomic, assign) NSInteger colNum;
 @property (nonatomic, strong) ShinBanViewModel* vm;
 @end
@@ -30,17 +31,18 @@
     }];
 }
 
-- (NSArray<RecommentShinBanDataModel *> *)items{
-    if (_items == nil) {
-        _items = [NSArray array];
-    }
-    return _items;
-}
+//- (NSArray<RecommentShinBanDataModel *> *)items{
+//    if (_items == nil) {
+//        _items = [NSArray array];
+//    }
+//    return _items;
+//}
 
 - (void)setVM:(ShinBanViewModel*)vm colNum:(NSInteger)num{
-    self.items = [vm getRecommentList];
+    //self.items = [vm getRecommentList];
     self.colNum = num;
     self.vm = vm;
+    [self.collectionView reloadData];
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     //cell的宽度等于(屏宽-2*边距-(列数-1)*item间的间距)/列数
@@ -64,22 +66,30 @@
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.items.count;
+    return [self.vm recommentListCount];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     RecommendCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"RecommendCollectionViewCell" forIndexPath:indexPath];
-    [cell.imgView setImageWithURL:[NSURL URLWithString:self.items[indexPath.row].cover]];
+    if ([self.vm recommentListCount]) {
+        [cell.imgView setImageWithURL:[NSURL URLWithString:self.vm.recommentList[indexPath.row].cover]];
+        cell.Label.text = self.vm.recommentList[indexPath.row].title;
+    }
+    
     cell.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"RecommendCollectionViewCell.backgroundColor"];
     cell.Label.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"RecommendCollectionViewCell.Label.backgroundColor"];
     cell.Label.textColor = [[ColorManager shareColorManager] colorWithString:@"textColor"];
-    cell.Label.text = self.items[indexPath.row].title;
     
     return cell;
 }
 #pragma mark  <UICollectionViewDelegate>
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    DDLogVerbose(@"%ld",(long)indexPath.row);
+    if ([self.vm recommentListCount]) {
+        ShiBanInfoViewController* avc = [[ShiBanInfoViewController alloc] init];
+        [avc setWithModel:self.vm.recommentList[indexPath.row]];
+        [self.navigationController pushViewController:avc animated:YES];
+    }
+//    DDLogVerbose(@"%ld",(long)indexPath.row);
 }
 
 - (void)colorSetting{

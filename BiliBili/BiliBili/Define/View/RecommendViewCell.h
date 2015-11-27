@@ -10,7 +10,8 @@
 /**
  *  推荐番剧单元格
  */
-@class ShinBanViewModel;
+@class ShinBanViewModel,RecommendCollectionViewController;
 @interface RecommendViewCell : UITableViewCell
+@property (nonatomic, strong) RecommendCollectionViewController* vc;
 - (void)setWithVM:(ShinBanViewModel*)vm;
 @end

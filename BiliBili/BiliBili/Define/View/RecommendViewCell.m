@@ -10,10 +10,10 @@
 #import "RecommendCollectionViewCell.h"
 #import "RecommendCollectionViewController.h"
 #import "ShinBanViewModel.h"
+#import "UIViewController+Tools.h"
 @interface RecommendViewCell ()
 @property (strong, nonatomic) UILabel *recommedLabel;
 @property (nonatomic, strong) UIImageView* recommedIcon;
-@property (nonatomic, strong) RecommendCollectionViewController* vc;
 @property (nonatomic, strong) NSArray* arr;
 @end
 

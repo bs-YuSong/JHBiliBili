@@ -21,7 +21,7 @@
 + (id)GetSameVideoWithParameter:(NSString*)parame completionHandler:(void(^)(id responseObj, NSError *error))complete;
 
 //获取新番详情信息
-+ (id)GetShiBanInfoWithParameter:(NSDictionary*)parame completionHandler:(void(^)(id responseObj, NSError *error))complete;
++ (id)GetShiBanInfoWithParameter:(NSString*)parame completionHandler:(void(^)(id responseObj, NSError *error))complete;
 
 + (id)GetTagWithParameter:(NSDictionary*)parame completionHandler:(void(^)(id responseObj, NSError *error))complete;
 @end
