@@ -26,6 +26,7 @@
                 [self Get:vpath parameters:nil completionHandler:^(id responseObj1, NSError *error) {
                     VideoDataModel*dModel = [VideoDataModel mj_objectWithKeyValues:[[NSJSONSerialization json2DicWithData:responseObj1][@"durl"] firstObject]];
                     dModel.cid = obj.CID;
+                    dModel.title = obj.Title;
                     [vModel.durl addObject: dModel];
                     if (idx == cidModel.list.count - 1) {
                         complete(vModel, error);

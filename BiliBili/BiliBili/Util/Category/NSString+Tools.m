@@ -19,11 +19,14 @@
 - (NSArray<NSString *>*)subStringsWithRegularExpression:(NSString*)regularExpression{
     NSRegularExpression* regu = [[NSRegularExpression alloc] initWithPattern:regularExpression options:NSRegularExpressionCaseInsensitive error:nil];
     NSArray* objArr = [regu matchesInString:self options:0 range:NSMakeRange(0, self.length)];
-    NSMutableArray* returnArr = [NSMutableArray array];
-    for (NSTextCheckingResult* rs in objArr) {
-        [returnArr addObject:[self substringWithRange:rs.range]];
+    if (objArr.count > 0) {
+        NSMutableArray* returnArr = [NSMutableArray array];
+        for (NSTextCheckingResult* rs in objArr) {
+            [returnArr addObject:[self substringWithRange:rs.range]];
+        }
+        return [returnArr copy];
     }
-    return [returnArr copy];
+    return nil;
 }
 
 @end

@@ -40,6 +40,8 @@
     [[UINavigationBar appearance] setBarTintColor: [[ColorManager shareColorManager] colorWithString:@"themeColor"]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    
+    
     //判断清空缓存是否标记
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"clearCache"] == YES) {
         NSArray<NSString*>* arr = [[NSFileManager defaultManager] subpathsAtPath: kCachePath];

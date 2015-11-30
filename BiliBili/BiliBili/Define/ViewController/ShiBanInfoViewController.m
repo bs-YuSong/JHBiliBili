@@ -94,7 +94,8 @@
 - (void)updateButtonTitleAndPlay:(NSNotification *)notification{
     [self.shiBanPlayButton setTitle:[NSString stringWithFormat:@"播放第%@话",[self.svm indexToTitle]] forState:UIControlStateNormal];
     VideoViewController* vc =[[VideoViewController alloc] initWithAid: [self.svm videoAid]];
-    [self.navigationController pushViewController: vc animated:YES];
+    [self presentViewController:vc animated:YES completion:nil];
+    //[self.navigationController pushViewController: vc animated:YES];
 }
 
 - (void)setChildrenScrollEnabled{

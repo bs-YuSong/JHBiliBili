@@ -180,8 +180,10 @@
 		A17EC2A91C0293270030886E /* VideoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC2671C0293270030886E /* VideoViewModel.m */; };
 		A17EC2AB1C0293710030886E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A17EC2AA1C0293710030886E /* Main.storyboard */; };
 		A17EC2C81C02A59A0030886E /* TakeHeadTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC2C61C02A59A0030886E /* TakeHeadTableView.m */; };
+		A18A14BB1C08820C00ABA733 /* PlayerUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = A18A14BA1C08820C00ABA733 /* PlayerUIView.m */; };
 		A195EA4F1C046AAB0099D8A4 /* ShiBanInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A195EA4E1C046AAB0099D8A4 /* ShiBanInfoViewModel.m */; };
 		A195EA551C04891C0099D8A4 /* ShiBanInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A195EA541C04891C0099D8A4 /* ShiBanInfoViewController.m */; };
+		A1AC2CFB1C097BD30044C6C4 /* PlayerSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1AC2CFA1C097BD30044C6C4 /* PlayerSliderView.m */; };
 		A1B6D6361C03229400DA3F27 /* HotSearchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B6D6351C03229400DA3F27 /* HotSearchButton.m */; };
 		A1B6D6391C03262000DA3F27 /* HotSearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B6D6381C03262000DA3F27 /* HotSearchTableViewCell.m */; };
 /* End PBXBuildFile section */
@@ -465,10 +467,14 @@
 		A17EC2AA1C0293710030886E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../Main.storyboard; sourceTree = "<group>"; };
 		A17EC2C61C02A59A0030886E /* TakeHeadTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakeHeadTableView.m; sourceTree = "<group>"; };
 		A17EC2C71C02A59A0030886E /* TakeHeadTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakeHeadTableView.h; sourceTree = "<group>"; };
+		A18A14B91C08820C00ABA733 /* PlayerUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerUIView.h; sourceTree = "<group>"; };
+		A18A14BA1C08820C00ABA733 /* PlayerUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerUIView.m; sourceTree = "<group>"; };
 		A195EA4D1C046AAB0099D8A4 /* ShiBanInfoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShiBanInfoViewModel.h; sourceTree = "<group>"; };
 		A195EA4E1C046AAB0099D8A4 /* ShiBanInfoViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShiBanInfoViewModel.m; sourceTree = "<group>"; };
 		A195EA531C04891C0099D8A4 /* ShiBanInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShiBanInfoViewController.h; sourceTree = "<group>"; };
 		A195EA541C04891C0099D8A4 /* ShiBanInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShiBanInfoViewController.m; sourceTree = "<group>"; };
+		A1AC2CF91C097BD30044C6C4 /* PlayerSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerSliderView.h; sourceTree = "<group>"; };
+		A1AC2CFA1C097BD30044C6C4 /* PlayerSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerSliderView.m; sourceTree = "<group>"; };
 		A1B6D6341C03229400DA3F27 /* HotSearchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotSearchButton.h; sourceTree = "<group>"; };
 		A1B6D6351C03229400DA3F27 /* HotSearchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotSearchButton.m; sourceTree = "<group>"; };
 		A1B6D6371C03262000DA3F27 /* HotSearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotSearchTableViewCell.h; sourceTree = "<group>"; };
@@ -975,6 +981,10 @@
 		A17EC2B71C02A2FC0030886E /* 自定义 */ = {
 			isa = PBXGroup;
 			children = (
+				A1AC2CF91C097BD30044C6C4 /* PlayerSliderView.h */,
+				A1AC2CFA1C097BD30044C6C4 /* PlayerSliderView.m */,
+				A18A14B91C08820C00ABA733 /* PlayerUIView.h */,
+				A18A14BA1C08820C00ABA733 /* PlayerUIView.m */,
 				A17EC2C61C02A59A0030886E /* TakeHeadTableView.m */,
 				A17EC2C71C02A59A0030886E /* TakeHeadTableView.h */,
 				A17EC21C1C0293270030886E /* MyRefreshComplete.h */,
@@ -1431,6 +1441,7 @@
 				A17EC27F1C0293270030886E /* WMProgressView.m in Sources */,
 				A17EC2851C0293270030886E /* MyRefreshComplete.m in Sources */,
 				A10A3F941C06DA6800274A76 /* ShiBanPlayTableViewController.m in Sources */,
+				A1AC2CFB1C097BD30044C6C4 /* PlayerSliderView.m in Sources */,
 				A17EC2951C0293270030886E /* HomePageViewController.m in Sources */,
 				A17EC29F1C0293270030886E /* ShinBanViewController.m in Sources */,
 				A17EC1D01C0293130030886E /* UIBezierPath+Tools.m in Sources */,
@@ -1438,6 +1449,7 @@
 				A17EC1BC1C0293130030886E /* ShinBanInfoModel.m in Sources */,
 				A11EFBEA1C055474000B4D6F /* ShiBanEpisodesTableViewCell.m in Sources */,
 				A17EC28A1C0293270030886E /* ReViewTableViewCell.m in Sources */,
+				A18A14BB1C08820C00ABA733 /* PlayerUIView.m in Sources */,
 				A17EC1611C0292C70030886E /* AppDelegate.m in Sources */,
 				A17EC1D51C0293130030886E /* UIViewController+Tools.m in Sources */,
 				A17EC27E1C0293270030886E /* WMMenuView.m in Sources */,
@@ -1623,7 +1635,7 @@
 				A17EC15B1C0292980030886E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		A17EC15C1C0292980030886E /* Build configuration list for PBXNativeTarget "BiliBili" */ = {
 			isa = XCConfigurationList;
@@ -1632,7 +1644,7 @@
 				A17EC15E1C0292980030886E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

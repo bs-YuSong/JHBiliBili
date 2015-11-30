@@ -15,7 +15,8 @@
 
 - (NSDictionary*)videoDanMu;
 - (NSURL*)videoURL;
-- (float)videoLength;
+- (NSInteger)videoLength;
+- (NSString*)videoTitle;
 
 - (void)refreshDataCompleteHandle:(void(^)(NSError *error))complete;
 @end

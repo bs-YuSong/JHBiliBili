@@ -355,7 +355,10 @@
         _playButton.titleLabel.font = [UIFont systemFontOfSize: 13];
         [_playButton bk_addEventHandler:^(id sender) {
             VideoViewController* vc = [[VideoViewController alloc] initWithAid:[self.vm videoAid]];
-            [self.navigationController pushViewController:vc animated:YES];
+            
+           // [self.navigationController pushViewController:vc animated:YES];
+            [self presentViewController:vc animated:YES completion:nil];
+            
         } forControlEvents:UIControlEventTouchUpInside];
         [_playButton setBackgroundColor:[[ColorManager shareColorManager] colorWithString:@"themeColor"]];
         [self.tableView.tableHeaderView addSubview: _playButton];

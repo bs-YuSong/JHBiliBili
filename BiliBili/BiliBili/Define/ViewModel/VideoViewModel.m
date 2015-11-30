@@ -26,12 +26,18 @@
     //判断默认设置是否为高清
     return [[[NSUserDefaults standardUserDefaults] stringForKey:@"HightResolution"] isEqualToString:@"yes"]?[NSURL URLWithString:[self firstObj].url]:[NSURL URLWithString:[self firstObj].backup_url.firstObject];
 }
-- (float)videoLength{
+
+//视频长度
+- (NSInteger)videoLength{
     return [self firstObj].length / 1000;
 }
 
 - (NSString*)videoCid{
     return [self firstObj].cid.stringValue;
+}
+
+- (NSString*)videoTitle{
+    return [self firstObj].title;
 }
 
 - (VideoDataModel*)firstObj{

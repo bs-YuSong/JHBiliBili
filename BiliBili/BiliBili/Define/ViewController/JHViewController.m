@@ -84,7 +84,9 @@
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    [self.delegate JHViewGetOffset:scrollView.contentOffset];
+    if ([self.delegate respondsToSelector:@selector(JHViewGetOffset:)]) {
+        [self.delegate JHViewGetOffset:scrollView.contentOffset];
+    }
 }
 
 

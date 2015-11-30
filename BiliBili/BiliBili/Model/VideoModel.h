@@ -27,7 +27,7 @@
 //@property (nonatomic, assign)NSInteger Mp4Length;
 //@property (nonatomic, strong)NSNumber* size;
 @property (nonatomic, strong)NSNumber* AV;
-//@property (nonatomic, strong)NSString* Title;
+@property (nonatomic, strong)NSString* Title;
 //@property (nonatomic, strong)NSNumber* P;
 @property (nonatomic, strong)NSNumber* CID;
 
@@ -38,5 +38,6 @@
 @property (nonatomic, assign)NSInteger length;
 @property (nonatomic, strong)NSString* url;
 @property (nonatomic, strong)NSNumber* cid;
+@property (nonatomic, strong)NSString* title;
 @property (nonatomic, strong)NSArray<NSString*>* backup_url;
 @end
