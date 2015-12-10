@@ -23,23 +23,7 @@
 
 @implementation RecommendViewController
 
-kRemoveCellSeparator
-
-- (RecommendViewModel *)vm{
-    if (_vm == nil) {
-        _vm = [[RecommendViewModel alloc] init];
-    }
-    return _vm;
-}
-
-- (TakeHeadTableView *)tableView{
-    if (_tableView == nil) {
-        _tableView = [[TakeHeadTableView alloc] init];
-        _tableView.delegate =self;
-        _tableView.dataSource = self;
-    }
-    return _tableView;
-}
+//kRemoveCellSeparator
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -49,13 +33,10 @@ kRemoveCellSeparator
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    __weak typeof(self) weakObj = self;
-    
 
     [self.view addSubview: self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(weakObj.view);
+        make.edges.equalTo(self.view);
     }];
     
     [self.tableView.tableHeaderView addSubview: self.headScrollView];
@@ -65,11 +46,11 @@ kRemoveCellSeparator
     
     self.tableView.mj_header = [MyRefreshComplete myRefreshHead:^{
         [self.vm refreshDataCompleteHandle:^(NSError *error) {
-            [weakObj.tableView.mj_header endRefreshing];
+            [self.tableView.mj_header endRefreshing];
             
-            [weakObj.headScrollView reloadData];
+            [self.headScrollView reloadData];
             
-            [weakObj.tableView reloadData];
+            [self.tableView reloadData];
             if (error) {
                 [self showErrorMsg:kerrorMessage];
             }
@@ -90,8 +71,6 @@ kRemoveCellSeparator
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    //return 0;
-  //  NSLog(@"%ld", [self.vm sectionCount]);
     return [self.vm sectionCount];
 }
 
@@ -107,10 +86,9 @@ kRemoveCellSeparator
     NSString* key = [dic allKeys].firstObject;
     //设置分区内容
     
-    NSDictionary* tempDic = @{@"titleLabel.text":[NSMutableArray array],@"playLabel.text":[NSMutableArray array],@"danMuLabel.text":[NSMutableArray array],@"imgv":[NSMutableArray array],@"dataModel":[NSMutableArray array]};
+    NSDictionary* tempDic = @{@"titleLabel.text":[NSMutableArray array],@"playLabel.text":[NSMutableArray array],@"danMuLabel.text":[NSMutableArray array],@"imgv":[NSMutableArray array],@"dataModel":[NSMutableArray array],@"section": dic[key]};
     if (self.vm.list[dic[key]]) {
         for (int i = 0; i < 4; ++i) {
-            
             [tempDic[@"imgv"] addObject:[self.vm picForRow:i section:dic[key]]];
             [tempDic[@"titleLabel.text"] addObject:[self.vm titleForRow:i section:dic[key]]];
             [tempDic[@"playLabel.text"] addObject:[self.vm playForRow:i section:dic[key]]];
@@ -147,8 +125,9 @@ kRemoveCellSeparator
         _headScrollView.pagingEnabled = YES;
         //手动滚动速度
         _headScrollView.scrollSpeed = 2;
+        __weak typeof(_headScrollView)weakHeadScrollView = _headScrollView;
         [NSTimer bk_scheduledTimerWithTimeInterval:2.5 block:^(NSTimer *timer) {
-            [_headScrollView scrollToItemAtIndex:_headScrollView.currentItemIndex + 1 animated:YES];
+            [weakHeadScrollView scrollToItemAtIndex:weakHeadScrollView.currentItemIndex + 1 animated:YES];
         } repeats:YES];
     }
     return _headScrollView;
@@ -176,7 +155,25 @@ kRemoveCellSeparator
 }
 
 - (void)colorSetting{
+    self.tableView.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"backgroundColor"];
     [self.tableView reloadData];
 }
 
+#pragma mark - 懒加载
+
+- (RecommendViewModel *)vm{
+    if (_vm == nil) {
+        _vm = [[RecommendViewModel alloc] init];
+    }
+    return _vm;
+}
+
+- (TakeHeadTableView *)tableView{
+    if (_tableView == nil) {
+        _tableView = [[TakeHeadTableView alloc] init];
+        _tableView.delegate =self;
+        _tableView.dataSource = self;
+    }
+    return _tableView;
+}
 @end

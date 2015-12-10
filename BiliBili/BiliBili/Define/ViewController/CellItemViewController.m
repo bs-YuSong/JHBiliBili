@@ -40,10 +40,9 @@
         _imgv.layer.cornerRadius = 8;
         _imgv.layer.masksToBounds = YES;
         [self.view addSubview: _imgv];
-        __weak typeof(self) weakObj = self;
         [_imgv mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.left.width.mas_equalTo(weakObj.view);
-            make.height.mas_equalTo(weakObj.view.mas_width).multipliedBy(0.61);
+            make.top.left.width.mas_equalTo(self.view);
+            make.height.mas_equalTo(self.view.mas_width).multipliedBy(0.61);
         }];
 	}
 	return _imgv;
@@ -57,12 +56,11 @@
         _titleLabel.font = [UIFont systemFontOfSize: 13];
         _titleLabel.font = [UIFont systemFontOfSize: 14];
         [self.view addSubview: _titleLabel];
-        __weak typeof(self) weakObj = self;
         [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(weakObj.imgv.mas_bottom).mas_offset(5);
-            make.width.mas_equalTo(weakObj.view.mas_width).mas_offset(-10);
-            make.centerX.equalTo(weakObj.view);
-            make.bottom.mas_equalTo(weakObj.playIcon.mas_top).mas_offset(-10);
+            make.top.mas_equalTo(self.imgv.mas_bottom).mas_offset(5);
+            make.width.mas_equalTo(self.view.mas_width).mas_offset(-10);
+            make.centerX.equalTo(self.view);
+            make.bottom.mas_equalTo(self.playIcon.mas_top).mas_offset(-10);
         }];
 	}
 	return _titleLabel;
@@ -73,11 +71,10 @@
 		_playIcon = [[UIImageView alloc] init];
         [_playIcon setImage: [UIImage imageNamed:@"list_playnumb_icon"]];
         [self.view addSubview: _playIcon];
-        __weak typeof(self) weakObj = self;
         [_playIcon mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(13);
             make.height.mas_equalTo(10);
-            make.left.equalTo(weakObj.imgv);
+            make.left.equalTo(self.imgv);
             make.bottom.mas_offset(-5);
         }];
 
@@ -89,11 +86,10 @@
 	if(_playLabel == nil) {
 		_playLabel = [[UILabel alloc] init];
         _playLabel.font = [UIFont systemFontOfSize: 10];
-        __weak typeof(self) weakObj = self;
         [self.view addSubview: _playLabel];
         [_playLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(weakObj.playIcon);
-            make.left.mas_equalTo(weakObj.playIcon.mas_right).mas_offset(2);
+            make.centerY.equalTo(self.playIcon);
+            make.left.mas_equalTo(self.playIcon.mas_right).mas_offset(2);
         }];
 	}
 	return _playLabel;
@@ -103,12 +99,11 @@
 	if(_danMuIcon == nil) {
 		_danMuIcon = [[UIImageView alloc] init];
         [_danMuIcon setImage:[UIImage imageNamed:@"list_danmaku_icon"]];
-        __weak typeof(self) weakObj = self;
         [self.view addSubview: _danMuIcon];
         [_danMuIcon mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.height.equalTo(weakObj.playIcon);
-            make.centerY.equalTo(weakObj.playIcon);
-            make.right.mas_equalTo(weakObj.danMuLabel.mas_left).mas_offset(-2);
+            make.width.height.equalTo(self.playIcon);
+            make.centerY.equalTo(self.playIcon);
+            make.right.mas_equalTo(self.danMuLabel.mas_left).mas_offset(-2);
         }];
 	}
 	return _danMuIcon;
@@ -118,11 +113,10 @@
 	if(_danMuLabel == nil) {
 		_danMuLabel = [[UILabel alloc] init];
         _danMuLabel.font = [UIFont systemFontOfSize: 10];
-        __weak typeof(self) weakObj = self;
         [self.view addSubview: _danMuLabel];
         [_danMuLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(weakObj.playIcon);
-            make.right.equalTo(weakObj.titleLabel);
+            make.centerY.equalTo(self.playIcon);
+            make.right.equalTo(self.titleLabel);
         }];
 	}
 	return _danMuLabel;

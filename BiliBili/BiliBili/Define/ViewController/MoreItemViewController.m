@@ -29,10 +29,9 @@
         _pic.layer.cornerRadius = 10;
         _pic.layer.masksToBounds = YES;
         [self.view insertSubview:_pic atIndex:0];
-        __weak typeof(self)weakObj = self;
         [_pic mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.left.width.equalTo(weakObj.view);
-            make.height.mas_equalTo(weakObj.view.mas_width).multipliedBy(0.64);
+            make.top.left.width.equalTo(self.view);
+            make.height.mas_equalTo(self.view.mas_width).multipliedBy(0.64);
         }];
     }
     return _pic;
@@ -45,12 +44,11 @@
         _animaTitle.font = [UIFont systemFontOfSize: 13];
         _animaTitle.textColor = [[ColorManager shareColorManager] colorWithString:@"textColor"];
         [self.view addSubview: _animaTitle];
-        __weak typeof(self)weakObj = self;
         [_animaTitle mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(weakObj.view).mas_offset(-10);
-            make.centerX.equalTo(weakObj.view);
-            make.top.mas_equalTo(weakObj.pic.mas_bottom).mas_offset(5);
-            make.bottom.equalTo(weakObj.view).mas_offset(-5);
+            make.width.equalTo(self.view).mas_offset(-10);
+            make.centerX.equalTo(self.view);
+            make.top.mas_equalTo(self.pic.mas_bottom).mas_offset(5);
+            make.bottom.equalTo(self.view).mas_offset(-5);
         }];
     }
     return _animaTitle;
@@ -65,12 +63,11 @@
         _playNum.textColor = [UIColor whiteColor];
         _playNum.font = [UIFont systemFontOfSize: 12];
         [self.view insertSubview:_playNum atIndex:1];
-        __weak typeof(self)weakObj = self;
         [_playNum mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_greaterThanOrEqualTo(41);
             make.height.mas_equalTo(21);
-            make.bottom.equalTo(weakObj.pic).mas_offset(-10);
-            make.right.equalTo(weakObj.pic).mas_offset(-10);
+            make.bottom.equalTo(self.pic).mas_offset(-10);
+            make.right.equalTo(self.pic).mas_offset(-10);
         }];
     }
     return _playNum;

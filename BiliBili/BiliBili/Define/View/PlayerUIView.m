@@ -16,6 +16,7 @@
 @property (nonatomic, strong) UILabel* timeLabel;
 @property (nonatomic, strong) PlayerSliderView* slideView;
 @property (nonatomic, strong) UIButton* playButton;
+@property (nonatomic, strong) UIButton* danMuButton;
 @property (nonatomic, strong) NSDateFormatter* formatter;
 @property (nonatomic, assign) NSInteger allTime;
 @property (nonatomic, strong) NSString* allFormatterTime;
@@ -27,10 +28,6 @@
 - (instancetype)initWithTitle:(NSString*)title videoTime:(NSInteger)videoTime{
     if (self = [super init]) {
         self.titleLabel.text = title;
-        self.allTime = videoTime;
-        self.allFormatterTime = [self.formatter stringFromDate:[NSDate dateWithTimeIntervalSinceReferenceDate:videoTime]];
-        
-        self.timeLabel.text = [@"00:00/" stringByAppendingString: self.allFormatterTime];
         self.fadeTime = 0.5;
         //初始化title
         [self addSubview: self.headView];
@@ -41,7 +38,7 @@
         //初始化时间面板
         [self addSubview: self.bottomView];
         [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.bottom.equalTo(self);
+            make.left.right.bottom.mas_equalTo(0);
             make.height.mas_equalTo(self.mas_height).multipliedBy(0.25);
         }];
         
@@ -58,12 +55,15 @@
         self.alpha = 1;
     } completion:^(BOOL finished) {
         //显示三秒后自动隐藏
-        self.timer = [NSTimer bk_scheduledTimerWithTimeInterval:3 block:^(NSTimer *timer) {
-            self.returnBlock();
-            [self hiddenPlayer];
-        } repeats:NO];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(autoHiddenPlayer) userInfo:nil repeats:NO];
     }];
 }
+
+- (void)autoHiddenPlayer{
+    self.returnBlock();
+    [self hiddenPlayer];
+}
+
 - (void)hiddenPlayer{
     [self.timer invalidate];
     [UIView animateWithDuration:self.fadeTime animations:^{
@@ -100,6 +100,12 @@
     }
 }
 
+- (void)danMuButtonDown{
+    if([self.delegate respondsToSelector:@selector(playerTouchDanMuButton:)]){
+        [self.delegate playerTouchDanMuButton: self];
+    }
+}
+
 - (void)arrowButtonDown{
     if([self.delegate respondsToSelector:@selector(playerTouchBackArrow:)]){
         [self.delegate playerTouchBackArrow: self];
@@ -120,10 +126,10 @@
         [arrowButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_offset(20);
             make.centerY.equalTo(_headView);
-            make.width.mas_equalTo(9);
+            make.width.mas_equalTo(18);
             make.height.mas_equalTo(16);
         }];
-        
+
         [_headView addSubview: self.titleLabel];
         [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(arrowButton.mas_right).mas_offset(10);
@@ -140,6 +146,7 @@
         _bottomView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
         
         [_bottomView addSubview: self.slideView];
+
         [self.slideView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(0);
             make.centerX.equalTo(_bottomView);
@@ -170,6 +177,17 @@
             make.centerY.equalTo(tempView);
         }];
         
+        self.danMuButton = [UIButton new];
+        [self.danMuButton setImage:[UIImage imageNamed:@"ic_answer_danmaku2"] forState:UIControlStateNormal];
+        [self.danMuButton addTarget:self action:@selector(danMuButtonDown) forControlEvents:UIControlEventTouchUpInside];
+        [self.danMuButton setTitle:@" 弹幕开关" forState:UIControlStateNormal];
+        self.danMuButton.titleLabel.font = [UIFont systemFontOfSize: 12];
+        [tempView addSubview: self.danMuButton];
+        [self.danMuButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.playButton);
+            make.right.mas_offset(-20);
+        }];
+        
         [_bottomView addSubview: self.timeLabel];
         [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.playButton.mas_right).mas_offset(20);
@@ -194,6 +212,7 @@
     if(_timeLabel == nil) {
         _timeLabel = [[UILabel alloc] init];
         _timeLabel.font = [UIFont systemFontOfSize: 15];
+        _timeLabel.text = @"00:00/00:00";
         _timeLabel.textColor = [UIColor whiteColor];
     }
     return _timeLabel;
@@ -208,7 +227,7 @@
     return _formatter;
 }
 
-- (PlayerSliderView *) slideView {
+- (PlayerSliderView *)slideView{
     if(_slideView == nil) {
         _slideView = [[PlayerSliderView alloc] initWithLineWidth:3 currentTimeColor:[[ColorManager shareColorManager] colorWithString:@"themeColor"] bufferTimeColor:[UIColor grayColor] lineBackGroundColor:[UIColor whiteColor] thumbImg:nil];
         _slideView.delegate = self;

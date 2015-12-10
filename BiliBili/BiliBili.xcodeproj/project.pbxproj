@@ -11,6 +11,9 @@
 		A10A3F7B1C06C43700274A76 /* ShiBanPlayTableModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A10A3F7A1C06C43700274A76 /* ShiBanPlayTableModel.m */; };
 		A10A3F7E1C06C6E800274A76 /* ShiBanPlayTableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A10A3F7D1C06C6E800274A76 /* ShiBanPlayTableViewModel.m */; };
 		A10A3F941C06DA6800274A76 /* ShiBanPlayTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A10A3F931C06DA6800274A76 /* ShiBanPlayTableViewController.m */; };
+		A10B29911C13CF9100463567 /* UserDefaultDownLoadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A10B29901C13CF9100463567 /* UserDefaultDownLoadManager.m */; };
+		A11524141C10689A00AF20C1 /* ShiBanEpisodeCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A11524131C10689A00AF20C1 /* ShiBanEpisodeCollectionViewController.m */; };
+		A11524171C106AAC00AF20C1 /* ShiBanEpisodeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A11524161C106AAC00AF20C1 /* ShiBanEpisodeCollectionViewCell.m */; };
 		A11EFBA41C053864000B4D6F /* ic_splash_icon_00000.png in Resources */ = {isa = PBXBuildFile; fileRef = A11EFB601C053864000B4D6F /* ic_splash_icon_00000.png */; };
 		A11EFBA51C053864000B4D6F /* ic_splash_icon_00001.png in Resources */ = {isa = PBXBuildFile; fileRef = A11EFB611C053864000B4D6F /* ic_splash_icon_00001.png */; };
 		A11EFBA61C053864000B4D6F /* ic_splash_icon_00002.png in Resources */ = {isa = PBXBuildFile; fileRef = A11EFB621C053864000B4D6F /* ic_splash_icon_00002.png */; };
@@ -184,8 +187,14 @@
 		A195EA4F1C046AAB0099D8A4 /* ShiBanInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A195EA4E1C046AAB0099D8A4 /* ShiBanInfoViewModel.m */; };
 		A195EA551C04891C0099D8A4 /* ShiBanInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A195EA541C04891C0099D8A4 /* ShiBanInfoViewController.m */; };
 		A1AC2CFB1C097BD30044C6C4 /* PlayerSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1AC2CFA1C097BD30044C6C4 /* PlayerSliderView.m */; };
+		A1B541021C12C636006ACA26 /* DownLoadViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B541011C12C636006ACA26 /* DownLoadViewModel.m */; };
 		A1B6D6361C03229400DA3F27 /* HotSearchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B6D6351C03229400DA3F27 /* HotSearchButton.m */; };
 		A1B6D6391C03262000DA3F27 /* HotSearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B6D6381C03262000DA3F27 /* HotSearchTableViewCell.m */; };
+		A1C43BF01C11460000AEEB5B /* DownLoadTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C43BEF1C11460000AEEB5B /* DownLoadTableViewController.m */; };
+		A1C43C071C11658400AEEB5B /* DownLoadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C43C061C11658400AEEB5B /* DownLoadTableViewCell.m */; };
+		A1C781681C0DC9D2000F43BC /* resolutionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C781671C0DC9D2000F43BC /* resolutionView.m */; };
+		A1D258C01C0EACDE005A3BEF /* AVItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D258BF1C0EACDE005A3BEF /* AVItemTableViewCell.m */; };
+		A1D258C31C0F032A005A3BEF /* BaseInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D258C21C0F032A005A3BEF /* BaseInfoViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -196,6 +205,12 @@
 		A10A3F7D1C06C6E800274A76 /* ShiBanPlayTableViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShiBanPlayTableViewModel.m; sourceTree = "<group>"; };
 		A10A3F921C06DA6800274A76 /* ShiBanPlayTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShiBanPlayTableViewController.h; sourceTree = "<group>"; };
 		A10A3F931C06DA6800274A76 /* ShiBanPlayTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShiBanPlayTableViewController.m; sourceTree = "<group>"; };
+		A10B298F1C13CF9100463567 /* UserDefaultDownLoadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefaultDownLoadManager.h; sourceTree = "<group>"; };
+		A10B29901C13CF9100463567 /* UserDefaultDownLoadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaultDownLoadManager.m; sourceTree = "<group>"; };
+		A11524121C10689A00AF20C1 /* ShiBanEpisodeCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShiBanEpisodeCollectionViewController.h; sourceTree = "<group>"; };
+		A11524131C10689A00AF20C1 /* ShiBanEpisodeCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShiBanEpisodeCollectionViewController.m; sourceTree = "<group>"; };
+		A11524151C106AAC00AF20C1 /* ShiBanEpisodeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShiBanEpisodeCollectionViewCell.h; sourceTree = "<group>"; };
+		A11524161C106AAC00AF20C1 /* ShiBanEpisodeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShiBanEpisodeCollectionViewCell.m; sourceTree = "<group>"; };
 		A11EFB601C053864000B4D6F /* ic_splash_icon_00000.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_splash_icon_00000.png; sourceTree = "<group>"; };
 		A11EFB611C053864000B4D6F /* ic_splash_icon_00001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_splash_icon_00001.png; sourceTree = "<group>"; };
 		A11EFB621C053864000B4D6F /* ic_splash_icon_00002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_splash_icon_00002.png; sourceTree = "<group>"; };
@@ -475,10 +490,22 @@
 		A195EA541C04891C0099D8A4 /* ShiBanInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShiBanInfoViewController.m; sourceTree = "<group>"; };
 		A1AC2CF91C097BD30044C6C4 /* PlayerSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerSliderView.h; sourceTree = "<group>"; };
 		A1AC2CFA1C097BD30044C6C4 /* PlayerSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerSliderView.m; sourceTree = "<group>"; };
+		A1B541001C12C636006ACA26 /* DownLoadViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownLoadViewModel.h; sourceTree = "<group>"; };
+		A1B541011C12C636006ACA26 /* DownLoadViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownLoadViewModel.m; sourceTree = "<group>"; };
 		A1B6D6341C03229400DA3F27 /* HotSearchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotSearchButton.h; sourceTree = "<group>"; };
 		A1B6D6351C03229400DA3F27 /* HotSearchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotSearchButton.m; sourceTree = "<group>"; };
 		A1B6D6371C03262000DA3F27 /* HotSearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotSearchTableViewCell.h; sourceTree = "<group>"; };
 		A1B6D6381C03262000DA3F27 /* HotSearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotSearchTableViewCell.m; sourceTree = "<group>"; };
+		A1C43BEE1C11460000AEEB5B /* DownLoadTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownLoadTableViewController.h; sourceTree = "<group>"; };
+		A1C43BEF1C11460000AEEB5B /* DownLoadTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownLoadTableViewController.m; sourceTree = "<group>"; };
+		A1C43C051C11658400AEEB5B /* DownLoadTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownLoadTableViewCell.h; sourceTree = "<group>"; };
+		A1C43C061C11658400AEEB5B /* DownLoadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownLoadTableViewCell.m; sourceTree = "<group>"; };
+		A1C781661C0DC9D2000F43BC /* resolutionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = resolutionView.h; sourceTree = "<group>"; };
+		A1C781671C0DC9D2000F43BC /* resolutionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = resolutionView.m; sourceTree = "<group>"; };
+		A1D258BE1C0EACDE005A3BEF /* AVItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVItemTableViewCell.h; sourceTree = "<group>"; };
+		A1D258BF1C0EACDE005A3BEF /* AVItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVItemTableViewCell.m; sourceTree = "<group>"; };
+		A1D258C11C0F032A005A3BEF /* BaseInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseInfoViewController.h; sourceTree = "<group>"; };
+		A1D258C21C0F032A005A3BEF /* BaseInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseInfoViewController.m; sourceTree = "<group>"; };
 		AA45D052281870CB68A872A1 /* libPods-BiliBili.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BiliBili.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29B8EFF4C9AFC44BA8CB642 /* Pods-BiliBili.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BiliBili.release.xcconfig"; path = "Pods/Target Support Files/Pods-BiliBili/Pods-BiliBili.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -649,8 +676,8 @@
 			children = (
 				A17EC2B31C02A2A40030886E /* 首页 */,
 				A17EC2B21C02A27E0030886E /* 视频详情 */,
-				A17EC1871C0293130030886E /* BaseNetManager.m */,
 				A17EC1861C0293130030886E /* BaseNetManager.h */,
+				A17EC1871C0293130030886E /* BaseNetManager.m */,
 			);
 			path = NetManager;
 			sourceTree = "<group>";
@@ -825,6 +852,7 @@
 		A17EC2151C0293270030886E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A1C43C041C11656400AEEB5B /* 下载 */,
 				A17EC2BC1C02A3BF0030886E /* 视频详情 */,
 				A17EC2B91C02A37A0030886E /* 首页 */,
 				A17EC2B81C02A34D0030886E /* 侧边栏 */,
@@ -837,6 +865,7 @@
 		A17EC22E1C0293270030886E /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				A1C43BED1C1145E000AEEB5B /* 下载 */,
 				A17EC2C21C02A4D60030886E /* 侧边栏 */,
 				A17EC2C11C02A4610030886E /* 自定义 */,
 				A17EC2BD1C02A3DA0030886E /* 首页 */,
@@ -848,6 +877,7 @@
 		A17EC25B1C0293270030886E /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				A1B540FF1C12C618006ACA26 /* 下载 */,
 				A17EC2C51C02A5180030886E /* 首页 */,
 				A17EC2C41C02A4FF0030886E /* 视频详情 */,
 				A17EC25E1C0293270030886E /* BaseViewModel.h */,
@@ -920,6 +950,8 @@
 		A17EC2B11C02A25D0030886E /* 其它 */ = {
 			isa = PBXGroup;
 			children = (
+				A10B298F1C13CF9100463567 /* UserDefaultDownLoadManager.h */,
+				A10B29901C13CF9100463567 /* UserDefaultDownLoadManager.m */,
 				A17EC1671C0293130030886E /* ArchiverObj.h */,
 				A17EC1681C0293130030886E /* ArchiverObj.m */,
 				A17EC16D1C0293130030886E /* ColorManager.h */,
@@ -985,8 +1017,8 @@
 				A1AC2CFA1C097BD30044C6C4 /* PlayerSliderView.m */,
 				A18A14B91C08820C00ABA733 /* PlayerUIView.h */,
 				A18A14BA1C08820C00ABA733 /* PlayerUIView.m */,
-				A17EC2C61C02A59A0030886E /* TakeHeadTableView.m */,
 				A17EC2C71C02A59A0030886E /* TakeHeadTableView.h */,
+				A17EC2C61C02A59A0030886E /* TakeHeadTableView.m */,
 				A17EC21C1C0293270030886E /* MyRefreshComplete.h */,
 				A17EC21D1C0293270030886E /* MyRefreshComplete.m */,
 				A17EC22A1C0293270030886E /* StrokeUILabel.h */,
@@ -1043,6 +1075,8 @@
 		A17EC2BC1C02A3BF0030886E /* 视频详情 */ = {
 			isa = PBXGroup;
 			children = (
+				A1D258BE1C0EACDE005A3BEF /* AVItemTableViewCell.h */,
+				A1D258BF1C0EACDE005A3BEF /* AVItemTableViewCell.m */,
 				A17EC2181C0293270030886E /* InvestorTableViewCell.h */,
 				A17EC2191C0293270030886E /* InvestorTableViewCell.m */,
 				A17EC2261C0293270030886E /* ReViewTableViewCell.h */,
@@ -1053,6 +1087,10 @@
 				A11EFBE91C055474000B4D6F /* ShiBanEpisodesTableViewCell.m */,
 				A11EFBEB1C0559BC000B4D6F /* ShiBanIntroduceTableViewCell.h */,
 				A11EFBEC1C0559BC000B4D6F /* ShiBanIntroduceTableViewCell.m */,
+				A11524151C106AAC00AF20C1 /* ShiBanEpisodeCollectionViewCell.h */,
+				A11524161C106AAC00AF20C1 /* ShiBanEpisodeCollectionViewCell.m */,
+				A1C781661C0DC9D2000F43BC /* resolutionView.h */,
+				A1C781671C0DC9D2000F43BC /* resolutionView.m */,
 			);
 			name = "视频详情";
 			sourceTree = "<group>";
@@ -1138,6 +1176,8 @@
 		A17EC2C31C02A4E80030886E /* 视频详情 */ = {
 			isa = PBXGroup;
 			children = (
+				A1D258C11C0F032A005A3BEF /* BaseInfoViewController.h */,
+				A1D258C21C0F032A005A3BEF /* BaseInfoViewController.m */,
 				A17EC22F1C0293270030886E /* AVInfoViewController.h */,
 				A17EC2301C0293270030886E /* AVInfoViewController.m */,
 				A195EA531C04891C0099D8A4 /* ShiBanInfoViewController.h */,
@@ -1146,6 +1186,8 @@
 				A17EC2321C0293270030886E /* AVItemTableViewController.m */,
 				A17EC2571C0293270030886E /* VideoViewController.h */,
 				A17EC2581C0293270030886E /* VideoViewController.m */,
+				A11524121C10689A00AF20C1 /* ShiBanEpisodeCollectionViewController.h */,
+				A11524131C10689A00AF20C1 /* ShiBanEpisodeCollectionViewController.m */,
 			);
 			name = "视频详情";
 			sourceTree = "<group>";
@@ -1178,6 +1220,15 @@
 			name = "首页";
 			sourceTree = "<group>";
 		};
+		A1B540FF1C12C618006ACA26 /* 下载 */ = {
+			isa = PBXGroup;
+			children = (
+				A1B541001C12C636006ACA26 /* DownLoadViewModel.h */,
+				A1B541011C12C636006ACA26 /* DownLoadViewModel.m */,
+			);
+			name = "下载";
+			sourceTree = "<group>";
+		};
 		A1B6D6331C03227800DA3F27 /* 发现 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1187,6 +1238,24 @@
 				A1B6D6381C03262000DA3F27 /* HotSearchTableViewCell.m */,
 			);
 			name = "发现";
+			sourceTree = "<group>";
+		};
+		A1C43BED1C1145E000AEEB5B /* 下载 */ = {
+			isa = PBXGroup;
+			children = (
+				A1C43BEE1C11460000AEEB5B /* DownLoadTableViewController.h */,
+				A1C43BEF1C11460000AEEB5B /* DownLoadTableViewController.m */,
+			);
+			name = "下载";
+			sourceTree = "<group>";
+		};
+		A1C43C041C11656400AEEB5B /* 下载 */ = {
+			isa = PBXGroup;
+			children = (
+				A1C43C051C11658400AEEB5B /* DownLoadTableViewCell.h */,
+				A1C43C061C11658400AEEB5B /* DownLoadTableViewCell.m */,
+			);
+			name = "下载";
 			sourceTree = "<group>";
 		};
 		B2C01D08A40CA668B4063096 /* Frameworks */ = {
@@ -1393,6 +1462,7 @@
 				A17EC2931C0293270030886E /* CellItemViewController.m in Sources */,
 				A195EA4F1C046AAB0099D8A4 /* ShiBanInfoViewModel.m in Sources */,
 				A17EC1B71C0293130030886E /* FindModel.m in Sources */,
+				A10B29911C13CF9100463567 /* UserDefaultDownLoadManager.m in Sources */,
 				A17EC1D21C0293130030886E /* UIImage+Tools.m in Sources */,
 				A17EC2811C0293270030886E /* XML2Dic.m in Sources */,
 				A17EC1CB1C0293130030886E /* NSJSONSerialization+Tools.m in Sources */,
@@ -1403,11 +1473,13 @@
 				A17EC2A81C0293270030886E /* ShinBanViewModel.m in Sources */,
 				A17EC1C01C0293130030886E /* AVInfoNetManager.m in Sources */,
 				A17EC29B1C0293270030886E /* RecommendCollectionViewController.m in Sources */,
+				A1C781681C0DC9D2000F43BC /* resolutionView.m in Sources */,
 				A17EC1C91C0293130030886E /* BarrageDescriptor+Tools.m in Sources */,
 				A17EC2921C0293270030886E /* BaseViewController.m in Sources */,
 				A17EC28F1C0293270030886E /* AVItemTableViewController.m in Sources */,
 				A17EC29E1C0293270030886E /* SettingTableViewController.m in Sources */,
 				A17EC2741C0293270030886E /* BarrageWalkImageSpirit.m in Sources */,
+				A1D258C01C0EACDE005A3BEF /* AVItemTableViewCell.m in Sources */,
 				A17EC1B31C0293130030886E /* AVModel.m in Sources */,
 				A17EC1CA1C0293130030886E /* NSDictionary+Tools.m in Sources */,
 				A17EC2941C0293270030886E /* FindViewController.m in Sources */,
@@ -1441,8 +1513,10 @@
 				A17EC27F1C0293270030886E /* WMProgressView.m in Sources */,
 				A17EC2851C0293270030886E /* MyRefreshComplete.m in Sources */,
 				A10A3F941C06DA6800274A76 /* ShiBanPlayTableViewController.m in Sources */,
+				A1C43BF01C11460000AEEB5B /* DownLoadTableViewController.m in Sources */,
 				A1AC2CFB1C097BD30044C6C4 /* PlayerSliderView.m in Sources */,
 				A17EC2951C0293270030886E /* HomePageViewController.m in Sources */,
+				A1B541021C12C636006ACA26 /* DownLoadViewModel.m in Sources */,
 				A17EC29F1C0293270030886E /* ShinBanViewController.m in Sources */,
 				A17EC1D01C0293130030886E /* UIBezierPath+Tools.m in Sources */,
 				A17EC2A71C0293270030886E /* RecommendViewModel.m in Sources */,
@@ -1453,8 +1527,10 @@
 				A17EC1611C0292C70030886E /* AppDelegate.m in Sources */,
 				A17EC1D51C0293130030886E /* UIViewController+Tools.m in Sources */,
 				A17EC27E1C0293270030886E /* WMMenuView.m in Sources */,
+				A1C43C071C11658400AEEB5B /* DownLoadTableViewCell.m in Sources */,
 				A17EC2A51C0293270030886E /* BaseViewModel.m in Sources */,
 				A17EC26A1C0293270030886E /* BarrageDescriptor.m in Sources */,
+				A11524141C10689A00AF20C1 /* ShiBanEpisodeCollectionViewController.m in Sources */,
 				A17EC2861C0293270030886E /* ProfileHeadView.m in Sources */,
 				A17EC26E1C0293270030886E /* BarrageLoader.m in Sources */,
 				A17EC2A11C0293270030886E /* ThemeTableViewController.m in Sources */,
@@ -1465,6 +1541,7 @@
 				A17EC1B21C0293130030886E /* ArchiverObj.m in Sources */,
 				A17EC2881C0293270030886E /* RecommendCollectionViewCell.m in Sources */,
 				A17EC1C11C0293130030886E /* BaseNetManager.m in Sources */,
+				A1D258C31C0F032A005A3BEF /* BaseInfoViewController.m in Sources */,
 				A195EA551C04891C0099D8A4 /* ShiBanInfoViewController.m in Sources */,
 				A17EC2761C0293270030886E /* BarrageWalkTextSpirit.m in Sources */,
 				A17EC1B41C0293130030886E /* BaseModel.m in Sources */,
@@ -1492,6 +1569,7 @@
 				A10A3F7B1C06C43700274A76 /* ShiBanPlayTableModel.m in Sources */,
 				A17EC26D1C0293270030886E /* BarrageSpiritFactory.m in Sources */,
 				A17EC1BF1C0293130030886E /* VideoModel.m in Sources */,
+				A11524171C106AAC00AF20C1 /* ShiBanEpisodeCollectionViewCell.m in Sources */,
 				A17EC28C1C0293270030886E /* StrokeUILabel.m in Sources */,
 				A17EC2841C0293270030886E /* MoreViewCell.m in Sources */,
 			);
@@ -1635,7 +1713,7 @@
 				A17EC15B1C0292980030886E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		A17EC15C1C0292980030886E /* Build configuration list for PBXNativeTarget "BiliBili" */ = {
 			isa = XCConfigurationList;
@@ -1644,7 +1722,7 @@
 				A17EC15E1C0292980030886E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

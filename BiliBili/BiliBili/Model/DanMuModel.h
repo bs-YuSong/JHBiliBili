@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "BaseModel.h"
 
-@interface DanMuModel : NSObject
+@interface DanMuModel : BaseModel
 @property (nonatomic, strong) NSNumber* sendTime;
 @property (nonatomic, strong) NSNumber* style;
 @property (nonatomic, strong) NSNumber* fontSize;

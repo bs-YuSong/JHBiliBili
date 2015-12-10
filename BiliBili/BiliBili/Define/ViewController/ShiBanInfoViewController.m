@@ -9,21 +9,13 @@
 #import "ShiBanInfoViewController.h"
 #import "ShiBanInfoViewModel.h"
 #import "ShinBanModel.h"
+#import "VideoViewController.h"
 #import "TakeHeadTableView.h"
 #import "AVItemTableViewController.h"
-#import "JHViewController.h"
-#import "WMMenuView.h"
-#import "VideoViewController.h"
+#import "ShiBanEpisodesTableViewCell.h"
+#import "ShiBanEpisodeCollectionViewController.h"
 
-#define MENEVIEWHEIGHT 40
-
-#define MAXOFFSET self.tableView.tableHeaderView.frame.size.height
-
-#define MINOFFSET 0
-
-#define EDGE 10
-
-@interface ShiBanInfoViewController ()<UITableViewDelegate, UITableViewDataSource,JHViewControllerDelegate,WMMenuViewDelegate>
+@interface ShiBanInfoViewController ()
 #pragma mark - 新番属性
 @property (nonatomic, strong) UIImageView *shiBanCoverImgView;
 @property (nonatomic, strong) UILabel *shiBanLabel;
@@ -33,13 +25,7 @@
 @property (nonatomic, strong) UILabel *shiBanDanMuLabel;
 @property (nonatomic, strong) UILabel *shiBanUpDateLabel;
 @property (nonatomic, strong) UIButton *shiBanPlayButton;
-@property (nonatomic, strong) ShiBanInfoViewModel* svm;
-@property (nonatomic, strong) TakeHeadTableView* tableView;
-@property (nonatomic, strong) WMMenuView* menuView;
-@property (nonatomic, strong) NSMutableArray<AVItemTableViewController*>* controllers;
-@property (nonatomic, strong) JHViewController* pageViewController;
-//顶部状态栏空间
-@property (nonatomic, strong) NSValue* topFrame;
+@property (nonatomic, strong) ShiBanEpisodeCollectionViewController *sevc;
 @end
 
 @implementation ShiBanInfoViewController
@@ -51,83 +37,63 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setUpProperty];
-    
-    self.tableView.mj_header = [MyRefreshComplete myRefreshHead:^{
-        [self.svm refreshDataCompleteHandle:^(NSError *error) {
-            [self.tableView.mj_header endRefreshing];
-            [self setUpProperty];
-            [self.tableView reloadData];
-            for (UITableViewController* c in self.controllers) {
-                [c.tableView reloadData];
-            }
-            if (error) {
-                [self showErrorMsg:kerrorMessage];
-            }
-        }];
-    }];
-    [self.tableView.mj_header beginRefreshing];
+    //初始化属性
+    [self setProperty];
+    //[self setUpDownLoadProperty];
 }
 
+#pragma mark - 方法
 - (void)setWithModel:(RecommentShinBanDataModel*)model{
-    [self.svm setAVData:model];
+    self.vm = [[ShiBanInfoViewModel alloc] init];
+    self.navigationItem.title = model.title;
+    [self.vm setAVData:model];
 }
 
-- (void)setUpProperty{
-    [self addChildViewController:self.pageViewController];
-    [self.shiBanCoverImgView setImageWithURL: [self.svm shiBanCover]];
-    self.shiBanLabel.text = [self.svm shiBanTitle];
-    self.shiBanPlayLabel.text = [self.svm shinBanInfoPlayNum];
-    self.shiBanDanMuLabel.text = [self.svm shinBanInfodanMuNum];
-    self.shiBanUpDateLabel.text = [self.svm shinBanInfoUpdateTime];
-    [self.shiBanPlayButton setTitle:[self.svm indexToTitle] == nil?@"N/A":[NSString stringWithFormat:@"播放第%@话",[self.svm indexToTitle]] forState:UIControlStateNormal];
+- (void)setProperty{
+    [self.shiBanCoverImgView setImageWithURL: [self.vm shiBanCover]];
+    self.shiBanLabel.text = [self.vm shiBanTitle];
+    self.shiBanPlayLabel.text = [self.vm shinBanInfoPlayNum];
+    self.shiBanDanMuLabel.text = [self.vm shinBanInfodanMuNum];
+    self.shiBanUpDateLabel.text = [self.vm shinBanInfoUpdateTime];
+    [self.shiBanPlayButton setTitle:[self.vm indexToTitle] == nil?@"N/A":[NSString stringWithFormat:@"播放第%@话",[self.vm indexToTitle]] forState:UIControlStateNormal];
 }
 
 - (void)updateButtonTitleAndPlay:(NSNotification *)notification{
-    [self.shiBanPlayButton setTitle:[NSString stringWithFormat:@"播放第%@话",[self.svm indexToTitle]] forState:UIControlStateNormal];
-    VideoViewController* vc =[[VideoViewController alloc] initWithAid: [self.svm videoAid]];
+    [self.vm setCurrentEpisode: notification.userInfo[@"title"]];
+    [self.shiBanPlayButton setTitle:[NSString stringWithFormat:@"播放第%@话",[self.vm indexToTitle]] forState:UIControlStateNormal];
+    VideoViewController* vc =[[VideoViewController alloc] initWithAid: [self.vm videoAid]];
     [self presentViewController:vc animated:YES completion:nil];
-    //[self.navigationController pushViewController: vc animated:YES];
 }
 
-- (void)setChildrenScrollEnabled{
-    for (AVItemTableViewController* vc in self.controllers) {
-        vc.tableView.scrollEnabled = YES;
-    }
-}
-
-
-
-#pragma mark - UITableView
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"avInfoCell"];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:0 reuseIdentifier:@"avInfoCell"];
-    }
-    cell.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"backgroundColor"];
-    UIView* v =  [cell viewWithTag: 100];
-    if (v == nil) {
-        self.pageViewController.view.tag = 100;
-        [cell.contentView addSubview: self.pageViewController.view];
-        [self.pageViewController.view mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.edges.mas_equalTo(0);
+- (void)setOtherProperty{
+    if ([self.downLoadView viewWithTag: 12] == nil) {
+        self.sevc.view.tag = 12;
+        [self.downLoadView addSubview: self.sevc.view];
+        [self.sevc.view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.right.mas_equalTo(0);
+            make.bottom.mas_equalTo([self.downLoadView viewWithTag:11].mas_top);
         }];
     }
-    return cell;
+    [self.sevc.collectionView reloadData];
 }
+
+- (NSArray *)allEpisode{
+    NSArray<episodesModel *>* episodes = [self.vm shinBanInfoEpisode];
+    NSMutableArray* tempArr = [NSMutableArray array];
+    [episodes enumerateObjectsUsingBlock:^(episodesModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [tempArr addObject: @{@"aid":obj.av_id,@"quality":self.resolution,@"cid":obj.av_cid,@"title":obj.index_title}];
+    }];
+    return tempArr;
+}
+
+#pragma mark - UITableViewController
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    NSArray* arr = @[@"承包商排行",@"番剧详情",[NSString stringWithFormat:@"评论(%ld)",(long)[self.svm allReply]]];
+    NSArray* arr = @[@"承包商排行",@"番剧详情",[NSString stringWithFormat:@"评论(%ld)",(long)[self.vm allReply]]];
     
     WMMenuView* menuView = [[WMMenuView alloc] initWithFrame:CGRectMake(0, 0, kWindowW, 30) buttonItems:arr backgroundColor:[[ColorManager shareColorManager] colorWithString:@"AVInfoViewController.menuView.backgroundColor"] norSize:15 selSize:15 norColor:[[ColorManager shareColorManager] colorWithString:@"textColor"] selColor:[[ColorManager shareColorManager] colorWithString:@"AVInfoViewController.menuView.selColor"]];
     menuView.lineColor = [[ColorManager shareColorManager] colorWithString:@"AVInfoViewController.menuView.lineColor"];
@@ -137,18 +103,8 @@
     return menuView;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return MENEVIEWHEIGHT;
-}
 
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return kWindowH - [self.topFrame CGRectValue].size.height - MENEVIEWHEIGHT;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
-}
 
 #pragma mark - 懒加载
 
@@ -172,12 +128,11 @@
         _shiBanLabel.numberOfLines = 2;
         _shiBanLabel.textColor = [[ColorManager shareColorManager] colorWithString:@"textColor"];
         [self.tableView.tableHeaderView addSubview: _shiBanLabel];
-        __weak typeof(self)weakObj = self;
         [_shiBanLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(weakObj.shiBanCoverImgView);
-            make.left.mas_equalTo(weakObj.shiBanCoverImgView.mas_right).mas_offset(10);
+            make.top.equalTo(self.shiBanCoverImgView);
+            make.left.mas_equalTo(self.shiBanCoverImgView.mas_right).mas_offset(10);
             make.right.mas_offset(-10);
-            make.bottom.mas_equalTo(weakObj.shiBanPlayIcon.mas_top).mas_offset(-10);
+            make.bottom.mas_equalTo(self.shiBanPlayIcon.mas_top).mas_offset(-10);
         }];
     }
     return _shiBanLabel;
@@ -189,12 +144,11 @@
         _shiBanPlayIcon = [[UIImageView alloc] initWithImage: img];
         _shiBanPlayIcon.tintColor = [UIColor grayColor];
         [self.tableView.tableHeaderView addSubview: _shiBanPlayIcon];
-        __weak typeof(self)weakObj = self;
         [_shiBanPlayIcon mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(13);
             make.height.mas_equalTo(10);
-            make.left.equalTo(weakObj.shiBanLabel);
-            make.right.mas_equalTo(weakObj.shiBanPlayLabel.mas_left).mas_offset(-2);
+            make.left.equalTo(self.shiBanLabel);
+            make.right.mas_equalTo(self.shiBanPlayLabel.mas_left).mas_offset(-2);
         }];
     }
     return _shiBanPlayIcon;
@@ -208,12 +162,11 @@
         _shiBandanMuIcon = [[UIImageView alloc] initWithImage: img];
         _shiBandanMuIcon.tintColor = [UIColor grayColor];
         [self.tableView.tableHeaderView addSubview: _shiBandanMuIcon];
-        __weak typeof(self)weakObj = self;
         [_shiBandanMuIcon mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(13);
             make.height.mas_equalTo(10);
-            make.centerY.equalTo(weakObj.shiBanPlayIcon);
-            make.right.mas_equalTo(weakObj.shiBanDanMuLabel.mas_left).mas_offset(-2);
+            make.centerY.equalTo(self.shiBanPlayIcon);
+            make.right.mas_equalTo(self.shiBanDanMuLabel.mas_left).mas_offset(-2);
         }];
     }
     return _shiBandanMuIcon;
@@ -225,10 +178,9 @@
         _shiBanPlayLabel.font = [UIFont systemFontOfSize: 10];
         _shiBanPlayLabel.textColor = [[ColorManager shareColorManager] colorWithString:@"textColor"];
         [self.tableView.tableHeaderView addSubview: _shiBanPlayLabel];
-        __weak typeof(self)weakObj = self;
         [_shiBanPlayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(weakObj.shiBanPlayIcon);
-            make.right.mas_equalTo(weakObj.shiBandanMuIcon.mas_left).mas_offset(-10);
+            make.centerY.equalTo(self.shiBanPlayIcon);
+            make.right.mas_equalTo(self.shiBandanMuIcon.mas_left).mas_offset(-10);
         }];
     }
     return _shiBanPlayLabel;
@@ -241,11 +193,10 @@
         _shiBanDanMuLabel.textColor = [[ColorManager shareColorManager] colorWithString:@"textColor"];
         _shiBanDanMuLabel.font = [UIFont systemFontOfSize: 10];
         [self.tableView.tableHeaderView addSubview: _shiBanDanMuLabel];
-        __weak typeof(self)weakObj = self;
         [_shiBanDanMuLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(weakObj.shiBanPlayIcon);
-            make.right.mas_equalTo(weakObj.shiBanPlayButton.mas_left).mas_equalTo(-10);
-            make.bottom.mas_equalTo(weakObj.shiBanUpDateLabel.mas_top).mas_offset(-10);
+            make.centerY.equalTo(self.shiBanPlayIcon);
+            make.right.mas_equalTo(self.shiBanPlayButton.mas_left).mas_equalTo(-10);
+            make.bottom.mas_equalTo(self.shiBanUpDateLabel.mas_top).mas_offset(-10);
         }];
     }
     return _shiBanDanMuLabel;
@@ -257,10 +208,9 @@
         _shiBanUpDateLabel.textColor = [[ColorManager shareColorManager] colorWithString:@"textColor"];
         _shiBanUpDateLabel.font = [UIFont systemFontOfSize: 11];
         [self.tableView.tableHeaderView addSubview: _shiBanUpDateLabel];
-        __weak typeof(self)weakObj = self;
         [_shiBanUpDateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(weakObj.shiBanPlayIcon);
-            make.right.mas_equalTo(weakObj.shiBanPlayButton.mas_left).mas_offset(-10);
+            make.left.equalTo(self.shiBanPlayIcon);
+            make.right.mas_equalTo(self.shiBanPlayButton.mas_left).mas_offset(-10);
         }];
     }
     return _shiBanUpDateLabel;
@@ -275,59 +225,37 @@
         _shiBanPlayButton.titleLabel.numberOfLines = 0;
         _shiBanPlayButton.titleLabel.textAlignment = NSTextAlignmentCenter;
         _shiBanPlayButton.layer.masksToBounds = YES;
+        __weak typeof(self)weakSelf = self;
         [_shiBanPlayButton bk_addEventHandler:^(id sender) {
-            [self updateButtonTitleAndPlay:nil];
+            [weakSelf updateButtonTitleAndPlay:nil];
         } forControlEvents:UIControlEventTouchUpInside];
         [self.tableView.tableHeaderView addSubview: _shiBanPlayButton];
-        __weak typeof(self)weakObj = self;
         [_shiBanPlayButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(73.5);
             make.height.mas_equalTo(37);
             make.right.mas_offset(-10);
-            make.centerY.equalTo(weakObj.shiBanCoverImgView);
+            make.centerY.equalTo(self.shiBanCoverImgView);
         }];
         
     }
     return _shiBanPlayButton;
 }
 
-- (TakeHeadTableView *)tableView{
-    if (_tableView == nil) {
-        _tableView = [[TakeHeadTableView alloc] initWithHeadHeight:kWindowW * 0.4 + 30];
-        _tableView.showsVerticalScrollIndicator = NO;
-        _tableView.tableFooterView = [UIView new];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        [self.view addSubview: _tableView];
-        __weak typeof(self) weakObj = self;
-        [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(weakObj.view);
-        }];
-    }
-    return _tableView;
-}
-
-- (ShiBanInfoViewModel *) svm {
-    if(_svm == nil) {
-        _svm = [[ShiBanInfoViewModel alloc] init];
-    }
-    return _svm;
-}
 
 - (NSMutableArray *)controllers{
     if (_controllers == nil) {
         _controllers = [NSMutableArray array];
         
-        AVItemTableViewController* inverstorVC = [[AVItemTableViewController alloc] initWithVM:self.svm cellIdentity:@"InvestorTableViewCell" storyBoardIndentity:@"AVItemTableViewController" parentTableView:self.tableView];
+        AVItemTableViewController* inverstorVC = [[AVItemTableViewController alloc] initWithVM:self.vm cellIdentitys:@[@"InvestorTableViewCell"]];
         [_controllers addObject:inverstorVC];
         
-        AVItemTableViewController* avInfoVC = [[AVItemTableViewController alloc] initWithVM:self.svm cellIdentity:@"shiBanInfoCell" storyBoardIndentity:@"AVItemTableViewController" parentTableView:self.tableView];
+        AVItemTableViewController* avInfoVC = [[AVItemTableViewController alloc] initWithVM:self.vm cellIdentitys:@[@"ShiBanEpisodesTableViewCell",@"ShiBanIntroduceTableViewCell"]];
         [_controllers addObject:avInfoVC];
         
-        AVItemTableViewController* replyVC = [[AVItemTableViewController alloc] initWithVM:self.svm cellIdentity:@"ReViewTableViewCell" storyBoardIndentity:@"AVItemTableViewController"  parentTableView:self.tableView];
+        AVItemTableViewController* replyVC = [[AVItemTableViewController alloc] initWithVM:self.vm cellIdentitys:@[@"ReViewTableViewCell"]];
         //添加脚部刷新
         replyVC.tableView.mj_footer = [MyRefreshComplete myRefreshFoot:^{
-            [self.svm getMoveReplyCompleteHandle:^(NSError *error) {
+            [self.vm getMoveReplyCompleteHandle:^(NSError *error) {
                 [replyVC.tableView.mj_footer endRefreshing];
                 [replyVC.tableView reloadData];
                 if (error) {
@@ -337,51 +265,16 @@
         }];
         
         [_controllers addObject:replyVC];
-        
-        
     }
     return _controllers;
 }
 
-- (JHViewController *)pageViewController{
-    if (_pageViewController == nil) {
-        _pageViewController = [[JHViewController alloc] initWithControllers:[self.controllers copy]];
-        _pageViewController.delegate = self;
+- (ShiBanEpisodeCollectionViewController *)sevc{
+    if(_sevc == nil) {
+        _sevc = [[ShiBanEpisodeCollectionViewController alloc] initWithCollectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
+        _sevc.episodes = [self.vm shinBanInfoEpisode];
     }
-    return _pageViewController;
-}
-
-- (NSValue *)topFrame{
-    if (_topFrame == nil) {
-        CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
-        CGRect rectNav = self.navigationController.navigationBar.frame;
-        rectStatus.size.height += rectNav.size.height;
-        _topFrame = [NSValue valueWithCGRect: rectStatus];
-    }
-    return _topFrame;
-}
-
-#pragma mark - JHViewController
-
-- (void)JHViewGetOffset:(CGPoint)offset{
-    [self.menuView slideMenuAtProgress: offset.x / self.menuView.frame.size.width];
-}
-
-#pragma mark - WMMenuView
-- (CGFloat)menuView:(WMMenuView *)menu widthForItemAtIndex:(NSInteger)index{
-    return self.view.frame.size.width / 3;
-}
-- (void)menuView:(WMMenuView *)menu didSelesctedIndex:(NSInteger)index currentIndex:(NSInteger)currentIndex{
-    [self.pageViewController setScrollViewPage:index];
-}
-
-#pragma mark - UIScrollerView
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    if(scrollView.contentOffset.y > MAXOFFSET){
-        [scrollView setContentOffset:CGPointMake(0, MAXOFFSET)];
-        scrollView.scrollEnabled = NO;
-        [self setChildrenScrollEnabled];
-    }
+    return _sevc;
 }
 
 @end

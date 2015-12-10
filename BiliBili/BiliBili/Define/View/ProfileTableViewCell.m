@@ -27,16 +27,15 @@
         self.imgView.tintColor = kRGBColor(129, 129, 129);
         [self.contentView addSubview: self.titleLabel];
         [self.contentView addSubview: self.imgView];
-        __weak typeof(self) weakObj = self;
         
         [self.imgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.height.mas_equalTo(weakObj.contentView.mas_height).mas_offset(-20);
-            make.centerY.equalTo(weakObj.contentView);
-            make.left.equalTo(weakObj.contentView).mas_offset(10);
+            make.width.height.mas_equalTo(self.contentView.mas_height).mas_offset(-20);
+            make.centerY.equalTo(self.contentView);
+            make.left.equalTo(self.contentView).mas_offset(10);
         }];
         [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.bottom.right.equalTo(weakObj.contentView);
-            make.left.mas_equalTo(weakObj.imgView.mas_right).mas_offset(20);
+            make.top.bottom.right.equalTo(self.contentView);
+            make.left.mas_equalTo(self.imgView.mas_right).mas_offset(20);
         }];
     }
     return self;

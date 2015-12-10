@@ -9,6 +9,7 @@
 #import "AVInfoNetManager.h"
 #import "NSString+Tools.h"
 #import "NSDictionary+Tools.h"
+#import "VideoNetManager.h"
 
 @implementation AVInfoNetManager
 //获取回复
@@ -63,6 +64,40 @@
         NSString* str = [[[NSString alloc] initWithData:responseObj encoding:NSUTF8StringEncoding] subStringsWithRegularExpression:@"\\{.*\\}"].firstObject;
         NSDictionary* js = [NSJSONSerialization json2DicWithData:[str dataUsingEncoding:NSUTF8StringEncoding]];
         complete([ShinBanInfoModel mj_objectWithKeyValues: js], error);
+    }];
+}
+
++ (id)DownVideoWithDic:(NSDictionary*)dic completionHandler:(void(^)(id responseObj, NSError *error))complete{
+    VideoModel *vm = dic[@"vm"];
+    NSString *quality = dic[@"quality"];
+    NSData *resumeData = [dic[@"resumeData"] isEqualToString:@""]?nil:[dic[@"resumeData"] dataUsingEncoding: NSUTF8StringEncoding];
+    NSString* aid = dic[@"aid"];
+    
+    return [VideoNetManager DownDanMuWithParameter:vm.durl.firstObject.cid completionHandler:^(NSDictionary *danmuObj, NSError *error) {
+        NSString* path = nil;
+        if ([quality isEqualToString:@"high"]) {
+            path = vm.durl.firstObject.url;
+        }else if ([quality isEqualToString:@"normal"]){
+            path = vm.durl.firstObject.backup_url.firstObject;
+        }else{
+            path = vm.durl.firstObject.backup_url.lastObject;
+        }
+        //对下载路径进行非空判断
+        if (path == nil) {
+            NSLog(@"请求失败");
+            return;
+        }else{
+            NSLog(@"请求成功");
+        }
+        
+        [self downLoad:path parameters:@{@"aid": aid} resumeData:resumeData completionHandler:^(NSURL *downLoadPathObj, NSError *error) {
+            //path存在 返回下载路径
+            if (downLoadPathObj.path) {
+                complete(@{@"danmuobj":danmuObj,@"status":@"downloadover",@"videopath":[downLoadPathObj.path lastPathComponent]}, nil);
+            }
+            NSLog(@"%@", downLoadPathObj);
+        }];
+        
     }];
 }
 

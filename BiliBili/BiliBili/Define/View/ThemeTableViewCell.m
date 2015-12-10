@@ -11,7 +11,6 @@
 @implementation ThemeTableViewCell
 - (instancetype)initWithTitle:(NSString*)title reuseIdentifier:(NSString*)reuseIdentifier{
     if (self = [super initWithStyle:0 reuseIdentifier:reuseIdentifier]) {
-        __weak typeof(self)weakObj = self;
         
         UIView* v = [[UIView alloc] init];
         v.backgroundColor = [[ColorManager shareColorManager] theme:title colorWithString:@"themeColor"];
@@ -19,7 +18,7 @@
         v.layer.masksToBounds = YES;
         [self addSubview: v];
         [v mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(weakObj.mas_centerY);
+            make.centerY.mas_offset(0);
             make.left.mas_offset(10);
             make.width.height.mas_equalTo(16);
         }];
@@ -34,7 +33,7 @@
         label.font = [UIFont systemFontOfSize: 14];
         [self addSubview: label];
         [label mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(weakObj);
+            make.centerY.mas_offset(0);
             make.left.equalTo(v.mas_right).mas_offset(10);
         }];
     }

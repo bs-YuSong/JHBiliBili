@@ -7,9 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ShiBanIntroduceTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *introduceLabel;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+#import "AVItemTableViewCell.h"
+@interface ShiBanIntroduceTableViewCell : AVItemTableViewCell
 - (void)setUpWithIntroduce:(NSString*)introduce;
 @end

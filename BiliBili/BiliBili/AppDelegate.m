@@ -71,8 +71,9 @@
         UIButton* homeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, self.vc.navigationController.navigationBar.frame.size.height, 10, 20)];
         homeButton.tag = 1000;
         [homeButton setImage:[UIImage imageNamed:@"ic_drawer_home"] forState:UIControlStateNormal];
+        __weak typeof(self)weakSelf = self;
         [homeButton bk_addEventHandler:^(id sender) {
-            [self.vc profileViewMoveToDestination];
+            [weakSelf.vc profileViewMoveToDestination];
         } forControlEvents:UIControlEventTouchUpInside];
         [_nav.view addSubview:homeButton];
     }
@@ -135,10 +136,11 @@
 
 - (void)animationEnd{
     self.arr = nil;
+    __weak typeof(self)weakSelf = self;
     [UIView animateWithDuration:0.8 animations:^{
-        self.view.alpha = 0;
+        weakSelf.view.alpha = 0;
     } completion:^(BOOL finished) {
-        [self.view removeFromSuperview];
+        [weakSelf.view removeFromSuperview];
     }];
 }
 

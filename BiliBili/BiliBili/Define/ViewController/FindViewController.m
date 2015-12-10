@@ -59,9 +59,8 @@
     [super viewDidLoad];
     [self.view addSubview: self.tableView];
     
-    __weak typeof(self)weakObj = self;
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(weakObj.view);
+        make.edges.equalTo(self.view);
     }];
     
     //为了调用懒加载而已
@@ -169,11 +168,10 @@
 		_allSectionRangeButton = [[UIButton alloc] init];
         [_allSectionRangeButton setBackgroundImage:[UIImage imageNamed:@"763b819c9a7dc5e09368a96e5c8d75da"] forState:UIControlStateNormal];
         [self.tableView.tableHeaderView addSubview: _allSectionRangeButton];
-        __weak typeof(self)weakObj = self;
         [_allSectionRangeButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.mas_offset(EDGE);
             make.height.mas_equalTo(_allSectionRangeButton.mas_width).multipliedBy(0.46);
-            make.size.equalTo(weakObj.originateRangeButton);
+            make.size.equalTo(self.originateRangeButton);
         }];
 	}
 	return _allSectionRangeButton;
@@ -184,11 +182,10 @@
 	if(_originateRangeButton == nil) {
 		_originateRangeButton = [[UIButton alloc] init];
         [_originateRangeButton setBackgroundImage:[UIImage imageNamed:@"83899f035f7a3ec866a77478773b5f48"] forState:UIControlStateNormal];
-        __weak typeof(self)weakObj = self;
         [self.tableView.tableHeaderView addSubview: _originateRangeButton];
         [_originateRangeButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(weakObj.allSectionRangeButton);
-            make.left.mas_equalTo(weakObj.allSectionRangeButton.mas_right).mas_offset(EDGE);
+            make.top.equalTo(self.allSectionRangeButton);
+            make.left.mas_equalTo(self.allSectionRangeButton.mas_right).mas_offset(EDGE);
             make.right.mas_offset(-EDGE);
         }];
 	}
@@ -199,13 +196,12 @@
 	if(_hotSearchLeftButton == nil) {
 		_hotSearchLeftButton = [[HotSearchButton alloc] initWithKeyWord:[self.vm coverKeyWordForNum:0]];
         [_hotSearchLeftButton setBackgroundImageForState:UIControlStateNormal withURL:[self.vm rankCoverForNum:0]];
-        __weak typeof(self)weakObj = self;
         [self.tableView.tableHeaderView addSubview: _hotSearchLeftButton];
         [_hotSearchLeftButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(weakObj.allViewLabel.mas_bottom).mas_offset(EDGE);
-            make.left.equalTo(weakObj.allViewLabel);
+            make.top.mas_equalTo(self.allViewLabel.mas_bottom).mas_offset(EDGE);
+            make.left.equalTo(self.allViewLabel);
             make.height.mas_equalTo(_hotSearchLeftButton.mas_width).multipliedBy(0.63);
-            make.size.equalTo(weakObj.hotSearchRightButton);
+            make.size.equalTo(self.hotSearchRightButton);
         }];
 	}
 	return _hotSearchLeftButton;
@@ -215,11 +211,10 @@
 	if(_hotSearchRightButton == nil) {
 		_hotSearchRightButton = [[HotSearchButton alloc] initWithKeyWord:[self.vm coverKeyWordForNum:1]];
          [_hotSearchRightButton setBackgroundImageForState:UIControlStateNormal withURL:[self.vm rankCoverForNum:1]];
-        __weak typeof(self)weakObj = self;
         [self.tableView.tableHeaderView addSubview: _hotSearchRightButton];
         [_hotSearchRightButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(weakObj.hotSearchLeftButton.mas_right).mas_offset(EDGE);
-            make.top.equalTo(weakObj.hotSearchLeftButton);
+            make.left.mas_equalTo(self.hotSearchLeftButton.mas_right).mas_offset(EDGE);
+            make.top.equalTo(self.hotSearchLeftButton);
             make.right.mas_offset(-EDGE);
         }];
 	}
@@ -230,11 +225,10 @@
 	if(_allViewLabel == nil) {
 		_allViewLabel = [[UILabel alloc] init];
         _allViewLabel.font = [UIFont systemFontOfSize: 13];
-        __weak typeof(self)weakObj = self;
         [self.tableView.tableHeaderView addSubview: _allViewLabel];
         [_allViewLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(weakObj.allSectionRangeButton.mas_bottom).mas_offset(EDGE);
-            make.left.equalTo(weakObj.allSectionRangeButton);
+            make.top.mas_equalTo(self.allSectionRangeButton.mas_bottom).mas_offset(EDGE);
+            make.left.equalTo(self.allSectionRangeButton);
         }];
 	}
 	return _allViewLabel;

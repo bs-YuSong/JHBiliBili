@@ -20,7 +20,7 @@
 //    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"fvcell"];
 //
     //排行
-    NSMutableAttributedString* str = [[NSMutableAttributedString alloc] initWithString: [NSString stringWithFormat:@"%ld", index.row + 1]];
+    NSMutableAttributedString* str = [[NSMutableAttributedString alloc] initWithString: [NSString stringWithFormat:@"%ld", (long)(index.row + 1)]];
     //排行前三添加其它标识颜色
     [str setAttributes:@{NSForegroundColorAttributeName:[[ColorManager shareColorManager] colorWithString: index.row <= 2?@"FindViewController.hotTextColor":@"textColor"]} range:NSMakeRange(0, str.length)];
     //之后的关键词

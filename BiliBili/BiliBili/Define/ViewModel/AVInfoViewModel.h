@@ -9,10 +9,21 @@
 #import "BaseViewModel.h"
 #import "AVInfoNetManager.h"
 #import "AVModel.h"
+@class episodesModel;
 /**
  *  视频详情子项
  */
 @interface AVInfoViewModel : BaseViewModel
+//相关视频数组
+@property (nonatomic, strong) NSMutableArray <sameVideoDataModel*>* sameVideoList;
+//回复数组
+@property (nonatomic, strong) NSMutableArray <ReplyDataModel*>* replyList;
+//tag数组
+@property (nonatomic, strong) NSMutableArray <TagDataModel*>* tagList;
+
+//存放视频详情 例如up名 播放数
+@property (nonatomic, strong) AVDataModel* AVData;
+
 //相关视频
 - (NSURL*)sameVideoPicForRow:(NSInteger)row;
 - (NSString*)sameVideoTitleForRow:(NSInteger)row;
@@ -42,28 +53,10 @@
 - (NSString*)infoDanMuCount;
 - (NSString*)infoTime;
 
-
 //视频详情
 - (NSString*)infoBrief;
 - (NSAttributedString*)infoTags;
 - (NSString*)videoAid;
-
-//相关视频数组
-@property (nonatomic, strong) NSMutableArray <sameVideoDataModel*>* sameVideoList;
-//回复数组
-@property (nonatomic, strong) NSMutableArray <ReplyDataModel*>* replyList;
-//tag数组
-@property (nonatomic, strong) NSMutableArray <TagDataModel*>* tagList;
-
-//存放视频详情 例如up名 播放数
-@property (nonatomic, strong) AVDataModel* AVData;
-
-- (void)setAVData:(AVDataModel *)AVData section:(NSString*)section;
-//判断是不是新番
-- (BOOL)isShiBan;
-
-- (void)refreshDataCompleteHandle:(void(^)(NSError *error))complete;
-- (void)getMoveReplyCompleteHandle:(void(^)(NSError *error))complete;
 
 //承包商排行
 - (NSURL*)investorIconForRow:(NSInteger)row;
@@ -71,5 +64,16 @@
 - (NSString*)investorMessageForRow:(NSInteger)row;
 - (NSInteger)investorRankForRow:(NSInteger)row;
 - (NSInteger)investorCount;
+
+//其它
+- (episodesModel*)AVModel2EpisodesModel;
+
+- (void)setAVData:(AVDataModel *)AVData section:(NSString*)section;
+//判断是不是新番
+- (BOOL)isShiBan;
+
+- (void)refreshDataCompleteHandle:(void(^)(NSError *error))complete;
+- (void)getMoveReplyCompleteHandle:(void(^)(NSError *error))complete;
+- (void)downLoadVideoWithAidArray:(NSArray*)aidArray CompleteHandle:(void(^)(id responseObj,NSError *error))complete;
 
 @end

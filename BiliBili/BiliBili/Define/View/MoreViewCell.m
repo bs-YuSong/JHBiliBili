@@ -51,9 +51,8 @@
         }
         
         [self addSubview: _vc.view];
-        __weak typeof(self) weakObj = self;
         [_vc.view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(weakObj);
+            make.edges.mas_equalTo(0);
         }];
         [self makeConstraintsWithViews: _vc.childViewControllers];
     }
@@ -65,9 +64,8 @@
     UIView* v2 = views[1].view;
     UIView* v3 = views[2].view;
     UIView* v4 = views[3].view;
-    __weak typeof(self)weakObj = self;
     [v1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(weakObj.allViewIcon.mas_bottom).mas_offset(EDGE);
+        make.top.mas_equalTo(self.allViewIcon.mas_bottom).mas_offset(EDGE);
         make.left.mas_offset(EDGE);
         make.size.equalTo(@[v2,v3,v4]);
     }];
@@ -98,10 +96,9 @@
         _allViewLabel.lineBreakMode = NSLineBreakByClipping;
         _allViewLabel.font = [UIFont systemFontOfSize: 13];
         [self addSubview: _allViewLabel];
-        __weak typeof(self)weakObj = self;
         [_allViewLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(weakObj.allViewIcon);
-            make.left.mas_equalTo(weakObj.allViewIcon.mas_right).mas_offset(10);
+            make.centerY.equalTo(self.allViewIcon);
+            make.left.mas_equalTo(self.allViewIcon.mas_right).mas_offset(10);
         }];
     }
     return _allViewLabel;
@@ -126,10 +123,9 @@
         _enterLabel.text = @"进去看看";
         _enterLabel.font = [UIFont systemFontOfSize: 13];
         [self addSubview: _enterLabel];
-        __weak typeof(self)weakObj = self;
         [_enterLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_offset(-10);
-            make.centerY.equalTo(weakObj.allViewIcon);
+            make.centerY.equalTo(self.allViewIcon);
         }];
     }
     return _enterLabel;

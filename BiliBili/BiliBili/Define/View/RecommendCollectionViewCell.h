@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface RecommendCollectionViewCell : UICollectionViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *imgView;
-@property (weak, nonatomic) IBOutlet UILabel *Label;
+//@property (weak, nonatomic) IBOutlet UIImageView *imgView;
+//@property (weak, nonatomic) IBOutlet UILabel *Label;
+@property (strong, nonatomic) UIImageView *imgView;
+@property (strong, nonatomic) UILabel *Label;
 
 @end

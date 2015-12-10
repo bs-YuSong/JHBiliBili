@@ -10,6 +10,7 @@
 static NSMutableDictionary* dic = nil;
 
 @implementation ArchiverObj
+#pragma mark - 归档
 + (void)archiveWithObj:(id)obj{
     [self archiveWithObj:obj key:[NSString stringWithCString:object_getClassName(obj) encoding:NSUTF8StringEncoding]];
 }
@@ -26,9 +27,21 @@ static NSMutableDictionary* dic = nil;
         return;
     }
     [dic setValue:obj forKey:key];
-    [NSKeyedArchiver archiveRootObject:dic toFile:kArchiverCachePath];
+    [self archiveWithObj:dic path:kArchiverCachePath];
+//    [NSKeyedArchiver archiveRootObject:dic toFile:kArchiverCachePath];
 }
 
++ (void)archiveWithObj:(id)obj path:(NSString*)path{
+    //path不存在 自动创建
+    NSString* tempDirectory = [path stringByDeletingLastPathComponent];
+    if (![[NSFileManager defaultManager] fileExistsAtPath: tempDirectory]) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:tempDirectory withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    [NSKeyedArchiver archiveRootObject:obj toFile: path];
+}
+
+
+#pragma mark - 解档
 + (id)UnArchiveWithKey:(NSString*)key{
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{

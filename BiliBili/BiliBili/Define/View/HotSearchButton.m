@@ -12,9 +12,8 @@
     if (self = [super init]) {
         self.label.text = keyWord;
         [self addSubview: self.label];
-        __weak typeof(self) weakObj = self;
         [self.label mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.left.right.equalTo(weakObj);
+            make.bottom.left.right.mas_equalTo(0);
             make.height.mas_equalTo(30);
         }];
     }

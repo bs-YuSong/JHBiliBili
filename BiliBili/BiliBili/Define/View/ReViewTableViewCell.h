@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AVItemTableViewCell.h"
 /**
  *  回复单元格
  */
-@interface ReViewTableViewCell : UITableViewCell
-- (void)setName:(NSString*)name image:(NSURL*)imgURL time:(NSString*)time message:(NSString*)message goodNum:(NSString*)goodNum lv:(NSString*)lv gender:(NSString*)gender;
+@interface ReViewTableViewCell : AVItemTableViewCell
 @end

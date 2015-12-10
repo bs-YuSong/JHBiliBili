@@ -53,7 +53,7 @@
     if (week == 7) {
         return @"-1";
     }
-    return [NSString stringWithFormat:@"%ld", (week + self.dayOffset.intValue) % 7];
+    return [NSString stringWithFormat:@"%ld", (long)((week + self.dayOffset.intValue) % 7)];
 }
 
 
@@ -83,14 +83,6 @@
 	}
 	return _dayOffset;
 }
-
-//- (NSDictionary *)weekList{
-//	if(_weekList == nil) {
-//        _weekList = @{@"1":@"周一",@"2":@"周二",@"3":@"周三",@"4":@"周四",@"5":@"周五",@"6":@"周六",@"0":@"周日",@"-1":@"其它"};
-//	}
-//	return _weekList;
-//}
-
 
 
 - (NSMutableDictionary<NSString*,NSMutableArray<ShiBanPlayTableDateModel*>*> *)list{

@@ -29,12 +29,28 @@ cell.layoutMargins = UIEdgeInsetsZero; \
 cell.preservesSuperviewLayoutMargins = NO; \
 }\
 
-//Docment文件夹目录
+/**
+ *  Docment文件夹目录
+ */
 #define kDocumentPath NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject
 
+/**
+ *  cache文件夹目录
+ */
 #define kCachePath NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject
 
+/**
+ *  离线缓存文件路径
+ */
 #define kArchiverCachePath [kCachePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@/src.arch",[[NSBundle mainBundle] bundleIdentifier]]]
+/**
+ *  下载文件夹目录
+ */
+#define kDownloadPath [kDocumentPath stringByAppendingPathComponent: @"download"]
+/**
+ *  VideoModel归档文件夹目录
+ */
+#define kArchPath [kDocumentPath stringByAppendingPathComponent: @"arch"]
 
 #define kGloableColor kRGBColor(248, 116, 153)
 

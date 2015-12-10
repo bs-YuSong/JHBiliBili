@@ -12,8 +12,11 @@
 #import "ShinBanViewModel.h"
 #import "ShiBanInfoViewController.h"
 #define EDGE 10
-@interface RecommendCollectionViewController ()<UICollectionViewDelegateFlowLayout,UICollectionViewDelegate>
-//@property (nonatomic, strong) NSArray<RecommentShinBanDataModel*>* items;
+
+static NSString * const reuseIdentifier = @"RecommendCollectionViewCell";
+
+@interface RecommendCollectionViewController ()
+
 @property (nonatomic, assign) NSInteger colNum;
 @property (nonatomic, strong) ShinBanViewModel* vm;
 @end
@@ -22,6 +25,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.collectionView registerClass:[RecommendCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    self.collectionView.backgroundColor = [UIColor clearColor];
     __weak typeof(self) weakObj = self;
     self.collectionView.mj_footer = [MyRefreshComplete myRefreshFoot:^{
         [self.vm getMoreDataCompleteHandle:^(NSError *error) {
@@ -31,19 +36,12 @@
     }];
 }
 
-//- (NSArray<RecommentShinBanDataModel *> *)items{
-//    if (_items == nil) {
-//        _items = [NSArray array];
-//    }
-//    return _items;
-//}
-
 - (void)setVM:(ShinBanViewModel*)vm colNum:(NSInteger)num{
-    //self.items = [vm getRecommentList];
     self.colNum = num;
     self.vm = vm;
     [self.collectionView reloadData];
 }
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     //cell的宽度等于(屏宽-2*边距-(列数-1)*item间的间距)/列数
     CGFloat inset = [self collectionView:collectionView layout:collectionViewLayout minimumInteritemSpacingForSectionAtIndex:0];
@@ -70,7 +68,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    RecommendCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"RecommendCollectionViewCell" forIndexPath:indexPath];
+    RecommendCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     if ([self.vm recommentListCount]) {
         [cell.imgView setImageWithURL:[NSURL URLWithString:self.vm.recommentList[indexPath.row].cover]];
         cell.Label.text = self.vm.recommentList[indexPath.row].title;
@@ -89,7 +87,6 @@
         [avc setWithModel:self.vm.recommentList[indexPath.row]];
         [self.navigationController pushViewController:avc animated:YES];
     }
-//    DDLogVerbose(@"%ld",(long)indexPath.row);
 }
 
 - (void)colorSetting{

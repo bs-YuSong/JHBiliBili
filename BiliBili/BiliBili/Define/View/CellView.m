@@ -48,9 +48,8 @@
             [_vc.view addSubview: v.view];
         }
         [self addSubview: _vc.view];
-        __weak typeof(self)weakObj = self;
         [_vc.view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(weakObj);
+            make.edges.equalTo(self);
         }];
         [self makeConstraintsWithViews:_vc.childViewControllers];
     }
@@ -63,11 +62,9 @@
     UIView* v2 = views[1].view;
     UIView* v3 = views[2].view;
     UIView* v4 = views[3].view;
-    __weak typeof(self)weakObj = self;
     [v1 mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(weakObj.titleImg.mas_bottom).mas_offset(10);
+        make.top.mas_equalTo(self.titleImg.mas_bottom).mas_offset(10);
         make.left.mas_offset(EDGE);
-       // make.height.mas_equalTo(v1.mas_width).multipliedBy(1.03);
         make.size.equalTo(@[v2,v3,v4]);
     }];
     [v2 mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -84,7 +81,7 @@
         make.left.equalTo(v3.mas_right).mas_offset(EDGE);
         make.top.mas_equalTo(v2.mas_bottom).mas_offset(EDGE);
         make.right.mas_offset(-EDGE);
-        make.bottom.equalTo(weakObj.moreButton.mas_top).mas_offset(-EDGE);
+        make.bottom.equalTo(self.moreButton.mas_top).mas_offset(-EDGE);
     }];
 }
 
@@ -95,10 +92,9 @@
         _title = [[UILabel alloc] init];
         _title.font = [UIFont systemFontOfSize: 13];
         [self addSubview: _title];
-        __weak typeof(self)weakObj = self;
         [_title mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(weakObj.titleImg);
-            make.left.equalTo(weakObj.titleImg.mas_right).mas_offset(5);
+            make.centerY.equalTo(self.titleImg);
+            make.left.equalTo(self.titleImg.mas_right).mas_offset(5);
         }];
     }
     return _title;
@@ -134,12 +130,11 @@
 
 - (UIView *)enterView{
     if (_enterView == nil) {
-        __weak typeof(self)weakObj = self;
         _enterView = [[UIView alloc] init];
         _enterView.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"CellView.enterView.backgroundColor"];
         [self addSubview: _enterView];
         [_enterView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(weakObj.titleImg);
+            make.centerY.equalTo(self.titleImg);
             make.right.mas_offset(-10);
             make.width.height.mas_equalTo(15);
         }];
@@ -148,8 +143,8 @@
         imv.contentMode = UIViewContentModeScaleAspectFit;
         [_enterView addSubview: imv];
         [imv mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.center.equalTo(weakObj.enterView);
-            make.width.height.equalTo(weakObj.enterView).mas_offset(-5);
+            make.center.equalTo(self.enterView);
+            make.width.height.equalTo(self.enterView).mas_offset(-5);
         }];
     }
     return _enterView;
@@ -162,10 +157,9 @@
         _enterLabel.textColor = [[ColorManager shareColorManager] colorWithString:@"textColor"];
         _enterLabel.font = [UIFont systemFontOfSize: 13];
         [self addSubview: _enterLabel];
-        __weak typeof(self)weakObj = self;
         [_enterLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(weakObj.enterView.mas_left).mas_offset(-5);
-            make.centerY.equalTo(weakObj.enterView);
+            make.right.mas_equalTo(self.enterView.mas_left).mas_offset(-5);
+            make.centerY.equalTo(self.enterView);
         }];
     }
     return _enterLabel;

@@ -12,6 +12,7 @@
 @protocol PlayerUIViewDelegate<NSObject>
 @optional
 - (void)playerTouchBackArrow:(PlayerUIView*)UIView;
+- (void)playerTouchDanMuButton:(PlayerUIView*)UIView;
 - (void)playerTouchPlayerButton:(PlayerUIView*)UIView;
 - (void)playerTouchSlider:(PlayerUIView*)UIView slideValue:(CGFloat)value;
 @end

@@ -10,34 +10,37 @@
 #import "ShinBanInfoModel.h"
 #import "VideoViewController.h"
 @interface ShiBanEpisodesTableViewCell ()
+@property (nonatomic, strong) UIViewController* vc;
 @end
 
 @implementation ShiBanEpisodesTableViewCell
+{
+    NSArray<episodesModel*>* _episodes;
+}
 
 - (void)setEpisodes:(NSArray *)episodes{
     _episodes = episodes;
     __block UIButton *preButton = nil;
+    __weak typeof(self)weakSelf = self;
     [_episodes enumerateObjectsUsingBlock:^(episodesModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        UIButton * button = [self viewWithTag: 100 + idx];
+        UIButton * button = [weakSelf viewWithTag: 100 + idx];
         //没添加的情况
         if (button == nil) {
             button = [[UIButton alloc] init];
             //记录下标
             button.tag = 100 + idx;
             button.titleLabel.font = [UIFont systemFontOfSize: 13];
-            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [button setBackgroundImage:[UIImage imageNamed:@"bg_text_field_mono_light_gray_boarder"] forState:UIControlStateNormal];
             
             [button bk_addEventHandler:^(id sender) {
-                self.returnBlock(@(button.tag - 100));
-            //通知更新按钮标题
-                NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-                NSDictionary *userInfo =@{@"title":@(button.tag - 100)};
-                [center postNotificationName:@"Update" object:self userInfo:userInfo];
+            //通知更新按钮标题和播放
+//            NSLog(@"%ld", button.tag - 100);
+                
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"Update" object:nil userInfo:@{@"title":@(button.tag - 100)}];
                 
             } forControlEvents:UIControlEventTouchUpInside];
             
-            [self.vc.view addSubview: button];
+            [weakSelf.vc.view addSubview: button];
             //第一个按钮
             if (preButton == nil) {
                 CGFloat rr =  (kWindowW  - 50) / 4;
@@ -82,7 +85,7 @@
 }
 
 
-- (UIViewController *) vc{
+- (UIViewController *)vc{
     if(_vc == nil) {
         _vc = [[UIViewController alloc] init];
         [self addSubview: _vc.view];
@@ -91,10 +94,6 @@
         }];
     }
     return _vc;
-}
-
-- (void)setUpdateReturnBlock:(updateEpisode)block{
-    self.returnBlock = block;
 }
 
 @end

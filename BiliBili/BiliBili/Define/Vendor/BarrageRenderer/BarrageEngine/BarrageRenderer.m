@@ -49,8 +49,6 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     NSDate * _startTime; //如果是nil,表示弹幕渲染不在运行中; 否则,表示开始的时间
     NSTimeInterval _pausedDuration; // 暂停持续时间
     NSDate * _pausedTime; // 上次暂停时间; 如果为nil, 说明当前没有暂停
-    
-    BOOL isStart;
 }
 @property(nonatomic,assign)NSTimeInterval pausedDuration; // 暂停时间
 @end
@@ -101,22 +99,18 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
 
 - (void)start
 {
-    //重复start应该无效
-    if (isStart == NO) {
-        if (!_startTime) { // 尚未启动,则初始化时间系统
-            _startTime = [NSDate date];
-            _records = [[NSMutableArray alloc]init];
-            _dispatcher = [[BarrageDispatcher alloc]initWithStartTime:_startTime];
-            _dispatcher.delegate = self;
-        }
-        else if(_pausedTime)
-        {
-            _pausedDuration += [[NSDate date]timeIntervalSinceDate:_pausedTime];
-        }
-        _pausedTime = nil;
-        isStart = YES;
-        [_clock start];
+    if (!_startTime) { // 尚未启动,则初始化时间系统
+        _startTime = [NSDate date];
+        _records = [[NSMutableArray alloc]init];
+        _dispatcher = [[BarrageDispatcher alloc]initWithStartTime:_startTime];
+        _dispatcher.delegate = self;
     }
+    else if(_pausedTime)
+    {
+        _pausedDuration += [[NSDate date]timeIntervalSinceDate:_pausedTime];
+    }
+    _pausedTime = nil;
+    [_clock start];
 }
 
 - (void)pause
@@ -133,7 +127,6 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
         _pausedDuration += [[NSDate date]timeIntervalSinceDate:_pausedTime];
         _pausedTime = [NSDate date];
     }
-    isStart = NO;
 }
 
 - (void)stop

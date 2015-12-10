@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-@class AVDataModel;
-@interface AVInfoViewController : UIViewController
+#import "BaseInfoViewController.h"
 
-- (void)setWithModel:(AVDataModel*)model section:(NSString*)section;
+@interface AVInfoViewController : BaseInfoViewController
+@property (nonatomic, strong) NSMutableArray* controllers;
 @end

@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface InvestorTableViewCell : UITableViewCell
-- (void)setRank:(NSInteger)rank icon:(NSURL*)icon name:(NSString*)name reply:(NSString*)reply;
+#import "AVItemTableViewCell.h"
+@interface InvestorTableViewCell : AVItemTableViewCell
 @end

@@ -9,6 +9,10 @@
 #import "AVInfoViewModel.h"
 #import "NSString+Tools.h"
 #import "AVInfoNetManager.h"
+#import "ShinBanInfoModel.h"
+#import "VideoNetManager.h"
+#import "DanMuModel.h"
+
 @interface AVInfoViewModel ()
 ////新番独有属性
 ////承包商数组
@@ -76,11 +80,13 @@
     NSDictionary* textAtt =  @{NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle),NSForegroundColorAttributeName:kGloableColor};
     
     NSMutableAttributedString* mstr = [[NSMutableAttributedString alloc] initWithString:@"" attributes:textAtt];
-    
+    __weak typeof(self)weakSelf = self;
+    __weak typeof(mstr)weakMstr = mstr;
+    __weak typeof(textAtt)weakTextAtt = textAtt;
     [self.tagList enumerateObjectsUsingBlock:^(TagDataModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
-        [mstr appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@",obj.name,(idx == self.tagList.count - 1)?@"":@","] attributes:textAtt]];
-        [mstr appendAttributedString:[[NSAttributedString alloc] initWithString:@" "]];
+        [weakMstr appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@",obj.name,(idx == weakSelf.tagList.count - 1)?@"":@","] attributes:weakTextAtt]];
+        [weakMstr appendAttributedString:[[NSAttributedString alloc] initWithString:@" "]];
     }];
     return [mstr copy];
 }
@@ -115,6 +121,14 @@
     return self.AVData.desc;
 }
 
+//其它
+- (episodesModel*)AVModel2EpisodesModel{
+    episodesModel* model = [[episodesModel alloc] init];
+    model.index = [self infoTitle];
+    model.av_id = [self videoAid];
+    return model;
+}
+
 
 //承包商排行
 - (NSURL*)investorIconForRow:(NSInteger)row{
@@ -140,40 +154,46 @@
 }
 
 
-
-
-
 #define pagesize @20
 #define page @1
 
 - (void)refreshDataCompleteHandle:(void(^)(NSError *error))complete{
     NSMutableArray<AFHTTPRequestOperation*>* arr = [NSMutableArray array];
-    
+    //评论请求
     [arr addObject:[AVInfoNetManager GetReplyWithParameter:@{@"pagesize":pagesize.stringValue, @"page":page.stringValue, @"aid":[self videoAid]} completionHandler:^(ReplyModel* responseObj, NSError *error) {
         self.replyList = [responseObj.list mutableCopy];
         self.allReplyCount = responseObj.results;
     }]];
+    //相似视频请求
     [arr addObject:[AVInfoNetManager GetSameVideoWithParameter:[self videoAid] completionHandler:^(sameVideoModel* responseObj, NSError *error) {
         self.sameVideoList = [responseObj.list mutableCopy];
     }]];
+    //新番的情况下 增加一个承包商请求
     if ([self isShiBan]) {
         [arr addObject: [AVInfoNetManager GetInverstorWithParameter:@{@"aid":[self videoAid]} completionHandler:^(InvestorModel* responseObj, NSError *error) {
             self.investorList = [responseObj.list mutableCopy];
         }]];
     }
+    //tag请求
     [arr addObject: [AVInfoNetManager GetTagWithParameter:@{@"aid":[self videoAid]} completionHandler:^(TagModel* responseObj, NSError *error) {
         self.tagList = [responseObj.result mutableCopy];
     }]];
-    
+    //视频cid请求
+    [arr addObject: [VideoNetManager GetCIDWithParameter:[self videoAid] completionHandler:^(id responseObj, NSError *error) {
+        self.AVData.cid = [CIDModel mj_objectWithKeyValues:[NSJSONSerialization json2DicWithData: responseObj]].list.firstObject.CID;
+    }]];
     
     NSArray* operations = [AFURLConnectionOperation batchOfRequestOperations:arr progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations) {
     } completionBlock:^(NSArray *operations) {
         complete(nil);
     }];
     [[NSOperationQueue mainQueue] addOperations:@[operations.lastObject] waitUntilFinished:NO];
-
+    
 }
 
+/*
+ 下拉获取更多评论方法
+ */
 - (void)getMoveReplyCompleteHandle:(void(^)(NSError *error))complete{
     [AVInfoNetManager GetReplyWithParameter:@{@"pagesize":pagesize.stringValue, @"page":@([self replyCount] / pagesize.intValue + 1), @"aid":[self videoAid]} completionHandler:^(ReplyModel* responseObj, NSError *error) {
         [self.replyList addObjectsFromArray:responseObj.list];
@@ -182,7 +202,83 @@
     }];
 }
 
+/*
+ 下载视频方法
+ */
+- (void)downLoadVideoWithAidArray:(NSArray*)aidArray CompleteHandle:(void(^)(id responseObj,NSError *error))complete{
+    //请求下载队列
+    NSMutableArray<AFHTTPRequestOperation*>* arr = [NSMutableArray array];
+    
+    [aidArray enumerateObjectsUsingBlock:^(NSDictionary*  _Nonnull dicObj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        [arr addObject: [VideoNetManager GetVideoPathWithCid:dicObj[@"cid"] Aid:dicObj[@"aid"] title:dicObj[@"title"] completionHandler:^(VideoModel* vmObj, NSError *error) {
+            NSString* archName = [NSString stringWithFormat:@"%@.arch",vmObj.durl.firstObject.cid];
+            //归档VideoModel对象
+            [ArchiverObj archiveWithObj:vmObj path: [kArchPath stringByAppendingPathComponent: archName]];
+            //把视频信息写入userDefault
+            [[UserDefaultDownLoadManager shareDownLoadManager] updateDownLoadDicWithKey:dicObj[@"aid"] Obj: @{@"aid":dicObj[@"aid"],@"status":@"downsuspand",@"index": @(idx), @"name": vmObj.durl.firstObject.title,@"vmpath": archName,@"quality":dicObj[@"quality"],@"cid":vmObj.durl.firstObject.cid}];
+        }]];
+        
+    }];
+    
+    NSArray* operations = [AFURLConnectionOperation batchOfRequestOperations:arr progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations){
+        NSLog(@"%d,%d", numberOfFinishedOperations, totalNumberOfOperations);
+        //参数获取完成后 自动下载第一个视频
+    } completionBlock:^(NSArray *operations){
+        //显示成功信息
+        complete(nil,nil);
+        NSDictionary* downDic = [UserDefaultDownLoadManager shareDownLoadManager].downLoadDic;
+        
+        [downDic enumerateKeysAndObjectsUsingBlock:^(NSString*  _Nonnull key, NSDictionary*  _Nonnull obj, BOOL * _Nonnull stop) {
+            if ([obj[@"index"] isEqualToNumber: @(0)]) {
+                [self autoDownLoadNextVideoWithIndex: @(0)];
+                *stop = YES;
+            }
+        }];
+        
+    }];
+    [[NSOperationQueue mainQueue] addOperations:@[operations.lastObject] waitUntilFinished: NO];
+    
+}
 
+
+#pragma mark - 初始化
+- (void)setAVData:(AVDataModel *)AVData section:(NSString*)section{
+    self.AVData = AVData;
+    self.section = section;
+}
+
+#pragma mark - 私有方法
+- (void)autoDownLoadNextVideoWithIndex:(NSNumber*)index{
+    NSDictionary* downDic = [UserDefaultDownLoadManager shareDownLoadManager].downLoadDic;
+    
+    [downDic enumerateKeysAndObjectsUsingBlock:^(NSString*  _Nonnull key, NSDictionary*  _Nonnull obj, BOOL * _Nonnull stop) {
+        if ([obj[@"index"] isEqualToNumber: index]){
+            //找到要下载的对象 解档
+            VideoModel* model = [NSKeyedUnarchiver unarchiveObjectWithFile:[kArchPath stringByAppendingPathComponent: obj[@"vmpath"]]];
+            //更新状态
+            NSMutableDictionary* MDic = [obj mutableCopy];
+            MDic[@"status"] = @"downloading";
+            [[UserDefaultDownLoadManager shareDownLoadManager] updateDownLoadDicWithKey:key Obj:MDic];
+            
+            [AVInfoNetManager DownVideoWithDic:@{@"aid": key, @"vm":model, @"quality":obj[@"quality"]} completionHandler:^(NSDictionary* responseObj, NSError *error) {
+                //                下载完成 下载信息写入userDefault
+                [ArchiverObj archiveWithObj:responseObj[@"danmuobj"] path: [kDownloadPath stringByAppendingPathComponent: [NSString stringWithFormat:@"%@.arch", obj[@"cid"]]]];
+                MDic[@"status"] = responseObj[@"status"];
+                MDic[@"videopath"] = responseObj[@"videopath"];
+                [[UserDefaultDownLoadManager shareDownLoadManager] updateDownLoadDicWithKey:key Obj:MDic];
+                //判断是否有下个任务 有的话 自动下载
+                [self autoDownLoadNextVideoWithIndex: @(index.intValue + 1)];
+            }];
+            
+            *stop = YES;
+            //所有任务下载完成
+        }else if(index.intValue >= downDic.count){
+            return;
+        }
+    }];
+    
+}
 
 #pragma mark - 懒加载
 - (NSMutableArray<sameVideoDataModel *> *)sameVideoList{
@@ -218,12 +314,6 @@
         _investorList = [NSMutableArray array];
     }
     return _investorList;
-}
-
-#pragma mark - 初始化
-- (void)setAVData:(AVDataModel *)AVData section:(NSString*)section{
-    self.AVData = AVData;
-    self.section = section;
 }
 
 

@@ -13,5 +13,5 @@
 @class AVInfoViewModel;
 @interface AVItemTableViewController : UITableViewController
 
-- (instancetype)initWithVM:(AVInfoViewModel*)vm cellIdentity:(NSString*)cellIdentity storyBoardIndentity:(NSString*)ID parentTableView:(UITableView*)tableView;
+- (instancetype)initWithVM:(AVInfoViewModel*)vm cellIdentitys:(NSArray<NSString*>*)cellIdentitys;
 @end

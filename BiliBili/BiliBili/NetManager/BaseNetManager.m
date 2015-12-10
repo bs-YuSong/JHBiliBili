@@ -18,7 +18,7 @@ static AFURLSessionManager *URLManager = nil;
     dispatch_once(&onceToken, ^{
         manager = [AFHTTPRequestOperationManager manager];
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-       // manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"application/json", nil];
+        // manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"application/json", nil];
     });
     return manager;
 }
@@ -48,14 +48,38 @@ static AFURLSessionManager *URLManager = nil;
     }];
 }
 
-//+ (id)downLoad:(NSString*)path parameters:(NSDictionary *)params completionHandler:(void(^)(id responseObj, NSError *error))complete{
-//    NSURLSessionDownloadTask *downloadTask = [[self sharedAFURLManager] downloadTaskWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:path]] progress:nil destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-//        NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-//        return [documentsDirectoryURL URLByAppendingPathComponent:[response suggestedFilename]];
-//    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
-//        complete(filePath, error);
-//    }];
-//    [downloadTask resume];
-//    return downloadTask;
-//}
++ (id)downLoad:(NSString*)path parameters:(NSDictionary *)params resumeData:(NSData*)resumeData completionHandler:(void(^)(NSURL* responseObj, NSError *error))complete{
+    if (path == nil) {
+        return nil;
+    }
+    //通过data判断文件是否正在下载
+    NSURLSessionDownloadTask *downloadTask = nil;
+    //重新下载
+    if (resumeData == nil) {
+        downloadTask = [[self sharedAFURLManager] downloadTaskWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:path]] progress:nil destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+            if (![[NSFileManager defaultManager] fileExistsAtPath: kDownloadPath]) {
+                [[NSFileManager defaultManager] createDirectoryAtPath:kDownloadPath withIntermediateDirectories:YES attributes:nil error:nil];
+            }
+            return [NSURL fileURLWithPath: [kDownloadPath stringByAppendingPathComponent:[response suggestedFilename]]];
+        } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+            complete(filePath, error);
+        }];
+    //断点续传
+    }else{
+        downloadTask = [[self sharedAFURLManager] downloadTaskWithResumeData:resumeData progress:nil destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+            if (![[NSFileManager defaultManager] fileExistsAtPath: kDownloadPath]) {
+                [[NSFileManager defaultManager] createDirectoryAtPath:kDownloadPath withIntermediateDirectories:YES attributes:nil error:nil];
+            }
+            return [NSURL fileURLWithPath: [kDownloadPath stringByAppendingPathComponent:[response suggestedFilename]]];
+        } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+            complete(filePath, error);
+        }];
+    }
+    downloadTask.taskDescription = params[@"aid"];
+    
+    [downloadTask resume];
+   // NSLog(@"%lu",(unsigned long)[self sharedAFURLManager].downloadTasks.count);
+    return downloadTask;
+}
+
 @end

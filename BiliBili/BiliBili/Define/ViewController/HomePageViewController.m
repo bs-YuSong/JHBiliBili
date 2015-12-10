@@ -75,7 +75,7 @@
         ProfileTableViewController* tableVC = [[ProfileTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
         [self.profileView addSubview: tableVC.tableView];
         [tableVC.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(weakObj.profileView);
+            make.edges.equalTo(self.profileView);
         }];
         [self addChildViewController: tableVC];
         

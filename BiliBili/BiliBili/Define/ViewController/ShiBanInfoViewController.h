@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseInfoViewController.h"
 @class RecommentShinBanDataModel;
-@interface ShiBanInfoViewController : UIViewController
+@interface ShiBanInfoViewController : BaseInfoViewController
+@property (nonatomic, strong) NSMutableArray* controllers;
 - (void)setWithModel:(RecommentShinBanDataModel*)model;
-- (void)updateButtonTitleAndPlay:(NSNotification *)notification;
 @end

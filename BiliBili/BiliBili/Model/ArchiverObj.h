@@ -11,6 +11,8 @@
 @interface ArchiverObj : NSObject
 + (void)archiveWithObj:(id)obj;
 + (void)archiveWithObj:(id)obj key:(NSString*)key;
++ (void)archiveWithObj:(id)obj path:(NSString*)path;
+
 + (id)UnArchiveWithKey:(NSString*)key;
 + (id)UnArchiveWithClass:(Class)class;
 @end

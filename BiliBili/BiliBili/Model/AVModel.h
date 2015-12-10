@@ -42,4 +42,6 @@
 @property (nonatomic, strong)NSString* create;
 //av号
 @property (nonatomic, strong)NSString* aid;
+//cid
+@property (nonatomic, strong)NSString* cid;
 @end

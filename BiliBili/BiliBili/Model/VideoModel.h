@@ -14,6 +14,15 @@
 @property (nonatomic, strong) NSMutableArray<VideoDataModel*>* durl;
 @end
 
+@interface VideoDataModel : BaseModel
+//视频长度
+//@property (nonatomic, assign)NSInteger length;
+@property (nonatomic, strong)NSString* url;
+@property (nonatomic, strong)NSString* cid;
+@property (nonatomic, strong)NSString* title;
+@property (nonatomic, strong)NSArray<NSString*>* backup_url;
+@end
+
 @interface CIDModel : BaseModel
 @property (nonatomic, strong) NSArray<CIDDataModel*>* list;
 @end
@@ -26,18 +35,10 @@
 //@property (nonatomic, strong)NSString* Mp4Url;
 //@property (nonatomic, assign)NSInteger Mp4Length;
 //@property (nonatomic, strong)NSNumber* size;
-@property (nonatomic, strong)NSNumber* AV;
-@property (nonatomic, strong)NSString* Title;
 //@property (nonatomic, strong)NSNumber* P;
-@property (nonatomic, strong)NSNumber* CID;
+@property (nonatomic, strong)NSString* AV;
+@property (nonatomic, strong)NSString* Title;
+@property (nonatomic, strong)NSString* CID;
 
 @end
 
-@interface VideoDataModel : BaseModel
-//视频长度
-@property (nonatomic, assign)NSInteger length;
-@property (nonatomic, strong)NSString* url;
-@property (nonatomic, strong)NSNumber* cid;
-@property (nonatomic, strong)NSString* title;
-@property (nonatomic, strong)NSArray<NSString*>* backup_url;
-@end

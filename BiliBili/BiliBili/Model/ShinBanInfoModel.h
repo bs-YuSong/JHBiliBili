@@ -79,9 +79,12 @@
 @property (nonatomic, strong)NSString* index;
 //av号
 @property (nonatomic, strong)NSString* av_id;
+//cid号
+@property (nonatomic, strong)NSString* av_cid;
+//标题
+@property (nonatomic, strong)NSString* index_title;
 
 //@property (nonatomic, strong)NSDictionary* up;
-//@property (nonatomic, strong)NSString* index_title;
 //@property (nonatomic, strong)NSString* coins;
 //@property (nonatomic, strong)NSString* episode_id;
 //弹幕号

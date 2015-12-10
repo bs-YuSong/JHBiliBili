@@ -67,5 +67,7 @@ static const int ddLogLevel = DDLogLevelError;
 
 #import "BaseViewController.h"
 
+#import "UserDefaultDownLoadManager.h"
+
 
 #endif /* PrefixHeader_pch */

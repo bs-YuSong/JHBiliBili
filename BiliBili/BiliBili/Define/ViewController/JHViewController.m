@@ -41,6 +41,8 @@
         _scrollView.showsHorizontalScrollIndicator = NO;
 
         __block UIView* preView = nil;
+//        __weak typeof(_scrollView)weakScrollView = _scrollView;
+//        __weak typeof(self)weakSelf = self;
         [self.conArr enumerateObjectsUsingBlock:^(UIViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [self addChildViewController: obj];
             [_scrollView addSubview:obj.view];

@@ -40,13 +40,13 @@
     //调用懒加载
     self.shinBanIndex.hidden = NO;
     
-    __block typeof(self) weakObj = self;
+    __weak typeof(self)weakObj = self;
     self.tableView.mj_header = [MyRefreshComplete myRefreshHead:^{
-        [self.vm refreshDataCompleteHandle:^(NSError *error) {
+        [weakObj.vm refreshDataCompleteHandle:^(NSError *error) {
             [weakObj.tableView.mj_header endRefreshing];
             [weakObj.tableView reloadData];
             if (error) {
-                [self showErrorMsg:kerrorMessage];
+                [weakObj showErrorMsg:kerrorMessage];
             }
             
         }];
@@ -121,17 +121,15 @@
 		_everyDayPlay = [[UIButton alloc] init];
         [_everyDayPlay setBackgroundImage:[UIImage imageNamed:@"home_bangumi_timeline"] forState:UIControlStateNormal];
         [self.tableView.tableHeaderView addSubview: _everyDayPlay];
-        __weak typeof(self)weakObj = self;
         [_everyDayPlay mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_offset(10);
-            make.centerY.equalTo(weakObj.tableView.tableHeaderView);
+            make.centerY.equalTo(self.tableView.tableHeaderView);
             make.height.mas_equalTo(_everyDayPlay.mas_width).multipliedBy(0.29);
         }];
-        
+        __weak typeof(self)weakObj = self;
         [_everyDayPlay bk_addEventHandler:^(id sender) {
             //推出每日放送表
-            ShiBanPlayTableViewController* vc = [[ShiBanPlayTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-            [self.navigationController pushViewController: vc animated:YES];
+            [weakObj.navigationController pushViewController: [[ShiBanPlayTableViewController alloc] initWithStyle:UITableViewStyleGrouped] animated:YES];
         } forControlEvents:UIControlEventTouchUpInside];
 	}
 	return _everyDayPlay;
@@ -142,12 +140,10 @@
 		_shinBanIndex = [[UIButton alloc] init];
         [_shinBanIndex setBackgroundImage:[UIImage imageNamed:@"home_bangumi_category"] forState:UIControlStateNormal];
         [self.tableView.tableHeaderView addSubview: _shinBanIndex];
-        __weak typeof(self)weakObj = self;
         [_shinBanIndex mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(weakObj.everyDayPlay.mas_right).mas_offset(10);
+            make.left.mas_equalTo(self.everyDayPlay.mas_right).mas_offset(10);
             make.right.mas_offset(-10);
-            make.centerY.equalTo(weakObj.everyDayPlay);
-            make.size.equalTo(weakObj.everyDayPlay);
+            make.size.centerY.equalTo(self.everyDayPlay);
         }];
 	}
 	return _shinBanIndex;

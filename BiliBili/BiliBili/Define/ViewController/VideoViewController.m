@@ -21,27 +21,39 @@
 @property(nonatomic,strong) AVPlayer *player;
 @property(nonatomic,strong) AVPlayerLayer *layer;
 
+/**
+ *  用于判断用户是否点击了播放暂停按钮
+ */
 @property (nonatomic, assign, getter=isUserPause) BOOL userPause;
+/**
+ *  用于判断用户是否点击了弹幕开关
+ */
+@property (nonatomic, assign, getter=isUserHiddenDanMu) BOOL userHiddenDanMu;
+/**
+ *  用于判断播放器是否应该隐藏
+ */
 @property (nonatomic, assign, getter=isPlayerHidden) BOOL playerHidden;
+/**
+ *  用于缓冲到达指定时间自动播放 每次恢复播放只执行一次
+ */
+@property (nonatomic, assign, getter=isPlayerPlayOnceTime) BOOL playerPlayOnceTime;
 @end
 
 @implementation VideoViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor blackColor];
     //菊花
     [self.hub show:YES];
     
     [self.vm refreshDataCompleteHandle:^(NSError *error) {
-        self.player = [AVPlayer playerWithURL:[self.vm videoURL]];
+        self.player = [AVPlayer playerWithURL: [self.vm videoURL]];
         self.layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
-        
         [self.view.layer insertSublayer:self.layer atIndex:0];
-        //弹幕开始播放
-        [self launchDanMu];
+        //开始播放
+        [self launch];
         //播放器
-        [self.playerView setWithTitle:[self.vm videoTitle] videoTime:CMTimeGetSeconds(self.player.currentItem.duration)];
+        [self.playerView setWithTitle:[self.vm videoTitle] videoTime: 0];
     }];
 }
 
@@ -78,30 +90,34 @@
 - (instancetype)initWithAid:(NSString*)aid{
     if (self = [super init]) {
         self.vm = [[VideoViewModel alloc] initWithAid: aid];
+        self.view.backgroundColor = [UIColor blackColor];
     }
     return self;
 }
 
-- (void)launchDanMu{
-    [self.rander start];
-    
+- (void)launch{
     self.timer = [NSTimer bk_scheduledTimerWithTimeInterval:1 block:^(NSTimer *timer) {
         //如果用户没点击暂停
         if (self.isUserPause == NO) {
             //没到达缓存时间应该播放
             if ([self isArriveBufferTime] == NO) {
-                [self playerPlay];
+                if (self.isPlayerPlayOnceTime == NO) {
+                    [self playerPlay];
+                    [self.rander start];
+                    self.playerPlayOnceTime = YES;
+                }
                 NSArray* model = [self.vm videoDanMu][@([self currentSecond])];
                 //逐一发射
                 [model enumerateObjectsUsingBlock:^(DanMuModel*  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     [self.rander receive: [BarrageDescriptor descriptorWithText:obj.text fontSize:obj.fontSize color:obj.textColor style:obj.style]];
                 }];
                 //更新当前时间
-                [self.playerView updateCurrentTime:[self currentSecond] bufferTime:[self allBufferSecond] allTime:CMTimeGetSeconds(self.player.currentItem.duration)];
+                [self.playerView updateCurrentTime:[self currentSecond] bufferTime:[self allBufferSecond] allTime: [self videoLength]];
                 
                 //到达缓存时间应该暂停弹幕播放
             }else{
                 [self playerPause];
+                self.playerPlayOnceTime = NO;
             }
         }
         
@@ -141,13 +157,20 @@
 - (BOOL)isArriveBufferTime{
     return [self currentBufferSecond] <= 2;
 }
+
+- (float)videoLength{
+    return CMTimeGetSeconds(self.player.currentItem.duration);
+}
+
 //播放器播放
 - (void)playerPlay{
     [self.player play];
     [self.rander start];
     [self.hub hide:YES];
 }
-//播放器暂停
+/**
+ *  播放器、弹幕 暂停
+ */
 - (void)playerPause{
     [self.player pause];
     [self.rander pause];
@@ -173,18 +196,10 @@
     return _hub;
 }
 
-- (AVPlayerLayer *)layer{
-    if (_layer == nil) {
-        _layer = [[AVPlayerLayer alloc] init];
-        _layer.frame = self.view.frame;
-    }
-    return _layer;
-}
-
 
 - (PlayerUIView *)playerView{
     if(_playerView == nil) {
-        _playerView = [[PlayerUIView alloc] initWithTitle:[self.vm videoTitle] videoTime:[self.vm videoLength]];
+        _playerView = [[PlayerUIView alloc] initWithTitle:[self.vm videoTitle] videoTime:[self videoLength]];
         _playerView.alpha = 0;
         [_playerView updateValue:^{
            self.playerHidden = !self.isPlayerHidden;
@@ -202,7 +217,7 @@
 
 - (void)playerTouchSlider:(PlayerUIView *)UIView slideValue:(CGFloat)value{
     CMTime time = [self.player currentTime];
-    time.value = time.timescale * value * [self.vm videoLength];
+    time.value = time.timescale * value * [self videoLength];
     [self.player seekToTime:time];
 }
 
@@ -210,12 +225,13 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)playerTouchDanMuButton:(PlayerUIView *)UIView{
+    self.isUserHiddenDanMu?[self.rander start]:[self.rander stop];
+    self.userHiddenDanMu = !self.isUserHiddenDanMu;
+}
+
 - (void)playerTouchPlayerButton:(PlayerUIView *)UIView{
-    if (self.isUserPause == NO) {
-        [self playerPause];
-    }else{
-        [self playerPlay];
-    }
+    self.isUserPause?[self playerPlay]:[self playerPause];
     self.userPause = !self.isUserPause;
 }
 

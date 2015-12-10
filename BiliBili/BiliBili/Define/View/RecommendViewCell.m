@@ -32,15 +32,14 @@
 }
 - (RecommendCollectionViewController *)vc{
     if (_vc == nil) {
-        _vc = kStoryboardWithInd(@"RecommendCollectionViewController");
+        _vc = [[RecommendCollectionViewController alloc] initWithCollectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
         [self addSubview: _vc.view];
-        __weak typeof(self) weakObj = self;
         
         [_vc.view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(weakObj.recommedIcon.mas_bottom).mas_offset(10);
+            make.top.equalTo(self.recommedIcon.mas_bottom).mas_offset(10);
             make.left.bottom.mas_equalTo(0);
             make.height.mas_equalTo(self.mas_width).multipliedBy(1.2);
-            make.width.equalTo(weakObj);
+            make.width.equalTo(self);
         }];
     }
     return _vc;
@@ -51,10 +50,9 @@
         _recommedLabel.text = @"推荐番剧";
         [self addSubview: _recommedLabel];
         _recommedLabel.font = [UIFont systemFontOfSize: 13];
-        __weak typeof(self)weakObj = self;
         [_recommedLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(weakObj.recommedIcon.mas_right).mas_offset(10);
-            make.centerY.equalTo(weakObj.recommedIcon);
+            make.left.mas_equalTo(self.recommedIcon.mas_right).mas_offset(10);
+            make.centerY.equalTo(self.recommedIcon);
         }];
 	}
 	return _recommedLabel;

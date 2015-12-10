@@ -92,7 +92,6 @@
 #pragma mark - 懒加载
 - (NSMutableDictionary *)list{
     if (_list == nil) {
-        //1-3 动画 、129-3 舞蹈、13-3番剧 3-3音乐 4-3游戏 36-3科技 5-3娱乐 119-3鬼畜 11-3电视剧 23-3电影
         NSDictionary* dic = [ArchiverObj UnArchiveWithKey:@"recommendViewModel"];
         if (dic == nil) {
             _list = [NSMutableDictionary new];
@@ -118,7 +117,7 @@
 
 - (NSArray<NSDictionary *> *)dicMap{
     if (_dicMap == nil) {
-        _dicMap =  @[@{@"动画":@"1-3day.json"},@{@"番剧":@"13-3day.json"},@{@"音乐":@"3-3day.json"},@{@"舞蹈":@"129-3day.json"},@{@"游戏":@"4-3day.json"},@{@"科技":@"36-3day.json"},@{@"娱乐":@"5-3day.json"},@{@"鬼畜":@"119-3day.json"},@{@"电影":@"23-3day.json"},@{@"电视剧":@"11-3day.json"}];
+        _dicMap =  @[@{@"动画":@"1-3day.json"},@{@"番剧":@"13-3day.json"},@{@"音乐":@"3-3day.json"},@{@"舞蹈":@"129-3day.json"},@{@"游戏":@"4-3day.json"},@{@"科技":@"36-3day.json"},@{@"娱乐":@"5-3day.json"},@{@"鬼畜":@"119-3day.json"},@{@"电影":@"23-3day.json"},@{@"电视剧":@"11-3day.json"},@{@"时尚":@"155-3day.json"}];
     }
     return _dicMap;
 }

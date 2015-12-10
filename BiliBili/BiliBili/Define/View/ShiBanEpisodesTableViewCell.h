@@ -7,12 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AVItemTableViewCell.h"
 
-typedef void(^updateEpisode)(NSNumber* str);
 @class episodesModel;
-@interface ShiBanEpisodesTableViewCell : UITableViewCell
-@property (nonatomic, strong) NSArray<episodesModel*>* episodes;
-@property (nonatomic, strong) UIViewController* vc;
-@property (nonatomic, strong) updateEpisode returnBlock;
-- (void)setUpdateReturnBlock:(updateEpisode)block;
+@interface ShiBanEpisodesTableViewCell : AVItemTableViewCell
+- (void)setEpisodes:(NSArray *)episodes;
 @end

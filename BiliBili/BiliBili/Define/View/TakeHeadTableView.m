@@ -14,7 +14,6 @@
 
 @implementation TakeHeadTableView
 
-
 - (instancetype)init{
     if (self = [super initWithFrame:CGRectMake(0, 0, kWindowW, kWindowH) style:UITableViewStyleGrouped]) {
         UIView* v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowW, kWindowW / 2)];

@@ -24,16 +24,16 @@
 }
 - (NSURL*)videoURL{
     //判断默认设置是否为高清
-    return [[[NSUserDefaults standardUserDefaults] stringForKey:@"HightResolution"] isEqualToString:@"yes"]?[NSURL URLWithString:[self firstObj].url]:[NSURL URLWithString:[self firstObj].backup_url.firstObject];
-}
-
-//视频长度
-- (NSInteger)videoLength{
-    return [self firstObj].length / 1000;
+    NSString* tempStr = [[self firstObj].url componentsSeparatedByString:@":"].firstObject;
+    if ([tempStr isEqualToString:@"http"] || [tempStr isEqualToString:@"https"]) {
+        return [[[NSUserDefaults standardUserDefaults] stringForKey:@"HightResolution"] isEqualToString:@"yes"]?[NSURL URLWithString:[self firstObj].url]:[NSURL URLWithString:[self firstObj].backup_url.firstObject];
+    }else{
+        return [NSURL fileURLWithPath:[kDownloadPath stringByAppendingPathComponent:[self firstObj].url]];
+    }
 }
 
 - (NSString*)videoCid{
-    return [self firstObj].cid.stringValue;
+    return [self firstObj].cid;
 }
 
 - (NSString*)videoTitle{
@@ -45,6 +45,16 @@
 }
 
 - (void)refreshDataCompleteHandle:(void(^)(NSError *error))complete{
+    //先尝试从本地获取 没有再从网络获取
+    
+    NSDictionary<NSString*, NSDictionary*>* dic = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"downLoad"];
+    if (dic[self.aid] != nil) {
+        self.list.firstObject.title = dic[self.aid][@"name"];
+        self.list.firstObject.url = dic[self.aid][@"url"];
+        self.danMuDic = [NSKeyedUnarchiver unarchiveObjectWithFile: [kDownloadPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.danmu",self.aid]]];
+        complete(nil);
+        return;
+    }
     [VideoNetManager GetVideoWithParameter:self.aid completionHandler:^(VideoModel *responseObj, NSError *error) {
         self.list = responseObj.durl;
         [VideoNetManager DownDanMuWithParameter:[self videoCid] completionHandler:^(NSDictionary *responseObj, NSError *error) {
@@ -65,7 +75,7 @@
 
 - (NSArray<VideoDataModel *> *)list{
     if (_list == nil) {
-        _list = [NSArray array];
+        _list = @[[[VideoDataModel alloc]init]];
     }
     return _list;
 }

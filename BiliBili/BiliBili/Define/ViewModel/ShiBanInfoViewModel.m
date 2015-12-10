@@ -8,6 +8,7 @@
 
 #import "ShiBanInfoViewModel.h"
 #import "ShinBanModel.h"
+#import "VideoNetManager.h"
 #import "NSString+Tools.h"
 @interface ShiBanInfoViewModel ()
 @property (nonatomic, strong) RecommentShinBanDataModel* rm;
@@ -16,9 +17,6 @@
 
 @implementation ShiBanInfoViewModel
 
-//- (NSNumber*)currentEpisode{
-//    return self.shiBan.episodes[_currentEpisode.intValue];
-//}
 - (NSInteger)shinBanInfoEpisodeCount{
     return self.shiBan.episodes.count;
 }
@@ -73,9 +71,26 @@
 
 - (void)refreshDataCompleteHandle:(void (^)(NSError *))complete{
     [AVInfoNetManager GetShiBanInfoWithParameter:self.rm.season_id completionHandler:^(ShinBanInfoModel* responseObj, NSError *error) {
-        self.shiBan = responseObj.result;
-        self.currentEpisode = self.shiBan.episodes==nil?nil:@(0);
-        [super refreshDataCompleteHandle:complete];
+        NSMutableArray* arr = [NSMutableArray array];
+        //获取该新番所有分集
+        NSMutableArray<episodesModel*>* epArr = [responseObj.result.episodes mutableCopy];
+        [epArr enumerateObjectsUsingBlock:^(episodesModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [arr addObject: [VideoNetManager GetCIDWithParameter:obj.av_id completionHandler:^(id responseObj, NSError *error) {
+                //为分集添加cid
+                epArr[idx].av_cid = [CIDModel mj_objectWithKeyValues:[NSJSONSerialization json2DicWithData: responseObj]].list.firstObject.CID;
+            }]];
+        }];
+        
+        NSArray* operations = [AFURLConnectionOperation batchOfRequestOperations:arr progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations) {
+            
+        } completionBlock:^(NSArray *operations) {
+            //所有请求完成后 更新分集参数
+            responseObj.result.episodes = epArr;
+            self.shiBan = responseObj.result;
+            self.currentEpisode = self.shiBan.episodes==nil?nil:@(0);
+            [super refreshDataCompleteHandle:complete];
+        }];
+        [[NSOperationQueue mainQueue] addOperations:@[operations.lastObject] waitUntilFinished:NO];
     }];
 }
 

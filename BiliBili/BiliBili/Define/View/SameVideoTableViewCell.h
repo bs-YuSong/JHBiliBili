@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AVItemTableViewCell.h"
 
-@interface SameVideoTableViewCell : UITableViewCell
-- (void)setTitle:(NSString*)title playNum:(NSString*)playNum replyNum:(NSString*)replyNum videoImg:(NSURL*)imgURL;
+@interface SameVideoTableViewCell : AVItemTableViewCell
 @end

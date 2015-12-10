@@ -12,6 +12,7 @@
 #import "ProfileHeadView.h"
 #import "SettingTableViewController.h"
 #import "ThemeTableViewController.h"
+#import "DownLoadTableViewController.h"
 @interface ProfileTableViewController ()
 @property (nonatomic, strong) UIButton* modelStyle;
 @end
@@ -81,6 +82,11 @@
             ThemeTableViewController* tvc = [[ThemeTableViewController alloc] init];
             [self.navigationController pushViewController: tvc animated:YES];
         }
+    }else if (indexPath.section == 0){
+        if (indexPath.row == 1) {
+            DownLoadTableViewController* vc = [[DownLoadTableViewController alloc] init];
+            [self.navigationController pushViewController: vc animated:YES];
+        }
     }
     HomePageViewController*vc =(HomePageViewController*) self.parentViewController;
     [vc profileViewMoveToOriginal];
@@ -93,22 +99,23 @@
         _modelStyle = [[UIButton alloc] init];
         _modelStyle.tag = 100;
         [_modelStyle setImage:[[ColorManager shareColorManager].themeStyle isEqualToString:@"夜间模式"]?[UIImage imageNamed:@"ic_switch_night"]:[UIImage imageNamed:@"ic_switch_daily"] forState:UIControlStateNormal];
-        
-        [_modelStyle bk_addEventHandler:^(id sender) {
-            if ([[ColorManager shareColorManager].themeStyle isEqualToString:@"夜间模式"]) {
-                [ColorManager shareColorManager].themeStyle = @"少女粉";
-            }else{
-                [ColorManager shareColorManager].themeStyle = @"夜间模式";
-            }
-            HomePageViewController*vc =(HomePageViewController*) self.parentViewController;
-            [vc profileViewMoveToOriginal];
-            //将模式写入userdefault
-            [[NSUserDefaults standardUserDefaults] setValue:[ColorManager shareColorManager].themeStyle forKey:@"themeStyle"];
-        } forControlEvents:UIControlEventTouchUpInside];
-        
+        [_modelStyle addTarget:self action:@selector(modelStyleButtonDown:) forControlEvents:UIControlEventTouchUpInside];
+            
         [self.tableView.tableHeaderView addSubview: _modelStyle];
     }
     return _modelStyle;
+}
+
+- (void)modelStyleButtonDown:(UIButton*)button{
+    if ([[ColorManager shareColorManager].themeStyle isEqualToString:@"夜间模式"]) {
+        [ColorManager shareColorManager].themeStyle = @"少女粉";
+    }else{
+        [ColorManager shareColorManager].themeStyle = @"夜间模式";
+    }
+    HomePageViewController*vc =(HomePageViewController*)self.parentViewController;
+    [vc profileViewMoveToOriginal];
+    //将模式写入userdefault
+    [[NSUserDefaults standardUserDefaults] setValue:[ColorManager shareColorManager].themeStyle forKey:@"themeStyle"];
 }
 
 #pragma mark - colorSetting
