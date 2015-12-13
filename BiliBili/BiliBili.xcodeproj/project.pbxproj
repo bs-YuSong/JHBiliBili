@@ -108,7 +108,6 @@
 		A17EC1C31C0293130030886E /* RecommendNetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC18B1C0293130030886E /* RecommendNetManager.m */; };
 		A17EC1C41C0293130030886E /* ShinBanNetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC18D1C0293130030886E /* ShinBanNetManager.m */; };
 		A17EC1C51C0293130030886E /* VideoNetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC18F1C0293130030886E /* VideoNetManager.m */; };
-		A17EC1C71C0293130030886E /* theme.plist in Resources */ = {isa = PBXBuildFile; fileRef = A17EC1931C0293130030886E /* theme.plist */; };
 		A17EC1C81C0293130030886E /* AppDelegate+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC1971C0293130030886E /* AppDelegate+Category.m */; };
 		A17EC1C91C0293130030886E /* BarrageDescriptor+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC1991C0293130030886E /* BarrageDescriptor+Tools.m */; };
 		A17EC1CA1C0293130030886E /* NSDictionary+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = A17EC19B1C0293130030886E /* NSDictionary+Tools.m */; };
@@ -195,6 +194,14 @@
 		A1C781681C0DC9D2000F43BC /* resolutionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C781671C0DC9D2000F43BC /* resolutionView.m */; };
 		A1D258C01C0EACDE005A3BEF /* AVItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D258BF1C0EACDE005A3BEF /* AVItemTableViewCell.m */; };
 		A1D258C31C0F032A005A3BEF /* BaseInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D258C21C0F032A005A3BEF /* BaseInfoViewController.m */; };
+		A31915091C1D1C930034F70E /* SearchNetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A31915081C1D1C930034F70E /* SearchNetManager.m */; };
+		A319150D1C1D1D6B0034F70E /* SearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A319150C1C1D1D6B0034F70E /* SearchModel.m */; };
+		A32FCF921C1D56C300C7A11C /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A32FCF911C1D56C300C7A11C /* SearchViewController.m */; };
+		A32FCF941C1D5F7500C7A11C /* theme.plist in Resources */ = {isa = PBXBuildFile; fileRef = A32FCF931C1D5F7500C7A11C /* theme.plist */; };
+		A32FCF971C1D681F00C7A11C /* SearchShiBanTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A32FCF961C1D681F00C7A11C /* SearchShiBanTableViewCell.m */; };
+		A3B66B031C1D7A1200E31733 /* SearchSpecialTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B66B021C1D7A1200E31733 /* SearchSpecialTableViewCell.m */; };
+		A3E4E2391C1D4A0400C9F48E /* SearchViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E4E2381C1D4A0400C9F48E /* SearchViewModel.m */; };
+		A3FC15191C1D3C640090A14C /* SpecialModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FC15181C1D3C640090A14C /* SpecialModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -332,7 +339,6 @@
 		A17EC18E1C0293130030886E /* VideoNetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoNetManager.h; sourceTree = "<group>"; };
 		A17EC18F1C0293130030886E /* VideoNetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoNetManager.m; sourceTree = "<group>"; };
 		A17EC1921C0293130030886E /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		A17EC1931C0293130030886E /* theme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = theme.plist; sourceTree = "<group>"; };
 		A17EC1961C0293130030886E /* AppDelegate+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+Category.h"; sourceTree = "<group>"; };
 		A17EC1971C0293130030886E /* AppDelegate+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+Category.m"; sourceTree = "<group>"; };
 		A17EC1981C0293130030886E /* BarrageDescriptor+Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BarrageDescriptor+Tools.h"; sourceTree = "<group>"; };
@@ -506,6 +512,21 @@
 		A1D258BF1C0EACDE005A3BEF /* AVItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVItemTableViewCell.m; sourceTree = "<group>"; };
 		A1D258C11C0F032A005A3BEF /* BaseInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseInfoViewController.h; sourceTree = "<group>"; };
 		A1D258C21C0F032A005A3BEF /* BaseInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseInfoViewController.m; sourceTree = "<group>"; };
+		A31915071C1D1C930034F70E /* SearchNetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchNetManager.h; sourceTree = "<group>"; };
+		A31915081C1D1C930034F70E /* SearchNetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchNetManager.m; sourceTree = "<group>"; };
+		A319150B1C1D1D6B0034F70E /* SearchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchModel.h; sourceTree = "<group>"; };
+		A319150C1C1D1D6B0034F70E /* SearchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchModel.m; sourceTree = "<group>"; };
+		A32FCF901C1D56C300C7A11C /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		A32FCF911C1D56C300C7A11C /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		A32FCF931C1D5F7500C7A11C /* theme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = theme.plist; sourceTree = "<group>"; };
+		A32FCF951C1D681F00C7A11C /* SearchShiBanTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchShiBanTableViewCell.h; sourceTree = "<group>"; };
+		A32FCF961C1D681F00C7A11C /* SearchShiBanTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchShiBanTableViewCell.m; sourceTree = "<group>"; };
+		A3B66B011C1D7A1200E31733 /* SearchSpecialTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSpecialTableViewCell.h; sourceTree = "<group>"; };
+		A3B66B021C1D7A1200E31733 /* SearchSpecialTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSpecialTableViewCell.m; sourceTree = "<group>"; };
+		A3E4E2371C1D4A0400C9F48E /* SearchViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewModel.h; sourceTree = "<group>"; };
+		A3E4E2381C1D4A0400C9F48E /* SearchViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewModel.m; sourceTree = "<group>"; };
+		A3FC15171C1D3C640090A14C /* SpecialModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecialModel.h; sourceTree = "<group>"; };
+		A3FC15181C1D3C640090A14C /* SpecialModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecialModel.m; sourceTree = "<group>"; };
 		AA45D052281870CB68A872A1 /* libPods-BiliBili.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BiliBili.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29B8EFF4C9AFC44BA8CB642 /* Pods-BiliBili.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BiliBili.release.xcconfig"; path = "Pods/Target Support Files/Pods-BiliBili/Pods-BiliBili.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -691,7 +712,7 @@
 				A11EFB5F1C053864000B4D6F /* anima */,
 				A17EC1921C0293130030886E /* PrefixHeader.pch */,
 				A17EC1621C0292F50030886E /* Info.plist */,
-				A17EC1931C0293130030886E /* theme.plist */,
+				A32FCF931C1D5F7500C7A11C /* theme.plist */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -879,6 +900,7 @@
 			children = (
 				A1B540FF1C12C618006ACA26 /* 下载 */,
 				A17EC2C51C02A5180030886E /* 首页 */,
+				A3E4E2331C1D499D00C9F48E /* 搜索 */,
 				A17EC2C41C02A4FF0030886E /* 视频详情 */,
 				A17EC25E1C0293270030886E /* BaseViewModel.h */,
 				A17EC25F1C0293270030886E /* BaseViewModel.m */,
@@ -909,6 +931,7 @@
 		A17EC2AD1C02A1EC0030886E /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				A319150A1C1D1D610034F70E /* 搜索 */,
 				A17EC2B01C02A2150030886E /* 番剧 */,
 				A17EC2AF1C02A2050030886E /* 推荐 */,
 				A17EC2AE1C02A1F90030886E /* 发现 */,
@@ -976,6 +999,7 @@
 		A17EC2B31C02A2A40030886E /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				A31915061C1D1C7F0034F70E /* 搜索 */,
 				A17EC2B61C02A2CF0030886E /* 番剧 */,
 				A17EC2B51C02A2C30030886E /* 推荐 */,
 				A17EC2B41C02A2AE0030886E /* 发现 */,
@@ -1043,6 +1067,7 @@
 		A17EC2B91C02A37A0030886E /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				A32FCF981C1D682800C7A11C /* 搜索 */,
 				A1B6D6331C03227800DA3F27 /* 发现 */,
 				A17EC2BB1C02A3A40030886E /* 推荐 */,
 				A17EC2BA1C02A38D0030886E /* 番剧 */,
@@ -1098,6 +1123,7 @@
 		A17EC2BD1C02A3DA0030886E /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				A32FCF8F1C1D56AF00C7A11C /* 搜索 */,
 				A17EC2C31C02A4E80030886E /* 视频详情 */,
 				A17EC2C01C02A4320030886E /* 番剧 */,
 				A17EC2BF1C02A4010030886E /* 推荐 */,
@@ -1258,6 +1284,55 @@
 			name = "下载";
 			sourceTree = "<group>";
 		};
+		A31915061C1D1C7F0034F70E /* 搜索 */ = {
+			isa = PBXGroup;
+			children = (
+				A31915071C1D1C930034F70E /* SearchNetManager.h */,
+				A31915081C1D1C930034F70E /* SearchNetManager.m */,
+			);
+			name = "搜索";
+			sourceTree = "<group>";
+		};
+		A319150A1C1D1D610034F70E /* 搜索 */ = {
+			isa = PBXGroup;
+			children = (
+				A319150B1C1D1D6B0034F70E /* SearchModel.h */,
+				A319150C1C1D1D6B0034F70E /* SearchModel.m */,
+				A3FC15171C1D3C640090A14C /* SpecialModel.h */,
+				A3FC15181C1D3C640090A14C /* SpecialModel.m */,
+			);
+			name = "搜索";
+			sourceTree = "<group>";
+		};
+		A32FCF8F1C1D56AF00C7A11C /* 搜索 */ = {
+			isa = PBXGroup;
+			children = (
+				A32FCF901C1D56C300C7A11C /* SearchViewController.h */,
+				A32FCF911C1D56C300C7A11C /* SearchViewController.m */,
+			);
+			name = "搜索";
+			sourceTree = "<group>";
+		};
+		A32FCF981C1D682800C7A11C /* 搜索 */ = {
+			isa = PBXGroup;
+			children = (
+				A32FCF951C1D681F00C7A11C /* SearchShiBanTableViewCell.h */,
+				A32FCF961C1D681F00C7A11C /* SearchShiBanTableViewCell.m */,
+				A3B66B011C1D7A1200E31733 /* SearchSpecialTableViewCell.h */,
+				A3B66B021C1D7A1200E31733 /* SearchSpecialTableViewCell.m */,
+			);
+			name = "搜索";
+			sourceTree = "<group>";
+		};
+		A3E4E2331C1D499D00C9F48E /* 搜索 */ = {
+			isa = PBXGroup;
+			children = (
+				A3E4E2371C1D4A0400C9F48E /* SearchViewModel.h */,
+				A3E4E2381C1D4A0400C9F48E /* SearchViewModel.m */,
+			);
+			name = "搜索";
+			sourceTree = "<group>";
+		};
 		B2C01D08A40CA668B4063096 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1367,6 +1442,7 @@
 				A11EFBE71C053864000B4D6F /* ic_splash_icon_00067.png in Resources */,
 				A11EFBDC1C053864000B4D6F /* ic_splash_icon_00056.png in Resources */,
 				A11EFBE01C053864000B4D6F /* ic_splash_icon_00060.png in Resources */,
+				A32FCF941C1D5F7500C7A11C /* theme.plist in Resources */,
 				A11EFBAE1C053864000B4D6F /* ic_splash_icon_00010.png in Resources */,
 				A11EFBDF1C053864000B4D6F /* ic_splash_icon_00059.png in Resources */,
 				A11EFBAB1C053864000B4D6F /* ic_splash_icon_00007.png in Resources */,
@@ -1398,7 +1474,6 @@
 				A11EFBE31C053864000B4D6F /* ic_splash_icon_00063.png in Resources */,
 				A11EFBE61C053864000B4D6F /* ic_splash_icon_00066.png in Resources */,
 				A11EFBC61C053864000B4D6F /* ic_splash_icon_00034.png in Resources */,
-				A17EC1C71C0293130030886E /* theme.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1458,7 +1533,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A10A3F7E1C06C6E800274A76 /* ShiBanPlayTableViewModel.m in Sources */,
+				A31915091C1D1C930034F70E /* SearchNetManager.m in Sources */,
 				A17EC26F1C0293270030886E /* BarrageFloatImageSpirit.m in Sources */,
+				A3E4E2391C1D4A0400C9F48E /* SearchViewModel.m in Sources */,
 				A17EC2931C0293270030886E /* CellItemViewController.m in Sources */,
 				A195EA4F1C046AAB0099D8A4 /* ShiBanInfoViewModel.m in Sources */,
 				A17EC1B71C0293130030886E /* FindModel.m in Sources */,
@@ -1477,6 +1554,7 @@
 				A17EC1C91C0293130030886E /* BarrageDescriptor+Tools.m in Sources */,
 				A17EC2921C0293270030886E /* BaseViewController.m in Sources */,
 				A17EC28F1C0293270030886E /* AVItemTableViewController.m in Sources */,
+				A32FCF921C1D56C300C7A11C /* SearchViewController.m in Sources */,
 				A17EC29E1C0293270030886E /* SettingTableViewController.m in Sources */,
 				A17EC2741C0293270030886E /* BarrageWalkImageSpirit.m in Sources */,
 				A1D258C01C0EACDE005A3BEF /* AVItemTableViewCell.m in Sources */,
@@ -1506,6 +1584,7 @@
 				A17EC1B61C0293130030886E /* DanMuModel.m in Sources */,
 				A17EC2A31C0293270030886E /* WebViewController.m in Sources */,
 				A17EC2871C0293270030886E /* ProfileTableViewCell.m in Sources */,
+				A319150D1C1D1D6B0034F70E /* SearchModel.m in Sources */,
 				A17EC2961C0293270030886E /* JHViewController.m in Sources */,
 				A11EFBED1C0559BC000B4D6F /* ShiBanIntroduceTableViewCell.m in Sources */,
 				A1B6D6361C03229400DA3F27 /* HotSearchButton.m in Sources */,
@@ -1514,9 +1593,11 @@
 				A17EC2851C0293270030886E /* MyRefreshComplete.m in Sources */,
 				A10A3F941C06DA6800274A76 /* ShiBanPlayTableViewController.m in Sources */,
 				A1C43BF01C11460000AEEB5B /* DownLoadTableViewController.m in Sources */,
+				A3FC15191C1D3C640090A14C /* SpecialModel.m in Sources */,
 				A1AC2CFB1C097BD30044C6C4 /* PlayerSliderView.m in Sources */,
 				A17EC2951C0293270030886E /* HomePageViewController.m in Sources */,
 				A1B541021C12C636006ACA26 /* DownLoadViewModel.m in Sources */,
+				A3B66B031C1D7A1200E31733 /* SearchSpecialTableViewCell.m in Sources */,
 				A17EC29F1C0293270030886E /* ShinBanViewController.m in Sources */,
 				A17EC1D01C0293130030886E /* UIBezierPath+Tools.m in Sources */,
 				A17EC2A71C0293270030886E /* RecommendViewModel.m in Sources */,
@@ -1543,6 +1624,7 @@
 				A17EC1C11C0293130030886E /* BaseNetManager.m in Sources */,
 				A1D258C31C0F032A005A3BEF /* BaseInfoViewController.m in Sources */,
 				A195EA551C04891C0099D8A4 /* ShiBanInfoViewController.m in Sources */,
+				A32FCF971C1D681F00C7A11C /* SearchShiBanTableViewCell.m in Sources */,
 				A17EC2761C0293270030886E /* BarrageWalkTextSpirit.m in Sources */,
 				A17EC1B41C0293130030886E /* BaseModel.m in Sources */,
 				A17EC2A41C0293270030886E /* AVInfoViewModel.m in Sources */,

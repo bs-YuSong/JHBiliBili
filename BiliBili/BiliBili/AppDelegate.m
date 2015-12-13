@@ -12,8 +12,8 @@
 #import "RecommendViewController.h"
 #import "ShinBanViewController.h"
 #import "FindViewController.h"
+#import "SearchViewController.h"
 #import "UIViewController+Tools.h"
-#import "UIBezierPath+Tools.h"
 #import "WMPageController.h"
 @interface AppDelegate ()
 @property (nonatomic, strong) HomePageViewController* vc;
@@ -33,7 +33,9 @@
     [self.window addSubview: self.view];
     return YES;
 }
-//默认设置
+
+
+#pragma mark - 方法
 - (void)defaultsSetting{
     [[UINavigationBar appearance] setTranslucent:NO];
     /** 配置导航栏题目的样式 */
@@ -55,8 +57,39 @@
         [[NSUserDefaults standardUserDefaults] setObject:@"yes" forKey:@"HightResolution"];
     }
 }
+/**
+ *  启动动画
+ */
+- (void)animationEnd{
+    self.arr = nil;
+    __weak typeof(self)weakSelf = self;
+    [UIView animateWithDuration:0.8 animations:^{
+        weakSelf.view.alpha = 0;
+    } completion:^(BOOL finished) {
+        [weakSelf.view removeFromSuperview];
+    }];
+}
 
-//懒加载
+/**
+ *  推出搜索视图
+ *
+ */
+- (void)pushSearchViewController:(UIButton*)button{
+    SearchViewController* svc = [[SearchViewController alloc] initWithkeyWord:@"%E6%9C%9D%E4%BA%94%E6%99%9A%E4%B9%9D"];
+    [self.nav pushViewController:svc animated:YES];
+}
+
+#pragma mark - 懒加载
+
+- (UIWindow *)window{
+    if (_window == nil) {
+        _window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
+        _window.rootViewController = self.nav;
+        _window.backgroundColor = [UIColor whiteColor];
+    }
+    return _window;
+}
+
 - (HomePageViewController *)vc{
     if (_vc == nil) {
         _vc = [[HomePageViewController alloc] initWithControllers:@[[[ShinBanViewController alloc] init], [[RecommendViewController alloc] init], [[FindViewController alloc] init]]];
@@ -68,6 +101,7 @@
     if (_nav == nil) {
         _nav = [self.vc setupNavigationController];
         
+        //主页按钮
         UIButton* homeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, self.vc.navigationController.navigationBar.frame.size.height, 10, 20)];
         homeButton.tag = 1000;
         [homeButton setImage:[UIImage imageNamed:@"ic_drawer_home"] forState:UIControlStateNormal];
@@ -75,7 +109,14 @@
         [homeButton bk_addEventHandler:^(id sender) {
             [weakSelf.vc profileViewMoveToDestination];
         } forControlEvents:UIControlEventTouchUpInside];
-        [_nav.view addSubview:homeButton];
+        [_nav.view addSubview: homeButton];
+        
+        
+        //搜索按钮
+        UIButton* searchButton = [[UIButton alloc] initWithFrame: CGRectMake(self.vc.navigationController.navigationBar.frame.size.width - 30, self.vc.navigationController.navigationBar.frame.size.height, 30, 30)];
+        searchButton.backgroundColor = [UIColor whiteColor];
+        [searchButton addTarget:self action:@selector(pushSearchViewController:) forControlEvents:UIControlEventTouchUpInside];
+        [_nav.view addSubview: searchButton];
     }
     return _nav;
 }
@@ -125,30 +166,5 @@
     return _arr;
 }
 
-- (UIWindow *)window{
-    if (_window == nil) {
-        _window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
-        _window.rootViewController = self.nav;
-        _window.backgroundColor = [UIColor whiteColor];
-    }
-    return _window;
-}
-
-- (void)animationEnd{
-    self.arr = nil;
-    __weak typeof(self)weakSelf = self;
-    [UIView animateWithDuration:0.8 animations:^{
-        weakSelf.view.alpha = 0;
-    } completion:^(BOOL finished) {
-        [weakSelf.view removeFromSuperview];
-    }];
-}
-
-- (WMPageController *)pvc {
-	if(_pvc == nil) {
-		_pvc = [[WMPageController alloc] initWithViewControllerClasses:@[[ShinBanViewController class], [RecommendViewController class], [FindViewController class]] andTheirTitles:@[@"1",@"2",@"3"]];
-	}
-	return _pvc;
-}
 
 @end

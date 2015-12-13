@@ -77,16 +77,13 @@
 
 
 - (NSAttributedString*)infoTags{
-    NSDictionary* textAtt =  @{NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle),NSForegroundColorAttributeName:kGloableColor};
+    NSDictionary* textAtt =  @{NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle),NSForegroundColorAttributeName: [[ColorManager shareColorManager] colorWithString:@"themeColor"]};
     
     NSMutableAttributedString* mstr = [[NSMutableAttributedString alloc] initWithString:@"" attributes:textAtt];
-    __weak typeof(self)weakSelf = self;
-    __weak typeof(mstr)weakMstr = mstr;
-    __weak typeof(textAtt)weakTextAtt = textAtt;
     [self.tagList enumerateObjectsUsingBlock:^(TagDataModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
-        [weakMstr appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@",obj.name,(idx == weakSelf.tagList.count - 1)?@"":@","] attributes:weakTextAtt]];
-        [weakMstr appendAttributedString:[[NSAttributedString alloc] initWithString:@" "]];
+        [mstr appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@",obj.name,(idx == self.tagList.count - 1)?@"":@","] attributes:textAtt]];
+        [mstr appendAttributedString:[[NSAttributedString alloc] initWithString:@" "]];
     }];
     return [mstr copy];
 }
@@ -222,7 +219,7 @@
     }];
     
     NSArray* operations = [AFURLConnectionOperation batchOfRequestOperations:arr progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations){
-        NSLog(@"%d,%d", numberOfFinishedOperations, totalNumberOfOperations);
+        NSLog(@"%lu,%lu", (unsigned long)numberOfFinishedOperations, (unsigned long)totalNumberOfOperations);
         //参数获取完成后 自动下载第一个视频
     } completionBlock:^(NSArray *operations){
         //显示成功信息

@@ -13,4 +13,12 @@
 + (NSString*)stringWithFormatNum:(NSInteger)num;
 //根据正则表达式返回对应子字符串
 - (NSArray<NSString *>*)subStringsWithRegularExpression:(NSString*)regularExpression;
+/*
+ 根据字典转成sign
+ */
++ (NSString*)signStringWithDic:(NSDictionary*)dic;
+/*
+ 根据字符串转成sign
+ */
++ (NSString*)signStringWithString:(NSString*)str;
 @end

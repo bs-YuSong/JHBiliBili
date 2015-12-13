@@ -7,6 +7,8 @@
 //
 
 #import "NSString+Tools.h"
+#import "NSDictionary+Tools.h"
+#import <CommonCrypto/CommonDigest.h>
 
 @implementation NSString (Tools)
 + (NSString*)stringWithFormatNum:(NSInteger)num{
@@ -27,6 +29,25 @@
         return [returnArr copy];
     }
     return nil;
+}
+
++ (NSString*)signStringWithDic:(NSDictionary*)dic{
+    //将字典键降序排列后转成md5
+    return [self signStringWithString: [dic appendGetSortParameterWithBasePath:@""]];
+}
+
++ (NSString*)signStringWithString:(NSString*)str{
+    //开始md5转换
+    const char *cStr = [[str stringByAppendingString: APPSEC] UTF8String];
+    unsigned char result[CC_MD5_DIGEST_LENGTH];
+    CC_MD5( cStr, (unsigned int)strlen(cStr), result );
+    
+    NSMutableString *hash = [NSMutableString string];
+    for(int i=0;i<CC_MD5_DIGEST_LENGTH;i++)
+    {
+        [hash appendFormat:@"%02X",result[i]];
+    }
+    return [hash lowercaseString];
 }
 
 @end

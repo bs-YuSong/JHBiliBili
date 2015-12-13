@@ -101,6 +101,11 @@
 		</dict>
 		<key>AVInfoViewController</key>
 		<dict>
+			<key>UPLabel</key>
+			<dict>
+				<key>textColor</key>
+				<real>16210055</real>
+			</dict>
 			<key>menuView</key>
 			<dict>
 				<key>lineColor</key>
@@ -221,6 +226,11 @@
 		</dict>
 		<key>AVInfoViewController</key>
 		<dict>
+			<key>UPLabel</key>
+			<dict>
+				<key>textColor</key>
+				<real>9737364</real>
+			</dict>
 			<key>menuView</key>
 			<dict>
 				<key>lineColor</key>
@@ -336,6 +346,11 @@
 		</dict>
 		<key>AVInfoViewController</key>
 		<dict>
+			<key>UPLabel</key>
+			<dict>
+				<key>textColor</key>
+				<real>15808567</real>
+			</dict>
 			<key>menuView</key>
 			<dict>
 				<key>lineColor</key>
@@ -451,6 +466,11 @@
 		</dict>
 		<key>AVInfoViewController</key>
 		<dict>
+			<key>UPLabel</key>
+			<dict>
+				<key>textColor</key>
+				<real>16630286</real>
+			</dict>
 			<key>menuView</key>
 			<dict>
 				<key>lineColor</key>
@@ -566,6 +586,11 @@
 		</dict>
 		<key>AVInfoViewController</key>
 		<dict>
+			<key>UPLabel</key>
+			<dict>
+				<key>textColor</key>
+				<real>9291338</real>
+			</dict>
 			<key>menuView</key>
 			<dict>
 				<key>lineColor</key>
@@ -681,6 +706,11 @@
 		</dict>
 		<key>AVInfoViewController</key>
 		<dict>
+			<key>UPLabel</key>
+			<dict>
+				<key>textColor</key>
+				<real>2790387</real>
+			</dict>
 			<key>menuView</key>
 			<dict>
 				<key>lineColor</key>
@@ -796,6 +826,11 @@
 		</dict>
 		<key>AVInfoViewController</key>
 		<dict>
+			<key>UPLabel</key>
+			<dict>
+				<key>textColor</key>
+				<real>10092720</real>
+			</dict>
 			<key>menuView</key>
 			<dict>
 				<key>lineColor</key>

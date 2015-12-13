@@ -83,7 +83,7 @@
 - (void)setProperty{
     //设置up名
     NSMutableAttributedString* str = [[NSMutableAttributedString alloc] initWithString:@"UP主："];
-    [str appendAttributedString:[[NSMutableAttributedString alloc] initWithString: [self.vm infoUpName] attributes:@{NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle),NSForegroundColorAttributeName:[[ColorManager shareColorManager] colorWithString:@"themeColor"]}]];
+    [str appendAttributedString:[[NSMutableAttributedString alloc] initWithString: [self.vm infoUpName] attributes:@{NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle),NSForegroundColorAttributeName:[[ColorManager shareColorManager] colorWithString:@"AVInfoViewController.UPLabel.textColor"]}]];
     [self.UPLabel setAttributedText:str];
     //播放数
     self.playNumLabel.text = [NSString stringWithFormat:@"播放：%@", [self.vm infoPlayNum]];
@@ -264,11 +264,11 @@
 
 
 - (ShiBanEpisodeCollectionViewController *)sevc{
-	if(_sevc == nil) {
+    if(_sevc == nil) {
         _sevc = [[ShiBanEpisodeCollectionViewController alloc] initWithCollectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
         _sevc.episodes = @[[self.vm AVModel2EpisodesModel]];
-	}
-	return _sevc;
+    }
+    return _sevc;
 }
 
 @end

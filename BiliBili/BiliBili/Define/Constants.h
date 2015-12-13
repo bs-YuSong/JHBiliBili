@@ -52,8 +52,19 @@ cell.preservesSuperviewLayoutMargins = NO; \
  */
 #define kArchPath [kDocumentPath stringByAppendingPathComponent: @"arch"]
 
-#define kGloableColor kRGBColor(248, 116, 153)
+/**
+ *  appkey
+ */
+#define APPKEY @"85eb6835b0a1034e"
 
+/**
+ *  appsec
+ */
+#define APPSEC @"2ad42749773c441109bdc0191257a664"
+
+/**
+ *  默认网络错误信息
+ */
 #define kerrorMessage @"网络连接出错_(:3 」∠)_"
 
 
