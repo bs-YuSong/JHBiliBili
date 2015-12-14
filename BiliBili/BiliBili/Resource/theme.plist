@@ -12,6 +12,10 @@
 		<real>16210055</real>
 		<key>textColor</key>
 		<real>3355443</real>
+		<key>assistantTextColor</key>
+		<integer>12303291</integer>
+		<key>lightBackGroundColor</key>
+		<integer>16777215</integer>
 		<key>ShiBanEpisodeCollectionViewCell</key>
 		<dict>
 			<key>backgroundColor</key>
@@ -132,6 +136,10 @@
 		<integer>3881787</integer>
 		<key>textColor</key>
 		<real>9737364</real>
+		<key>assistantTextColor</key>
+		<integer>12303291</integer>
+		<key>lightBackGroundColor</key>
+		<integer>3881787</integer>
 		<key>ShiBanEpisodeCollectionViewCell</key>
 		<dict>
 			<key>backgroundColor</key>
@@ -257,6 +265,10 @@
 		<real>15808567</real>
 		<key>textColor</key>
 		<integer>3355443</integer>
+		<key>assistantTextColor</key>
+		<integer>12303291</integer>
+		<key>lightBackGroundColor</key>
+		<integer>16777215</integer>
 		<key>ShiBanEpisodeCollectionViewCell</key>
 		<dict>
 			<key>backgroundColor</key>
@@ -377,6 +389,10 @@
 		<integer>10066329</integer>
 		<key>textColor</key>
 		<integer>3355443</integer>
+		<key>assistantTextColor</key>
+		<integer>12303291</integer>
+		<key>lightBackGroundColor</key>
+		<integer>16777215</integer>
 		<key>ShiBanEpisodeCollectionViewCell</key>
 		<dict>
 			<key>backgroundColor</key>
@@ -496,7 +512,11 @@
 		<key>separatorColor</key>
 		<integer>10066329</integer>
 		<key>textColor</key>
-		<integer>3355443</integer>
+		<real>3355443</real>
+		<key>assistantTextColor</key>
+		<real>3355443</real>
+		<key>lightBackGroundColor</key>
+		<integer>16777215</integer>
 		<key>ShiBanEpisodeCollectionViewCell</key>
 		<dict>
 			<key>backgroundColor</key>
@@ -617,6 +637,10 @@
 		<real>2790387</real>
 		<key>textColor</key>
 		<integer>3355443</integer>
+		<key>assistantTextColor</key>
+		<integer>12303291</integer>
+		<key>lightBackGroundColor</key>
+		<integer>16777215</integer>
 		<key>ShiBanEpisodeCollectionViewCell</key>
 		<dict>
 			<key>backgroundColor</key>
@@ -737,6 +761,10 @@
 		<integer>10066329</integer>
 		<key>textColor</key>
 		<integer>3355443</integer>
+		<key>assistantTextColor</key>
+		<integer>12303291</integer>
+		<key>lightBackGroundColor</key>
+		<integer>16777215</integer>
 		<key>ShiBanEpisodeCollectionViewCell</key>
 		<dict>
 			<key>backgroundColor</key>

@@ -25,7 +25,7 @@
 @end
 
 @implementation MoreViewShinBanDataModel
-+ (NSDictionary *)replacedKeyFromPropertyName{
++ (NSDictionary *)mj_replacedKeyFromPropertyName{
     return @{@"description":@"desc",@"typeid":@"typeID"};
 }
 @end

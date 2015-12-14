@@ -26,6 +26,13 @@
     return [self shiBanWithIndex:index].title;
 }
 /**
+ *  seasonId
+ *
+ */
+- (NSString*)shiBanSeasonIdWithIndex:(NSInteger)index{
+    return [self shiBanWithIndex:index].season_id;
+}
+/**
  *  番剧点击量
  */
 - (NSString*)shiBanClickNumWithIndex:(NSInteger)index{
@@ -48,7 +55,7 @@
  */
 - (NSString*)shiBanNewEpisodeWithIndex:(NSInteger)index{
     //完结返回全集，否则返回最新集数
-    return [[self shiBanWithIndex:index].is_finish isEqualToString:@"1"]?@"全集":[self shiBanWithIndex:index].newest_ep_index;
+    return [[self shiBanWithIndex:index].is_finish isEqualToString:@"1"]?@"全集":[NSString stringWithFormat: @"更新到：%@",[self shiBanWithIndex:index].newest_ep_index];
 }
 /**
  *  番剧部分总数

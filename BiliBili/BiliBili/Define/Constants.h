@@ -12,6 +12,8 @@
 //通过RGB设置颜色
 #define kRGBColor(R,G,B)        [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:1.0]
 
+#define kRGBAColor(R,G,B,A) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:A]
+
 #define kWindowH   [UIScreen mainScreen].bounds.size.height //应用程序的屏幕高度
 #define kWindowW    [UIScreen mainScreen].bounds.size.width  //应用程序的屏幕宽度
 

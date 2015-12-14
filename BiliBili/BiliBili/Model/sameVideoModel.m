@@ -15,8 +15,7 @@
 @end
 
 @implementation sameVideoDataModel
-+ (NSDictionary *)replacedKeyFromPropertyName{
++ (NSDictionary *)mj_replacedKeyFromPropertyName{
     return @{@"id":@"identity", @"description":@"desc", @"typeid":@"typeID"};
 }
-
 @end

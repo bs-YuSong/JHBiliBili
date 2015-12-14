@@ -42,6 +42,8 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.signLabel.text = @"专题";
         self.titleLabel.text = @"";
+        self.detailLabel.text = @"";
+        self.contentView.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"lightBackGroundColor"];
     }
     return self;
 }
@@ -53,7 +55,7 @@
         _signLabel.textColor = [UIColor whiteColor];
         _signLabel.backgroundColor = [[ColorManager shareColorManager] colorWithString: @"themeColor"];
         _signLabel.textAlignment = NSTextAlignmentCenter;
-        _signLabel.font = [UIFont systemFontOfSize: 12];
+        _signLabel.font = [UIFont systemFontOfSize: 13];
         [self addSubview: _signLabel];
         [_signLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.coverImgView.mas_right).mas_offset(10);
@@ -80,7 +82,8 @@
 - (UILabel *) titleLabel {
 	if(_titleLabel == nil) {
 		_titleLabel = [[UILabel alloc] init];
-        _titleLabel.font = [UIFont systemFontOfSize: 12];
+        _titleLabel.font = [UIFont systemFontOfSize: 13];
+        _titleLabel.textColor = [[ColorManager shareColorManager] colorWithString:@"textColor"];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview: _titleLabel];
         [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -91,4 +94,20 @@
 	return _titleLabel;
 }
 
+- (UILabel*)detailLabel{
+    if (_detailLabel == nil) {
+        _detailLabel = [[UILabel alloc] init];
+        _detailLabel.font = [UIFont systemFontOfSize: 13];
+        _detailLabel.textColor = [[ColorManager shareColorManager] colorWithString:@"assistantTextColor"];
+        _detailLabel.numberOfLines = 2;
+        [self addSubview: _detailLabel];
+        [_detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.signLabel);
+            make.right.mas_offset(-10);
+            make.top.mas_equalTo(self.signLabel.mas_bottom).mas_offset(5);
+            make.bottom.equalTo(self.coverImgView);
+        }];
+    }
+    return _detailLabel;
+}
 @end

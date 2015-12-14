@@ -10,13 +10,13 @@
 
 @implementation AVModel
 + (NSDictionary *)objectClassInArray{
-    return @{@"list":[AVDataModel class]};
+    return @{@"list": [AVDataModel class]};
 }
 @end
 
 @implementation AVDataModel
 
-+ (NSDictionary *)replacedKeyFromPropertyName{
++ (NSDictionary *)mj_replacedKeyFromPropertyName{
     return @{@"desc": @"description"};
 }
 

@@ -12,15 +12,22 @@
 #import "RecommendViewController.h"
 #import "ShinBanViewController.h"
 #import "FindViewController.h"
-#import "SearchViewController.h"
 #import "UIViewController+Tools.h"
 #import "WMPageController.h"
+#import "SearchView.h"
 @interface AppDelegate ()
 @property (nonatomic, strong) HomePageViewController* vc;
 @property (nonatomic, strong) WMPageController* pvc;
 @property (nonatomic, strong) UINavigationController* nav;
 @property (strong, nonatomic) UIImageView* imgView;
+/**
+ *  启动动画底部view
+ */
 @property (strong, nonatomic) UIView* view;
+/**
+ *  搜索输入框
+ */
+@property (nonatomic, strong)SearchView* searchView;
 @property (strong, nonatomic) NSMutableArray* arr;
 @end
 
@@ -70,15 +77,6 @@
     }];
 }
 
-/**
- *  推出搜索视图
- *
- */
-- (void)pushSearchViewController:(UIButton*)button{
-    SearchViewController* svc = [[SearchViewController alloc] initWithkeyWord:@"%E6%9C%9D%E4%BA%94%E6%99%9A%E4%B9%9D"];
-    [self.nav pushViewController:svc animated:YES];
-}
-
 #pragma mark - 懒加载
 
 - (UIWindow *)window{
@@ -93,30 +91,14 @@
 - (HomePageViewController *)vc{
     if (_vc == nil) {
         _vc = [[HomePageViewController alloc] initWithControllers:@[[[ShinBanViewController alloc] init], [[RecommendViewController alloc] init], [[FindViewController alloc] init]]];
-    }
+        }
     return _vc;
 }
 
 - (UINavigationController *)nav{
     if (_nav == nil) {
         _nav = [self.vc setupNavigationController];
-        
-        //主页按钮
-        UIButton* homeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, self.vc.navigationController.navigationBar.frame.size.height, 10, 20)];
-        homeButton.tag = 1000;
-        [homeButton setImage:[UIImage imageNamed:@"ic_drawer_home"] forState:UIControlStateNormal];
-        __weak typeof(self)weakSelf = self;
-        [homeButton bk_addEventHandler:^(id sender) {
-            [weakSelf.vc profileViewMoveToDestination];
-        } forControlEvents:UIControlEventTouchUpInside];
-        [_nav.view addSubview: homeButton];
-        
-        
-        //搜索按钮
-        UIButton* searchButton = [[UIButton alloc] initWithFrame: CGRectMake(self.vc.navigationController.navigationBar.frame.size.width - 30, self.vc.navigationController.navigationBar.frame.size.height, 30, 30)];
-        searchButton.backgroundColor = [UIColor whiteColor];
-        [searchButton addTarget:self action:@selector(pushSearchViewController:) forControlEvents:UIControlEventTouchUpInside];
-        [_nav.view addSubview: searchButton];
+        self.searchView.hidden = YES;
     }
     return _nav;
 }
@@ -148,6 +130,21 @@
     return _view;
 }
 
+- (SearchView *)searchView {
+    if(_searchView == nil) {
+        _searchView = [[SearchView alloc] init];
+        _searchView.tag = 105;
+        [self.nav.view addSubview: _searchView];
+        [_searchView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(_searchView.superview).mas_offset(-10);
+            make.height.mas_equalTo(40);
+            make.centerX.mas_offset(0);
+            make.top.mas_offset(25);
+        }];
+    }
+    return _searchView;
+}
+
 - (NSMutableArray *)arr{
     if (_arr == nil) {
         _arr = [NSMutableArray array];
@@ -165,6 +162,5 @@
     }
     return _arr;
 }
-
 
 @end

@@ -10,6 +10,9 @@
 #import "SearchViewModel.h"
 #import "SearchShiBanTableViewCell.h"
 #import "SearchSpecialTableViewCell.h"
+#import "SearchSameVideoTableViewCell.h"
+#import "ShiBanInfoViewController.h"
+#import "ShinBanModel.h"
 
 @interface SearchViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong)SearchViewModel* vm;
@@ -74,22 +77,69 @@
         if (cell == nil) {
             cell = [[SearchSpecialTableViewCell alloc] initWithStyle:0 reuseIdentifier: @"SearchSpecialTableViewCell"];
         }
-        [cell setWithDic:
-         @{@"coverImgView":[self.vm specialCoverWithIndex: indexPath.row],
-           @"titleLabel.text":[self.vm specialTitleWithIndex: indexPath.row]
-           }];
+        [cell setWithDic:@{
+                           @"coverImgView":[self.vm specialCoverWithIndex: indexPath.row],
+                           @"titleLabel.text":[self.vm specialTitleWithIndex: indexPath.row],
+                           @"detailLabel.text":[self.vm specialDescWithIndex: indexPath.row]
+                           }];
         return cell;
     }else{
-        UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:0 reuseIdentifier: @"cell3"];
-        cell.textLabel.text = [self.vm videoTitleWithIndex: indexPath.row];
+        SearchSameVideoTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"SearchSameVideoTableViewCell"];
+        if (cell == nil) {
+            cell = [[SearchSameVideoTableViewCell alloc] initWithStyle:0 reuseIdentifier: @"SearchSameVideoTableViewCell"];
+        }
+        [cell setWithDic: @{
+                            @"coverImageView":[self.vm videoCoverWithIndex: indexPath.row],
+                            @"titleLabel.text":[self.vm videoTitleWithIndex: indexPath.row],
+                            @"playLabel.text":[self.vm videoPlayNumWithIndex: indexPath.row],
+                            @"danMuLabel.text":[self.vm videoDanMuNumWithIndex: indexPath.row],
+                            @"UPLabel.text":[self.vm videoUpWithIndex: indexPath.row]
+                            }];
         return cell;
     }
     return nil;
 }
 
+
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if (section == 2) {
+        UIView* view = [[UIView alloc] initWithFrame: CGRectMake(0, 0, kWindowW, 30)];
+        
+        UILabel* label = [[UILabel alloc] init];
+        [view addSubview: label];
+        [label mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_offset(10);
+            make.bottom.right.top.mas_offset(0);
+        }];
+        label.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"backgroundColor"];
+        label.textColor = [[ColorManager shareColorManager] colorWithString:@"textColor"];
+        label.text = @"相关视频";
+        label.font = [UIFont systemFontOfSize: 14];
+        return view;
+    }
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 2) {
+        return 30;
+    }
+    return 0;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableView deselectRowAtIndexPath:indexPath animated: YES];
+    if (indexPath.section == 0) {
+        ShiBanInfoViewController* vc = [[ShiBanInfoViewController alloc] init];
+        RecommentShinBanDataModel* model = [[RecommentShinBanDataModel alloc] init];
+        model.title = [self.vm shiBanTitleWithIndex: indexPath.row];
+        model.season_id = [self.vm shiBanSeasonIdWithIndex: indexPath.row];
+        model.cover = [self.vm shiBanCoverWithIndex: indexPath.row].absoluteString;
+        [vc setWithModel: model];
+        [self.navigationController pushViewController: vc animated:YES];
+    }
 }
+
 
 #pragma mark - 懒加载
 
@@ -97,7 +147,10 @@
     if(_tableView == nil) {
         _tableView = [[UITableView alloc] init];
         _tableView.estimatedRowHeight = 200;
+        _tableView.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"backgroundColor"];
         _tableView.rowHeight = UITableViewAutomaticDimension;
+        _tableView.tableFooterView = [UIView new];
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.dataSource = self;
         _tableView.delegate = self;
         [self.view addSubview: _tableView];

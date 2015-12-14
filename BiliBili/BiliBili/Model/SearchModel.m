@@ -20,7 +20,7 @@
 @end
 
 @implementation SearchSpecialModel
-+ (NSDictionary *)replacedKeyFromPropertyName{
-    return @{@"description":@"desc"};
++ (NSDictionary *)mj_replacedKeyFromPropertyName{
+    return @{@"desc":@"description"};
 }
 @end

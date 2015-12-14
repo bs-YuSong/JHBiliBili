@@ -37,6 +37,7 @@
  */
 - (NSInteger)shiBanCount;
 
+- (NSString*)shiBanSeasonIdWithIndex:(NSInteger)index;
 
 
 //专题部分

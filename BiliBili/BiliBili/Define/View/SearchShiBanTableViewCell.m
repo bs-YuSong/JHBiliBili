@@ -52,6 +52,7 @@
         self.clicklabel.text = @"点击：";
         self.favoriteLabel.text = @"订阅：";
         self.episodeLabel.text = @"";
+        self.contentView.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"lightBackGroundColor"];
     }
     return self;
 }
@@ -109,6 +110,7 @@
 	if(_clicklabel == nil) {
 		_clicklabel = [[UILabel alloc] init];
         _clicklabel.font = [UIFont systemFontOfSize: 12];
+        _clicklabel.textColor = [[ColorManager shareColorManager] colorWithString:@"assistantTextColor"];
         [self addSubview: _clicklabel];
         [_clicklabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.shiBanSignLabel);
@@ -121,6 +123,7 @@
 - (UILabel *) favoriteLabel {
 	if(_favoriteLabel == nil) {
 		_favoriteLabel = [[UILabel alloc] init];
+        _favoriteLabel.textColor = [[ColorManager shareColorManager] colorWithString:@"assistantTextColor"];
         _favoriteLabel.font = [UIFont systemFontOfSize: 12];
         [self addSubview: _favoriteLabel];
         [_favoriteLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -134,6 +137,7 @@
 - (UILabel *) episodeLabel {
 	if(_episodeLabel == nil) {
 		_episodeLabel = [[UILabel alloc] init];
+        _episodeLabel.textColor = [[ColorManager shareColorManager] colorWithString:@"assistantTextColor"];
         _episodeLabel.font = [UIFont systemFontOfSize: 12];
         [self addSubview: _episodeLabel];
         [_episodeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
