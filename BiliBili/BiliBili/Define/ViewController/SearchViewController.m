@@ -13,6 +13,8 @@
 #import "SearchSameVideoTableViewCell.h"
 #import "ShiBanInfoViewController.h"
 #import "ShinBanModel.h"
+#import "AVInfoViewController.h"
+#import "SpecialViewController.h"
 
 @interface SearchViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong)SearchViewModel* vm;
@@ -129,13 +131,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableView deselectRowAtIndexPath:indexPath animated: YES];
+    //番剧
     if (indexPath.section == 0) {
         ShiBanInfoViewController* vc = [[ShiBanInfoViewController alloc] init];
-        RecommentShinBanDataModel* model = [[RecommentShinBanDataModel alloc] init];
-        model.title = [self.vm shiBanTitleWithIndex: indexPath.row];
-        model.season_id = [self.vm shiBanSeasonIdWithIndex: indexPath.row];
-        model.cover = [self.vm shiBanCoverWithIndex: indexPath.row].absoluteString;
-        [vc setWithModel: model];
+        [vc setWithModel:  (RecommentShinBanDataModel*)[self.vm shiBanWithIndex: indexPath.row]];
+        [self.navigationController pushViewController: vc animated:YES];
+    //相关视频
+    }else if (indexPath.section == 2){
+        AVInfoViewController* vc = [[AVInfoViewController alloc] init];
+        [vc setWithModel: [self.vm videoWithIndex: indexPath.row] section:nil];
+        [self.navigationController pushViewController: vc animated:YES];
+    //专题
+    }else{
+        SpecialViewController* vc = [[SpecialViewController alloc] initWithModel: [self.vm specialWithIndex: indexPath.row]];
         [self.navigationController pushViewController: vc animated:YES];
     }
 }

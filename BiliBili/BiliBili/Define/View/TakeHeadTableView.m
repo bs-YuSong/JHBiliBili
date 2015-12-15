@@ -20,7 +20,6 @@
         self.tableHeaderView = v;
         self.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"backgroundColor"];
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
-        self.allowsSelection = NO;
     }
     return self;
 }
@@ -31,7 +30,6 @@
         self.tableHeaderView = v;
         self.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"backgroundColor"];
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
-        self.allowsSelection = NO;
     }
     return self;
 }

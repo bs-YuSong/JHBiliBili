@@ -28,5 +28,4 @@
 + (id)GetTagWithParameter:(NSDictionary*)parame completionHandler:(void(^)(id responseObj, NSError *error))complete;
 
 + (id)DownVideoWithDic:(NSDictionary*)dic completionHandler:(void(^)(id responseObj, NSError *error))complete;
-//+ (id)DownVideoWithVideoModel:(VideoModel*)vm quality:(NSString*)quality resumeData:(NSData*)resumeData completionHandler:(void(^)(id responseObj, NSError *error))complete;
 @end

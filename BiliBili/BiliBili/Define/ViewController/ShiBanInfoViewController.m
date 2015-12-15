@@ -42,7 +42,6 @@
     [super viewDidLoad];
     //初始化属性
     [self setProperty];
-    //[self setUpDownLoadProperty];
 }
 
 #pragma mark - 方法

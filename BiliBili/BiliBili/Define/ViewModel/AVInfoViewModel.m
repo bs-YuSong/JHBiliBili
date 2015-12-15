@@ -103,7 +103,7 @@
     return [NSString stringWithFormatNum:self.AVData.play];
 }
 - (NSString*)infoDanMuCount{
-    return [NSString stringWithFormatNum:self.AVData.video_review];
+    return self.AVData.video_review >= 0?[NSString stringWithFormatNum: self.AVData.video_review]:nil;
 }
 - (NSString*)infoTime{
     return self.AVData.create;
@@ -112,6 +112,14 @@
 //视频aid
 - (NSString*)videoAid{
     return self.AVData.aid;
+}
+//视频cid
+- (NSString*)videoCid{
+    return self.AVData.cid;
+}
+//视频标题
+- (NSString*)videoTitle{
+    return self.AVData.title;
 }
 //视频详情
 - (NSString*)infoBrief{
@@ -123,6 +131,8 @@
     episodesModel* model = [[episodesModel alloc] init];
     model.index = [self infoTitle];
     model.av_id = [self videoAid];
+    model.av_cid = [self videoCid];
+    model.index_title = [self videoTitle];
     return model;
 }
 

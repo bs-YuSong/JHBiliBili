@@ -25,7 +25,7 @@
  */
 @property (nonatomic, strong)NSString* aid;
 /**
- *  总集数
+ *  集数
  */
 @property (nonatomic, strong)NSString* episode;
 /**
@@ -43,5 +43,5 @@
 /**
  *  cid
  */
-@property (nonatomic, strong)NSNumber* cid;
+@property (nonatomic, strong)NSString* cid;
 @end

@@ -24,7 +24,6 @@
 //回复数
 //@property (nonatomic, assign)NSInteger review;
 
-
 //缩略图部分
 //图片地址
 @property (nonatomic, strong)NSString* pic;

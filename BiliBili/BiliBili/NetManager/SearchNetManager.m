@@ -40,7 +40,11 @@
 //    http://www.bilibili.com/index/bangumi/58163.json
     NSString* basePath = [NSString stringWithFormat:@"http://www.bilibili.com/index/bangumi/%@.json",spid];
     return [self Get:basePath parameters:nil completionHandler:^(id responseObj, NSError *error) {
-        complete([SpecialModel mj_objectWithKeyValues: @{@"list":[NSJSONSerialization json2DicWithData: responseObj]}], error);
+        id resp = [NSJSONSerialization json2DicWithData: responseObj];
+        if (resp == nil) {
+            return;
+        }
+        complete([SpecialModel mj_objectWithKeyValues: @{@"list": resp}], error);
     }];
 }
 @end

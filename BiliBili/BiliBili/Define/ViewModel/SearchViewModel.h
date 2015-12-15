@@ -7,6 +7,8 @@
 //
 
 #import "BaseViewModel.h"
+@class SearchShibanModel, AVDataModel, SearchSpecialModel;
+
 @interface SearchViewModel : BaseViewModel
 @property (nonatomic, strong)NSString* keyWord;
 
@@ -33,11 +35,18 @@
  */
 - (NSString*)shiBanNewEpisodeWithIndex:(NSInteger)index;
 /**
+ *  番剧SeasonId
+ *
+ */
+- (NSString*)shiBanSeasonIdWithIndex:(NSInteger)index;
+/**
  *  番剧数
  */
 - (NSInteger)shiBanCount;
-
-- (NSString*)shiBanSeasonIdWithIndex:(NSInteger)index;
+/**
+ *  番剧模型
+ */
+- (SearchShibanModel *)shiBanWithIndex:(NSInteger)index;
 
 
 //专题部分
@@ -53,6 +62,20 @@
  *  专题封面
  */
 - (NSURL*)specialCoverWithIndex:(NSInteger)index;
+
+/**
+ *  专题spid
+ *
+ */
+- (NSString*)specialSpidWithIndex:(NSInteger)index;
+
+/**
+ *  专题模型
+ *
+ */
+
+- (SearchSpecialModel *)specialWithIndex:(NSInteger)index;
+
 /**
  *  专题数
  */
@@ -85,6 +108,8 @@
  *  视频数
  */
 - (NSInteger)videosCount;
+
+- (AVDataModel*)videoWithIndex:(NSInteger)index;
 
 //其他方法
 - (void)refreshDataCompleteHandle:(void(^)(NSError *error))complete;

@@ -116,7 +116,7 @@
 }
 
 - (NSArray<NSDictionary *> *)dicMap{
-    if (_dicMap == nil) {
+    if (_dicMap == nil){
         _dicMap =  @[@{@"动画":@"1-3day.json"},@{@"番剧":@"13-3day.json"},@{@"音乐":@"3-3day.json"},@{@"舞蹈":@"129-3day.json"},@{@"游戏":@"4-3day.json"},@{@"科技":@"36-3day.json"},@{@"娱乐":@"5-3day.json"},@{@"鬼畜":@"119-3day.json"},@{@"电影":@"23-3day.json"},@{@"电视剧":@"11-3day.json"},@{@"时尚":@"155-3day.json"}];
     }
     return _dicMap;

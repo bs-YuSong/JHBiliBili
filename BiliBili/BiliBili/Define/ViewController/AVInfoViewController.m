@@ -74,7 +74,7 @@
 }
 
 - (NSArray *)allEpisode{
-    return @[@{@"aid":[self.vm videoAid],@"quality":self.resolution}];
+    return @[@{@"aid":[self.vm videoAid],@"quality":self.resolution,@"cid":[self.vm videoCid],@"title":[self.vm videoTitle]}];
 }
 
 /**
@@ -83,14 +83,24 @@
 - (void)setProperty{
     //设置up名
     NSMutableAttributedString* str = [[NSMutableAttributedString alloc] initWithString:@"UP主："];
-    [str appendAttributedString:[[NSMutableAttributedString alloc] initWithString: [self.vm infoUpName] attributes:@{NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle),NSForegroundColorAttributeName:[[ColorManager shareColorManager] colorWithString:@"AVInfoViewController.UPLabel.textColor"]}]];
-    [self.UPLabel setAttributedText:str];
+    NSString* upName = [self.vm infoUpName];
+    if (upName) {
+        [str appendAttributedString:[[NSMutableAttributedString alloc] initWithString: [self.vm infoUpName] attributes:@{NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle),NSForegroundColorAttributeName:[[ColorManager shareColorManager] colorWithString:@"AVInfoViewController.UPLabel.textColor"]}]];
+        [self.UPLabel setAttributedText:str];
+    }
+    
     //播放数
     self.playNumLabel.text = [NSString stringWithFormat:@"播放：%@", [self.vm infoPlayNum]];
     //弹幕数
-    self.danMuNumLabel.text = [NSString stringWithFormat:@"弹幕数：%@", [self.vm infoDanMuCount]];
+    NSString* danMuCount = [self.vm infoDanMuCount];
+    if (danMuCount) {
+        self.danMuNumLabel.text = [NSString stringWithFormat:@"弹幕数：%@", danMuCount];
+    }
     //创建时间
-    self.publicTimeLabel.text = [NSString stringWithFormat:@"发布于：%@", [self.vm infoTime]];
+    NSString* pubTime = [self.vm infoTime];
+    if (pubTime) {        
+        self.publicTimeLabel.text = [NSString stringWithFormat:@"发布于：%@", pubTime];
+    }
     //图片URL
     [self.imgView setImageWithURL: [self.vm infoImgURL]];
     //标题

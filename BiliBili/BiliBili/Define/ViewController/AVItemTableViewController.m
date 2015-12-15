@@ -12,6 +12,7 @@
 #import "ShiBanEpisodesTableViewCell.h"
 #import "ShiBanIntroduceTableViewCell.h"
 #import "AVItemTableViewCell.h"
+#import "AVInfoViewController.h"
 
 @interface AVItemTableViewController ()
 //根据cell的标识符判断初始化的cell类型
@@ -20,10 +21,6 @@
 @end
 
 @implementation AVItemTableViewController
-
-- (void)dealloc{
-    NSLog(@"dsds");
-}
 
 #pragma mark - TableViewController
 
@@ -49,6 +46,21 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if ([self.cellIdentitys[indexPath.section] isEqualToString:@"SameVideoTableViewCell"]) {
+        sameVideoDataModel* sModle = [self.vm sameVideoModelForRow: indexPath.row];
+        AVDataModel* avModel = [[AVDataModel alloc] init];
+        avModel.title = sModle.title;
+        avModel.desc = sModle.desc;
+        avModel.pic = sModle.pic;
+        avModel.play = sModle.click;
+        avModel.aid = sModle.identity;
+        avModel.author = sModle.author_name;
+        avModel.create = sModle.pubdate;
+        avModel.video_review = sModle.dm_count;
+        AVInfoViewController* vc = [[AVInfoViewController alloc] init];
+        [vc setWithModel: avModel section: nil];
+        [self.navigationController pushViewController: vc animated:YES];
+    }
 }
 
 #pragma mark - 方法

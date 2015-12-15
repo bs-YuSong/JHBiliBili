@@ -197,6 +197,9 @@
 		A1D258C31C0F032A005A3BEF /* BaseInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D258C21C0F032A005A3BEF /* BaseInfoViewController.m */; };
 		A31915091C1D1C930034F70E /* SearchNetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A31915081C1D1C930034F70E /* SearchNetManager.m */; };
 		A319150D1C1D1D6B0034F70E /* SearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A319150C1C1D1D6B0034F70E /* SearchModel.m */; };
+		A31EACE91C1FC2B000482993 /* SpecialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A31EACE81C1FC2B000482993 /* SpecialViewController.m */; };
+		A31EACEC1C1FC62500482993 /* SpecialViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A31EACEB1C1FC62500482993 /* SpecialViewModel.m */; };
+		A31EACEF1C1FD3AB00482993 /* SpecialTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A31EACEE1C1FD3AB00482993 /* SpecialTableViewCell.m */; };
 		A32FCF921C1D56C300C7A11C /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A32FCF911C1D56C300C7A11C /* SearchViewController.m */; };
 		A32FCF941C1D5F7500C7A11C /* theme.plist in Resources */ = {isa = PBXBuildFile; fileRef = A32FCF931C1D5F7500C7A11C /* theme.plist */; };
 		A32FCF971C1D681F00C7A11C /* SearchShiBanTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A32FCF961C1D681F00C7A11C /* SearchShiBanTableViewCell.m */; };
@@ -520,6 +523,12 @@
 		A31915081C1D1C930034F70E /* SearchNetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchNetManager.m; sourceTree = "<group>"; };
 		A319150B1C1D1D6B0034F70E /* SearchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchModel.h; sourceTree = "<group>"; };
 		A319150C1C1D1D6B0034F70E /* SearchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchModel.m; sourceTree = "<group>"; };
+		A31EACE71C1FC2B000482993 /* SpecialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecialViewController.h; sourceTree = "<group>"; };
+		A31EACE81C1FC2B000482993 /* SpecialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecialViewController.m; sourceTree = "<group>"; };
+		A31EACEA1C1FC62500482993 /* SpecialViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecialViewModel.h; sourceTree = "<group>"; };
+		A31EACEB1C1FC62500482993 /* SpecialViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecialViewModel.m; sourceTree = "<group>"; };
+		A31EACED1C1FD3AB00482993 /* SpecialTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecialTableViewCell.h; sourceTree = "<group>"; };
+		A31EACEE1C1FD3AB00482993 /* SpecialTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecialTableViewCell.m; sourceTree = "<group>"; };
 		A32FCF901C1D56C300C7A11C /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		A32FCF911C1D56C300C7A11C /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		A32FCF931C1D5F7500C7A11C /* theme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = theme.plist; sourceTree = "<group>"; };
@@ -1315,6 +1324,8 @@
 			children = (
 				A32FCF901C1D56C300C7A11C /* SearchViewController.h */,
 				A32FCF911C1D56C300C7A11C /* SearchViewController.m */,
+				A31EACE71C1FC2B000482993 /* SpecialViewController.h */,
+				A31EACE81C1FC2B000482993 /* SpecialViewController.m */,
 			);
 			name = "搜索";
 			sourceTree = "<group>";
@@ -1330,6 +1341,8 @@
 				89B633021C1E224900C4E45A /* SearchSameVideoTableViewCell.m */,
 				A3B00F4E1C1E6CC6003A1CB4 /* SearchView.h */,
 				A3B00F4F1C1E6CC6003A1CB4 /* SearchView.m */,
+				A31EACED1C1FD3AB00482993 /* SpecialTableViewCell.h */,
+				A31EACEE1C1FD3AB00482993 /* SpecialTableViewCell.m */,
 			);
 			name = "搜索";
 			sourceTree = "<group>";
@@ -1339,6 +1352,8 @@
 			children = (
 				A3E4E2371C1D4A0400C9F48E /* SearchViewModel.h */,
 				A3E4E2381C1D4A0400C9F48E /* SearchViewModel.m */,
+				A31EACEA1C1FC62500482993 /* SpecialViewModel.h */,
+				A31EACEB1C1FC62500482993 /* SpecialViewModel.m */,
 			);
 			name = "搜索";
 			sourceTree = "<group>";
@@ -1564,6 +1579,7 @@
 				A17EC1C91C0293130030886E /* BarrageDescriptor+Tools.m in Sources */,
 				A17EC2921C0293270030886E /* BaseViewController.m in Sources */,
 				A17EC28F1C0293270030886E /* AVItemTableViewController.m in Sources */,
+				A31EACEC1C1FC62500482993 /* SpecialViewModel.m in Sources */,
 				A32FCF921C1D56C300C7A11C /* SearchViewController.m in Sources */,
 				A17EC29E1C0293270030886E /* SettingTableViewController.m in Sources */,
 				A17EC2741C0293270030886E /* BarrageWalkImageSpirit.m in Sources */,
@@ -1585,6 +1601,7 @@
 				A17EC2981C0293270030886E /* ProfileTableViewController.m in Sources */,
 				A17EC2901C0293270030886E /* BaseCollectionViewController.m in Sources */,
 				A17EC1C21C0293130030886E /* FindNetManager.m in Sources */,
+				A31EACE91C1FC2B000482993 /* SpecialViewController.m in Sources */,
 				A17EC1BE1C0293130030886E /* TagModel.m in Sources */,
 				A17EC1D31C0293130030886E /* UIScrollView+Tools.m in Sources */,
 				A17EC1C81C0293130030886E /* AppDelegate+Category.m in Sources */,
@@ -1630,6 +1647,7 @@
 				A17EC1B81C0293130030886E /* IndexModel.m in Sources */,
 				A17EC2801C0293270030886E /* WMPageController.m in Sources */,
 				A17EC26B1C0293270030886E /* BarrageDispatcher.m in Sources */,
+				A31EACEF1C1FD3AB00482993 /* SpecialTableViewCell.m in Sources */,
 				A17EC1B21C0293130030886E /* ArchiverObj.m in Sources */,
 				A17EC2881C0293270030886E /* RecommendCollectionViewCell.m in Sources */,
 				A17EC1C11C0293130030886E /* BaseNetManager.m in Sources */,

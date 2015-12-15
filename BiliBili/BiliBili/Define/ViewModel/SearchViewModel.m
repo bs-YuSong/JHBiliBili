@@ -99,6 +99,13 @@
 - (NSURL*)specialCoverWithIndex:(NSInteger)index{
     return [NSURL URLWithString: [self specialWithIndex:index].pic];
 }
+/**
+ *  专题spid
+ *
+ */
+- (NSString*)specialSpidWithIndex:(NSInteger)index{
+    return [self specialWithIndex: index].spid;
+}
 
 - (NSInteger)specialCount{
     return [self specials].count;

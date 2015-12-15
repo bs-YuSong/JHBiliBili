@@ -13,20 +13,12 @@
 #import "TakeHeadTableView.h"
 #import "HotSearchButton.h"
 #import "HotSearchTableViewCell.h"
+#import "SearchViewController.h"
 
 #define EDGE 12
 
 @interface FindViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) FindViewModel* vm;
-//@property (weak, nonatomic) IBOutlet UITableView *tableView;
-//@property (weak, nonatomic) IBOutlet UIView *headView;
-//@property (weak, nonatomic) IBOutlet UIButton *allSectionRangeButton;
-//@property (weak, nonatomic) IBOutlet UIImageView *hotSearchLeftImgView;
-//@property (weak, nonatomic) IBOutlet UIImageView *hotSearchRightImgView;
-//@property (weak, nonatomic) IBOutlet UIView *hotSearchBottomBlackView;
-//@property (weak, nonatomic) IBOutlet UILabel *hotSearchLeftLabel;
-//@property (weak, nonatomic) IBOutlet UILabel *hotSearchRightLabel;
-//@property (weak, nonatomic) IBOutlet UILabel *allViewLabel;
 
 @property (strong, nonatomic) TakeHeadTableView *tableView;
 @property (strong, nonatomic) UIButton *allSectionRangeButton;
@@ -35,13 +27,6 @@
 @property (strong, nonatomic) HotSearchButton *hotSearchLeftButton;
 @property (strong, nonatomic) HotSearchButton *hotSearchRightButton;
 @property (strong, nonatomic) UILabel *allViewLabel;
-//@property (strong, nonatomic) UIView *headView;
-//@property (strong, nonatomic) UIImageView *hotSearchLeftImgView;
-//@property (strong, nonatomic) UIImageView *hotSearchRightImgView;
-//@property (strong, nonatomic) UIView *hotSearchBottomBlackView;
-//@property (strong, nonatomic) UILabel *hotSearchLeftLabel;
-//@property (strong, nonatomic) UILabel *hotSearchRightLabel;
-
 
 @property (nonatomic, strong) UIImage* upImg;
 @property (nonatomic, strong) UIImage* downImg;
@@ -139,15 +124,22 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.navigationController pushViewController:[[SearchViewController alloc] initWithkeyWord: [[self.vm keyWordForRow: indexPath.row] stringByAddingPercentEncodingWithAllowedCharacters: [NSCharacterSet URLHostAllowedCharacterSet]]] animated:YES];
 }
 
-# pragma mark - 颜色设置
+# pragma mark - 方法
 - (void)colorSetting{
     self.allViewLabel.textColor = [[ColorManager shareColorManager] colorWithString:@"textColor"];
     self.tableView.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"backgroundColor"];
     [self.tableView reloadData];
 }
 
+/**
+ *  点击热搜按钮
+ */
+- (void)searchButtonDown:(HotSearchButton*)button{
+    [self.navigationController pushViewController: [[SearchViewController alloc] initWithkeyWord: [button.label.text stringByAddingPercentEncodingWithAllowedCharacters: [NSCharacterSet URLHostAllowedCharacterSet]]] animated:YES];
+}
 
 #pragma mark - 懒加载
 - (TakeHeadTableView *)tableView {
@@ -196,6 +188,7 @@
 	if(_hotSearchLeftButton == nil) {
 		_hotSearchLeftButton = [[HotSearchButton alloc] initWithKeyWord:[self.vm coverKeyWordForNum:0]];
         [_hotSearchLeftButton setBackgroundImageForState:UIControlStateNormal withURL:[self.vm rankCoverForNum:0]];
+        [_hotSearchLeftButton addTarget: self action:@selector(searchButtonDown:) forControlEvents:UIControlEventTouchUpInside];
         [self.tableView.tableHeaderView addSubview: _hotSearchLeftButton];
         [_hotSearchLeftButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.allViewLabel.mas_bottom).mas_offset(EDGE);
@@ -211,6 +204,7 @@
 	if(_hotSearchRightButton == nil) {
 		_hotSearchRightButton = [[HotSearchButton alloc] initWithKeyWord:[self.vm coverKeyWordForNum:1]];
          [_hotSearchRightButton setBackgroundImageForState:UIControlStateNormal withURL:[self.vm rankCoverForNum:1]];
+        [_hotSearchRightButton addTarget: self action:@selector(searchButtonDown:) forControlEvents:UIControlEventTouchUpInside];
         [self.tableView.tableHeaderView addSubview: _hotSearchRightButton];
         [_hotSearchRightButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.hotSearchLeftButton.mas_right).mas_offset(EDGE);

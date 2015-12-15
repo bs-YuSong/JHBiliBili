@@ -71,6 +71,8 @@
 - (void)setAVData:(AVDataModel *)AVData section:(NSString*)section;
 //判断是不是新番
 - (BOOL)isShiBan;
+- (NSString*)videoCid;
+- (NSString*)videoTitle;
 
 - (void)refreshDataCompleteHandle:(void(^)(NSError *error))complete;
 - (void)getMoveReplyCompleteHandle:(void(^)(NSError *error))complete;

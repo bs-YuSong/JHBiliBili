@@ -69,7 +69,7 @@
 #pragma mark -  方法
 - (void)showSearchView{
     self.hidden = NO;
-    [UIView animateWithDuration: 1 animations:^{
+    [UIView animateWithDuration: 0.5 animations:^{
         self.circleMaskView.transform = CGAffineTransformMakeScale(20, 20);
     }];
 }
@@ -78,7 +78,9 @@
         self.circleMaskView.transform = CGAffineTransformIdentity;
     } completion:^(BOOL finished) {
         self.hidden = YES;
-        handel();
+        if (handel != nil) {
+            handel();
+        }
     }];
 }
 
