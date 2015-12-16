@@ -21,6 +21,12 @@
     self.tableView.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"backgroundColor"];
 }
 
+- (instancetype)init{
+    if (self = [super init]) {
+        self.navigationItem.title = @"主题选择";
+    }
+    return self;
+}
 
 #pragma mark - Table view data source
 

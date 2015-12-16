@@ -11,4 +11,9 @@
 @interface FindNetManager : BaseNetManager
 + (id)GetRankCompletionHandler:(void(^)(id responseObj, NSError *error))complete;
 + (id)GetRankImgCompletionHandler:(void(^)(id responseObj, NSError *error))complete;
+/**
+ *  获取全区排行
+ *
+ */
++ (id)GetSectionRankWithParameters:(NSDictionary*)parameters CompletionHandler:(void(^)(id responseObj, NSError *error))complete;
 @end

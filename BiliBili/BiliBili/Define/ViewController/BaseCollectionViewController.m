@@ -33,6 +33,6 @@
 }
 
 - (void)dealloc{
-    [self bk_removeAllBlockObservers];
+    [self removeObserver:self forKeyPath:@"cm.themeStyle"];
 }
 @end

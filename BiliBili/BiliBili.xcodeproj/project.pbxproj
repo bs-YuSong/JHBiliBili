@@ -203,6 +203,9 @@
 		A32FCF921C1D56C300C7A11C /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A32FCF911C1D56C300C7A11C /* SearchViewController.m */; };
 		A32FCF941C1D5F7500C7A11C /* theme.plist in Resources */ = {isa = PBXBuildFile; fileRef = A32FCF931C1D5F7500C7A11C /* theme.plist */; };
 		A32FCF971C1D681F00C7A11C /* SearchShiBanTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A32FCF961C1D681F00C7A11C /* SearchShiBanTableViewCell.m */; };
+		A339D58A1C21245E00BB818C /* SectionItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A339D5891C21245E00BB818C /* SectionItemViewController.m */; };
+		A339D58D1C21265B00BB818C /* SectionRankTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A339D58C1C21265B00BB818C /* SectionRankTableViewCell.m */; };
+		A339D5901C2128C700BB818C /* SectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A339D58F1C2128C700BB818C /* SectionViewController.m */; };
 		A3B00F501C1E6CC6003A1CB4 /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B00F4F1C1E6CC6003A1CB4 /* SearchView.m */; };
 		A3B66B031C1D7A1200E31733 /* SearchSpecialTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B66B021C1D7A1200E31733 /* SearchSpecialTableViewCell.m */; };
 		A3E4E2391C1D4A0400C9F48E /* SearchViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E4E2381C1D4A0400C9F48E /* SearchViewModel.m */; };
@@ -534,6 +537,12 @@
 		A32FCF931C1D5F7500C7A11C /* theme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = theme.plist; sourceTree = "<group>"; };
 		A32FCF951C1D681F00C7A11C /* SearchShiBanTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchShiBanTableViewCell.h; sourceTree = "<group>"; };
 		A32FCF961C1D681F00C7A11C /* SearchShiBanTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchShiBanTableViewCell.m; sourceTree = "<group>"; };
+		A339D5881C21245E00BB818C /* SectionItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionItemViewController.h; sourceTree = "<group>"; };
+		A339D5891C21245E00BB818C /* SectionItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionItemViewController.m; sourceTree = "<group>"; };
+		A339D58B1C21265B00BB818C /* SectionRankTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionRankTableViewCell.h; sourceTree = "<group>"; };
+		A339D58C1C21265B00BB818C /* SectionRankTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionRankTableViewCell.m; sourceTree = "<group>"; };
+		A339D58E1C2128C700BB818C /* SectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionViewController.h; sourceTree = "<group>"; };
+		A339D58F1C2128C700BB818C /* SectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionViewController.m; sourceTree = "<group>"; };
 		A3B00F4E1C1E6CC6003A1CB4 /* SearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchView.h; sourceTree = "<group>"; };
 		A3B00F4F1C1E6CC6003A1CB4 /* SearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
 		A3B66B011C1D7A1200E31733 /* SearchSpecialTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSpecialTableViewCell.h; sourceTree = "<group>"; };
@@ -1154,6 +1163,10 @@
 			children = (
 				A17EC23B1C0293270030886E /* FindViewController.h */,
 				A17EC23C1C0293270030886E /* FindViewController.m */,
+				A339D58E1C2128C700BB818C /* SectionViewController.h */,
+				A339D58F1C2128C700BB818C /* SectionViewController.m */,
+				A339D5881C21245E00BB818C /* SectionItemViewController.h */,
+				A339D5891C21245E00BB818C /* SectionItemViewController.m */,
 			);
 			name = "发现";
 			sourceTree = "<group>";
@@ -1277,6 +1290,8 @@
 				A1B6D6351C03229400DA3F27 /* HotSearchButton.m */,
 				A1B6D6371C03262000DA3F27 /* HotSearchTableViewCell.h */,
 				A1B6D6381C03262000DA3F27 /* HotSearchTableViewCell.m */,
+				A339D58B1C21265B00BB818C /* SectionRankTableViewCell.h */,
+				A339D58C1C21265B00BB818C /* SectionRankTableViewCell.m */,
 			);
 			name = "发现";
 			sourceTree = "<group>";
@@ -1631,6 +1646,7 @@
 				A17EC1BC1C0293130030886E /* ShinBanInfoModel.m in Sources */,
 				A11EFBEA1C055474000B4D6F /* ShiBanEpisodesTableViewCell.m in Sources */,
 				A17EC28A1C0293270030886E /* ReViewTableViewCell.m in Sources */,
+				A339D58D1C21265B00BB818C /* SectionRankTableViewCell.m in Sources */,
 				A18A14BB1C08820C00ABA733 /* PlayerUIView.m in Sources */,
 				A17EC1611C0292C70030886E /* AppDelegate.m in Sources */,
 				89B633031C1E224900C4E45A /* SearchSameVideoTableViewCell.m in Sources */,
@@ -1652,6 +1668,7 @@
 				A17EC2881C0293270030886E /* RecommendCollectionViewCell.m in Sources */,
 				A17EC1C11C0293130030886E /* BaseNetManager.m in Sources */,
 				A1D258C31C0F032A005A3BEF /* BaseInfoViewController.m in Sources */,
+				A339D5901C2128C700BB818C /* SectionViewController.m in Sources */,
 				A195EA551C04891C0099D8A4 /* ShiBanInfoViewController.m in Sources */,
 				A32FCF971C1D681F00C7A11C /* SearchShiBanTableViewCell.m in Sources */,
 				A17EC2761C0293270030886E /* BarrageWalkTextSpirit.m in Sources */,
@@ -1674,6 +1691,7 @@
 				A17EC2891C0293270030886E /* RecommendViewCell.m in Sources */,
 				A17EC1BA1C0293130030886E /* ReplyModel.m in Sources */,
 				A17EC28D1C0293270030886E /* ThemeTableViewCell.m in Sources */,
+				A339D58A1C21245E00BB818C /* SectionItemViewController.m in Sources */,
 				A17EC26C1C0293270030886E /* BarrageRenderer.m in Sources */,
 				A17EC27D1C0293270030886E /* WMMenuItem.m in Sources */,
 				A3B00F501C1E6CC6003A1CB4 /* SearchView.m in Sources */,

@@ -13,13 +13,6 @@
     
 }
 
-//- (instancetype)init{
-//    if (self = [super init]) {
-//        self.backgroundColor = [UIColor clearColor];
-//    }
-//    return self;
-//}
-
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.backgroundColor = [UIColor clearColor];

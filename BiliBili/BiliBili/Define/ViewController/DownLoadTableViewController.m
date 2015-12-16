@@ -42,6 +42,16 @@
     [self.timer invalidate];
 }
 
+- (instancetype)init{
+    if (self = [super init]) {
+        self.tableView.rowHeight = 50;
+        self.tableView.tableFooterView = [UIView new];
+        self.navigationItem.title = @"离线管理";
+        self.tableView.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"backgroundColor"];
+    }
+    return self;
+}
+
 
 #pragma mark - Table view data source
 
@@ -68,7 +78,6 @@
             }
         }];
     }
-//    cell.suspandButton.selected = [self.vm taskIsPauseWithIndex: indexPath.row];
     cell.textLabel.text = [self.vm taskNameWithIndex:indexPath.row];
     
     //下载完成 状态更新到100%
@@ -84,16 +93,6 @@
         VideoViewController* vc = [[VideoViewController alloc] initWithAid: [self.vm taskAidWithIndex:indexPath.row]];
         [self presentViewController: vc animated:YES completion:nil];
     }
-}
-
-
-- (instancetype)init{
-    if (self = [super init]) {
-        self.tableView.rowHeight = 50;
-        self.tableView.tableFooterView = [UIView new];
-        self.tableView.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"backgroundColor"];
-    }
-    return self;
 }
 
 #pragma mark - 懒加载

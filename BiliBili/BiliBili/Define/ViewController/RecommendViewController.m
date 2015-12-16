@@ -126,7 +126,7 @@
         //手动滚动速度
         _headScrollView.scrollSpeed = 2;
         __weak typeof(_headScrollView)weakHeadScrollView = _headScrollView;
-        [NSTimer bk_scheduledTimerWithTimeInterval:2.5 block:^(NSTimer *timer) {
+        [NSTimer bk_scheduledTimerWithTimeInterval:8 block:^(NSTimer *timer) {
             [weakHeadScrollView scrollToItemAtIndex:weakHeadScrollView.currentItemIndex + 1 animated:YES];
         } repeats:YES];
     }

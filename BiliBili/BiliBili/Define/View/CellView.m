@@ -21,8 +21,8 @@
     [self.moreButton setTitleColor:[[ColorManager shareColorManager] colorWithString:@"textColor"] forState:UIControlStateNormal];
     [self.moreButton setBackgroundColor:[[ColorManager shareColorManager] colorWithString:@"CellView.moreButton.BackgroundColor"]];
     
-    self.enterView.layer.masksToBounds = YES;
-    self.enterLabel.alpha = 1;
+    self.enterButton.hidden = NO;
+    self.enterLabel.hidden = NO;
     
     NSArray<CellItemViewController*>* arr = [self.vc childViewControllers];
     [arr enumerateObjectsUsingBlock:^(CellItemViewController * _Nonnull vc, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -39,6 +39,7 @@
     }];
 }
 
+#pragma mark - 懒加载
 - (UIViewController *)vc{
     if (_vc == nil) {
         _vc = [[UIViewController alloc] init];
@@ -128,26 +129,22 @@
     return _moreButton;
 }
 
-- (UIView *)enterView{
-    if (_enterView == nil) {
-        _enterView = [[UIView alloc] init];
-        _enterView.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"CellView.enterView.backgroundColor"];
-        [self addSubview: _enterView];
-        [_enterView mas_makeConstraints:^(MASConstraintMaker *make) {
+
+- (UIButton *) enterButton {
+    if(_enterButton == nil) {
+        _enterButton = [[UIButton alloc] init];
+        _enterButton.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"CellView.enterView.backgroundColor"];
+        [_enterButton setImage:[UIImage imageNamed:@"ipad_player_setup_arrow"] forState:UIControlStateNormal];
+        _enterButton.imageEdgeInsets = UIEdgeInsetsMake(3, 3, 3, 3);
+        [self addSubview: _enterButton];
+        [_enterButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.titleImg);
             make.right.mas_offset(-10);
             make.width.height.mas_equalTo(15);
         }];
         
-        UIImageView* imv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ipad_player_setup_arrow"]];
-        imv.contentMode = UIViewContentModeScaleAspectFit;
-        [_enterView addSubview: imv];
-        [imv mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.center.equalTo(self.enterView);
-            make.width.height.equalTo(self.enterView).mas_offset(-5);
-        }];
     }
-    return _enterView;
+    return _enterButton;
 }
 
 - (UILabel *)enterLabel{
@@ -158,8 +155,8 @@
         _enterLabel.font = [UIFont systemFontOfSize: 13];
         [self addSubview: _enterLabel];
         [_enterLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(self.enterView.mas_left).mas_offset(-5);
-            make.centerY.equalTo(self.enterView);
+            make.right.mas_equalTo(self.enterButton.mas_left).mas_offset(-5);
+            make.centerY.equalTo(self.enterButton);
         }];
     }
     return _enterLabel;

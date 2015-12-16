@@ -23,6 +23,13 @@
     self.tableView.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"backgroundColor"];
 }
 
+- (instancetype)init{
+    if (self = [super init]) {
+        self.navigationItem.title = @"设置";
+    }
+    return self;
+}
+
 
 #pragma mark - TableViewController
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

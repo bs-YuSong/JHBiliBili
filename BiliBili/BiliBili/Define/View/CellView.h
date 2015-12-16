@@ -12,8 +12,9 @@
 @property (strong, nonatomic) UILabel *title;
 @property (strong, nonatomic) UIImageView *titleImg;
 @property (strong, nonatomic) UIButton *moreButton;
-@property (strong, nonatomic) UIView *enterView;
+@property (nonatomic, strong) UIButton* enterButton;
 @property (nonatomic, strong) UILabel* enterLabel;
 @property (nonatomic, strong) UIViewController* vc;
 - (void)setTitle:(NSString*)title titleImg:(NSString*)titleimg buttonTitle:(NSString*)buttonTitle dic:(NSDictionary<NSString*,NSArray*>*)dic;
+
 @end

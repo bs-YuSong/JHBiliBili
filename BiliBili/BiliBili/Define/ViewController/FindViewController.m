@@ -14,6 +14,8 @@
 #import "HotSearchButton.h"
 #import "HotSearchTableViewCell.h"
 #import "SearchViewController.h"
+#import "SectionViewController.h"
+#import "SectionItemViewController.h"
 
 #define EDGE 12
 
@@ -74,33 +76,7 @@
     [self.tableView.mj_header beginRefreshing];
 }
 
-- (FindViewModel *)vm{
-    if (_vm == nil) {
-        _vm = [[FindViewModel alloc] init];
-    }
-    return _vm;
-}
 
-- (UIImage *)upImg{
-    if (_upImg == nil) {
-        _upImg = [[UIImage imageNamed:@"search_icon"] clipImageWithRect:CGRectMake(0, 0, 7, 10)];
-    }
-    return _upImg;
-}
-
-- (UIImage *)downImg{
-    if (_downImg == nil) {
-        _downImg = [[UIImage imageNamed:@"search_icon"] clipImageWithRect:CGRectMake(10, 0, 7, 10)];
-    }
-    return _downImg;
-}
-
-- (UIImage *)keepImg{
-    if (_keepImg == nil) {
-        _keepImg = [[UIImage imageNamed:@"search_icon"] clipImageWithRect:CGRectMake(20, 0, 7, 10)];
-    }
-    return _keepImg;
-}
 
 # pragma mark - UITableViewDataSource
 
@@ -141,6 +117,27 @@
     [self.navigationController pushViewController: [[SearchViewController alloc] initWithkeyWord: [button.label.text stringByAddingPercentEncodingWithAllowedCharacters: [NSCharacterSet URLHostAllowedCharacterSet]]] animated:YES];
 }
 
+/**
+ *  点击全区排行按钮
+ */
+- (void)allSectionRangeButtonDown:(UIButton*)button{
+    NSMutableArray* controllerArr = [NSMutableArray array];
+    NSArray* tempArr = @[@"全站",@"动画",@"音乐",@"舞蹈",@"游戏",@"科技",@"娱乐",@"鬼畜",@"电影",@"电视剧",@"时尚"];
+    [tempArr enumerateObjectsUsingBlock:^(NSString*  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [controllerArr addObject: [[SectionItemViewController alloc] initWithSection: obj style: @"allSection"]];
+    }];
+    [self.navigationController pushViewController:[[SectionViewController alloc] initWithControllers:controllerArr titles: tempArr style: @"全区排行"] animated:YES];
+}
+
+- (void)originateRangeButtonDown:(UIButton*)button{
+    NSMutableArray* controllerArr = [NSMutableArray array];
+    NSArray* tempArr = @[@"全站",@"番剧"];
+    [tempArr enumerateObjectsUsingBlock:^(NSString*  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [controllerArr addObject: [[SectionItemViewController alloc] initWithSection: obj style: @"origin"]];
+    }];
+    [self.navigationController pushViewController:[[SectionViewController alloc] initWithControllers:controllerArr titles: tempArr style:@"原创排行"] animated:YES];
+}
+
 #pragma mark - 懒加载
 - (TakeHeadTableView *)tableView {
 	if(_tableView == nil) {
@@ -152,13 +149,14 @@
 }
 
 /**
- *  全区排行
+ *  全区排行按钮
  *
  */
 - (UIButton *)allSectionRangeButton {
 	if(_allSectionRangeButton == nil) {
 		_allSectionRangeButton = [[UIButton alloc] init];
         [_allSectionRangeButton setBackgroundImage:[UIImage imageNamed:@"763b819c9a7dc5e09368a96e5c8d75da"] forState:UIControlStateNormal];
+        [_allSectionRangeButton addTarget:self action:@selector(allSectionRangeButtonDown:) forControlEvents:UIControlEventTouchUpInside];
         [self.tableView.tableHeaderView addSubview: _allSectionRangeButton];
         [_allSectionRangeButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.mas_offset(EDGE);
@@ -169,11 +167,15 @@
 	return _allSectionRangeButton;
 }
 
-
+/**
+ *  原创排行按钮
+ *
+ */
 - (UIButton *)originateRangeButton {
 	if(_originateRangeButton == nil) {
 		_originateRangeButton = [[UIButton alloc] init];
         [_originateRangeButton setBackgroundImage:[UIImage imageNamed:@"83899f035f7a3ec866a77478773b5f48"] forState:UIControlStateNormal];
+        [_originateRangeButton addTarget:self action:@selector(originateRangeButtonDown:) forControlEvents: UIControlEventTouchUpInside];
         [self.tableView.tableHeaderView addSubview: _originateRangeButton];
         [_originateRangeButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.allSectionRangeButton);
@@ -226,6 +228,34 @@
         }];
 	}
 	return _allViewLabel;
+}
+
+- (FindViewModel *)vm{
+    if (_vm == nil) {
+        _vm = [[FindViewModel alloc] init];
+    }
+    return _vm;
+}
+
+- (UIImage *)upImg{
+    if (_upImg == nil) {
+        _upImg = [[UIImage imageNamed:@"search_icon"] clipImageWithRect:CGRectMake(0, 0, 7, 10)];
+    }
+    return _upImg;
+}
+
+- (UIImage *)downImg{
+    if (_downImg == nil) {
+        _downImg = [[UIImage imageNamed:@"search_icon"] clipImageWithRect:CGRectMake(10, 0, 7, 10)];
+    }
+    return _downImg;
+}
+
+- (UIImage *)keepImg{
+    if (_keepImg == nil) {
+        _keepImg = [[UIImage imageNamed:@"search_icon"] clipImageWithRect:CGRectMake(20, 0, 7, 10)];
+    }
+    return _keepImg;
 }
 
 @end

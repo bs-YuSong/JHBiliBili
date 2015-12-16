@@ -55,7 +55,10 @@
         avModel.play = sModle.click;
         avModel.aid = sModle.identity;
         avModel.author = sModle.author_name;
-        avModel.create = sModle.pubdate;
+        NSDateFormatter* fmt = [[NSDateFormatter alloc] init];
+        fmt.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
+        fmt.dateFormat = @"yyyy-MM-dd HH:mm";
+        avModel.create = [fmt stringFromDate: [[NSDate alloc] initWithTimeIntervalSince1970: sModle.pubdate.integerValue]];
         avModel.video_review = sModle.dm_count;
         AVInfoViewController* vc = [[AVInfoViewController alloc] init];
         [vc setWithModel: avModel section: nil];

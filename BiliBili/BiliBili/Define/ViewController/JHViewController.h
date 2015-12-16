@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Masonry.h"
 @protocol JHViewControllerDelegate <NSObject>
 @optional
 - (void)JHViewGetOffset:(CGPoint)offset;
@@ -21,5 +20,4 @@
 - (instancetype)initWithControllers:(NSArray*)controllers;
 - (NSInteger)currentPage;
 - (void)setScrollViewPage:(NSInteger)page;
-//@property (nonatomic, assign) NSInteger currentPage;
 @end
