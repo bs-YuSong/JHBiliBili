@@ -122,7 +122,7 @@
 - (void)colorSetting{
     self.view.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"ProfileTableViewController.view.backgroundColor"];
     self.tableView.tableHeaderView.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"themeColor"];
-    UIButton* button = [self.tableView.tableHeaderView viewWithTag:100];
+    UIButton* button = (UIButton* _Nullable)[self.tableView.tableHeaderView viewWithTag:100];
     [button setImage:[[ColorManager shareColorManager].themeStyle isEqualToString:@"夜间模式"]?[UIImage imageNamed:@"ic_switch_night"]:[UIImage imageNamed:@"ic_switch_daily"] forState:UIControlStateNormal];
 }
 

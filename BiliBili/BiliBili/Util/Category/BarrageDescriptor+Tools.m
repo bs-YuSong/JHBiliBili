@@ -19,11 +19,10 @@
     [descriptor.params setObject:text forKey:@"text"];
     [descriptor.params setObject:size forKey:@"fontSize"];
     [descriptor.params setObject:@(1) forKey:@"borderWidth"];
-    //[descriptor.params setObject:[UIColor blackColor] forKey:@"borderColor"];
     [descriptor.params setObject:[UIColor colorWithHex:color] forKey:@"textColor"];
     [descriptor.params setObject:@(100 * (double)random()/RAND_MAX+50) forKey:@"speed"];
     [descriptor.params setObject:@(3) forKey:@"duration"];
-    [descriptor.params setObject:(style.intValue == 1)?@(1):@(3) forKey:@"direction"];
+    [descriptor.params setObject:(style.intValue == 1) ? @(1) : (style.intValue == 4) ? @(2) : @(1) forKey:@"direction"];
     return descriptor;
 }
 @end

@@ -23,7 +23,7 @@
     __block UIButton *preButton = nil;
     __weak typeof(self)weakSelf = self;
     [_episodes enumerateObjectsUsingBlock:^(episodesModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        UIButton * button = [weakSelf viewWithTag: 100 + idx];
+        UIButton * button = (UIButton* _Nullable)[weakSelf viewWithTag: 100 + idx];
         //没添加的情况
         if (button == nil) {
             button = [[UIButton alloc] init];

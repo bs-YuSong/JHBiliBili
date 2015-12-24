@@ -161,7 +161,7 @@
  *  显示搜索视图
  */
 - (void)showSearchView:(UIButton*)button{
-    SearchView* vc = [self.navigationController.view viewWithTag: 105];
+    SearchView* vc = (SearchView* _Nullable)[self.navigationController.view viewWithTag: 105];
     vc.delegate = self;
     [vc showSearchView];
     [UIView animateWithDuration:1 animations:^{
@@ -172,7 +172,7 @@
  *  隐藏搜索视图
  */
 - (void)hideSearchView:(UIButton*)button handel:(void(^)())handel{
-    SearchView* vc = [self.navigationController.view viewWithTag: 105];
+    SearchView* vc = (SearchView* _Nullable)[self.navigationController.view viewWithTag: 105];
     [vc hideSearchView: handel];
     [self hideBlackView];
     [vc endEditing: YES];

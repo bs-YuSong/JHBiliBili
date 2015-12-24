@@ -22,7 +22,6 @@
 }
 
 + (id)getRecommentParameters:(NSDictionary*)params CompletionHandler:(void(^)(id responseObj, NSError *error))complete{
-    //http://app.bilibili.com/promo/android3/2448/bangumi.android3.xhdpi.json
     
     //http://www.bilibili.com/api_proxy?app=bangumi&page=1&indexType=0&pagesize=30&action=site_season_index
     

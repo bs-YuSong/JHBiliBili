@@ -179,7 +179,7 @@
 
 - (void)changeResolution:(NSNotification*)notification{
     NSDictionary *userInfo = notification.userInfo;
-    UIButton* button = [self.downLoadView viewWithTag: 11];
+    UIButton* button = (UIButton* _Nullable)[self.downLoadView viewWithTag: 11];
     self.resolution = userInfo[@"title"];
     [button setTitle:@{@"high":@"精美画质",@"normal":@"普通画质",@"low":@"渣画质"}[self.resolution] forState:UIControlStateNormal];
     [self hideResolutionView];
